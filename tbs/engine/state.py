@@ -218,12 +218,27 @@ class GameState:
             known = ", ".join(sorted(self.units))
             raise KeyError(f"unknown unit id {unit_id!r}; units in play: {known}") from None
 
-    def unit_at(self, pos: Hex) -> Unit | None:
+    def units_at(self, pos: Hex) -> list[Unit]:
+        """Every unit standing on a hex, in stable id order.
+
+        More than one unit can be present when an air unit shares a hex with a
+        surface unit (see :func:`can_share_hex`).  Loaded units have ``pos`` set
+        to ``None`` and are therefore never returned here.
+        """
         pos = tuple(pos)
-        for unit in self.units.values():
-            if unit.pos == pos:
+        return sorted(
+            (unit for unit in self.units.values() if unit.pos == pos),
+            key=lambda unit: unit.id,
+        )
+
+    def unit_at(self, pos: Hex) -> Unit | None:
+        """The unit on top of a hex: an air unit if one is stacked, else the
+        surface unit.  Use :meth:`units_at` when every occupant matters."""
+        units = self.units_at(pos)
+        for unit in units:
+            if self.spec_of(unit).domain == "air":
                 return unit
-        return None
+        return units[0] if units else None
 
     def units_of(self, player_id: str, *, include_loaded: bool = True) -> list[Unit]:
         """A player's units, ordered by id so generated lists are reproducible."""
@@ -299,6 +314,18 @@ class GameState:
             specs=specs,
         )
         return state
+
+
+def can_share_hex(state: GameState, first: Unit | str, second: Unit | str) -> bool:
+    """Whether two units may stand on the same hex.
+
+    The board has two layers: air units fly above the surface.  An air unit may
+    therefore share a hex with exactly one land or naval unit, but two air units
+    and two surface units still block each other.
+    """
+    first_domain = state.spec_of(first).domain
+    second_domain = state.spec_of(second).domain
+    return (first_domain == "air") != (second_domain == "air")
 
 
 def new_game(scenario: dict[str, Any], specs: GameSpecs) -> GameState:
@@ -455,7 +482,14 @@ def create_unit(
                 f"{spec.name} cannot be placed on {state.terrain_of(tile).name} at {list(pos)} "
                 f"({spec.movement} units cannot enter that terrain)"
             )
-        occupant = state.unit_at(pos)
+        occupant = next(
+            (
+                other
+                for other in state.units_at(pos)
+                if not can_share_hex(state, spec.id, other)
+            ),
+            None,
+        )
         if occupant is not None:
             raise ValueError(f"cannot place {spec.name} at {list(pos)}: {occupant.id} is already there")
 

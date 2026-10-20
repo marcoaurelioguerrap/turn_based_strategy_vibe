@@ -2,10 +2,9 @@
 
 The rules this file pins down:
 
-* A unit may attack only while it is connected to a supply source: an owned
-  city, factory, port, airport or HQ whose domains cover it, or a friendly
-  supply vehicle (Truck, APC, Transport Ship) whose domains cover it.  Movement
-  and capture never need supply (that half is asserted in ``test_combat``).
+* A unit may always attack while it has ammunition and a target in range: an
+  owned city/factory/port/airport/HQ or a supply vehicle no longer gates shots.
+  Supply only governs rearming.
 * A supplied unit is refuelled and rearmed at the start of your turn; a unit
   cut off keeps whatever it has left.  The very first turn respects exactly what
   the scenario authored.  Air and naval units that end their turn with an empty
@@ -89,7 +88,9 @@ def test_only_your_own_bases_supply_your_units():
     )
     assert is_supplied(state, state.unit("B1")) is True, "it stands next to its own city"
     assert is_supplied(state, state.unit("A1")) is False, "the same city belongs to the enemy"
-    assert any("out of supply" in blocker for blocker in explain_blockers(state, "A1"))
+    assert not any(
+        "out of supply" in blocker for blocker in explain_blockers(state, "A1")
+    ), "supply no longer gates attacks"
 
 
 def test_a_base_supplies_its_own_tile_and_the_hexes_touching_it():

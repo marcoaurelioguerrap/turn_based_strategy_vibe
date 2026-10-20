@@ -24,14 +24,14 @@ def test_tile_lines_describe_terrain_owner_and_cover():
     assert "OBJECTIVE" in text
 
 
-def test_unit_lines_describe_condition_ammo_supply_and_status():
+def test_unit_lines_describe_condition_ammo_rearm_and_status():
     state = fresh_state()
     lines = info.unit_lines(state, state.unit("A2").pos)
     text = "\n".join(lines)
     assert "A2  Infantry" in text
     assert "hp 100/100" in text
-    assert "supply yes" in text
-    assert "rifle:10" in text
+    assert "rearm yes" in text
+    assert "rifle 10/10" in text
     assert "status: ready" in text
 
 

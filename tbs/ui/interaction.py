@@ -360,11 +360,15 @@ class Controller:
             return Intent("noop", note="weapon choice cancelled")
 
         self.build_site = None
-        unit = state.unit_at(pos)
+        units = state.units_at(pos)
         player = state.current_player
 
         if self.selected is None:
-            if unit is not None and unit.owner == player and not unit.loaded:
+            own = [unit for unit in units if unit.owner == player and not unit.loaded]
+            if own:
+                preferred = state.unit_at(pos)
+                own_ids = {item.id for item in own}
+                unit = preferred if preferred is not None and preferred.id in own_ids else own[0]
                 self.select_unit(state, unit.id)
                 return Intent("select", note=f"selected {unit.id}")
             if self.mode == MODE_IDLE and self._is_empty_build_site(state, pos, player):
@@ -378,19 +382,33 @@ class Controller:
             self.clear()
             return Intent("noop")
 
-        # A different friendly unit: load into/out of a transport if possible, else reselect.
-        if unit is not None and unit.owner == player and unit.id != selected.id:
-            if self.mode in (MODE_MENU, MODE_LOAD):
+        # A different friendly unit on this hex: load into/out of a transport
+        # when possible; otherwise the click may still be a capture or attack.
+        friendly = [
+            unit
+            for unit in units
+            if unit.owner == player and unit.id != selected.id and not unit.loaded
+        ]
+        if friendly and self.mode in (MODE_MENU, MODE_LOAD):
+            for unit in friendly:
                 order = load_order(state, selected.id, unit.id)
                 if order is not None:
                     self.clear()
                     return Intent("order", order=order, note=f"{selected.id} loads {unit.id}")
-            self.select_unit(state, unit.id)
-            return Intent("select", note=f"selected {unit.id}")
 
         intent = self._commit(state, selected, pos)
         if intent is not None:
             return intent
+
+        if friendly:
+            self.select_unit(state, friendly[0].id)
+            return Intent("select", note=f"selected {friendly[0].id}")
+
+        target = next((unit for unit in units if unit.owner != selected.owner), None)
+        if target is not None:
+            blockers = rules.explain_blockers(state, selected.id)
+            reason = blockers[0] if blockers else "no weapon can hit that target from here"
+            return Intent("noop", note=f"{selected.id} cannot attack {target.id}: {reason}")
 
         if self.mode in _TARGET_MODES:
             self.mode = MODE_MENU
@@ -437,7 +455,7 @@ class Controller:
             self.build_site = tuple(pos)
             return self.build_site
         for site in state.build_sites(state.current_player):
-            if state.unit_at(site.pos) is None:
+            if self._is_empty_build_site(state, site.pos, state.current_player):
                 self.mode = MODE_BUILD
                 self.build_site = site.pos
                 return self.build_site
@@ -457,6 +475,41 @@ class Controller:
         options = rules.unit_options(state, selected.id)
         mode = self.mode
 
+        # Clicking an enemy attacks it even when a move under/onto it would be
+        # legal (a surface unit may share a hex with an enemy aircraft).
+        if mode in (MODE_IDLE, MODE_MENU, MODE_ATTACK):
+            candidates = []
+            for enemy in state.units_at(pos):
+                if enemy.owner == selected.owner:
+                    continue
+                attacks = [a for a in options["attacks"] if a["target"] == enemy.id]
+                if attacks:
+                    best_damage = max(attack["preview_damage"] for attack in attacks)
+                    candidates.append((best_damage, enemy.id, enemy, attacks))
+            if candidates:
+                candidates.sort(key=lambda item: (-item[0], item[1]))
+                _, _, unit, attacks = candidates[0]
+                if len(attacks) > 1:
+                    self.mode = MODE_WEAPON
+                    self.weapon_target = unit.id
+                    self.weapon_choices = sorted(
+                        attacks, key=lambda a: (-a["preview_damage"], a["weapon"])
+                    )
+                    self.weapon_index = 0
+                    return Intent("weapon", note=f"choose a weapon against {unit.id}")
+                best = attacks[0]
+                self.clear()
+                return Intent(
+                    "order",
+                    order={
+                        "action": "attack",
+                        "unit": selected.id,
+                        "target": unit.id,
+                        "weapon": best["weapon"],
+                    },
+                    note=f"{selected.id} attacks {unit.id} ({best['preview_damage']} dmg)",
+                )
+
         if mode in (MODE_IDLE, MODE_MENU, MODE_MOVE):
             for move in options["moves"]:
                 if tuple(move["pos"]) == pos:
@@ -465,32 +518,6 @@ class Controller:
                         "order",
                         order={"action": "move", "unit": selected.id, "path": move["path"]},
                         note=f"{selected.id} moves",
-                    )
-
-        if mode in (MODE_IDLE, MODE_MENU, MODE_ATTACK):
-            unit = state.unit_at(pos)
-            if unit is not None and unit.owner != selected.owner:
-                attacks = [a for a in options["attacks"] if a["target"] == unit.id]
-                if attacks:
-                    if len(attacks) > 1:
-                        self.mode = MODE_WEAPON
-                        self.weapon_target = unit.id
-                        self.weapon_choices = sorted(
-                            attacks, key=lambda a: (-a["preview_damage"], a["weapon"])
-                        )
-                        self.weapon_index = 0
-                        return Intent("weapon", note=f"choose a weapon against {unit.id}")
-                    best = attacks[0]
-                    self.clear()
-                    return Intent(
-                        "order",
-                        order={
-                            "action": "attack",
-                            "unit": selected.id,
-                            "target": unit.id,
-                            "weapon": best["weapon"],
-                        },
-                        note=f"{selected.id} attacks {unit.id} ({best['preview_damage']} dmg)",
                     )
 
         if mode in (MODE_IDLE, MODE_MENU) and selected.pos == pos and options["captures"]:
@@ -520,4 +547,7 @@ class Controller:
             return False
         if not state.terrain_of(tile).build:
             return False
-        return state.unit_at(pos) is None
+        return any(
+            tuple(option["site"]) == tuple(pos)
+            for option in rules.build_options(state, player)
+        )

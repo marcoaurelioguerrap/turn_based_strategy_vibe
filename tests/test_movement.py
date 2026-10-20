@@ -309,3 +309,17 @@ def test_unit_options_advertise_a_capture_the_unit_could_start():
     assert options["captures"][0]["needed"] == 200
     assert options["captures"][0]["completes_now"] is False
     assert options["can_move"] is True, "standing on a site does not freeze the unit"
+
+
+def test_a_unit_that_has_moved_is_offered_no_more_moves():
+    state = make_state(
+        units=[unit("infantry", "A", 3, 1, "A1"), anchor()],
+    )
+    assert legal_moves(state, "A1"), "a fresh unit can move"
+    do(state, move("A1", line(3, 1, 1)))
+
+    assert state.unit("A1").moved is True and state.unit("A1").acted is False
+    assert legal_moves(state, "A1") == [], "the query layer must agree with _apply_move"
+    options = unit_options(state, "A1")
+    assert options["can_move"] is False and options["moves"] == []
+    assert options["can_hold"] is True, "a moved unit can still act or hold"

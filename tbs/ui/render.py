@@ -16,7 +16,7 @@ from typing import Any, Iterable
 import pygame
 
 from tbs.engine import rules, view
-from tbs.engine.hexgrid import axial_to_offset
+from tbs.engine.hexgrid import Hex, axial_to_offset
 from tbs.engine.state import GameState
 from tbs.ui import buttons, palette
 from tbs.ui.interaction import (
@@ -166,8 +166,9 @@ def _draw_capture_progress(surface: pygame.Surface, state: GameState, camera: Ca
 
 
 def _draw_build_sites(surface: pygame.Surface, state: GameState, camera: Camera) -> None:
+    buildable = {tuple(option["site"]) for option in rules.build_options(state, state.current_player)}
     for site in state.build_sites(state.current_player):
-        if state.unit_at(site.pos) is not None:
+        if tuple(site.pos) not in buildable:
             continue
         center = camera.to_screen(site.pos)
         size = camera.size * 0.16
@@ -268,6 +269,39 @@ def arrow_head(surface: pygame.Surface, start, end, color) -> None:
     pygame.draw.polygon(surface, color, [end, left, right])
 
 
+def _unit_centers(state: GameState, pos: Hex, camera: Camera) -> dict[str, tuple[float, float]]:
+    """Screen centres for every unit on a hex.
+
+    A single unit sits in the middle.  When an aircraft shares a hex with a
+    surface unit, the surface unit is drawn slightly low and the aircraft above
+    it, so both remain visible.
+    """
+    center = camera.to_screen(pos)
+    units = state.units_at(pos)
+    if len(units) <= 1:
+        return {unit.id: center for unit in units}
+
+    air = [unit for unit in units if state.spec_of(unit).domain == "air"]
+    surface = [unit for unit in units if state.spec_of(unit).domain != "air"]
+    if len(air) == 1 and len(surface) == 1:
+        offset = camera.size * 0.20
+        return {
+            surface[0].id: (center[0], center[1] + offset),
+            air[0].id: (center[0], center[1] - offset),
+        }
+
+    # Defensive fallback for an impossible stack authored outside the rules:
+    # fan the units out so none is completely hidden.
+    radius = camera.size * 0.30
+    return {
+        unit.id: (
+            center[0] + radius * math.cos(2 * math.pi * index / len(units)),
+            center[1] + radius * math.sin(2 * math.pi * index / len(units)),
+        )
+        for index, unit in enumerate(units)
+    }
+
+
 def _draw_units(
     surface: pygame.Surface,
     state: GameState,
@@ -276,19 +310,26 @@ def _draw_units(
     fonts: Fonts,
 ) -> None:
     ids = state.player_ids()
-    for unit in sorted(state.units.values(), key=lambda u: u.id):
+    # Draw surface units first and aircraft last, so the air layer stays on top.
+    for unit in sorted(
+        state.units.values(),
+        key=lambda u: (state.spec_of(u).domain == "air", u.id),
+    ):
         if unit.pos is None:
             continue
-        center = camera.to_screen(unit.pos)
+        centers = _unit_centers(state, unit.pos, camera)
+        center = centers.get(unit.id) or camera.to_screen(unit.pos)
         color = palette.player_color(unit.owner, ids)
         if unit.acted or unit.loaded:
             color = palette.shade(color, 0.55)
-        radius = max(6, int(camera.size * 0.46))
+        stacked = len(state.units_at(unit.pos)) > 1
+        radius = max(6, int(camera.size * (0.36 if stacked else 0.46)))
+        spec = state.spec_of(unit)
         pygame.draw.circle(surface, color, (int(center[0]), int(center[1])), radius)
         pygame.draw.circle(surface, palette.GRID, (int(center[0]), int(center[1])), radius, 2)
-        _text(surface, fonts.glyph, state.spec_of(unit).glyph, center, (245, 245, 245))
-        _draw_hp_bar(surface, center, camera, unit.hp, state.spec_of(unit).max_hp)
-        if not rules.is_supplied(state, unit):
+        _text(surface, fonts.glyph, spec.glyph, center, (245, 245, 245))
+        _draw_hp_bar(surface, center, camera, unit.hp, spec.max_hp)
+        if spec.weapons and not any(unit.ammo.get(weapon.id, 0) > 0 for weapon in spec.weapons):
             pygame.draw.circle(surface, palette.ATTACK_HIGHLIGHT, (int(center[0] - radius), int(center[1] - radius)), 4)
         if unit.cargo:
             _text(surface, fonts.tiny, str(len(unit.cargo)), (center[0] + radius, center[1] + radius), palette.TEXT)
@@ -312,13 +353,13 @@ def _draw_highlights(surface: pygame.Surface, state: GameState, camera: Camera, 
             unit = state.units.get(target)
             if unit is None or unit.pos is None:
                 continue
-            center = camera.to_screen(unit.pos)
+            center = _unit_centers(state, unit.pos, camera).get(unit.id) or camera.to_screen(unit.pos)
             radius = int(camera.size * 0.5)
             pygame.draw.circle(surface, palette.ATTACK_HIGHLIGHT, (int(center[0]), int(center[1])), radius, 3)
     if controller.selected is not None and controller.selected in state.units:
         unit = state.units[controller.selected]
         if unit.pos is not None:
-            center = camera.to_screen(unit.pos)
+            center = _unit_centers(state, unit.pos, camera).get(unit.id) or camera.to_screen(unit.pos)
             radius = int(camera.size * 0.5)
             pygame.draw.circle(surface, palette.SELECT_HIGHLIGHT, (int(center[0]), int(center[1])), radius, 2)
 

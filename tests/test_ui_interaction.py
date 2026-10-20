@@ -388,3 +388,19 @@ def test_a_moved_artillery_shows_attack_disabled_in_the_ui():
     attack = next(item for item in controller.action_items(state) if item.key == "attack")
     assert attack.enabled is False and "0" in attack.label
     assert rules.attack_options(state, "A1") == []
+
+
+def test_clicking_a_target_with_empty_magazines_explains_why():
+    state = make_state(
+        units=[
+            placement("tank", "A", 3, 1, "A1"),
+            placement("tank", "B", 4, 1, "B1"),
+            placement("infantry", "B", 9, 3, "B9"),
+        ],
+    )
+    state.unit("A1").ammo = {"cannon": 0, "mg": 0}
+    controller = Controller()
+    controller.click(state, state.unit("A1").pos)
+    intent = controller.click(state, state.unit("B1").pos)
+    assert intent.kind == "noop"
+    assert "out of ammo" in intent.note

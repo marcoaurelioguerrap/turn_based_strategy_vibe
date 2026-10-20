@@ -20,6 +20,7 @@ visible to everyone.
 from __future__ import annotations
 
 import json
+from collections.abc import Callable
 from typing import Any
 
 from .hexgrid import axial_to_offset, offset_to_axial
@@ -76,28 +77,56 @@ def ownership_rows(state: GameState) -> list[str]:
     return ["".join(grid[row][col] for col in sorted(grid[row])) for row in sorted(grid)]
 
 
-def unit_rows(state: GameState) -> list[str]:
-    """The unit layer: a unit glyph, or ``.`` where a hex is empty.
-
-    Units loaded inside a transport are not on the board; they appear in the
-    unit table instead.
-    """
+def _unit_rows(
+    state: GameState,
+    include: Callable[[Any], bool],
+) -> list[str]:
+    """One glyph layer for the units selected by ``include``."""
     grid: dict[int, dict[int, str]] = {}
     for pos in state.map.tiles:
         col, row = axial_to_offset(pos)
         grid.setdefault(row, {})[col] = "."
-    for unit in state.units.values():
-        if unit.pos is None:
+    for unit in sorted(state.units.values(), key=lambda item: item.id):
+        if unit.pos is None or not include(unit):
             continue
         col, row = axial_to_offset(unit.pos)
         grid[row][col] = state.spec_of(unit).glyph
     return ["".join(grid[row][col] for col in sorted(grid[row])) for row in sorted(grid)]
 
 
+def ground_unit_rows(state: GameState) -> list[str]:
+    """The surface layer: land and naval units only."""
+    return _unit_rows(state, lambda unit: state.spec_of(unit).domain != "air")
+
+
+def air_unit_rows(state: GameState) -> list[str]:
+    """The air layer: aircraft only."""
+    return _unit_rows(state, lambda unit: state.spec_of(unit).domain == "air")
+
+
+def unit_rows(state: GameState) -> list[str]:
+    """The combined unit layer: a unit glyph, or ``.`` where a hex is empty.
+
+    Units loaded inside a transport are not on the board; they appear in the
+    unit table instead.  When an air unit is stacked over a surface unit, the
+    air glyph is drawn on top; :func:`ground_unit_rows` and
+    :func:`air_unit_rows` expose both layers separately.
+    """
+    rows = ground_unit_rows(state)
+    air = air_unit_rows(state)
+    for row_index, (ground_row, air_row) in enumerate(zip(rows, air)):
+        rows[row_index] = "".join(
+            air_glyph if air_glyph != "." else ground_glyph
+            for ground_glyph, air_glyph in zip(ground_row, air_row)
+        )
+    return rows
+
+
 def cell_coordinates(state: GameState, row: int, col: int) -> dict[str, Any]:
     """Translate a printed cell position into game coordinates."""
     pos = offset_to_axial(col, row)
     tile = state.map.tiles.get(pos)
+    units = state.units_at(pos) if tile else []
     unit = state.unit_at(pos) if tile else None
     return {
         "pos": list(pos),
@@ -106,6 +135,7 @@ def cell_coordinates(state: GameState, row: int, col: int) -> dict[str, Any]:
         "terrain": tile.terrain if tile else None,
         "owner": tile.owner if tile else None,
         "unit": unit.id if unit else None,
+        "units": [item.id for item in units],
     }
 
 
@@ -122,6 +152,10 @@ def render_map(state: GameState, *, show_units: bool = True) -> str:
     ]
     if show_units:
         blocks += ["", "UNITS (. = empty hex; see UNIT LETTERS for the glyphs)", *unit_rows(state)]
+        if any(state.spec_of(unit).domain == "air" for unit in state.units.values()):
+            blocks += ["", "AIR UNITS (the top layer over any stacked ground or naval unit)", *air_unit_rows(state)]
+        if any(len(state.units_at(pos)) > 1 for pos in state.map.tiles):
+            blocks += ["", "GROUND UNITS (including units beneath aircraft)", *ground_unit_rows(state)]
 
     captures = [
         f"  {list(tile.pos)} {state.terrain_of(tile).name} {tile.capture_progress}/{tile.capture_points} by {tile.capture_unit}"
@@ -180,7 +214,9 @@ def describe_unit(state: GameState, unit_id: str) -> str:
     else:
         col, row = axial_to_offset(unit.pos)
         where = f"at {list(unit.pos)} (col {col} row {row})"
-    ammo = ", ".join(f"{weapon}:{amount}" for weapon, amount in sorted(unit.ammo.items())) or "none"
+    ammo = ", ".join(
+        f"{weapon.id} {unit.ammo.get(weapon.id, 0)}/{weapon.ammo}" for weapon in spec.weapons
+    ) or "none"
     fuel = "n/a" if unit.fuel is None else str(unit.fuel)
     flags: list[str] = []
     if unit.moved:
@@ -197,7 +233,7 @@ def describe_unit(state: GameState, unit_id: str) -> str:
     label = f" [{unit.label}]" if unit.label else ""
     return (
         f"{unit.id:<4} {spec.glyph} {spec.name:<15}{label:<22} {where:<26} "
-        f"hp {unit.hp:>3}/{spec.max_hp:<3} ammo {ammo:<24} fuel {fuel:>4} supply {supplied:>3} "
+        f"hp {unit.hp:>3}/{spec.max_hp:<3} ammo {ammo:<24} fuel {fuel:>4} rearm {supplied:>3} "
         f"status [{', '.join(flags) or 'ready'}]"
     )
 
@@ -284,9 +320,13 @@ RULE_SUMMARY = (
     "without moving; no unit acts twice and none moves after acting. Indirect weapons (min "
     "range > 1) cannot fire after a unit has moved; direct weapons can. Ranged weapons (min "
     "range > 1) neither counterattack nor are countered; range-1 attacks are countered at 50% "
-    "power by a surviving defender that can shoot back. Attacking requires supply: stand on or "
-    "next to your own city/factory/port/airport/HQ or next to a supply vehicle. Movement and "
-    "capture do not need supply. Capturing adds your current HP to the site each time you act "
+    "power by a surviving defender that can shoot back. Every weapon has limited ammunition, "
+    "spent one point per shot; a weapon at zero cannot fire. Units start with full magazines and "
+    "rearm their fuel and ammo at the start of your turn when on or next to your own "
+    "city/factory/port/airport/HQ or a supply vehicle. Supply never blocks an attack by itself. "
+    "Air units fly above the surface: one aircraft may share a hex with one land or naval unit, "
+    "but two aircraft or two surface units still block each other. "
+    "Capturing adds your current HP to the site each time you act "
     "there; capturing an enemy HQ ends the game. Income is paid at the start of your turn and "
     "produced units act next turn. Coordinates are axial [q,r]."
 )
@@ -367,7 +407,7 @@ def state_view(state: GameState, player_id: str | None = None) -> dict[str, Any]
                 "move": spec.move,
                 "ammo": dict(unit.ammo),
                 "fuel": unit.fuel,
-                "supplied": is_supplied(state, unit),
+                "can_rearm": is_supplied(state, unit),
                 "cargo": list(unit.cargo),
                 "loaded": unit.loaded,
                 "moved": unit.moved,
@@ -375,6 +415,12 @@ def state_view(state: GameState, player_id: str | None = None) -> dict[str, Any]
                 "new": unit.deployed_this_turn,
             }
         )
+
+    stacks = []
+    for pos in sorted(state.map.tiles, key=lambda hex_: (hex_[1], hex_[0])):
+        occupants = state.units_at(pos)
+        if len(occupants) > 1:
+            stacks.append({"pos": list(pos), "units": [unit.id for unit in occupants]})
 
     view: dict[str, Any] = {
         "scenario": state.scenario_name,
@@ -388,6 +434,9 @@ def state_view(state: GameState, player_id: str | None = None) -> dict[str, Any]
         "map_terrain_rows": map_rows(state),
         "map_ownership_rows": ownership_rows(state),
         "map_unit_rows": unit_rows(state),
+        "map_ground_unit_rows": ground_unit_rows(state),
+        "map_air_unit_rows": air_unit_rows(state),
+        "unit_stacks": stacks,
         "coordinates": "axial [q,r]; map rows are authored rows, column index is the authoring column; rules.legal_moves gives exact paths",
         "rules": RULE_SUMMARY,
         "players": [

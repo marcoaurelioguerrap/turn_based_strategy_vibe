@@ -94,7 +94,7 @@
           "power": 80,
           "min_range": 1,
           "max_range": 1,
-          "ammo": 8,
+          "ammo": 3,
           "multipliers": {"infantry": 60, "light": 90, "heavy": 100, "air": 0, "naval": 20, "sub": 0}
         },
         {
@@ -103,7 +103,7 @@
           "power": 25,
           "min_range": 1,
           "max_range": 1,
-          "ammo": 10,
+          "ammo": 4,
           "multipliers": {"infantry": 80, "light": 40, "heavy": 10, "air": 0, "naval": 0, "sub": 0}
         }
       ],

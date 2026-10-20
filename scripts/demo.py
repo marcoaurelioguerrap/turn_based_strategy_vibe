@@ -126,7 +126,7 @@ def main() -> None:
 
     print(f"\nEnd of demo: status={state.status} turn={state.turn_number}")
     print(f"state hash {state_hash(state)[:16]}  log hash {log_hash(state)[:16]}")
-    print("Everything above is reproduced by `py -m pytest`: 226 tests pin every rule this demo touched.")
+    print("Everything above is reproduced by `py -m pytest`: 240 tests pin every rule this demo touched.")
 
 
 if __name__ == "__main__":

@@ -27,7 +27,7 @@ Milestones from the agreed plan (kept in `~/.opencode/plan/turn-based-strategy-p
 | M3 | pygame UI | done — a hot-seat window (`tbs/ui/`, `py -m tbs.ui.app`) over the same action API |
 | M9+ | Fog of war, swarm orchestrator, scenario editor | planned |
 
-Everything that follows is enforced by **226 passing tests** (`py -m pytest`,
+Everything that follows is enforced by **240 passing tests** (`py -m pytest`,
 well under a second) — each claim in this README is pinned by one of them.
 
 ## Run it
@@ -37,7 +37,7 @@ dependency, and the optional window needs `pygame-ce`.
 
 ```
 py -m pip install -e ".[dev]"       # or just: py -m pip install pytest
-py -m pytest                        # 226 tests in ~1 s
+py -m pytest                        # 240 tests in ~1 s
 py scripts/demo.py                  # a two-minute tour: view → bad order rejected → two AI half-turns → save/load/resume
 py -m pip install -e ".[ui]"        # the hot-seat window (pygame-ce; import name is `pygame`)
 py -m tbs.ui.app                    # opens the main menu: New Game / Load Game / Quit
@@ -59,7 +59,7 @@ hashes and replays exactly like an agent's.
   `rules.attack_options` the agent API serves. Choosing Attack strokes the
   weapons' range boundary instead.
 - **Hover:** resting on a hex shows the terrain, cover, owner and coordinates,
-  plus the standing unit's HP, ammo, fuel, supply and this-turn status.
+  plus the standing unit's HP, ammo (current/max), fuel, rearm and this-turn status.
 - **Toolbar:** vector-drawn icon buttons down the left border for Menu, End
   Turn, Units (the current player's roster), Build, Save, Load, Log,
   Coordinates and zoom.
@@ -189,14 +189,20 @@ re-runs are identical even with dice on.
 
 ## Supply, fuel, capture
 
-- Supply gates **attacks only**; movement and capture never require supply.
-- A unit is supplied when it stands on or next to one of its own bases whose
-  domain covers it, or next to (distance ≤ 1) a friendly supply vehicle — Truck
-  and APC for land, Transport Ship for naval. Cargo riding inside a supply
-  vehicle counts as supplied.
+- Every weapon has limited **ammunition**, spent one point per shot; a weapon at
+  zero cannot fire. Ammunition is the only firing limit: a unit can attack
+  anywhere as long as it has ammo and a target in range. The Tank carries 3 Main
+  Gun shells and 4 Machine Gun bursts.
+- Aircraft fly above the surface: one air unit may share a hex with one land or
+  naval unit. Two aircraft or two surface units still block each other, and a
+  stacked aircraft and surface unit may move through the shared hex freely.
+- Supply lines govern **rearming**. A unit is in supply when it stands on or
+  next to one of its own bases whose domain covers it, or next to (distance ≤ 1)
+  a friendly supply vehicle — Truck and APC for land, Transport Ship for naval.
+  Cargo riding inside a supply vehicle counts as supplied.
 - At the start of its turn every supplied unit is fully replenished (fuel and
   ammo). `start_game` deliberately does *not* replenish, so a scenario's
-  authored hp/fuel/ammo survive turn 1.
+  authored hp/fuel/ammo survive turn 1; placements that omit ammo start full.
 - Air and naval units that end their turn at 0 fuel lose HP, unless a base or
   supply vehicle is near enough to top them up.
 - Capture is progress accumulation: a unit standing on a capturable site adds
@@ -248,7 +254,7 @@ data/
   terrain.json  11 tile types: cover, move costs, build/capture/supply rules
   maps/         scenarios as text-row maps + regions + starting armies
 scripts/demo.py headless end-to-end tour of the API
-tests/          226 tests pinning every rule above
+tests/          240 tests pinning every rule above
 ```
 
 ## Tests
@@ -256,20 +262,21 @@ tests/          226 tests pinning every rule above
 | File | Tests | What it pins |
 |---|---|---|
 | `test_hexgrid.py` | 17 | coordinates, distances, diagonals, pathfinding |
-| `test_movement.py` | 21 | move costs, fuel, blocking, occupied hexes |
-| `test_combat.py` | 29 | the full damage chain, counters, cover, weapon choice, direct fire after moving and indirect fire only when stationary |
+| `test_movement.py` | 22 | move costs, fuel, blocking, occupied hexes, no second move after moving |
+| `test_combat.py` | 30 | the full damage chain, counters, cover, weapon choice, ammo as the firing limit, direct fire after moving and indirect fire only when stationary |
 | `test_logistics.py` | 23 | supply domains, resupply, load/unload, fuel attrition |
 | `test_capture_economy.py` | 14 | capture progress, income, production, victory by capture |
 | `test_scenarios.py` | 11 | scenario validation, fairness (material symmetry), error strings |
+| `test_stacking.py` | 11 | aircraft sharing a hex with one land/naval unit, two-layer movement, targeting, unloading, production and views |
 | `test_determinism.py` | 11 | replays, seeded dice, hashes, save/load continuation |
 | `test_data_integrity.py` | 26 | cross-file data rules + every validator message |
 | `test_agent_play.py` | 4 | greedy-agent play, order-log replay, view/API agreement, view-only orders |
 | `test_agent_server.py` | 7 | JSON-lines protocol over the wire, structured rejections, save/load continuation, the real `py -m tbs.api.server` process |
 | `test_ui_layout.py` | 11 | hex/pixel round trip, centring, hit-testing, zoom, the reachable-area outline, and a guard that `engine/` never imports pygame |
 | `test_ui_menu.py` | 5 | menu navigation skips disabled entries and wraps around |
-| `test_ui_info.py` | 5 | hover text for terrain, owners, units, supply and status |
+| `test_ui_info.py` | 5 | hover text for terrain, owners, units, ammo, rearm and status |
 | `test_ui_buttons.py` | 3 | toolbar layout, overflow and hit-testing |
-| `test_ui_interaction.py` | 21 | select/move/attack/build/action-menu/weapon-picker held to the engine's own options; cursor and attack region; move-then-attack for direct weapons; a UI-played turn replays from its orders |
+| `test_ui_interaction.py` | 22 | select/move/attack/build/action-menu/weapon-picker held to the engine's own options; cursor and attack region; move-then-attack for direct weapons; blocked-attack reasons; a UI-played turn replays from its orders |
 | `test_ui_app.py` | 18 | the real pygame loop on SDL's dummy driver: draw, menus, hover, toolbar, click-to-move, cursor, action menu, status, pause, end turn, build menu, zoom |
 
 ## Next

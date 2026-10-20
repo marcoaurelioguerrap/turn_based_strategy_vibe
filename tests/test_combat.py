@@ -20,7 +20,7 @@ from tbs.engine.errors import ActionError
 from tbs.engine.rng import LUCK_RANGE
 from tbs.engine.rules import attack_options, explain_blockers, is_supplied
 
-from .helpers import anchor, at, attack, cell, do, end_turn, line, make_state, move, owned_cells, tile_at, unit
+from .helpers import anchor, at, attack, do, end_turn, line, make_state, move, owned_cells, tile_at, unit
 
 # A city on column 2 of row 1.  In the scenarios that pass A_CITY, A owns it, so
 # a unit on it or next to it is in supply; where A_CITY is omitted the city is
@@ -201,24 +201,25 @@ def test_ammo_is_spent_by_shots_and_resupply_lets_the_gun_keep_firing():
     assert state.unit("A1").hp < 100, "resupply fills magazines and fuel tanks, it does not repair the hull"
 
 
-def test_attacking_needs_a_supply_source_you_own():
+def test_attacks_need_ammo_not_a_supply_line():
     state = engaged(
         unit("tank", "A", 3, 1, "A1"), unit("tank", "B", 4, 1, "B1"), regions=[]
     )
     assert is_supplied(state, state.unit("A1")) is False, "the city next to it is neutral ground"
-    assert attack_options(state, "A1") == []
-    assert any("out of supply" in blocker for blocker in explain_blockers(state, "A1"))
-
-    with pytest.raises(ActionError) as info:
-        do(state, attack("A1", "B1"))
-    assert "out of supply" in str(info.value)
-    assert "cities" in str(info.value), "the error says how to fix it"
-
-    state.map.tile(cell(2, 1)).owner = "A"  # in a real game an infantry would have captured it
-    assert is_supplied(state, state.unit("A1")) is True
-    assert attack_options(state, "A1")
+    assert state.unit("A1").ammo == {"cannon": 3, "mg": 4}, "a tank starts with full magazines"
+    assert {option["weapon"] for option in attack_options(state, "A1")} == {"cannon", "mg"}
     events = do(state, attack("A1", "B1"))
     assert events[0]["damage"] == 80, "main gun 80 at 100 % against a heavy"
+    assert state.unit("A1").ammo["cannon"] == 2, "one shell spent"
+
+    dry = engaged(unit("tank", "A", 3, 1, "A1"), unit("tank", "B", 4, 1, "B1"), regions=[])
+    dry.unit("A1").ammo["cannon"] = 0
+    dry.unit("A1").ammo["mg"] = 0
+    assert attack_options(dry, "A1") == [], "empty magazines stop the attack"
+    assert any("out of ammo" in blocker for blocker in explain_blockers(dry, "A1"))
+    with pytest.raises(ActionError) as info:
+        do(dry, attack("A1", "B1"))
+    assert "out of ammo" in str(info.value)
 
 
 def test_movement_and_capturing_do_not_need_supply():
@@ -250,15 +251,12 @@ def test_a_supply_vehicle_keeps_its_neighbours_attacking():
     assert events[0]["damage"] == 72, "main gun 80 at 90 % against a light vehicle"
 
 
-def test_aircraft_need_an_airfield_or_a_supply_truck():
+def test_aircraft_rearm_at_airfields_or_a_supply_truck_but_can_always_shoot():
     with_city = engaged(
         unit("helicopter", "A", 3, 1, "A1"), unit("tank", "B", 4, 1, "B1"), regions=A_CITY
     )
     assert is_supplied(with_city, with_city.unit("A1")) is False, "a city supplies land units only"
-    assert attack_options(with_city, "A1") == []
-    with pytest.raises(ActionError) as info:
-        do(with_city, attack("A1", "B1"))
-    assert "out of supply" in str(info.value)
+    assert attack_options(with_city, "A1"), "being cut off from rearming does not stop a shot"
 
     with_airfield = engaged(
         unit("helicopter", "A", 3, 1, "A1"),
@@ -439,7 +437,7 @@ def test_a_weapon_can_be_chosen_explicitly_when_several_would_work():
     support = engaged(unit("tank", "A", 3, 1, "A1"), unit("infantry", "B", 4, 1, "B1"))
     events = do(support, attack("A1", "B1", "mg"))
     assert events[0]["weapon"] == "mg" and events[0]["damage"] == 20, "25 at 80 %"
-    assert support.unit("A1").ammo["cannon"] == 8, "the weapon that was not used kept its ammo"
+    assert support.unit("A1").ammo["cannon"] == 3, "the weapon that was not used kept its ammo"
 
 
 # ---------------------------------------------------------------------------
@@ -473,6 +471,17 @@ def test_direct_weapons_still_fire_after_moving():
     assert [option["weapon"] for option in options] == ["rifle"]
     events = do(state, attack("A1", "B1"))
     assert events[0]["weapon"] == "rifle"
+
+
+def test_a_moved_tank_fires_even_when_cut_off_from_supply():
+    state = make_state(
+        units=[unit("tank", "A", 3, 1, "A1"), unit("infantry", "B", 5, 1, "B1"), anchor()],
+    )
+    do(state, move("A1", line(3, 1, 1)))  # col 4, adjacent to B1 and far from any base
+    assert is_supplied(state, state.unit("A1")) is False
+    assert {option["weapon"] for option in attack_options(state, "A1")} == {"cannon", "mg"}
+    events = do(state, attack("A1", "B1"))
+    assert events[0]["weapon"] == "cannon" and events[0]["damage"] == 48
 
 
 def test_a_moved_destroyer_keeps_its_deck_gun_but_loses_shore_bombardment():

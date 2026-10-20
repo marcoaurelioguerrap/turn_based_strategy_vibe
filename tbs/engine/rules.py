@@ -14,6 +14,8 @@ Turn structure, in short:
   can, so a moved unit may still attack;
 * units produced this turn cannot act until the owner's next turn;
 * transports may load or unload exactly one cargo per turn;
+* air units fly above the surface: one aircraft may share a hex with one land or
+  naval unit, while same-layer units still block each other;
 * a turn ends with the ``end_turn`` action, which pays income, resets flags and
   hands over to the next player.
 """
@@ -40,7 +42,7 @@ from .actions import (
 from .data import SUPPLY_DOMAINS
 from .errors import ActionError
 from .hexgrid import Hex, hex_distance, hex_neighbors, reachable_hexes
-from .state import OUT_OF_FUEL_DAMAGE, GameState, Unit, create_unit
+from .state import OUT_OF_FUEL_DAMAGE, GameState, Unit, can_share_hex, create_unit
 
 __all__ = [
     "apply_action",
@@ -161,11 +163,19 @@ def _unit_id(action: Action) -> str:
 # --------------------------------------------------------------------------
 
 
-def _occupied_hexes(state: GameState, ignore: Unit | None = None) -> set[Hex]:
-    occupied = {unit.pos for unit in state.units.values() if unit.pos is not None}
-    if ignore is not None and ignore.pos is not None:
-        occupied.discard(ignore.pos)
-    return occupied
+def _blocked_hexes(state: GameState, mover: Unit) -> set[Hex]:
+    """Hexes ``mover`` may not enter because of an incompatible unit.
+
+    An air unit ignores surface units (it flies over them) and a surface unit
+    ignores air units, but units on the same layer still block each other.
+    """
+    blocked: set[Hex] = set()
+    for other in state.units.values():
+        if other.id == mover.id or other.pos is None:
+            continue
+        if not can_share_hex(state, mover, other):
+            blocked.add(other.pos)
+    return blocked
 
 
 def _terrain_cost(state: GameState, unit: Unit) -> Callable[[Hex], int | None]:
@@ -210,7 +220,6 @@ def _apply_move(state: GameState, unit: Unit, action: MoveAction) -> list[dict]:
         raise ActionError(f"the move path must start at {unit.id}'s position {list(unit.pos)}, not {list(path[0])}")
 
     cost_of = _terrain_cost(state, unit)
-    occupied = _occupied_hexes(state, ignore=unit)
     total = 0
     for from_hex, to_hex in zip(path, path[1:]):
         if from_hex not in state.map.tiles:
@@ -225,7 +234,14 @@ def _apply_move(state: GameState, unit: Unit, action: MoveAction) -> list[dict]:
             raise ActionError(
                 f"{spec.name} {unit.id} ({spec.movement}) cannot enter {state.terrain_of(tile).name} at {list(to_hex)}"
             )
-        occupant = state.unit_at(to_hex)
+        occupant = next(
+            (
+                other
+                for other in state.units_at(to_hex)
+                if other.id != unit.id and not can_share_hex(state, unit, other)
+            ),
+            None,
+        )
         if occupant is not None:
             raise ActionError(f"{list(to_hex)} is occupied by {occupant.id}; move around it or attack it instead")
         total += step_cost
@@ -276,12 +292,6 @@ def _apply_attack(state: GameState, unit: Unit, action: AttackAction) -> list[di
 
     dist = hex_distance(unit.pos, target.pos)
     weapon = _select_weapon(state, unit, target, action.weapon, dist)
-    if not is_supplied(state, unit):
-        raise ActionError(
-            f"{unit.id} is out of supply and cannot attack; move it next to one of your "
-            f"cities, factories, ports, airports or HQs, or next to a supply vehicle (Truck)"
-        )
-
     events = combat.resolve_attack(state, unit, target, weapon)
     unit.acted = True
     return events
@@ -457,7 +467,14 @@ def _apply_unload(state: GameState, unit: Unit, action: UnloadAction) -> list[di
         raise ActionError(
             f"{cargo_spec.name} cannot be dropped on {state.terrain_of(tile).name} at {list(target)}"
         )
-    occupant = state.unit_at(target)
+    occupant = next(
+        (
+            other
+            for other in state.units_at(target)
+            if not can_share_hex(state, cargo, other)
+        ),
+        None,
+    )
     if occupant is not None:
         raise ActionError(f"{list(target)} is occupied by {occupant.id}; choose an empty hex")
 
@@ -485,11 +502,6 @@ def _apply_build(state: GameState, action: BuildAction) -> list[dict]:
     if site.owner != player.id:
         owner = site.owner or "nobody"
         raise ActionError(f"you do not own the {terrain.name} at {list(site.pos)} (owner: {owner})")
-    if state.unit_at(site.pos) is not None:
-        raise ActionError(
-            f"the {terrain.name} at {list(site.pos)} is occupied by {state.unit_at(site.pos).id}; "
-            "production needs an empty build site"
-        )
     try:
         spec = state.spec_of(action.unit)
     except KeyError as exc:
@@ -497,6 +509,19 @@ def _apply_build(state: GameState, action: BuildAction) -> list[dict]:
     if terrain.build not in spec.build_at:
         where = ", ".join(spec.build_at) or "nowhere"
         raise ActionError(f"{spec.name} can only be produced at: {where} (this site is {terrain.build})")
+    occupant = next(
+        (
+            other
+            for other in state.units_at(site.pos)
+            if not can_share_hex(state, spec.id, other)
+        ),
+        None,
+    )
+    if occupant is not None:
+        raise ActionError(
+            f"the {terrain.name} at {list(site.pos)} is occupied by {occupant.id}; "
+            "production needs an empty build site"
+        )
     if player.funds < spec.cost:
         raise ActionError(f"{spec.name} costs {spec.cost} but you only have {player.funds}")
 
@@ -643,12 +668,11 @@ def _end_turn(state: GameState) -> list[dict]:
 
 
 def is_supplied(state: GameState, unit: Unit) -> bool:
-    """Whether a unit may attack: only units that are connected to a supply
-    source (see :func:`_near_supply_source`) can fire.
+    """Whether the unit is connected to a supply source for rearming.
 
-    Capture and movement do not require supply, only attacks do, and a unit with
-    no weapons to spend is therefore never "out of supply" as far as an order is
-    concerned.  Fuel and replenishment use the stricter :func:`_near_supply_source`.
+    Supply no longer gates attacks (ammunition does); a unit in supply refills
+    its fuel and every weapon's ammo at the start of its owner's turn.  Fuel and
+    replenishment use the stricter :func:`_near_supply_source`.
     """
     spec = state.spec_of(unit)
     if not spec.weapons:
@@ -752,9 +776,9 @@ def legal_moves(state: GameState, unit_id: str) -> list[dict]:
     """Every legal move destination with its cost and the cheapest path to it."""
     unit = state.unit(unit_id)
     spec = state.spec_of(unit)
-    if unit.acted or unit.loaded or unit.deployed_this_turn or not spec.can_move or unit.pos is None:
+    if unit.acted or unit.moved or unit.loaded or unit.deployed_this_turn or not spec.can_move or unit.pos is None:
         return []
-    found = reachable_hexes(unit.pos, spec.move, _terrain_cost(state, unit), _occupied_hexes(state, ignore=unit))
+    found = reachable_hexes(unit.pos, spec.move, _terrain_cost(state, unit), _blocked_hexes(state, unit))
     moves: list[dict] = []
     for pos, (cost, path) in sorted(found.items()):
         if pos == unit.pos:
@@ -774,12 +798,15 @@ def legal_moves(state: GameState, unit_id: str) -> list[dict]:
 
 
 def attack_options(state: GameState, unit_id: str) -> list[dict]:
-    """Every legal attack, with a luck-free damage preview for planning."""
+    """Every legal attack, with a luck-free damage preview for planning.
+
+    Ammunition is the only firing limit: a weapon with ammo left can fire even
+    when the unit is far from a base.  Supply only governs rearming at the start
+    of the owner's turn.
+    """
     unit = state.unit(unit_id)
     spec = state.spec_of(unit)
     if unit.acted or unit.loaded or unit.deployed_this_turn or unit.pos is None or not spec.weapons:
-        return []
-    if not is_supplied(state, unit):
         return []
     options: list[dict] = []
     for target in state.enemies_of(unit.owner):
@@ -838,13 +865,13 @@ def load_options(state: GameState, unit_id: str) -> list[dict]:
         return []
     options = []
     for pos in hex_neighbors(unit.pos):
-        other = state.unit_at(pos)
-        if other is None or other.owner != unit.owner or other.loaded:
-            continue
-        other_spec = state.spec_of(other)
-        if other_spec.movement not in spec.carries:
-            continue
-        options.append({"cargo": other.id, "cargo_type": other.type_id, "pos": list(pos)})
+        for other in state.units_at(pos):
+            if other.owner != unit.owner or other.loaded:
+                continue
+            other_spec = state.spec_of(other)
+            if other_spec.movement not in spec.carries:
+                continue
+            options.append({"cargo": other.id, "cargo_type": other.type_id, "pos": list(pos)})
     return sorted(options, key=lambda item: item["cargo"])
 
 
@@ -858,7 +885,9 @@ def unload_options(state: GameState, unit_id: str) -> list[dict]:
         cargo_spec = state.spec_of(cargo)
         for pos in hex_neighbors(unit.pos):
             tile = state.map.tiles.get(pos)
-            if tile is None or state.unit_at(pos) is not None:
+            if tile is None:
+                continue
+            if any(not can_share_hex(state, cargo, other) for other in state.units_at(pos)):
                 continue
             if state.terrain_of(tile).cost_for(cargo_spec.movement) is None:
                 continue
@@ -871,10 +900,11 @@ def build_options(state: GameState, player_id: str) -> list[dict]:
     player = state.players[player_id]
     options: list[dict] = []
     for site in state.build_sites(player_id):
-        if state.unit_at(site.pos) is not None:
-            continue
         terrain = state.terrain_of(site)
+        occupants = state.units_at(site.pos)
         for spec in state.specs.buildable_units(terrain.build):
+            if any(not can_share_hex(state, spec.id, other) for other in occupants):
+                continue
             options.append(
                 {
                     "site": list(site.pos),
@@ -919,10 +949,9 @@ def explain_blockers(state: GameState, unit_id: str) -> list[str]:
     if unit.loaded:
         blockers.append(f"loaded inside {unit.carried_by}")
     if spec.weapons and unit.pos is not None and not unit.acted and not unit.loaded:
-        if not is_supplied(state, unit):
+        if not any(unit.ammo.get(weapon.id, 0) > 0 for weapon in spec.weapons):
             blockers.append(
-                "out of supply: attacks need an owned city/factory/port/airport/HQ or a supply "
-                "vehicle adjacent to it"
+                "out of ammo: every weapon is empty; rearm next to a friendly base or supply vehicle"
             )
         elif unit.moved and not attack_options(state, unit_id) and _indirect_target_in_range(state, unit):
             blockers.append(

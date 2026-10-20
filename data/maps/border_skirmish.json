@@ -1,0 +1,230 @@
+{
+  "schema": 1,
+  "name": "border_skirmish",
+  "comment": "Two nations split by a broken ridge with a sea bay cut through it. Authored as 14x8 text rows in odd-r offset layout; regions claim whole authoring columns. Every Red feature and every Red starting unit is the hex-true mirror of Blue's, so both sides start with the same bases, the same income and the same supply situation. Infantry cross the ridge, wheeled vehicles must go round it by the bay.",
+  "seed": 20261019,
+  "first_player": "A",
+  "initial_income": 800,
+  "max_turns": 60,
+  "fog_of_war": false,
+  "players": [
+    {
+      "id": "A",
+      "name": "Blue Republic",
+      "funds": 8000
+    },
+    {
+      "id": "B",
+      "name": "Red Federation",
+      "funds": 8000
+    }
+  ],
+  "regions": [
+    {
+      "owner": "A",
+      "offset_cols": [
+        0,
+        5
+      ]
+    },
+    {
+      "owner": "B",
+      "offset_cols": [
+        8,
+        13
+      ]
+    }
+  ],
+  "rows": [
+    "..C...##...C..",
+    ".f...###...f..",
+    ".H...C##C...H.",
+    "..C..###..C...",
+    ".A....~~....A.",
+    "....p~~~p.....",
+    "......~~......",
+    ".............."
+  ],
+  "units": [
+    {
+      "id": "A1",
+      "type": "hq",
+      "owner": "A",
+      "offset": [
+        1,
+        2
+      ],
+      "label": "Blue HQ"
+    },
+    {
+      "id": "B1",
+      "type": "hq",
+      "owner": "B",
+      "offset": [
+        12,
+        2
+      ],
+      "label": "Red HQ"
+    },
+    {
+      "id": "A2",
+      "type": "infantry",
+      "owner": "A",
+      "offset": [
+        4,
+        2
+      ],
+      "label": "Blue Ridge Guard 1"
+    },
+    {
+      "id": "B2",
+      "type": "infantry",
+      "owner": "B",
+      "offset": [
+        9,
+        2
+      ],
+      "label": "Red Ridge Guard 1"
+    },
+    {
+      "id": "A3",
+      "type": "infantry",
+      "owner": "A",
+      "offset": [
+        5,
+        3
+      ],
+      "label": "Blue Ridge Guard 2"
+    },
+    {
+      "id": "B3",
+      "type": "infantry",
+      "owner": "B",
+      "offset": [
+        7,
+        3
+      ],
+      "label": "Red Ridge Guard 2"
+    },
+    {
+      "id": "A4",
+      "type": "tank",
+      "owner": "A",
+      "offset": [
+        4,
+        3
+      ],
+      "label": "Blue Heavy Tank"
+    },
+    {
+      "id": "B4",
+      "type": "tank",
+      "owner": "B",
+      "offset": [
+        8,
+        3
+      ],
+      "label": "Red Heavy Tank"
+    },
+    {
+      "id": "A5",
+      "type": "artillery",
+      "owner": "A",
+      "offset": [
+        4,
+        1
+      ],
+      "label": "Blue Battery"
+    },
+    {
+      "id": "B5",
+      "type": "artillery",
+      "owner": "B",
+      "offset": [
+        8,
+        1
+      ],
+      "label": "Red Battery"
+    },
+    {
+      "id": "A6",
+      "type": "truck",
+      "owner": "A",
+      "offset": [
+        2,
+        2
+      ],
+      "label": "Blue Supply Truck"
+    },
+    {
+      "id": "B6",
+      "type": "truck",
+      "owner": "B",
+      "offset": [
+        11,
+        2
+      ],
+      "label": "Red Supply Truck"
+    },
+    {
+      "id": "A7",
+      "type": "aa_missile",
+      "owner": "A",
+      "offset": [
+        5,
+        2
+      ],
+      "label": "Blue AA Guard"
+    },
+    {
+      "id": "B7",
+      "type": "aa_missile",
+      "owner": "B",
+      "offset": [
+        8,
+        2
+      ],
+      "label": "Red AA Guard"
+    },
+    {
+      "id": "A8",
+      "type": "attack_plane",
+      "owner": "A",
+      "offset": [
+        1,
+        4
+      ],
+      "label": "Blue Interceptor"
+    },
+    {
+      "id": "B8",
+      "type": "attack_plane",
+      "owner": "B",
+      "offset": [
+        12,
+        4
+      ],
+      "label": "Red Interceptor"
+    },
+    {
+      "id": "A9",
+      "type": "destroyer",
+      "owner": "A",
+      "offset": [
+        4,
+        5
+      ],
+      "label": "Blue Escort"
+    },
+    {
+      "id": "B9",
+      "type": "destroyer",
+      "owner": "B",
+      "offset": [
+        8,
+        5
+      ],
+      "label": "Red Escort"
+    }
+  ]
+}

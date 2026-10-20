@@ -1,0 +1,16 @@
+[project]
+name = "tbs"
+version = "0.1.0"
+description = "Modern hex-based turn-based strategy game with an LLM-agent-first engine"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+# The pygame hot-seat window (tbs/ui).  pygame-ce is a drop-in replacement for
+# pygame and is the one that ships a wheel for Python 3.14; the import name is
+# still `pygame`.  The engine core stays dependency-free.
+ui = ["pygame-ce>=2.5"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,97 @@
+{
+  "schema": 1,
+  "comment": "Terrain rules. defense_pct is the cover reduction applied to incoming damage. move_cost is in movement points per movement type; null means that movement type cannot enter. Balance numbers are placeholders to be tuned in M4.",
+  "terrains": [
+    {
+      "code": ".",
+      "name": "Plains",
+      "defense_pct": 0,
+      "move_cost": {"foot": 1, "wheel": 2, "tread": 2, "air": 1}
+    },
+    {
+      "code": "r",
+      "name": "Road",
+      "defense_pct": 0,
+      "move_cost": {"foot": 1, "wheel": 1, "tread": 1, "air": 1}
+    },
+    {
+      "code": "F",
+      "name": "Forest",
+      "defense_pct": 25,
+      "move_cost": {"foot": 1, "wheel": 2, "tread": 2, "air": 1},
+      "comment": "Cheap for infantry, expensive for vehicles: infantry hold forests while armour drives around them."
+    },
+    {
+      "code": "#",
+      "name": "Rough",
+      "defense_pct": 15,
+      "move_cost": {"foot": 2, "wheel": null, "tread": 2, "air": 1},
+      "comment": "Wheeled vehicles cannot enter."
+    },
+    {
+      "code": "M",
+      "name": "Mountain",
+      "defense_pct": 40,
+      "move_cost": {"foot": 2, "wheel": null, "tread": null, "air": 1},
+      "comment": "Infantry-only passage, strong cover."
+    },
+    {
+      "code": "C",
+      "name": "City",
+      "defense_pct": 40,
+      "move_cost": {"foot": 1, "wheel": 1, "tread": 1, "air": 1},
+      "supply_domains": ["land"],
+      "capture_points": 200,
+      "income": 300,
+      "comment": "Supplies land units standing on or next to it."
+    },
+    {
+      "code": "f",
+      "name": "Factory",
+      "defense_pct": 20,
+      "move_cost": {"foot": 1, "wheel": 1, "tread": 1, "air": 1},
+      "build": "factory",
+      "supply_domains": ["land"],
+      "capture_points": 200,
+      "income": 500
+    },
+    {
+      "code": "p",
+      "name": "Port",
+      "defense_pct": 15,
+      "move_cost": {"foot": 1, "wheel": 1, "tread": 1, "air": 1, "sea": 1},
+      "build": "port",
+      "supply_domains": ["land", "naval"],
+      "capture_points": 200,
+      "income": 300
+    },
+    {
+      "code": "A",
+      "name": "Airport",
+      "defense_pct": 0,
+      "move_cost": {"foot": 1, "wheel": 1, "tread": 1, "air": 1},
+      "build": "airport",
+      "supply_domains": ["land", "air"],
+      "capture_points": 200,
+      "income": 200
+    },
+    {
+      "code": "H",
+      "name": "Headquarters",
+      "defense_pct": 40,
+      "move_cost": {"foot": 1, "wheel": 1, "tread": 1, "air": 1},
+      "supply_domains": ["land"],
+      "capture_points": 300,
+      "income": 400,
+      "objective": true,
+      "comment": "Capturing an enemy HQ ends the game. Each side starts with an HQ unit on its own HQ hex."
+    },
+    {
+      "code": "~",
+      "name": "Sea",
+      "defense_pct": 0,
+      "move_cost": {"sea": 1, "air": 1},
+      "comment": "Only ships (and aircraft) cross the sea; land units need a Transport Ship."
+    }
+  ]
+}

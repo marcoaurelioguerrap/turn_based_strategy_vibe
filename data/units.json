@@ -1,0 +1,420 @@
+{
+  "schema": 1,
+  "comment": "Unit roster. Everything here is data: rename a unit, reskin it or retune it without touching the engine. glyph is the one-character marker text and graphical views use. Weapon power is the base damage against a 100-multiplier target at full attacker HP; multipliers are percentages per damage class and 0 means 'cannot hit that class'. min_range > 1 makes a weapon indirect: it is never counterattacked. Units are produced at a build site listed in build_at. Balance numbers are placeholders to be tuned in M4.",
+  "damage_classes": ["infantry", "light", "heavy", "air", "naval", "sub"],
+  "units": [
+    {
+      "id": "infantry",
+      "name": "Infantry",
+      "glyph": "i",
+      "damage_class": "infantry",
+      "movement": "foot",
+      "move": 3,
+      "vision": 2,
+      "cost": 700,
+      "max_hp": 100,
+      "fuel": null,
+      "can_capture": true,
+      "build_at": ["factory"],
+      "weapons": [
+        {
+          "id": "rifle",
+          "name": "Rifle",
+          "power": 55,
+          "min_range": 1,
+          "max_range": 1,
+          "ammo": 10,
+          "multipliers": {"infantry": 100, "light": 60, "heavy": 20, "air": 0, "naval": 0, "sub": 0}
+        }
+      ],
+      "comment": "The capture unit. Cheap, slow, decides the map."
+    },
+    {
+      "id": "apc",
+      "name": "APC",
+      "glyph": "a",
+      "damage_class": "light",
+      "movement": "wheel",
+      "move": 5,
+      "vision": 1,
+      "cost": 500,
+      "max_hp": 100,
+      "fuel": 40,
+      "capacity": 2,
+      "carries": ["foot"],
+      "supply_domains": ["land"],
+      "build_at": ["factory"],
+      "weapons": [
+        {
+          "id": "mg",
+          "name": "Machine Gun",
+          "power": 20,
+          "min_range": 1,
+          "max_range": 1,
+          "ammo": 5,
+          "multipliers": {"infantry": 80, "light": 30, "heavy": 5, "air": 0, "naval": 0, "sub": 0}
+        }
+      ],
+      "comment": "Motorises two infantry and can resupply land units standing next to it."
+    },
+    {
+      "id": "truck",
+      "name": "Truck",
+      "glyph": "t",
+      "damage_class": "light",
+      "movement": "wheel",
+      "move": 5,
+      "vision": 1,
+      "cost": 400,
+      "max_hp": 100,
+      "fuel": 50,
+      "capacity": 1,
+      "carries": ["foot"],
+      "supply_domains": ["land", "air"],
+      "build_at": ["factory"],
+      "weapons": [],
+      "comment": "Supply vehicle: keeps adjacent land and air units in supply. Carries one infantry."
+    },
+    {
+      "id": "tank",
+      "name": "Tank",
+      "glyph": "T",
+      "damage_class": "heavy",
+      "movement": "tread",
+      "move": 6,
+      "vision": 2,
+      "cost": 1200,
+      "max_hp": 100,
+      "fuel": 50,
+      "build_at": ["factory"],
+      "weapons": [
+        {
+          "id": "cannon",
+          "name": "Main Gun",
+          "power": 80,
+          "min_range": 1,
+          "max_range": 1,
+          "ammo": 8,
+          "multipliers": {"infantry": 60, "light": 90, "heavy": 100, "air": 0, "naval": 20, "sub": 0}
+        },
+        {
+          "id": "mg",
+          "name": "Machine Gun",
+          "power": 25,
+          "min_range": 1,
+          "max_range": 1,
+          "ammo": 10,
+          "multipliers": {"infantry": 80, "light": 40, "heavy": 10, "air": 0, "naval": 0, "sub": 0}
+        }
+      ],
+      "comment": "Main battle tank: the straight-line answer to armour and vehicles."
+    },
+    {
+      "id": "artillery",
+      "name": "Artillery",
+      "glyph": "R",
+      "damage_class": "heavy",
+      "movement": "tread",
+      "move": 4,
+      "vision": 2,
+      "cost": 900,
+      "max_hp": 100,
+      "fuel": 40,
+      "build_at": ["factory"],
+      "weapons": [
+        {
+          "id": "howitzer",
+          "name": "105mm Howitzer",
+          "power": 90,
+          "min_range": 2,
+          "max_range": 4,
+          "ammo": 6,
+          "multipliers": {"infantry": 85, "light": 80, "heavy": 95, "air": 0, "naval": 40, "sub": 0}
+        }
+      ],
+      "comment": "Indirect fire: never counterattacked, but it cannot shoot at an adjacent hex."
+    },
+    {
+      "id": "aa_missile",
+      "name": "AA Missile",
+      "glyph": "X",
+      "damage_class": "heavy",
+      "movement": "tread",
+      "move": 5,
+      "vision": 3,
+      "cost": 800,
+      "max_hp": 100,
+      "fuel": 40,
+      "build_at": ["factory"],
+      "weapons": [
+        {
+          "id": "sam",
+          "name": "Surface-to-Air Missiles",
+          "power": 85,
+          "min_range": 1,
+          "max_range": 3,
+          "ammo": 6,
+          "multipliers": {"infantry": 0, "light": 5, "heavy": 0, "air": 100, "naval": 0, "sub": 0}
+        },
+        {
+          "id": "autocannon",
+          "name": "Autocannon",
+          "power": 45,
+          "min_range": 1,
+          "max_range": 1,
+          "ammo": 8,
+          "multipliers": {"infantry": 40, "light": 25, "heavy": 5, "air": 15, "naval": 0, "sub": 0}
+        }
+      ],
+      "comment": "Air defence. Keeps your columns safe from helicopters and planes."
+    },
+    {
+      "id": "helicopter",
+      "name": "Helicopter",
+      "glyph": "h",
+      "damage_class": "air",
+      "movement": "air",
+      "move": 7,
+      "vision": 3,
+      "cost": 1600,
+      "max_hp": 100,
+      "fuel": 60,
+      "build_at": ["airport"],
+      "weapons": [
+        {
+          "id": "atgm",
+          "name": "Anti-Tank Missiles",
+          "power": 70,
+          "min_range": 1,
+          "max_range": 2,
+          "ammo": 6,
+          "multipliers": {"infantry": 60, "light": 90, "heavy": 85, "air": 0, "naval": 20, "sub": 0}
+        },
+        {
+          "id": "autocannon",
+          "name": "Autocannon",
+          "power": 45,
+          "min_range": 1,
+          "max_range": 1,
+          "ammo": 8,
+          "multipliers": {"infantry": 10, "light": 10, "heavy": 5, "air": 100, "naval": 0, "sub": 0}
+        }
+      ],
+      "comment": "Flies over any terrain. Kills tanks, dies to AA."
+    },
+    {
+      "id": "attack_plane",
+      "name": "Attack Plane",
+      "glyph": "P",
+      "damage_class": "air",
+      "movement": "air",
+      "move": 9,
+      "vision": 4,
+      "cost": 1500,
+      "max_hp": 100,
+      "fuel": 70,
+      "build_at": ["airport"],
+      "weapons": [
+        {
+          "id": "air_missiles",
+          "name": "Air-to-Air Missiles",
+          "power": 85,
+          "min_range": 1,
+          "max_range": 1,
+          "ammo": 6,
+          "multipliers": {"infantry": 0, "light": 0, "heavy": 0, "air": 100, "naval": 20, "sub": 0}
+        },
+        {
+          "id": "cannon",
+          "name": "Cannon",
+          "power": 40,
+          "min_range": 1,
+          "max_range": 1,
+          "ammo": 8,
+          "multipliers": {"infantry": 45, "light": 65, "heavy": 35, "air": 0, "naval": 0, "sub": 0}
+        }
+      ],
+      "comment": "Fighter and ground attacker. Needs an airport and lots of fuel."
+    },
+    {
+      "id": "bomber",
+      "name": "Bomber",
+      "glyph": "B",
+      "damage_class": "air",
+      "movement": "air",
+      "move": 7,
+      "vision": 3,
+      "cost": 1800,
+      "max_hp": 100,
+      "fuel": 60,
+      "build_at": ["airport"],
+      "weapons": [
+        {
+          "id": "bombs",
+          "name": "Bomb Rack",
+          "power": 85,
+          "min_range": 2,
+          "max_range": 3,
+          "ammo": 5,
+          "multipliers": {"infantry": 90, "light": 90, "heavy": 100, "air": 0, "naval": 90, "sub": 40}
+        }
+      ],
+      "comment": "Heavy ground attack, never counterattacked, cannot hit aircraft. Escort it."
+    },
+    {
+      "id": "destroyer",
+      "name": "Destroyer",
+      "glyph": "D",
+      "damage_class": "naval",
+      "movement": "sea",
+      "move": 6,
+      "vision": 3,
+      "cost": 1500,
+      "max_hp": 100,
+      "fuel": 60,
+      "build_at": ["port"],
+      "weapons": [
+        {
+          "id": "main_gun",
+          "name": "Deck Gun",
+          "power": 75,
+          "min_range": 1,
+          "max_range": 1,
+          "ammo": 8,
+          "multipliers": {"infantry": 0, "light": 0, "heavy": 0, "air": 0, "naval": 100, "sub": 10}
+        },
+        {
+          "id": "howitzer",
+          "name": "Shore Bombardment",
+          "power": 65,
+          "min_range": 2,
+          "max_range": 4,
+          "ammo": 6,
+          "multipliers": {"infantry": 70, "light": 50, "heavy": 60, "air": 0, "naval": 0, "sub": 0}
+        },
+        {
+          "id": "aa_gun",
+          "name": "AA Gun",
+          "power": 55,
+          "min_range": 1,
+          "max_range": 1,
+          "ammo": 6,
+          "multipliers": {"infantry": 0, "light": 0, "heavy": 0, "air": 100, "naval": 0, "sub": 0}
+        }
+      ],
+      "comment": "Escort ship: hunts submarines poorly, screens against aircraft."
+    },
+    {
+      "id": "cruiser",
+      "name": "Cruiser",
+      "glyph": "C",
+      "damage_class": "naval",
+      "movement": "sea",
+      "move": 5,
+      "vision": 3,
+      "cost": 2400,
+      "max_hp": 100,
+      "fuel": 70,
+      "build_at": ["port"],
+      "weapons": [
+        {
+          "id": "guns",
+          "name": "Main Battery",
+          "power": 85,
+          "min_range": 1,
+          "max_range": 1,
+          "ammo": 8,
+          "multipliers": {"infantry": 0, "light": 0, "heavy": 0, "air": 0, "naval": 95, "sub": 5}
+        },
+        {
+          "id": "shore_battery",
+          "name": "Shore Battery",
+          "power": 95,
+          "min_range": 2,
+          "max_range": 5,
+          "ammo": 6,
+          "multipliers": {"infantry": 85, "light": 85, "heavy": 100, "air": 0, "naval": 0, "sub": 0}
+        },
+        {
+          "id": "aa_gun",
+          "name": "AA Gun",
+          "power": 55,
+          "min_range": 1,
+          "max_range": 1,
+          "ammo": 6,
+          "multipliers": {"infantry": 0, "light": 0, "heavy": 0, "air": 100, "naval": 0, "sub": 0}
+        }
+      ],
+      "comment": "Offshore artillery that supports a landing. Fragile to submarines."
+    },
+    {
+      "id": "submarine",
+      "name": "Submarine",
+      "glyph": "S",
+      "damage_class": "sub",
+      "movement": "sea",
+      "move": 5,
+      "vision": 2,
+      "cost": 1700,
+      "max_hp": 100,
+      "fuel": 70,
+      "build_at": ["port"],
+      "weapons": [
+        {
+          "id": "torpedoes",
+          "name": "Torpedoes",
+          "power": 90,
+          "min_range": 1,
+          "max_range": 1,
+          "ammo": 6,
+          "multipliers": {"infantry": 0, "light": 0, "heavy": 0, "air": 0, "naval": 100, "sub": 80}
+        }
+      ],
+      "comment": "Surface guns barely scratch a submarine; only torpedoes and bombs really hurt it."
+    },
+    {
+      "id": "transport_ship",
+      "name": "Transport Ship",
+      "glyph": "U",
+      "damage_class": "naval",
+      "movement": "sea",
+      "move": 5,
+      "vision": 1,
+      "cost": 1200,
+      "max_hp": 100,
+      "fuel": 60,
+      "capacity": 4,
+      "carries": ["foot", "wheel", "tread"],
+      "supply_domains": ["naval"],
+      "build_at": ["port"],
+      "weapons": [],
+      "comment": "Amphibious lift: four ground vehicles or infantry.  Unloads onto adjacent land or port hexes - it cannot put troops into open sea, so a beach or a harbour is needed."
+    },
+    {
+      "id": "hq",
+      "name": "Headquarters",
+      "glyph": "H",
+      "damage_class": "heavy",
+      "movement": "foot",
+      "move": 0,
+      "vision": 2,
+      "cost": 0,
+      "max_hp": 100,
+      "fuel": null,
+      "can_capture": false,
+      "build_at": [],
+      "weapons": [
+        {
+          "id": "mg",
+          "name": "Guard MG",
+          "power": 20,
+          "min_range": 1,
+          "max_range": 1,
+          "ammo": 20,
+          "multipliers": {"infantry": 60, "light": 30, "heavy": 5, "air": 0, "naval": 0, "sub": 0}
+        }
+      ],
+      "comment": "Placed by a scenario on its HQ hex; captures nothing, moves nowhere, defends the objective."
+    }
+  ]
+}

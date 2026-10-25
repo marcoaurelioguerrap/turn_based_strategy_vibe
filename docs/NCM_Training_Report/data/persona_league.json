@@ -1,0 +1,2067 @@
+{
+  "personas": [
+    "aggressive",
+    "defensive",
+    "infantry",
+    "armor",
+    "artillery"
+  ],
+  "maps": [
+    "border_skirmish"
+  ],
+  "games_per_map": 1,
+  "matches": 10,
+  "fallback": "persona",
+  "prefix_len": 2048,
+  "generator": "generator.pt",
+  "retries": 6,
+  "seconds": 5742.4,
+  "aggregates": {
+    "aggressive": {
+      "persona": "aggressive",
+      "games": 4,
+      "wins": 0,
+      "losses": 0,
+      "unfinished": 4,
+      "win_rate": 0.0,
+      "finished_win_rate": 0.0,
+      "avg_score_delta": -2.6725000000000003,
+      "avg_turns": 21.0,
+      "steps": 1376,
+      "orders": 1376,
+      "generated": 143,
+      "repaired": 985,
+      "model_orders": 1128,
+      "fallbacks": 248,
+      "rejected": 0,
+      "state_too_long": 0,
+      "repairs": {
+        "same-unit": 245,
+        "unit": 149,
+        "action": 547,
+        "nearest": 44
+      },
+      "fallback_reasons": {
+        "no-legal-sample": 248
+      },
+      "fallback_rate": 0.18023255813953487,
+      "fallback_rate_per_order": 0.18023255813953487,
+      "generated_share": 0.10392441860465117,
+      "repaired_share": 0.715843023255814,
+      "model_share": 0.8197674418604651,
+      "state_too_long_rate": 0.0,
+      "actions": {
+        "move": 0.30886627906976744,
+        "attack": 0.14825581395348839,
+        "build": 0.04433139534883721,
+        "capture": 0.0,
+        "hold": 0.49636627906976744,
+        "load": 0.0014534883720930232,
+        "unload": 0.0007267441860465116
+      },
+      "model_actions": {
+        "move": 0.3351063829787234,
+        "attack": 0.1524822695035461,
+        "build": 0.054078014184397165,
+        "capture": 0.0,
+        "hold": 0.4574468085106383,
+        "load": 0.0008865248226950354,
+        "unload": 0.0
+      },
+      "builds": {
+        "infantry": 21,
+        "aa_missile": 39,
+        "transport_ship": 1
+      },
+      "model_builds": {
+        "infantry": 21,
+        "aa_missile": 39,
+        "transport_ship": 1
+      },
+      "build_mix": {
+        "infantry": 0.3442622950819672,
+        "aa_missile": 0.639344262295082,
+        "transport_ship": 0.01639344262295082
+      },
+      "model_build_mix": {
+        "infantry": 0.3442622950819672,
+        "aa_missile": 0.639344262295082,
+        "transport_ship": 0.01639344262295082
+      },
+      "mean_enemy_distance": 3.1213533290946103,
+      "mean_home_distance": 3.419184279655615,
+      "style_distance": 0.1964,
+      "model_style_distance": 0.1574,
+      "teacher_mix": {
+        "actions": {
+          "move": 0.3491901999065086,
+          "attack": 0.22756894987213683,
+          "build": 0.09607611295955124,
+          "capture": 0.0028322380179833366,
+          "hold": 0.2999972502543515,
+          "load": 0.012016388484065225,
+          "unload": 0.01231886050540325
+        },
+        "builds": {
+          "tank": 0.498282770463652,
+          "aa_missile": 0.09959931310818546,
+          "artillery": 0.3554665140240412,
+          "infantry": 0.04665140240412135
+        },
+        "rows": 36367
+      }
+    },
+    "defensive": {
+      "persona": "defensive",
+      "games": 4,
+      "wins": 0,
+      "losses": 0,
+      "unfinished": 4,
+      "win_rate": 0.0,
+      "finished_win_rate": 0.0,
+      "avg_score_delta": -22.189999999999998,
+      "avg_turns": 21.0,
+      "steps": 1048,
+      "orders": 1048,
+      "generated": 148,
+      "repaired": 641,
+      "model_orders": 789,
+      "fallbacks": 259,
+      "rejected": 0,
+      "state_too_long": 0,
+      "repairs": {
+        "same-unit": 138,
+        "action": 366,
+        "unit": 113,
+        "nearest": 24
+      },
+      "fallback_reasons": {
+        "no-legal-sample": 259
+      },
+      "fallback_rate": 0.24713740458015268,
+      "fallback_rate_per_order": 0.24713740458015268,
+      "generated_share": 0.14122137404580154,
+      "repaired_share": 0.6116412213740458,
+      "model_share": 0.7528625954198473,
+      "state_too_long_rate": 0.0,
+      "actions": {
+        "move": 0.32251908396946566,
+        "attack": 0.18129770992366412,
+        "build": 0.04103053435114504,
+        "capture": 0.0,
+        "hold": 0.44274809160305345,
+        "load": 0.007633587786259542,
+        "unload": 0.004770992366412214
+      },
+      "model_actions": {
+        "move": 0.33713561470215464,
+        "attack": 0.19138149556400508,
+        "build": 0.05449936628643853,
+        "capture": 0.0,
+        "hold": 0.4144486692015209,
+        "load": 0.0025348542458808617,
+        "unload": 0.0
+      },
+      "builds": {
+        "aa_missile": 17,
+        "infantry": 23,
+        "artillery": 3
+      },
+      "model_builds": {
+        "aa_missile": 17,
+        "infantry": 23,
+        "artillery": 3
+      },
+      "build_mix": {
+        "aa_missile": 0.3953488372093023,
+        "infantry": 0.5348837209302325,
+        "artillery": 0.06976744186046512
+      },
+      "model_build_mix": {
+        "aa_missile": 0.3953488372093023,
+        "infantry": 0.5348837209302325,
+        "artillery": 0.06976744186046512
+      },
+      "mean_enemy_distance": 3.5388920557693706,
+      "mean_home_distance": 2.9056549996369183,
+      "style_distance": 0.1428,
+      "model_style_distance": 0.1145,
+      "teacher_mix": {
+        "actions": {
+          "move": 0.3918331026300178,
+          "attack": 0.21010480522048647,
+          "build": 0.060510183903500096,
+          "capture": 0.001532529167490607,
+          "hold": 0.2999802254300969,
+          "load": 0.018143167886098478,
+          "unload": 0.01789598576230967
+        },
+        "builds": {
+          "infantry": 0.3946078431372549,
+          "tank": 0.0727124183006536,
+          "artillery": 0.23937908496732027,
+          "aa_missile": 0.29330065359477125
+        },
+        "rows": 20228
+      }
+    },
+    "infantry": {
+      "persona": "infantry",
+      "games": 4,
+      "wins": 0,
+      "losses": 0,
+      "unfinished": 4,
+      "win_rate": 0.0,
+      "finished_win_rate": 0.0,
+      "avg_score_delta": 12.5275,
+      "avg_turns": 21.0,
+      "steps": 1612,
+      "orders": 1612,
+      "generated": 190,
+      "repaired": 1082,
+      "model_orders": 1272,
+      "fallbacks": 340,
+      "rejected": 0,
+      "state_too_long": 0,
+      "repairs": {
+        "action": 571,
+        "same-unit": 261,
+        "unit": 178,
+        "nearest": 72
+      },
+      "fallback_reasons": {
+        "no-legal-sample": 340
+      },
+      "fallback_rate": 0.2109181141439206,
+      "fallback_rate_per_order": 0.2109181141439206,
+      "generated_share": 0.11786600496277916,
+      "repaired_share": 0.6712158808933002,
+      "model_share": 0.7890818858560794,
+      "state_too_long_rate": 0.0,
+      "actions": {
+        "move": 0.32444168734491313,
+        "attack": 0.13337468982630274,
+        "build": 0.04094292803970223,
+        "capture": 0.007444168734491315,
+        "hold": 0.4820099255583127,
+        "load": 0.006823821339950372,
+        "unload": 0.004962779156327543
+      },
+      "model_actions": {
+        "move": 0.35455974842767296,
+        "attack": 0.14937106918238993,
+        "build": 0.05188679245283019,
+        "capture": 0.009433962264150943,
+        "hold": 0.42924528301886794,
+        "load": 0.00550314465408805,
+        "unload": 0.0
+      },
+      "builds": {
+        "infantry": 66
+      },
+      "model_builds": {
+        "infantry": 66
+      },
+      "build_mix": {
+        "infantry": 1.0
+      },
+      "model_build_mix": {
+        "infantry": 1.0
+      },
+      "mean_enemy_distance": 3.651035569011923,
+      "mean_home_distance": 4.214369679248673,
+      "style_distance": 0.182,
+      "model_style_distance": 0.1363,
+      "teacher_mix": {
+        "actions": {
+          "move": 0.347538831765478,
+          "attack": 0.214438853642529,
+          "build": 0.08641435134543864,
+          "capture": 0.02056442791511704,
+          "hold": 0.2999781229490265,
+          "load": 0.01636403412819952,
+          "unload": 0.014701378254211332
+        },
+        "builds": {
+          "infantry": 1.0
+        },
+        "rows": 22855
+      }
+    },
+    "armor": {
+      "persona": "armor",
+      "games": 4,
+      "wins": 0,
+      "losses": 0,
+      "unfinished": 4,
+      "win_rate": 0.0,
+      "finished_win_rate": 0.0,
+      "avg_score_delta": 1.2749999999999997,
+      "avg_turns": 21.0,
+      "steps": 1366,
+      "orders": 1366,
+      "generated": 83,
+      "repaired": 887,
+      "model_orders": 970,
+      "fallbacks": 396,
+      "rejected": 0,
+      "state_too_long": 0,
+      "repairs": {
+        "same-unit": 230,
+        "action": 379,
+        "nearest": 117,
+        "unit": 161
+      },
+      "fallback_reasons": {
+        "no-legal-sample": 396
+      },
+      "fallback_rate": 0.28989751098096633,
+      "fallback_rate_per_order": 0.28989751098096633,
+      "generated_share": 0.06076134699853587,
+      "repaired_share": 0.6493411420204978,
+      "model_share": 0.7101024890190337,
+      "state_too_long_rate": 0.0,
+      "actions": {
+        "move": 0.3484626647144949,
+        "attack": 0.12152269399707175,
+        "build": 0.04319180087847731,
+        "capture": 0.0,
+        "hold": 0.4612005856515373,
+        "load": 0.013177159590043924,
+        "unload": 0.012445095168374817
+      },
+      "model_actions": {
+        "move": 0.4195876288659794,
+        "attack": 0.1463917525773196,
+        "build": 0.060824742268041236,
+        "capture": 0.0,
+        "hold": 0.3680412371134021,
+        "load": 0.002061855670103093,
+        "unload": 0.003092783505154639
+      },
+      "builds": {
+        "tank": 33,
+        "artillery": 3,
+        "infantry": 23
+      },
+      "model_builds": {
+        "tank": 33,
+        "artillery": 3,
+        "infantry": 23
+      },
+      "build_mix": {
+        "tank": 0.559322033898305,
+        "artillery": 0.05084745762711865,
+        "infantry": 0.3898305084745763
+      },
+      "model_build_mix": {
+        "tank": 0.559322033898305,
+        "artillery": 0.05084745762711865,
+        "infantry": 0.3898305084745763
+      },
+      "mean_enemy_distance": 2.942268247944201,
+      "mean_home_distance": 3.4846162072035898,
+      "style_distance": 0.1661,
+      "model_style_distance": 0.1135,
+      "teacher_mix": {
+        "actions": {
+          "move": 0.3741707209199469,
+          "attack": 0.1956656346749226,
+          "build": 0.10123839009287926,
+          "capture": 0.008182220256523662,
+          "hold": 0.3,
+          "load": 0.010482087571870854,
+          "unload": 0.010260946483856701
+        },
+        "builds": {
+          "tank": 0.5574486675404107,
+          "aa_missile": 0.145041502839668,
+          "artillery": 0.2529488859764089,
+          "infantry": 0.04456094364351245
+        },
+        "rows": 22610
+      }
+    },
+    "artillery": {
+      "persona": "artillery",
+      "games": 4,
+      "wins": 0,
+      "losses": 0,
+      "unfinished": 4,
+      "win_rate": 0.0,
+      "finished_win_rate": 0.0,
+      "avg_score_delta": 11.06,
+      "avg_turns": 21.0,
+      "steps": 1319,
+      "orders": 1319,
+      "generated": 70,
+      "repaired": 826,
+      "model_orders": 896,
+      "fallbacks": 423,
+      "rejected": 0,
+      "state_too_long": 0,
+      "repairs": {
+        "same-unit": 168,
+        "action": 486,
+        "nearest": 57,
+        "unit": 115
+      },
+      "fallback_reasons": {
+        "no-legal-sample": 423
+      },
+      "fallback_rate": 0.3206974981046247,
+      "fallback_rate_per_order": 0.3206974981046247,
+      "generated_share": 0.05307050796057619,
+      "repaired_share": 0.6262319939347991,
+      "model_share": 0.6793025018953753,
+      "state_too_long_rate": 0.0,
+      "actions": {
+        "move": 0.2699014404852161,
+        "attack": 0.15314632297194844,
+        "build": 0.032600454890068235,
+        "capture": 0.0,
+        "hold": 0.5200909780136467,
+        "load": 0.012130401819560273,
+        "unload": 0.012130401819560273
+      },
+      "model_actions": {
+        "move": 0.33816964285714285,
+        "attack": 0.15513392857142858,
+        "build": 0.04799107142857143,
+        "capture": 0.0,
+        "hold": 0.4486607142857143,
+        "load": 0.008928571428571428,
+        "unload": 0.0011160714285714285
+      },
+      "builds": {
+        "infantry": 10,
+        "aa_missile": 7,
+        "artillery": 24,
+        "tank": 2
+      },
+      "model_builds": {
+        "infantry": 10,
+        "aa_missile": 7,
+        "artillery": 24,
+        "tank": 2
+      },
+      "build_mix": {
+        "infantry": 0.23255813953488372,
+        "aa_missile": 0.16279069767441862,
+        "artillery": 0.5581395348837209,
+        "tank": 0.046511627906976744
+      },
+      "model_build_mix": {
+        "infantry": 0.23255813953488372,
+        "aa_missile": 0.16279069767441862,
+        "artillery": 0.5581395348837209,
+        "tank": 0.046511627906976744
+      },
+      "mean_enemy_distance": 4.001725025005655,
+      "mean_home_distance": 3.303925751239767,
+      "style_distance": 0.2201,
+      "model_style_distance": 0.1487,
+      "teacher_mix": {
+        "actions": {
+          "move": 0.3881917631917632,
+          "attack": 0.19397522522522523,
+          "build": 0.08703346203346203,
+          "capture": 0.00180984555984556,
+          "hold": 0.29999195624195624,
+          "load": 0.015122265122265123,
+          "unload": 0.013875482625482626
+        },
+        "builds": {
+          "aa_missile": 0.14186691312384472,
+          "tank": 0.048983364140480594,
+          "artillery": 0.49815157116451014,
+          "infantry": 0.3109981515711645
+        },
+        "rows": 24864
+      }
+    }
+  },
+  "fallback_reasons_by_map": {
+    "border_skirmish": {
+      "aggressive": {
+        "no-legal-sample": 248
+      },
+      "defensive": {
+        "no-legal-sample": 259
+      },
+      "infantry": {
+        "no-legal-sample": 340
+      },
+      "armor": {
+        "no-legal-sample": 396
+      },
+      "artillery": {
+        "no-legal-sample": 423
+      }
+    }
+  },
+  "games": [
+    {
+      "pair": [
+        "aggressive",
+        "defensive"
+      ],
+      "map": "border_skirmish",
+      "seed": 710000,
+      "winner": "",
+      "persona_sides": {
+        "aggressive": "B",
+        "defensive": "A"
+      },
+      "turns": 21,
+      "score_delta": -1.93,
+      "status": "ongoing",
+      "learner_side": "B",
+      "stats": {
+        "B": {
+          "steps": 331,
+          "samples": 2207,
+          "generated": 30,
+          "repaired": 239,
+          "repaired_samples": 1187,
+          "fallbacks": 62,
+          "illegal": 990,
+          "rejected": 0,
+          "recovered": 0,
+          "state_too_long": 0,
+          "generation_errors": 0,
+          "orders": 331,
+          "actions": {
+            "build": 17,
+            "move": 115,
+            "attack": 38,
+            "hold": 159,
+            "load": 1,
+            "unload": 1
+          },
+          "builds": {
+            "infantry": 8,
+            "aa_missile": 9
+          },
+          "repairs": {
+            "same-unit": 67,
+            "unit": 41,
+            "action": 125,
+            "nearest": 6
+          },
+          "model_orders": 269,
+          "model_actions": {
+            "build": 17,
+            "move": 99,
+            "attack": 32,
+            "hold": 120,
+            "load": 1
+          },
+          "model_builds": {
+            "infantry": 8,
+            "aa_missile": 9
+          },
+          "attack_rate": 0.1148036253776435,
+          "capture_rate": 0.0,
+          "hold_rate": 0.48036253776435045,
+          "build_rate": 0.0513595166163142,
+          "model_attack_rate": 0.11895910780669144,
+          "model_hold_rate": 0.44609665427509293,
+          "model_build_rate": 0.06319702602230483,
+          "fallback_rate": 0.18731117824773413,
+          "fallback_rate_per_order": 0.18731117824773413,
+          "generated_share": 0.09063444108761329,
+          "repaired_share": 0.7220543806646526,
+          "model_share": 0.8126888217522659,
+          "sample_legal_rate": 0.01359311282283643,
+          "fallback_reasons": {
+            "no-legal-sample": 62
+          },
+          "mean_enemy_distance": 3.713375796178344,
+          "mean_home_distance": 3.417197452229299
+        },
+        "A": {
+          "steps": 299,
+          "samples": 1930,
+          "generated": 40,
+          "repaired": 195,
+          "repaired_samples": 1029,
+          "fallbacks": 64,
+          "illegal": 861,
+          "rejected": 0,
+          "recovered": 0,
+          "state_too_long": 0,
+          "generation_errors": 0,
+          "orders": 299,
+          "actions": {
+            "build": 8,
+            "move": 97,
+            "hold": 135,
+            "attack": 54,
+            "load": 3,
+            "unload": 2
+          },
+          "builds": {
+            "aa_missile": 2,
+            "infantry": 3,
+            "artillery": 3
+          },
+          "repairs": {
+            "same-unit": 43,
+            "action": 111,
+            "unit": 32,
+            "nearest": 9
+          },
+          "model_orders": 235,
+          "model_actions": {
+            "build": 8,
+            "move": 82,
+            "hold": 98,
+            "attack": 47
+          },
+          "model_builds": {
+            "aa_missile": 2,
+            "infantry": 3,
+            "artillery": 3
+          },
+          "attack_rate": 0.1806020066889632,
+          "capture_rate": 0.0,
+          "hold_rate": 0.451505016722408,
+          "build_rate": 0.026755852842809364,
+          "model_attack_rate": 0.2,
+          "model_hold_rate": 0.41702127659574467,
+          "model_build_rate": 0.03404255319148936,
+          "fallback_rate": 0.2140468227424749,
+          "fallback_rate_per_order": 0.2140468227424749,
+          "generated_share": 0.13377926421404682,
+          "repaired_share": 0.6521739130434783,
+          "model_share": 0.7859531772575251,
+          "sample_legal_rate": 0.02072538860103627,
+          "fallback_reasons": {
+            "no-legal-sample": 64
+          },
+          "mean_enemy_distance": 3.48,
+          "mean_home_distance": 3.6
+        }
+      }
+    },
+    {
+      "pair": [
+        "aggressive",
+        "infantry"
+      ],
+      "map": "border_skirmish",
+      "seed": 711000,
+      "winner": "",
+      "persona_sides": {
+        "aggressive": "B",
+        "infantry": "A"
+      },
+      "turns": 21,
+      "score_delta": -9.41,
+      "status": "ongoing",
+      "learner_side": "B",
+      "stats": {
+        "B": {
+          "steps": 342,
+          "samples": 2284,
+          "generated": 27,
+          "repaired": 234,
+          "repaired_samples": 1188,
+          "fallbacks": 81,
+          "illegal": 1069,
+          "rejected": 0,
+          "recovered": 0,
+          "state_too_long": 0,
+          "generation_errors": 0,
+          "orders": 342,
+          "actions": {
+            "build": 14,
+            "move": 106,
+            "attack": 57,
+            "hold": 165
+          },
+          "builds": {
+            "infantry": 6,
+            "aa_missile": 8
+          },
+          "repairs": {
+            "same-unit": 65,
+            "action": 123,
+            "unit": 34,
+            "nearest": 12
+          },
+          "model_orders": 261,
+          "model_actions": {
+            "build": 14,
+            "move": 87,
+            "attack": 44,
+            "hold": 116
+          },
+          "model_builds": {
+            "infantry": 6,
+            "aa_missile": 8
+          },
+          "attack_rate": 0.16666666666666666,
+          "capture_rate": 0.0,
+          "hold_rate": 0.4824561403508772,
+          "build_rate": 0.04093567251461988,
+          "model_attack_rate": 0.1685823754789272,
+          "model_hold_rate": 0.4444444444444444,
+          "model_build_rate": 0.05363984674329502,
+          "fallback_rate": 0.23684210526315788,
+          "fallback_rate_per_order": 0.23684210526315788,
+          "generated_share": 0.07894736842105263,
+          "repaired_share": 0.6842105263157895,
+          "model_share": 0.7631578947368421,
+          "sample_legal_rate": 0.011821366024518389,
+          "fallback_reasons": {
+            "no-legal-sample": 81
+          },
+          "mean_enemy_distance": 2.167682926829268,
+          "mean_home_distance": 3.3963414634146343
+        },
+        "A": {
+          "steps": 418,
+          "samples": 2697,
+          "generated": 52,
+          "repaired": 284,
+          "repaired_samples": 1642,
+          "fallbacks": 82,
+          "illegal": 1003,
+          "rejected": 0,
+          "recovered": 0,
+          "state_too_long": 0,
+          "generation_errors": 0,
+          "orders": 418,
+          "actions": {
+            "build": 17,
+            "move": 136,
+            "hold": 193,
+            "attack": 67,
+            "load": 2,
+            "unload": 1,
+            "capture": 2
+          },
+          "builds": {
+            "infantry": 17
+          },
+          "repairs": {
+            "action": 142,
+            "same-unit": 70,
+            "unit": 58,
+            "nearest": 14
+          },
+          "model_orders": 336,
+          "model_actions": {
+            "build": 17,
+            "move": 119,
+            "hold": 135,
+            "attack": 62,
+            "capture": 2,
+            "load": 1
+          },
+          "model_builds": {
+            "infantry": 17
+          },
+          "attack_rate": 0.16028708133971292,
+          "capture_rate": 0.004784688995215311,
+          "hold_rate": 0.46172248803827753,
+          "build_rate": 0.04066985645933014,
+          "model_attack_rate": 0.18452380952380953,
+          "model_hold_rate": 0.4017857142857143,
+          "model_build_rate": 0.050595238095238096,
+          "fallback_rate": 0.19617224880382775,
+          "fallback_rate_per_order": 0.19617224880382775,
+          "generated_share": 0.12440191387559808,
+          "repaired_share": 0.6794258373205742,
+          "model_share": 0.8038277511961722,
+          "sample_legal_rate": 0.0192806822395254,
+          "fallback_reasons": {
+            "no-legal-sample": 82
+          },
+          "mean_enemy_distance": 2.733167082294264,
+          "mean_home_distance": 4.311720698254364
+        }
+      }
+    },
+    {
+      "pair": [
+        "aggressive",
+        "armor"
+      ],
+      "map": "border_skirmish",
+      "seed": 712000,
+      "winner": "",
+      "persona_sides": {
+        "aggressive": "B",
+        "armor": "A"
+      },
+      "turns": 21,
+      "score_delta": -14.46,
+      "status": "ongoing",
+      "learner_side": "B",
+      "stats": {
+        "B": {
+          "steps": 338,
+          "samples": 2221,
+          "generated": 40,
+          "repaired": 241,
+          "repaired_samples": 1205,
+          "fallbacks": 57,
+          "illegal": 976,
+          "rejected": 0,
+          "recovered": 0,
+          "state_too_long": 0,
+          "generation_errors": 0,
+          "orders": 338,
+          "actions": {
+            "build": 14,
+            "move": 100,
+            "hold": 151,
+            "attack": 73
+          },
+          "builds": {
+            "infantry": 3,
+            "aa_missile": 11
+          },
+          "repairs": {
+            "same-unit": 60,
+            "action": 129,
+            "unit": 36,
+            "nearest": 16
+          },
+          "model_orders": 281,
+          "model_actions": {
+            "build": 14,
+            "move": 93,
+            "hold": 112,
+            "attack": 62
+          },
+          "model_builds": {
+            "infantry": 3,
+            "aa_missile": 11
+          },
+          "attack_rate": 0.21597633136094674,
+          "capture_rate": 0.0,
+          "hold_rate": 0.4467455621301775,
+          "build_rate": 0.04142011834319527,
+          "model_attack_rate": 0.2206405693950178,
+          "model_hold_rate": 0.398576512455516,
+          "model_build_rate": 0.0498220640569395,
+          "fallback_rate": 0.16863905325443787,
+          "fallback_rate_per_order": 0.16863905325443787,
+          "generated_share": 0.11834319526627218,
+          "repaired_share": 0.7130177514792899,
+          "model_share": 0.8313609467455622,
+          "sample_legal_rate": 0.018009905447996397,
+          "fallback_reasons": {
+            "no-legal-sample": 57
+          },
+          "mean_enemy_distance": 2.95679012345679,
+          "mean_home_distance": 3.330246913580247
+        },
+        "A": {
+          "steps": 398,
+          "samples": 2684,
+          "generated": 27,
+          "repaired": 271,
+          "repaired_samples": 1379,
+          "fallbacks": 100,
+          "illegal": 1278,
+          "rejected": 0,
+          "recovered": 0,
+          "state_too_long": 0,
+          "generation_errors": 0,
+          "orders": 398,
+          "actions": {
+            "build": 18,
+            "move": 134,
+            "hold": 184,
+            "load": 3,
+            "attack": 56,
+            "unload": 3
+          },
+          "builds": {
+            "tank": 15,
+            "artillery": 1,
+            "infantry": 2
+          },
+          "repairs": {
+            "same-unit": 86,
+            "action": 117,
+            "nearest": 30,
+            "unit": 38
+          },
+          "model_orders": 298,
+          "model_actions": {
+            "build": 18,
+            "move": 120,
+            "hold": 114,
+            "attack": 45,
+            "unload": 1
+          },
+          "model_builds": {
+            "tank": 15,
+            "artillery": 1,
+            "infantry": 2
+          },
+          "attack_rate": 0.1407035175879397,
+          "capture_rate": 0.0,
+          "hold_rate": 0.4623115577889447,
+          "build_rate": 0.04522613065326633,
+          "model_attack_rate": 0.15100671140939598,
+          "model_hold_rate": 0.3825503355704698,
+          "model_build_rate": 0.06040268456375839,
+          "fallback_rate": 0.25125628140703515,
+          "fallback_rate_per_order": 0.25125628140703515,
+          "generated_share": 0.0678391959798995,
+          "repaired_share": 0.6809045226130653,
+          "model_share": 0.7487437185929648,
+          "sample_legal_rate": 0.010059612518628911,
+          "fallback_reasons": {
+            "no-legal-sample": 100
+          },
+          "mean_enemy_distance": 3.2073863636363638,
+          "mean_home_distance": 3.1931818181818183
+        }
+      }
+    },
+    {
+      "pair": [
+        "aggressive",
+        "artillery"
+      ],
+      "map": "border_skirmish",
+      "seed": 713000,
+      "winner": "",
+      "persona_sides": {
+        "aggressive": "B",
+        "artillery": "A"
+      },
+      "turns": 21,
+      "score_delta": 15.11,
+      "status": "ongoing",
+      "learner_side": "B",
+      "stats": {
+        "B": {
+          "steps": 365,
+          "samples": 2395,
+          "generated": 46,
+          "repaired": 271,
+          "repaired_samples": 1316,
+          "fallbacks": 48,
+          "illegal": 1033,
+          "rejected": 0,
+          "recovered": 0,
+          "state_too_long": 0,
+          "generation_errors": 0,
+          "orders": 365,
+          "actions": {
+            "build": 16,
+            "move": 104,
+            "attack": 36,
+            "hold": 208,
+            "load": 1
+          },
+          "builds": {
+            "infantry": 4,
+            "aa_missile": 11,
+            "transport_ship": 1
+          },
+          "repairs": {
+            "same-unit": 53,
+            "action": 170,
+            "unit": 38,
+            "nearest": 10
+          },
+          "model_orders": 317,
+          "model_actions": {
+            "build": 16,
+            "move": 99,
+            "attack": 34,
+            "hold": 168
+          },
+          "model_builds": {
+            "infantry": 4,
+            "aa_missile": 11,
+            "transport_ship": 1
+          },
+          "attack_rate": 0.09863013698630137,
+          "capture_rate": 0.0,
+          "hold_rate": 0.5698630136986301,
+          "build_rate": 0.043835616438356165,
+          "model_attack_rate": 0.10725552050473186,
+          "model_hold_rate": 0.5299684542586751,
+          "model_build_rate": 0.050473186119873815,
+          "fallback_rate": 0.13150684931506848,
+          "fallback_rate_per_order": 0.13150684931506848,
+          "generated_share": 0.12602739726027398,
+          "repaired_share": 0.7424657534246575,
+          "model_share": 0.8684931506849315,
+          "sample_legal_rate": 0.019206680584551147,
+          "fallback_reasons": {
+            "no-legal-sample": 48
+          },
+          "mean_enemy_distance": 3.64756446991404,
+          "mean_home_distance": 3.5329512893982806
+        },
+        "A": {
+          "steps": 232,
+          "samples": 1583,
+          "generated": 15,
+          "repaired": 118,
+          "repaired_samples": 617,
+          "fallbacks": 99,
+          "illegal": 951,
+          "rejected": 0,
+          "recovered": 0,
+          "state_too_long": 0,
+          "generation_errors": 0,
+          "orders": 232,
+          "actions": {
+            "build": 6,
+            "move": 70,
+            "hold": 102,
+            "attack": 42,
+            "load": 6,
+            "unload": 6
+          },
+          "builds": {
+            "infantry": 1,
+            "aa_missile": 2,
+            "artillery": 3
+          },
+          "repairs": {
+            "same-unit": 20,
+            "action": 57,
+            "nearest": 10,
+            "unit": 31
+          },
+          "model_orders": 133,
+          "model_actions": {
+            "build": 6,
+            "move": 60,
+            "hold": 40,
+            "attack": 24,
+            "load": 2,
+            "unload": 1
+          },
+          "model_builds": {
+            "infantry": 1,
+            "aa_missile": 2,
+            "artillery": 3
+          },
+          "attack_rate": 0.1810344827586207,
+          "capture_rate": 0.0,
+          "hold_rate": 0.4396551724137931,
+          "build_rate": 0.02586206896551724,
+          "model_attack_rate": 0.18045112781954886,
+          "model_hold_rate": 0.3007518796992481,
+          "model_build_rate": 0.045112781954887216,
+          "fallback_rate": 0.4267241379310345,
+          "fallback_rate_per_order": 0.4267241379310345,
+          "generated_share": 0.06465517241379311,
+          "repaired_share": 0.5086206896551724,
+          "model_share": 0.5732758620689655,
+          "sample_legal_rate": 0.009475679090334808,
+          "fallback_reasons": {
+            "no-legal-sample": 99
+          },
+          "mean_enemy_distance": 3.2787610619469025,
+          "mean_home_distance": 3.225663716814159
+        }
+      }
+    },
+    {
+      "pair": [
+        "defensive",
+        "infantry"
+      ],
+      "map": "border_skirmish",
+      "seed": 714000,
+      "winner": "",
+      "persona_sides": {
+        "defensive": "B",
+        "infantry": "A"
+      },
+      "turns": 21,
+      "score_delta": -37.14,
+      "status": "ongoing",
+      "learner_side": "B",
+      "stats": {
+        "B": {
+          "steps": 199,
+          "samples": 1238,
+          "generated": 38,
+          "repaired": 128,
+          "repaired_samples": 685,
+          "fallbacks": 33,
+          "illegal": 515,
+          "rejected": 0,
+          "recovered": 0,
+          "state_too_long": 0,
+          "generation_errors": 0,
+          "orders": 199,
+          "actions": {
+            "build": 11,
+            "move": 66,
+            "attack": 48,
+            "hold": 71,
+            "load": 2,
+            "unload": 1
+          },
+          "builds": {
+            "infantry": 10,
+            "aa_missile": 1
+          },
+          "repairs": {
+            "same-unit": 27,
+            "action": 67,
+            "unit": 30,
+            "nearest": 4
+          },
+          "model_orders": 166,
+          "model_actions": {
+            "build": 11,
+            "move": 61,
+            "attack": 38,
+            "hold": 55,
+            "load": 1
+          },
+          "model_builds": {
+            "infantry": 10,
+            "aa_missile": 1
+          },
+          "attack_rate": 0.24120603015075376,
+          "capture_rate": 0.0,
+          "hold_rate": 0.35678391959798994,
+          "build_rate": 0.05527638190954774,
+          "model_attack_rate": 0.2289156626506024,
+          "model_hold_rate": 0.3313253012048193,
+          "model_build_rate": 0.06626506024096386,
+          "fallback_rate": 0.1658291457286432,
+          "fallback_rate_per_order": 0.1658291457286432,
+          "generated_share": 0.19095477386934673,
+          "repaired_share": 0.6432160804020101,
+          "model_share": 0.8341708542713567,
+          "sample_legal_rate": 0.030694668820678513,
+          "fallback_reasons": {
+            "no-legal-sample": 33
+          },
+          "mean_enemy_distance": 2.345744680851064,
+          "mean_home_distance": 2.5638297872340425
+        },
+        "A": {
+          "steps": 460,
+          "samples": 2953,
+          "generated": 58,
+          "repaired": 318,
+          "repaired_samples": 1852,
+          "fallbacks": 84,
+          "illegal": 1043,
+          "rejected": 0,
+          "recovered": 0,
+          "state_too_long": 0,
+          "generation_errors": 0,
+          "orders": 460,
+          "actions": {
+            "build": 17,
+            "move": 161,
+            "hold": 221,
+            "attack": 54,
+            "load": 1,
+            "capture": 6
+          },
+          "builds": {
+            "infantry": 17
+          },
+          "repairs": {
+            "same-unit": 90,
+            "action": 174,
+            "unit": 37,
+            "nearest": 17
+          },
+          "model_orders": 376,
+          "model_actions": {
+            "build": 17,
+            "move": 145,
+            "hold": 162,
+            "attack": 45,
+            "load": 1,
+            "capture": 6
+          },
+          "model_builds": {
+            "infantry": 17
+          },
+          "attack_rate": 0.11739130434782609,
+          "capture_rate": 0.013043478260869565,
+          "hold_rate": 0.48043478260869565,
+          "build_rate": 0.03695652173913044,
+          "model_attack_rate": 0.1196808510638298,
+          "model_hold_rate": 0.4308510638297872,
+          "model_build_rate": 0.04521276595744681,
+          "fallback_rate": 0.1826086956521739,
+          "fallback_rate_per_order": 0.1826086956521739,
+          "generated_share": 0.12608695652173912,
+          "repaired_share": 0.691304347826087,
+          "model_share": 0.8173913043478261,
+          "sample_legal_rate": 0.019641043007111413,
+          "fallback_reasons": {
+            "no-legal-sample": 84
+          },
+          "mean_enemy_distance": 4.6410835214446955,
+          "mean_home_distance": 4.778781038374718
+        }
+      }
+    },
+    {
+      "pair": [
+        "defensive",
+        "armor"
+      ],
+      "map": "border_skirmish",
+      "seed": 715000,
+      "winner": "",
+      "persona_sides": {
+        "defensive": "B",
+        "armor": "A"
+      },
+      "turns": 21,
+      "score_delta": -19.48,
+      "status": "ongoing",
+      "learner_side": "B",
+      "stats": {
+        "B": {
+          "steps": 244,
+          "samples": 1526,
+          "generated": 41,
+          "repaired": 149,
+          "repaired_samples": 731,
+          "fallbacks": 54,
+          "illegal": 754,
+          "rejected": 0,
+          "recovered": 0,
+          "state_too_long": 0,
+          "generation_errors": 0,
+          "orders": 244,
+          "actions": {
+            "build": 11,
+            "move": 73,
+            "attack": 71,
+            "hold": 86,
+            "load": 2,
+            "unload": 1
+          },
+          "builds": {
+            "aa_missile": 6,
+            "infantry": 5
+          },
+          "repairs": {
+            "action": 76,
+            "same-unit": 37,
+            "unit": 30,
+            "nearest": 6
+          },
+          "model_orders": 190,
+          "model_actions": {
+            "build": 11,
+            "move": 61,
+            "attack": 53,
+            "hold": 64,
+            "load": 1
+          },
+          "model_builds": {
+            "aa_missile": 6,
+            "infantry": 5
+          },
+          "attack_rate": 0.29098360655737704,
+          "capture_rate": 0.0,
+          "hold_rate": 0.3524590163934426,
+          "build_rate": 0.045081967213114756,
+          "model_attack_rate": 0.2789473684210526,
+          "model_hold_rate": 0.3368421052631579,
+          "model_build_rate": 0.05789473684210526,
+          "fallback_rate": 0.22131147540983606,
+          "fallback_rate_per_order": 0.22131147540983606,
+          "generated_share": 0.1680327868852459,
+          "repaired_share": 0.610655737704918,
+          "model_share": 0.7786885245901639,
+          "sample_legal_rate": 0.026867627785058978,
+          "fallback_reasons": {
+            "no-legal-sample": 54
+          },
+          "mean_enemy_distance": 3.148936170212766,
+          "mean_home_distance": 2.765957446808511
+        },
+        "A": {
+          "steps": 397,
+          "samples": 2739,
+          "generated": 10,
+          "repaired": 257,
+          "repaired_samples": 1214,
+          "fallbacks": 130,
+          "illegal": 1515,
+          "rejected": 0,
+          "recovered": 0,
+          "state_too_long": 0,
+          "generation_errors": 0,
+          "orders": 397,
+          "actions": {
+            "build": 18,
+            "move": 146,
+            "hold": 187,
+            "attack": 38,
+            "load": 4,
+            "unload": 4
+          },
+          "builds": {
+            "tank": 14,
+            "infantry": 2,
+            "artillery": 2
+          },
+          "repairs": {
+            "same-unit": 62,
+            "action": 106,
+            "unit": 60,
+            "nearest": 29
+          },
+          "model_orders": 267,
+          "model_actions": {
+            "build": 18,
+            "move": 109,
+            "hold": 102,
+            "attack": 37,
+            "unload": 1
+          },
+          "model_builds": {
+            "tank": 14,
+            "infantry": 2,
+            "artillery": 2
+          },
+          "attack_rate": 0.09571788413098237,
+          "capture_rate": 0.0,
+          "hold_rate": 0.47103274559193953,
+          "build_rate": 0.04534005037783375,
+          "model_attack_rate": 0.13857677902621723,
+          "model_hold_rate": 0.38202247191011235,
+          "model_build_rate": 0.06741573033707865,
+          "fallback_rate": 0.327455919395466,
+          "fallback_rate_per_order": 0.327455919395466,
+          "generated_share": 0.02518891687657431,
+          "repaired_share": 0.6473551637279596,
+          "model_share": 0.672544080604534,
+          "sample_legal_rate": 0.0036509675063891934,
+          "fallback_reasons": {
+            "no-legal-sample": 130
+          },
+          "mean_enemy_distance": 3.1377952755905514,
+          "mean_home_distance": 3.484251968503937
+        }
+      }
+    },
+    {
+      "pair": [
+        "defensive",
+        "artillery"
+      ],
+      "map": "border_skirmish",
+      "seed": 716000,
+      "winner": "",
+      "persona_sides": {
+        "defensive": "B",
+        "artillery": "A"
+      },
+      "turns": 21,
+      "score_delta": -34.07,
+      "status": "ongoing",
+      "learner_side": "B",
+      "stats": {
+        "B": {
+          "steps": 306,
+          "samples": 2010,
+          "generated": 29,
+          "repaired": 169,
+          "repaired_samples": 726,
+          "fallbacks": 108,
+          "illegal": 1255,
+          "rejected": 0,
+          "recovered": 0,
+          "state_too_long": 0,
+          "generation_errors": 0,
+          "orders": 306,
+          "actions": {
+            "build": 13,
+            "move": 102,
+            "attack": 17,
+            "hold": 172,
+            "load": 1,
+            "unload": 1
+          },
+          "builds": {
+            "aa_missile": 8,
+            "infantry": 5
+          },
+          "repairs": {
+            "same-unit": 31,
+            "action": 112,
+            "nearest": 5,
+            "unit": 21
+          },
+          "model_orders": 198,
+          "model_actions": {
+            "build": 13,
+            "move": 62,
+            "attack": 13,
+            "hold": 110
+          },
+          "model_builds": {
+            "aa_missile": 8,
+            "infantry": 5
+          },
+          "attack_rate": 0.05555555555555555,
+          "capture_rate": 0.0,
+          "hold_rate": 0.5620915032679739,
+          "build_rate": 0.042483660130718956,
+          "model_attack_rate": 0.06565656565656566,
+          "model_hold_rate": 0.5555555555555556,
+          "model_build_rate": 0.06565656565656566,
+          "fallback_rate": 0.35294117647058826,
+          "fallback_rate_per_order": 0.35294117647058826,
+          "generated_share": 0.09477124183006536,
+          "repaired_share": 0.5522875816993464,
+          "model_share": 0.6470588235294118,
+          "sample_legal_rate": 0.014427860696517412,
+          "fallback_reasons": {
+            "no-legal-sample": 108
+          },
+          "mean_enemy_distance": 5.180887372013652,
+          "mean_home_distance": 2.6928327645051193
+        },
+        "A": {
+          "steps": 464,
+          "samples": 3183,
+          "generated": 16,
+          "repaired": 306,
+          "repaired_samples": 1236,
+          "fallbacks": 142,
+          "illegal": 1931,
+          "rejected": 0,
+          "recovered": 0,
+          "state_too_long": 0,
+          "generation_errors": 0,
+          "orders": 464,
+          "actions": {
+            "build": 18,
+            "move": 120,
+            "hold": 275,
+            "attack": 39,
+            "load": 6,
+            "unload": 6
+          },
+          "builds": {
+            "aa_missile": 1,
+            "infantry": 8,
+            "artillery": 9
+          },
+          "repairs": {
+            "same-unit": 50,
+            "action": 191,
+            "unit": 43,
+            "nearest": 22
+          },
+          "model_orders": 322,
+          "model_actions": {
+            "build": 18,
+            "move": 96,
+            "hold": 180,
+            "attack": 25,
+            "load": 3
+          },
+          "model_builds": {
+            "aa_missile": 1,
+            "infantry": 8,
+            "artillery": 9
+          },
+          "attack_rate": 0.08405172413793104,
+          "capture_rate": 0.0,
+          "hold_rate": 0.5926724137931034,
+          "build_rate": 0.03879310344827586,
+          "model_attack_rate": 0.07763975155279502,
+          "model_hold_rate": 0.5590062111801242,
+          "model_build_rate": 0.055900621118012424,
+          "fallback_rate": 0.30603448275862066,
+          "fallback_rate_per_order": 0.30603448275862066,
+          "generated_share": 0.034482758620689655,
+          "repaired_share": 0.6594827586206896,
+          "model_share": 0.6939655172413793,
+          "sample_legal_rate": 0.005026704366949419,
+          "fallback_reasons": {
+            "no-legal-sample": 142
+          },
+          "mean_enemy_distance": 5.504484304932736,
+          "mean_home_distance": 3.486547085201794
+        }
+      }
+    },
+    {
+      "pair": [
+        "infantry",
+        "armor"
+      ],
+      "map": "border_skirmish",
+      "seed": 717000,
+      "winner": "",
+      "persona_sides": {
+        "infantry": "B",
+        "armor": "A"
+      },
+      "turns": 21,
+      "score_delta": 22.31,
+      "status": "ongoing",
+      "learner_side": "B",
+      "stats": {
+        "B": {
+          "steps": 439,
+          "samples": 2895,
+          "generated": 38,
+          "repaired": 287,
+          "repaired_samples": 1576,
+          "fallbacks": 114,
+          "illegal": 1281,
+          "rejected": 0,
+          "recovered": 0,
+          "state_too_long": 0,
+          "generation_errors": 0,
+          "orders": 439,
+          "actions": {
+            "build": 17,
+            "attack": 71,
+            "move": 124,
+            "hold": 216,
+            "load": 4,
+            "unload": 3,
+            "capture": 4
+          },
+          "builds": {
+            "infantry": 17
+          },
+          "repairs": {
+            "action": 152,
+            "unit": 46,
+            "same-unit": 60,
+            "nearest": 29
+          },
+          "model_orders": 325,
+          "model_actions": {
+            "build": 17,
+            "attack": 61,
+            "move": 95,
+            "hold": 146,
+            "load": 2,
+            "capture": 4
+          },
+          "model_builds": {
+            "infantry": 17
+          },
+          "attack_rate": 0.16173120728929385,
+          "capture_rate": 0.009111617312072893,
+          "hold_rate": 0.4920273348519362,
+          "build_rate": 0.0387243735763098,
+          "model_attack_rate": 0.18769230769230769,
+          "model_hold_rate": 0.4492307692307692,
+          "model_build_rate": 0.052307692307692305,
+          "fallback_rate": 0.25968109339407747,
+          "fallback_rate_per_order": 0.25968109339407747,
+          "generated_share": 0.08656036446469248,
+          "repaired_share": 0.6537585421412301,
+          "model_share": 0.7403189066059226,
+          "sample_legal_rate": 0.013126079447322971,
+          "fallback_reasons": {
+            "no-legal-sample": 114
+          },
+          "mean_enemy_distance": 3.2227488151658767,
+          "mean_home_distance": 4.184834123222749
+        },
+        "A": {
+          "steps": 231,
+          "samples": 1555,
+          "generated": 16,
+          "repaired": 139,
+          "repaired_samples": 643,
+          "fallbacks": 76,
+          "illegal": 896,
+          "rejected": 0,
+          "recovered": 0,
+          "state_too_long": 0,
+          "generation_errors": 0,
+          "orders": 231,
+          "actions": {
+            "build": 11,
+            "move": 78,
+            "hold": 100,
+            "attack": 33,
+            "load": 5,
+            "unload": 4
+          },
+          "builds": {
+            "tank": 4,
+            "infantry": 7
+          },
+          "repairs": {
+            "same-unit": 33,
+            "action": 59,
+            "nearest": 18,
+            "unit": 29
+          },
+          "model_orders": 155,
+          "model_actions": {
+            "build": 11,
+            "move": 71,
+            "hold": 46,
+            "attack": 25,
+            "unload": 1,
+            "load": 1
+          },
+          "model_builds": {
+            "tank": 4,
+            "infantry": 7
+          },
+          "attack_rate": 0.14285714285714285,
+          "capture_rate": 0.0,
+          "hold_rate": 0.4329004329004329,
+          "build_rate": 0.047619047619047616,
+          "model_attack_rate": 0.16129032258064516,
+          "model_hold_rate": 0.2967741935483871,
+          "model_build_rate": 0.07096774193548387,
+          "fallback_rate": 0.329004329004329,
+          "fallback_rate_per_order": 0.329004329004329,
+          "generated_share": 0.06926406926406926,
+          "repaired_share": 0.6017316017316018,
+          "model_share": 0.670995670995671,
+          "sample_legal_rate": 0.010289389067524116,
+          "fallback_reasons": {
+            "no-legal-sample": 76
+          },
+          "mean_enemy_distance": 2.731818181818182,
+          "mean_home_distance": 3.440909090909091
+        }
+      }
+    },
+    {
+      "pair": [
+        "infantry",
+        "artillery"
+      ],
+      "map": "border_skirmish",
+      "seed": 718000,
+      "winner": "",
+      "persona_sides": {
+        "infantry": "B",
+        "artillery": "A"
+      },
+      "turns": 21,
+      "score_delta": -18.75,
+      "status": "ongoing",
+      "learner_side": "B",
+      "stats": {
+        "B": {
+          "steps": 295,
+          "samples": 1886,
+          "generated": 42,
+          "repaired": 193,
+          "repaired_samples": 992,
+          "fallbacks": 60,
+          "illegal": 852,
+          "rejected": 0,
+          "recovered": 0,
+          "state_too_long": 0,
+          "generation_errors": 0,
+          "orders": 295,
+          "actions": {
+            "build": 15,
+            "attack": 23,
+            "move": 102,
+            "hold": 147,
+            "load": 4,
+            "unload": 4
+          },
+          "builds": {
+            "infantry": 15
+          },
+          "repairs": {
+            "same-unit": 41,
+            "action": 103,
+            "unit": 37,
+            "nearest": 12
+          },
+          "model_orders": 235,
+          "model_actions": {
+            "build": 15,
+            "attack": 22,
+            "move": 92,
+            "hold": 103,
+            "load": 3
+          },
+          "model_builds": {
+            "infantry": 15
+          },
+          "attack_rate": 0.07796610169491526,
+          "capture_rate": 0.0,
+          "hold_rate": 0.49830508474576274,
+          "build_rate": 0.05084745762711865,
+          "model_attack_rate": 0.09361702127659574,
+          "model_hold_rate": 0.43829787234042555,
+          "model_build_rate": 0.06382978723404255,
+          "fallback_rate": 0.2033898305084746,
+          "fallback_rate_per_order": 0.2033898305084746,
+          "generated_share": 0.1423728813559322,
+          "repaired_share": 0.6542372881355932,
+          "model_share": 0.7966101694915254,
+          "sample_legal_rate": 0.022269353128313893,
+          "fallback_reasons": {
+            "no-legal-sample": 60
+          },
+          "mean_enemy_distance": 4.007142857142857,
+          "mean_home_distance": 3.5821428571428573
+        },
+        "A": {
+          "steps": 326,
+          "samples": 2221,
+          "generated": 18,
+          "repaired": 220,
+          "repaired_samples": 1043,
+          "fallbacks": 88,
+          "illegal": 1160,
+          "rejected": 0,
+          "recovered": 0,
+          "state_too_long": 0,
+          "generation_errors": 0,
+          "orders": 326,
+          "actions": {
+            "build": 12,
+            "move": 85,
+            "attack": 63,
+            "hold": 166
+          },
+          "builds": {
+            "aa_missile": 3,
+            "artillery": 7,
+            "tank": 2
+          },
+          "repairs": {
+            "same-unit": 62,
+            "action": 132,
+            "unit": 21,
+            "nearest": 5
+          },
+          "model_orders": 238,
+          "model_actions": {
+            "build": 12,
+            "move": 74,
+            "attack": 47,
+            "hold": 105
+          },
+          "model_builds": {
+            "aa_missile": 3,
+            "artillery": 7,
+            "tank": 2
+          },
+          "attack_rate": 0.19325153374233128,
+          "capture_rate": 0.0,
+          "hold_rate": 0.50920245398773,
+          "build_rate": 0.03680981595092025,
+          "model_attack_rate": 0.19747899159663865,
+          "model_hold_rate": 0.4411764705882353,
+          "model_build_rate": 0.05042016806722689,
+          "fallback_rate": 0.26993865030674846,
+          "fallback_rate_per_order": 0.26993865030674846,
+          "generated_share": 0.05521472392638037,
+          "repaired_share": 0.6748466257668712,
+          "model_share": 0.7300613496932515,
+          "sample_legal_rate": 0.00810445745159838,
+          "fallback_reasons": {
+            "no-legal-sample": 88
+          },
+          "mean_enemy_distance": 4.089171974522293,
+          "mean_home_distance": 3.082802547770701
+        }
+      }
+    },
+    {
+      "pair": [
+        "armor",
+        "artillery"
+      ],
+      "map": "border_skirmish",
+      "seed": 719000,
+      "winner": "",
+      "persona_sides": {
+        "armor": "B",
+        "artillery": "A"
+      },
+      "turns": 21,
+      "score_delta": -6.53,
+      "status": "ongoing",
+      "learner_side": "B",
+      "stats": {
+        "B": {
+          "steps": 340,
+          "samples": 2276,
+          "generated": 30,
+          "repaired": 220,
+          "repaired_samples": 1059,
+          "fallbacks": 90,
+          "illegal": 1187,
+          "rejected": 0,
+          "recovered": 0,
+          "state_too_long": 0,
+          "generation_errors": 0,
+          "orders": 340,
+          "actions": {
+            "build": 12,
+            "move": 118,
+            "attack": 39,
+            "hold": 159,
+            "load": 6,
+            "unload": 6
+          },
+          "builds": {
+            "infantry": 12
+          },
+          "repairs": {
+            "same-unit": 49,
+            "action": 97,
+            "nearest": 40,
+            "unit": 34
+          },
+          "model_orders": 250,
+          "model_actions": {
+            "build": 12,
+            "move": 107,
+            "attack": 35,
+            "hold": 95,
+            "load": 1
+          },
+          "model_builds": {
+            "infantry": 12
+          },
+          "attack_rate": 0.11470588235294117,
+          "capture_rate": 0.0,
+          "hold_rate": 0.4676470588235294,
+          "build_rate": 0.03529411764705882,
+          "model_attack_rate": 0.14,
+          "model_hold_rate": 0.38,
+          "model_build_rate": 0.048,
+          "fallback_rate": 0.2647058823529412,
+          "fallback_rate_per_order": 0.2647058823529412,
+          "generated_share": 0.08823529411764706,
+          "repaired_share": 0.6470588235294118,
+          "model_share": 0.7352941176470589,
+          "sample_legal_rate": 0.013181019332161687,
+          "fallback_reasons": {
+            "no-legal-sample": 90
+          },
+          "mean_enemy_distance": 2.692073170731707,
+          "mean_home_distance": 3.8201219512195124
+        },
+        "A": {
+          "steps": 297,
+          "samples": 1988,
+          "generated": 21,
+          "repaired": 182,
+          "repaired_samples": 863,
+          "fallbacks": 94,
+          "illegal": 1104,
+          "rejected": 0,
+          "recovered": 0,
+          "state_too_long": 0,
+          "generation_errors": 0,
+          "orders": 297,
+          "actions": {
+            "build": 7,
+            "move": 81,
+            "attack": 58,
+            "hold": 143,
+            "load": 4,
+            "unload": 4
+          },
+          "builds": {
+            "aa_missile": 1,
+            "infantry": 1,
+            "artillery": 5
+          },
+          "repairs": {
+            "same-unit": 36,
+            "action": 106,
+            "unit": 20,
+            "nearest": 20
+          },
+          "model_orders": 203,
+          "model_actions": {
+            "build": 7,
+            "move": 73,
+            "attack": 43,
+            "hold": 77,
+            "load": 3
+          },
+          "model_builds": {
+            "aa_missile": 1,
+            "infantry": 1,
+            "artillery": 5
+          },
+          "attack_rate": 0.19528619528619529,
+          "capture_rate": 0.0,
+          "hold_rate": 0.48148148148148145,
+          "build_rate": 0.02356902356902357,
+          "model_attack_rate": 0.21182266009852216,
+          "model_hold_rate": 0.3793103448275862,
+          "model_build_rate": 0.034482758620689655,
+          "fallback_rate": 0.3164983164983165,
+          "fallback_rate_per_order": 0.3164983164983165,
+          "generated_share": 0.0707070707070707,
+          "repaired_share": 0.6127946127946128,
+          "model_share": 0.6835016835016835,
+          "sample_legal_rate": 0.01056338028169014,
+          "fallback_reasons": {
+            "no-legal-sample": 94
+          },
+          "mean_enemy_distance": 3.1344827586206896,
+          "mean_home_distance": 3.420689655172414
+        }
+      }
+    }
+  ],
+  "pairwise": {
+    "aggressive": {
+      "defensive": {
+        "games": 1,
+        "wins": 0,
+        "losses": 0,
+        "unfinished": 1
+      },
+      "infantry": {
+        "games": 1,
+        "wins": 0,
+        "losses": 0,
+        "unfinished": 1
+      },
+      "armor": {
+        "games": 1,
+        "wins": 0,
+        "losses": 0,
+        "unfinished": 1
+      },
+      "artillery": {
+        "games": 1,
+        "wins": 0,
+        "losses": 0,
+        "unfinished": 1
+      }
+    },
+    "defensive": {
+      "aggressive": {
+        "games": 1,
+        "wins": 0,
+        "losses": 0,
+        "unfinished": 1
+      },
+      "infantry": {
+        "games": 1,
+        "wins": 0,
+        "losses": 0,
+        "unfinished": 1
+      },
+      "armor": {
+        "games": 1,
+        "wins": 0,
+        "losses": 0,
+        "unfinished": 1
+      },
+      "artillery": {
+        "games": 1,
+        "wins": 0,
+        "losses": 0,
+        "unfinished": 1
+      }
+    },
+    "infantry": {
+      "aggressive": {
+        "games": 1,
+        "wins": 0,
+        "losses": 0,
+        "unfinished": 1
+      },
+      "defensive": {
+        "games": 1,
+        "wins": 0,
+        "losses": 0,
+        "unfinished": 1
+      },
+      "armor": {
+        "games": 1,
+        "wins": 0,
+        "losses": 0,
+        "unfinished": 1
+      },
+      "artillery": {
+        "games": 1,
+        "wins": 0,
+        "losses": 0,
+        "unfinished": 1
+      }
+    },
+    "armor": {
+      "aggressive": {
+        "games": 1,
+        "wins": 0,
+        "losses": 0,
+        "unfinished": 1
+      },
+      "defensive": {
+        "games": 1,
+        "wins": 0,
+        "losses": 0,
+        "unfinished": 1
+      },
+      "infantry": {
+        "games": 1,
+        "wins": 0,
+        "losses": 0,
+        "unfinished": 1
+      },
+      "artillery": {
+        "games": 1,
+        "wins": 0,
+        "losses": 0,
+        "unfinished": 1
+      }
+    },
+    "artillery": {
+      "aggressive": {
+        "games": 1,
+        "wins": 0,
+        "losses": 0,
+        "unfinished": 1
+      },
+      "defensive": {
+        "games": 1,
+        "wins": 0,
+        "losses": 0,
+        "unfinished": 1
+      },
+      "infantry": {
+        "games": 1,
+        "wins": 0,
+        "losses": 0,
+        "unfinished": 1
+      },
+      "armor": {
+        "games": 1,
+        "wins": 0,
+        "losses": 0,
+        "unfinished": 1
+      }
+    }
+  }
+}

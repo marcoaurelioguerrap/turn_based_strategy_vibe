@@ -1,0 +1,32 @@
+{
+  "rows": 3527,
+  "games": 10,
+  "actions": {
+    "a": 731,
+    "m": 1191,
+    "b": 319,
+    "u": 49,
+    "c": 120,
+    "h": 1058,
+    "l": 59
+  },
+  "builds": {
+    "infantry": 319
+  },
+  "maps": {
+    "last_stand": 820,
+    "urban_delta": 811,
+    "border_skirmish": 662,
+    "mountain_pass": 94,
+    "archipelago": 1140
+  },
+  "opponents": {
+    "aggressive": 224,
+    "infantry": 1562,
+    "armor": 616,
+    "defensive": 645,
+    "artillery": 480
+  },
+  "raw_rows": 6601,
+  "hold_cap": 0.3
+}

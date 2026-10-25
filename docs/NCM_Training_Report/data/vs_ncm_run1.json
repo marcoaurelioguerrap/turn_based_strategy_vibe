@@ -1,0 +1,926 @@
+{
+  "started": "20261020-235926",
+  "learner": "C:\\AIs\\NCM\\artifacts\\tbs",
+  "frozen_opponent": "C:\\AIs\\NCM\\artifacts\\tbs",
+  "out_dir": "C:\\AIs\\NCM\\artifacts\\tbs\\vs_ncm\\run1",
+  "config": {
+    "checkpoint_dir": "C:\\AIs\\NCM\\artifacts\\tbs",
+    "opponent_checkpoint_dir": "",
+    "out_dir": "artifacts/tbs/vs_ncm/run1",
+    "iterations": 1,
+    "games": 30,
+    "eval_games": 6,
+    "seed_base": 40000,
+    "eval_seed_base": 50000,
+    "learner_side": "B",
+    "no_alternate_sides": false,
+    "temperature": 0.8,
+    "opponent_temperature": 0.0,
+    "include_fallback": false,
+    "teacher": false,
+    "original_ratio": 0.5,
+    "epochs": 1,
+    "lr": 5e-05,
+    "batch_size": 8,
+    "grad_accum": 2,
+    "eval_limit": 128,
+    "eval_generate": 64,
+    "log_every": 10,
+    "max_steps": 0,
+    "max_turns": 20,
+    "arena_max_turns": 30,
+    "max_game_steps": 64,
+    "seed": 42,
+    "device": null,
+    "validation": "C:\\AIs\\NCM\\tbs_ncm\\data\\validation.jsonl",
+    "original_data": "C:\\AIs\\NCM\\tbs_ncm\\data\\train.jsonl",
+    "update_opponent": false,
+    "runs_dir": "",
+    "no_monitor": false,
+    "tb": false
+  },
+  "iterations": [
+    {
+      "iteration": 1,
+      "baseline": {
+        "games": 6,
+        "wins": 0,
+        "losses": 0,
+        "unfinished": 6,
+        "win_rate": 0.0,
+        "finished_rate": 0.0,
+        "avg_score_delta": 10.19,
+        "avg_turns": 31.0,
+        "avg_orders": 556.8
+      },
+      "post": {
+        "games": 6,
+        "wins": 0,
+        "losses": 1,
+        "unfinished": 5,
+        "win_rate": 0.0,
+        "finished_rate": 0.16666666666666666,
+        "avg_score_delta": -47.96,
+        "avg_turns": 29.3,
+        "avg_orders": 552.8
+      },
+      "delta_win_rate": 0.0,
+      "delta_score": -58.15,
+      "selfplay": {
+        "games": [
+          {
+            "seed": 40000,
+            "learner_side": "B",
+            "status": "ongoing",
+            "winner": "",
+            "learner_won": false,
+            "turns": 21,
+            "examples": 97,
+            "kinds": {
+              "generated": 60,
+              "repaired": 37
+            },
+            "learner": {
+              "generated": 60,
+              "repaired": 37,
+              "fallbacks": 65,
+              "illegal": 310,
+              "generation_errors": 0
+            },
+            "opponent": {
+              "generated": 67,
+              "repaired": 65,
+              "fallbacks": 90,
+              "illegal": 442,
+              "generation_errors": 0
+            },
+            "seconds": 56.42
+          },
+          {
+            "seed": 40001,
+            "learner_side": "A",
+            "status": "ongoing",
+            "winner": "",
+            "learner_won": false,
+            "turns": 21,
+            "examples": 129,
+            "kinds": {
+              "generated": 65,
+              "repaired": 64
+            },
+            "learner": {
+              "generated": 65,
+              "repaired": 64,
+              "fallbacks": 85,
+              "illegal": 428,
+              "generation_errors": 0
+            },
+            "opponent": {
+              "generated": 52,
+              "repaired": 33,
+              "fallbacks": 70,
+              "illegal": 324,
+              "generation_errors": 0
+            },
+            "seconds": 53.55
+          },
+          {
+            "seed": 40002,
+            "learner_side": "B",
+            "status": "ongoing",
+            "winner": "",
+            "learner_won": false,
+            "turns": 21,
+            "examples": 135,
+            "kinds": {
+              "generated": 60,
+              "repaired": 75
+            },
+            "learner": {
+              "generated": 60,
+              "repaired": 75,
+              "fallbacks": 80,
+              "illegal": 398,
+              "generation_errors": 0
+            },
+            "opponent": {
+              "generated": 56,
+              "repaired": 34,
+              "fallbacks": 71,
+              "illegal": 339,
+              "generation_errors": 0
+            },
+            "seconds": 53.51
+          },
+          {
+            "seed": 40003,
+            "learner_side": "A",
+            "status": "ongoing",
+            "winner": "",
+            "learner_won": false,
+            "turns": 21,
+            "examples": 133,
+            "kinds": {
+              "repaired": 71,
+              "generated": 62
+            },
+            "learner": {
+              "generated": 62,
+              "repaired": 71,
+              "fallbacks": 106,
+              "illegal": 496,
+              "generation_errors": 0
+            },
+            "opponent": {
+              "generated": 57,
+              "repaired": 39,
+              "fallbacks": 65,
+              "illegal": 329,
+              "generation_errors": 0
+            },
+            "seconds": 58.88
+          },
+          {
+            "seed": 40004,
+            "learner_side": "B",
+            "status": "ongoing",
+            "winner": "",
+            "learner_won": false,
+            "turns": 21,
+            "examples": 98,
+            "kinds": {
+              "generated": 54,
+              "repaired": 44
+            },
+            "learner": {
+              "generated": 54,
+              "repaired": 44,
+              "fallbacks": 64,
+              "illegal": 319,
+              "generation_errors": 0
+            },
+            "opponent": {
+              "generated": 67,
+              "repaired": 34,
+              "fallbacks": 92,
+              "illegal": 424,
+              "generation_errors": 0
+            },
+            "seconds": 52.08
+          },
+          {
+            "seed": 40005,
+            "learner_side": "A",
+            "status": "ongoing",
+            "winner": "",
+            "learner_won": false,
+            "turns": 21,
+            "examples": 123,
+            "kinds": {
+              "repaired": 59,
+              "generated": 64
+            },
+            "learner": {
+              "generated": 64,
+              "repaired": 59,
+              "fallbacks": 93,
+              "illegal": 432,
+              "generation_errors": 0
+            },
+            "opponent": {
+              "generated": 63,
+              "repaired": 35,
+              "fallbacks": 61,
+              "illegal": 286,
+              "generation_errors": 0
+            },
+            "seconds": 52.6
+          },
+          {
+            "seed": 40006,
+            "learner_side": "B",
+            "status": "ongoing",
+            "winner": "",
+            "learner_won": false,
+            "turns": 21,
+            "examples": 86,
+            "kinds": {
+              "generated": 42,
+              "repaired": 44
+            },
+            "learner": {
+              "generated": 42,
+              "repaired": 44,
+              "fallbacks": 47,
+              "illegal": 232,
+              "generation_errors": 0
+            },
+            "opponent": {
+              "generated": 65,
+              "repaired": 78,
+              "fallbacks": 113,
+              "illegal": 520,
+              "generation_errors": 0
+            },
+            "seconds": 54.35
+          },
+          {
+            "seed": 40007,
+            "learner_side": "A",
+            "status": "ongoing",
+            "winner": "",
+            "learner_won": false,
+            "turns": 21,
+            "examples": 142,
+            "kinds": {
+              "repaired": 85,
+              "generated": 57
+            },
+            "learner": {
+              "generated": 57,
+              "repaired": 85,
+              "fallbacks": 78,
+              "illegal": 375,
+              "generation_errors": 0
+            },
+            "opponent": {
+              "generated": 59,
+              "repaired": 36,
+              "fallbacks": 59,
+              "illegal": 296,
+              "generation_errors": 0
+            },
+            "seconds": 50.75
+          },
+          {
+            "seed": 40008,
+            "learner_side": "B",
+            "status": "ongoing",
+            "winner": "",
+            "learner_won": false,
+            "turns": 21,
+            "examples": 108,
+            "kinds": {
+              "generated": 59,
+              "repaired": 49
+            },
+            "learner": {
+              "generated": 59,
+              "repaired": 49,
+              "fallbacks": 73,
+              "illegal": 357,
+              "generation_errors": 0
+            },
+            "opponent": {
+              "generated": 54,
+              "repaired": 69,
+              "fallbacks": 100,
+              "illegal": 449,
+              "generation_errors": 0
+            },
+            "seconds": 58.38
+          },
+          {
+            "seed": 40009,
+            "learner_side": "A",
+            "status": "ongoing",
+            "winner": "",
+            "learner_won": false,
+            "turns": 21,
+            "examples": 103,
+            "kinds": {
+              "repaired": 48,
+              "generated": 55
+            },
+            "learner": {
+              "generated": 55,
+              "repaired": 48,
+              "fallbacks": 80,
+              "illegal": 384,
+              "generation_errors": 0
+            },
+            "opponent": {
+              "generated": 57,
+              "repaired": 34,
+              "fallbacks": 100,
+              "illegal": 444,
+              "generation_errors": 0
+            },
+            "seconds": 57.95
+          },
+          {
+            "seed": 40010,
+            "learner_side": "B",
+            "status": "ongoing",
+            "winner": "",
+            "learner_won": false,
+            "turns": 21,
+            "examples": 87,
+            "kinds": {
+              "generated": 49,
+              "repaired": 38
+            },
+            "learner": {
+              "generated": 49,
+              "repaired": 38,
+              "fallbacks": 47,
+              "illegal": 234,
+              "generation_errors": 0
+            },
+            "opponent": {
+              "generated": 66,
+              "repaired": 85,
+              "fallbacks": 120,
+              "illegal": 585,
+              "generation_errors": 0
+            },
+            "seconds": 59.43
+          },
+          {
+            "seed": 40011,
+            "learner_side": "A",
+            "status": "ongoing",
+            "winner": "",
+            "learner_won": false,
+            "turns": 21,
+            "examples": 114,
+            "kinds": {
+              "repaired": 44,
+              "generated": 70
+            },
+            "learner": {
+              "generated": 70,
+              "repaired": 44,
+              "fallbacks": 69,
+              "illegal": 332,
+              "generation_errors": 0
+            },
+            "opponent": {
+              "generated": 55,
+              "repaired": 58,
+              "fallbacks": 78,
+              "illegal": 394,
+              "generation_errors": 0
+            },
+            "seconds": 53.15
+          },
+          {
+            "seed": 40012,
+            "learner_side": "B",
+            "status": "ongoing",
+            "winner": "",
+            "learner_won": false,
+            "turns": 21,
+            "examples": 96,
+            "kinds": {
+              "generated": 58,
+              "repaired": 38
+            },
+            "learner": {
+              "generated": 58,
+              "repaired": 38,
+              "fallbacks": 58,
+              "illegal": 296,
+              "generation_errors": 0
+            },
+            "opponent": {
+              "generated": 71,
+              "repaired": 72,
+              "fallbacks": 92,
+              "illegal": 456,
+              "generation_errors": 0
+            },
+            "seconds": 55.45
+          },
+          {
+            "seed": 40013,
+            "learner_side": "A",
+            "status": "ongoing",
+            "winner": "",
+            "learner_won": false,
+            "turns": 21,
+            "examples": 142,
+            "kinds": {
+              "repaired": 90,
+              "generated": 52
+            },
+            "learner": {
+              "generated": 52,
+              "repaired": 90,
+              "fallbacks": 95,
+              "illegal": 443,
+              "generation_errors": 0
+            },
+            "opponent": {
+              "generated": 49,
+              "repaired": 28,
+              "fallbacks": 76,
+              "illegal": 333,
+              "generation_errors": 0
+            },
+            "seconds": 55.39
+          },
+          {
+            "seed": 40014,
+            "learner_side": "B",
+            "status": "ongoing",
+            "winner": "",
+            "learner_won": false,
+            "turns": 21,
+            "examples": 119,
+            "kinds": {
+              "generated": 61,
+              "repaired": 58
+            },
+            "learner": {
+              "generated": 61,
+              "repaired": 58,
+              "fallbacks": 76,
+              "illegal": 383,
+              "generation_errors": 0
+            },
+            "opponent": {
+              "generated": 52,
+              "repaired": 38,
+              "fallbacks": 84,
+              "illegal": 393,
+              "generation_errors": 0
+            },
+            "seconds": 62.0
+          },
+          {
+            "seed": 40015,
+            "learner_side": "A",
+            "status": "ongoing",
+            "winner": "",
+            "learner_won": false,
+            "turns": 21,
+            "examples": 105,
+            "kinds": {
+              "repaired": 50,
+              "generated": 55
+            },
+            "learner": {
+              "generated": 55,
+              "repaired": 50,
+              "fallbacks": 74,
+              "illegal": 334,
+              "generation_errors": 0
+            },
+            "opponent": {
+              "generated": 67,
+              "repaired": 44,
+              "fallbacks": 78,
+              "illegal": 395,
+              "generation_errors": 0
+            },
+            "seconds": 62.0
+          },
+          {
+            "seed": 40016,
+            "learner_side": "B",
+            "status": "ongoing",
+            "winner": "",
+            "learner_won": false,
+            "turns": 21,
+            "examples": 71,
+            "kinds": {
+              "generated": 43,
+              "repaired": 28
+            },
+            "learner": {
+              "generated": 43,
+              "repaired": 28,
+              "fallbacks": 53,
+              "illegal": 242,
+              "generation_errors": 0
+            },
+            "opponent": {
+              "generated": 72,
+              "repaired": 75,
+              "fallbacks": 105,
+              "illegal": 489,
+              "generation_errors": 0
+            },
+            "seconds": 62.48
+          },
+          {
+            "seed": 40017,
+            "learner_side": "A",
+            "status": "ongoing",
+            "winner": "",
+            "learner_won": false,
+            "turns": 21,
+            "examples": 146,
+            "kinds": {
+              "repaired": 75,
+              "generated": 71
+            },
+            "learner": {
+              "generated": 71,
+              "repaired": 75,
+              "fallbacks": 107,
+              "illegal": 506,
+              "generation_errors": 0
+            },
+            "opponent": {
+              "generated": 44,
+              "repaired": 23,
+              "fallbacks": 61,
+              "illegal": 279,
+              "generation_errors": 0
+            },
+            "seconds": 63.75
+          },
+          {
+            "seed": 40018,
+            "learner_side": "B",
+            "status": "ongoing",
+            "winner": "",
+            "learner_won": false,
+            "turns": 21,
+            "examples": 83,
+            "kinds": {
+              "generated": 56,
+              "repaired": 27
+            },
+            "learner": {
+              "generated": 56,
+              "repaired": 27,
+              "fallbacks": 56,
+              "illegal": 260,
+              "generation_errors": 0
+            },
+            "opponent": {
+              "generated": 79,
+              "repaired": 75,
+              "fallbacks": 91,
+              "illegal": 437,
+              "generation_errors": 0
+            },
+            "seconds": 56.39
+          },
+          {
+            "seed": 40019,
+            "learner_side": "A",
+            "status": "ongoing",
+            "winner": "",
+            "learner_won": false,
+            "turns": 21,
+            "examples": 136,
+            "kinds": {
+              "repaired": 66,
+              "generated": 70
+            },
+            "learner": {
+              "generated": 70,
+              "repaired": 66,
+              "fallbacks": 88,
+              "illegal": 417,
+              "generation_errors": 0
+            },
+            "opponent": {
+              "generated": 60,
+              "repaired": 34,
+              "fallbacks": 64,
+              "illegal": 317,
+              "generation_errors": 0
+            },
+            "seconds": 54.43
+          },
+          {
+            "seed": 40020,
+            "learner_side": "B",
+            "status": "ongoing",
+            "winner": "",
+            "learner_won": false,
+            "turns": 21,
+            "examples": 127,
+            "kinds": {
+              "generated": 68,
+              "repaired": 59
+            },
+            "learner": {
+              "generated": 68,
+              "repaired": 59,
+              "fallbacks": 79,
+              "illegal": 358,
+              "generation_errors": 0
+            },
+            "opponent": {
+              "generated": 52,
+              "repaired": 26,
+              "fallbacks": 93,
+              "illegal": 421,
+              "generation_errors": 0
+            },
+            "seconds": 59.96
+          },
+          {
+            "seed": 40021,
+            "learner_side": "A",
+            "status": "ongoing",
+            "winner": "",
+            "learner_won": false,
+            "turns": 21,
+            "examples": 149,
+            "kinds": {
+              "repaired": 78,
+              "generated": 71
+            },
+            "learner": {
+              "generated": 71,
+              "repaired": 78,
+              "fallbacks": 90,
+              "illegal": 421,
+              "generation_errors": 0
+            },
+            "opponent": {
+              "generated": 44,
+              "repaired": 40,
+              "fallbacks": 66,
+              "illegal": 306,
+              "generation_errors": 0
+            },
+            "seconds": 55.1
+          },
+          {
+            "seed": 40022,
+            "learner_side": "B",
+            "status": "ongoing",
+            "winner": "",
+            "learner_won": false,
+            "turns": 21,
+            "examples": 55,
+            "kinds": {
+              "generated": 33,
+              "repaired": 22
+            },
+            "learner": {
+              "generated": 33,
+              "repaired": 22,
+              "fallbacks": 37,
+              "illegal": 180,
+              "generation_errors": 0
+            },
+            "opponent": {
+              "generated": 63,
+              "repaired": 88,
+              "fallbacks": 127,
+              "illegal": 607,
+              "generation_errors": 0
+            },
+            "seconds": 56.67
+          },
+          {
+            "seed": 40023,
+            "learner_side": "A",
+            "status": "ongoing",
+            "winner": "",
+            "learner_won": false,
+            "turns": 21,
+            "examples": 158,
+            "kinds": {
+              "repaired": 90,
+              "generated": 68
+            },
+            "learner": {
+              "generated": 68,
+              "repaired": 90,
+              "fallbacks": 110,
+              "illegal": 514,
+              "generation_errors": 0
+            },
+            "opponent": {
+              "generated": 47,
+              "repaired": 28,
+              "fallbacks": 47,
+              "illegal": 219,
+              "generation_errors": 0
+            },
+            "seconds": 55.35
+          },
+          {
+            "seed": 40024,
+            "learner_side": "B",
+            "status": "ongoing",
+            "winner": "",
+            "learner_won": false,
+            "turns": 21,
+            "examples": 106,
+            "kinds": {
+              "generated": 52,
+              "repaired": 54
+            },
+            "learner": {
+              "generated": 52,
+              "repaired": 54,
+              "fallbacks": 63,
+              "illegal": 308,
+              "generation_errors": 0
+            },
+            "opponent": {
+              "generated": 57,
+              "repaired": 66,
+              "fallbacks": 100,
+              "illegal": 489,
+              "generation_errors": 0
+            },
+            "seconds": 58.69
+          },
+          {
+            "seed": 40025,
+            "learner_side": "A",
+            "status": "ongoing",
+            "winner": "",
+            "learner_won": false,
+            "turns": 21,
+            "examples": 97,
+            "kinds": {
+              "repaired": 39,
+              "generated": 58
+            },
+            "learner": {
+              "generated": 58,
+              "repaired": 39,
+              "fallbacks": 85,
+              "illegal": 397,
+              "generation_errors": 0
+            },
+            "opponent": {
+              "generated": 59,
+              "repaired": 34,
+              "fallbacks": 72,
+              "illegal": 349,
+              "generation_errors": 0
+            },
+            "seconds": 54.31
+          },
+          {
+            "seed": 40026,
+            "learner_side": "B",
+            "status": "ongoing",
+            "winner": "",
+            "learner_won": false,
+            "turns": 21,
+            "examples": 130,
+            "kinds": {
+              "generated": 60,
+              "repaired": 70
+            },
+            "learner": {
+              "generated": 60,
+              "repaired": 70,
+              "fallbacks": 91,
+              "illegal": 420,
+              "generation_errors": 0
+            },
+            "opponent": {
+              "generated": 47,
+              "repaired": 43,
+              "fallbacks": 74,
+              "illegal": 354,
+              "generation_errors": 0
+            },
+            "seconds": 57.83
+          },
+          {
+            "seed": 40027,
+            "learner_side": "A",
+            "status": "ongoing",
+            "winner": "",
+            "learner_won": false,
+            "turns": 21,
+            "examples": 46,
+            "kinds": {
+              "repaired": 17,
+              "generated": 29
+            },
+            "learner": {
+              "generated": 29,
+              "repaired": 17,
+              "fallbacks": 56,
+              "illegal": 241,
+              "generation_errors": 0
+            },
+            "opponent": {
+              "generated": 73,
+              "repaired": 79,
+              "fallbacks": 128,
+              "illegal": 638,
+              "generation_errors": 0
+            },
+            "seconds": 62.26
+          },
+          {
+            "seed": 40028,
+            "learner_side": "B",
+            "status": "ongoing",
+            "winner": "",
+            "learner_won": false,
+            "turns": 21,
+            "examples": 107,
+            "kinds": {
+              "generated": 57,
+              "repaired": 50
+            },
+            "learner": {
+              "generated": 57,
+              "repaired": 50,
+              "fallbacks": 70,
+              "illegal": 339,
+              "generation_errors": 0
+            },
+            "opponent": {
+              "generated": 62,
+              "repaired": 59,
+              "fallbacks": 80,
+              "illegal": 382,
+              "generation_errors": 0
+            },
+            "seconds": 54.45
+          },
+          {
+            "seed": 40029,
+            "learner_side": "A",
+            "status": "ongoing",
+            "winner": "",
+            "learner_won": false,
+            "turns": 21,
+            "examples": 145,
+            "kinds": {
+              "repaired": 72,
+              "generated": 73
+            },
+            "learner": {
+              "generated": 73,
+              "repaired": 72,
+              "fallbacks": 106,
+              "illegal": 515,
+              "generation_errors": 0
+            },
+            "opponent": {
+              "generated": 45,
+              "repaired": 30,
+              "fallbacks": 57,
+              "illegal": 278,
+              "generation_errors": 0
+            },
+            "seconds": 58.08
+          }
+        ],
+        "rows": 3373,
+        "kinds": {
+          "generated": 1732,
+          "repaired": 1641
+        },
+        "wins": 0,
+        "finished": 0,
+        "win_rate": 0.0
+      },
+      "checkpoint": "C:\\AIs\\NCM\\artifacts\\tbs\\vs_ncm\\run1\\iter1\\checkpoint",
+      "train_rows": 5059
+    }
+  ],
+  "elapsed_s": 2880.4
+}

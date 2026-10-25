@@ -1,0 +1,278 @@
+{
+  "split": "test",
+  "seeds": [
+    20000,
+    20019
+  ],
+  "examples": 5425,
+  "raw_examples": 5477,
+  "duplicates": 52,
+  "record_legal": true,
+  "games": [
+    {
+      "seed": 20000,
+      "status": "victory",
+      "winner": "A",
+      "turns": 33,
+      "examples": 244,
+      "actions": {
+        "m": 111,
+        "b": 37,
+        "a": 85,
+        "c": 11
+      }
+    },
+    {
+      "seed": 20001,
+      "status": "victory",
+      "winner": "A",
+      "turns": 20,
+      "examples": 211,
+      "actions": {
+        "m": 102,
+        "a": 72,
+        "b": 26,
+        "c": 11
+      }
+    },
+    {
+      "seed": 20002,
+      "status": "victory",
+      "winner": "A",
+      "turns": 32,
+      "examples": 255,
+      "actions": {
+        "m": 114,
+        "a": 88,
+        "b": 37,
+        "c": 16
+      }
+    },
+    {
+      "seed": 20003,
+      "status": "victory",
+      "winner": "B",
+      "turns": 34,
+      "examples": 365,
+      "actions": {
+        "m": 171,
+        "b": 43,
+        "a": 121,
+        "c": 30
+      }
+    },
+    {
+      "seed": 20004,
+      "status": "victory",
+      "winner": "A",
+      "turns": 25,
+      "examples": 256,
+      "actions": {
+        "m": 101,
+        "a": 94,
+        "b": 37,
+        "c": 24
+      }
+    },
+    {
+      "seed": 20005,
+      "status": "victory",
+      "winner": "A",
+      "turns": 40,
+      "examples": 223,
+      "actions": {
+        "m": 105,
+        "b": 35,
+        "a": 73,
+        "c": 10
+      }
+    },
+    {
+      "seed": 20006,
+      "status": "victory",
+      "winner": "A",
+      "turns": 18,
+      "examples": 196,
+      "actions": {
+        "m": 91,
+        "b": 22,
+        "a": 70,
+        "c": 13
+      }
+    },
+    {
+      "seed": 20007,
+      "status": "victory",
+      "winner": "A",
+      "turns": 31,
+      "examples": 281,
+      "actions": {
+        "m": 127,
+        "a": 97,
+        "b": 39,
+        "c": 18
+      }
+    },
+    {
+      "seed": 20008,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 405,
+      "actions": {
+        "m": 183,
+        "b": 58,
+        "a": 141,
+        "c": 23
+      }
+    },
+    {
+      "seed": 20009,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 358,
+      "actions": {
+        "b": 50,
+        "m": 161,
+        "a": 111,
+        "c": 36
+      }
+    },
+    {
+      "seed": 20010,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 325,
+      "actions": {
+        "m": 130,
+        "a": 143,
+        "b": 52
+      }
+    },
+    {
+      "seed": 20011,
+      "status": "victory",
+      "winner": "A",
+      "turns": 18,
+      "examples": 190,
+      "actions": {
+        "b": 21,
+        "m": 88,
+        "a": 65,
+        "c": 16
+      }
+    },
+    {
+      "seed": 20012,
+      "status": "victory",
+      "winner": "A",
+      "turns": 17,
+      "examples": 197,
+      "actions": {
+        "b": 23,
+        "m": 84,
+        "a": 75,
+        "c": 15
+      }
+    },
+    {
+      "seed": 20013,
+      "status": "victory",
+      "winner": "A",
+      "turns": 30,
+      "examples": 274,
+      "actions": {
+        "m": 117,
+        "b": 36,
+        "a": 101,
+        "c": 20
+      }
+    },
+    {
+      "seed": 20014,
+      "status": "victory",
+      "winner": "A",
+      "turns": 25,
+      "examples": 262,
+      "actions": {
+        "m": 110,
+        "b": 36,
+        "a": 96,
+        "c": 20
+      }
+    },
+    {
+      "seed": 20015,
+      "status": "victory",
+      "winner": "A",
+      "turns": 28,
+      "examples": 250,
+      "actions": {
+        "m": 109,
+        "b": 37,
+        "a": 89,
+        "c": 15
+      }
+    },
+    {
+      "seed": 20016,
+      "status": "victory",
+      "winner": "A",
+      "turns": 35,
+      "examples": 335,
+      "actions": {
+        "m": 138,
+        "a": 127,
+        "b": 49,
+        "c": 21
+      }
+    },
+    {
+      "seed": 20017,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 343,
+      "actions": {
+        "m": 143,
+        "a": 122,
+        "b": 50,
+        "c": 28
+      }
+    },
+    {
+      "seed": 20018,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 287,
+      "actions": {
+        "m": 137,
+        "a": 80,
+        "b": 44,
+        "c": 26
+      }
+    },
+    {
+      "seed": 20019,
+      "status": "victory",
+      "winner": "A",
+      "turns": 20,
+      "examples": 220,
+      "actions": {
+        "b": 26,
+        "m": 92,
+        "a": 88,
+        "c": 14
+      }
+    }
+  ],
+  "actions": {
+    "m": 2385,
+    "b": 750,
+    "a": 1923,
+    "c": 367
+  }
+}

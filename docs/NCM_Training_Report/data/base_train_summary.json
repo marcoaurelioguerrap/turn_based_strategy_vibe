@@ -1,0 +1,2593 @@
+{
+  "split": "train",
+  "seeds": [
+    1,
+    200
+  ],
+  "examples": 54525,
+  "raw_examples": 55395,
+  "duplicates": 870,
+  "games": [
+    {
+      "seed": 1,
+      "status": "victory",
+      "winner": "A",
+      "turns": 26,
+      "examples": 206,
+      "actions": {
+        "b": 26,
+        "m": 104,
+        "a": 53,
+        "c": 23
+      }
+    },
+    {
+      "seed": 2,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 324,
+      "actions": {
+        "m": 126,
+        "b": 51,
+        "a": 141,
+        "c": 6
+      }
+    },
+    {
+      "seed": 3,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 402,
+      "actions": {
+        "b": 50,
+        "m": 204,
+        "a": 108,
+        "c": 40
+      }
+    },
+    {
+      "seed": 4,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 261,
+      "actions": {
+        "b": 49,
+        "m": 96,
+        "a": 116
+      }
+    },
+    {
+      "seed": 5,
+      "status": "victory",
+      "winner": "A",
+      "turns": 38,
+      "examples": 258,
+      "actions": {
+        "m": 124,
+        "a": 80,
+        "b": 38,
+        "c": 16
+      }
+    },
+    {
+      "seed": 6,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 338,
+      "actions": {
+        "m": 151,
+        "b": 55,
+        "a": 119,
+        "c": 13
+      }
+    },
+    {
+      "seed": 7,
+      "status": "victory",
+      "winner": "A",
+      "turns": 20,
+      "examples": 278,
+      "actions": {
+        "m": 141,
+        "b": 29,
+        "a": 90,
+        "c": 18
+      }
+    },
+    {
+      "seed": 8,
+      "status": "victory",
+      "winner": "A",
+      "turns": 22,
+      "examples": 245,
+      "actions": {
+        "b": 30,
+        "m": 111,
+        "a": 85,
+        "c": 19
+      }
+    },
+    {
+      "seed": 9,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 273,
+      "actions": {
+        "m": 92,
+        "b": 46,
+        "a": 135
+      }
+    },
+    {
+      "seed": 10,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 256,
+      "actions": {
+        "m": 105,
+        "a": 105,
+        "b": 35,
+        "c": 11
+      }
+    },
+    {
+      "seed": 11,
+      "status": "victory",
+      "winner": "A",
+      "turns": 24,
+      "examples": 194,
+      "actions": {
+        "m": 95,
+        "a": 58,
+        "b": 27,
+        "c": 14
+      }
+    },
+    {
+      "seed": 12,
+      "status": "victory",
+      "winner": "A",
+      "turns": 38,
+      "examples": 307,
+      "actions": {
+        "m": 137,
+        "b": 46,
+        "a": 107,
+        "c": 17
+      }
+    },
+    {
+      "seed": 13,
+      "status": "victory",
+      "winner": "A",
+      "turns": 21,
+      "examples": 234,
+      "actions": {
+        "b": 29,
+        "m": 103,
+        "a": 82,
+        "c": 20
+      }
+    },
+    {
+      "seed": 14,
+      "status": "victory",
+      "winner": "A",
+      "turns": 29,
+      "examples": 254,
+      "actions": {
+        "b": 37,
+        "m": 108,
+        "a": 82,
+        "c": 27
+      }
+    },
+    {
+      "seed": 15,
+      "status": "victory",
+      "winner": "A",
+      "turns": 20,
+      "examples": 192,
+      "actions": {
+        "m": 88,
+        "b": 24,
+        "a": 71,
+        "c": 9
+      }
+    },
+    {
+      "seed": 16,
+      "status": "victory",
+      "winner": "A",
+      "turns": 21,
+      "examples": 264,
+      "actions": {
+        "m": 134,
+        "a": 83,
+        "b": 28,
+        "c": 19
+      }
+    },
+    {
+      "seed": 17,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 344,
+      "actions": {
+        "m": 157,
+        "a": 117,
+        "b": 54,
+        "c": 16
+      }
+    },
+    {
+      "seed": 18,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 348,
+      "actions": {
+        "b": 51,
+        "m": 151,
+        "a": 117,
+        "c": 29
+      }
+    },
+    {
+      "seed": 19,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 427,
+      "actions": {
+        "m": 162,
+        "a": 198,
+        "b": 67
+      }
+    },
+    {
+      "seed": 20,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 301,
+      "actions": {
+        "m": 145,
+        "b": 49,
+        "a": 75,
+        "c": 32
+      }
+    },
+    {
+      "seed": 21,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 300,
+      "actions": {
+        "b": 45,
+        "m": 138,
+        "a": 97,
+        "c": 20
+      }
+    },
+    {
+      "seed": 22,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 309,
+      "actions": {
+        "m": 128,
+        "b": 54,
+        "a": 121,
+        "c": 6
+      }
+    },
+    {
+      "seed": 23,
+      "status": "victory",
+      "winner": "A",
+      "turns": 29,
+      "examples": 248,
+      "actions": {
+        "m": 113,
+        "a": 83,
+        "b": 33,
+        "c": 19
+      }
+    },
+    {
+      "seed": 24,
+      "status": "victory",
+      "winner": "A",
+      "turns": 23,
+      "examples": 212,
+      "actions": {
+        "m": 107,
+        "b": 28,
+        "a": 59,
+        "c": 18
+      }
+    },
+    {
+      "seed": 25,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 375,
+      "actions": {
+        "m": 174,
+        "a": 120,
+        "b": 50,
+        "c": 31
+      }
+    },
+    {
+      "seed": 26,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 253,
+      "actions": {
+        "m": 94,
+        "b": 43,
+        "a": 116
+      }
+    },
+    {
+      "seed": 27,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 272,
+      "actions": {
+        "m": 105,
+        "b": 52,
+        "a": 110,
+        "c": 5
+      }
+    },
+    {
+      "seed": 28,
+      "status": "victory",
+      "winner": "A",
+      "turns": 26,
+      "examples": 253,
+      "actions": {
+        "b": 32,
+        "m": 115,
+        "a": 81,
+        "c": 25
+      }
+    },
+    {
+      "seed": 29,
+      "status": "victory",
+      "winner": "A",
+      "turns": 22,
+      "examples": 210,
+      "actions": {
+        "m": 102,
+        "a": 68,
+        "b": 26,
+        "c": 14
+      }
+    },
+    {
+      "seed": 30,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 382,
+      "actions": {
+        "m": 159,
+        "b": 54,
+        "a": 111,
+        "c": 58
+      }
+    },
+    {
+      "seed": 31,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 293,
+      "actions": {
+        "b": 49,
+        "m": 114,
+        "a": 130
+      }
+    },
+    {
+      "seed": 32,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 358,
+      "actions": {
+        "b": 53,
+        "m": 168,
+        "a": 103,
+        "c": 34
+      }
+    },
+    {
+      "seed": 33,
+      "status": "victory",
+      "winner": "A",
+      "turns": 24,
+      "examples": 210,
+      "actions": {
+        "m": 112,
+        "a": 60,
+        "b": 24,
+        "c": 14
+      }
+    },
+    {
+      "seed": 34,
+      "status": "victory",
+      "winner": "A",
+      "turns": 26,
+      "examples": 348,
+      "actions": {
+        "m": 155,
+        "a": 104,
+        "b": 40,
+        "c": 49
+      }
+    },
+    {
+      "seed": 35,
+      "status": "victory",
+      "winner": "A",
+      "turns": 32,
+      "examples": 343,
+      "actions": {
+        "m": 164,
+        "b": 42,
+        "a": 112,
+        "c": 25
+      }
+    },
+    {
+      "seed": 36,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 362,
+      "actions": {
+        "m": 153,
+        "a": 139,
+        "b": 54,
+        "c": 16
+      }
+    },
+    {
+      "seed": 37,
+      "status": "victory",
+      "winner": "A",
+      "turns": 17,
+      "examples": 181,
+      "actions": {
+        "m": 79,
+        "b": 25,
+        "a": 67,
+        "c": 10
+      }
+    },
+    {
+      "seed": 38,
+      "status": "victory",
+      "winner": "A",
+      "turns": 20,
+      "examples": 232,
+      "actions": {
+        "m": 103,
+        "a": 85,
+        "b": 30,
+        "c": 14
+      }
+    },
+    {
+      "seed": 39,
+      "status": "victory",
+      "winner": "A",
+      "turns": 32,
+      "examples": 278,
+      "actions": {
+        "b": 41,
+        "m": 122,
+        "a": 92,
+        "c": 23
+      }
+    },
+    {
+      "seed": 40,
+      "status": "victory",
+      "winner": "A",
+      "turns": 21,
+      "examples": 230,
+      "actions": {
+        "m": 101,
+        "b": 31,
+        "a": 85,
+        "c": 13
+      }
+    },
+    {
+      "seed": 41,
+      "status": "victory",
+      "winner": "A",
+      "turns": 18,
+      "examples": 200,
+      "actions": {
+        "m": 92,
+        "b": 24,
+        "a": 69,
+        "c": 15
+      }
+    },
+    {
+      "seed": 42,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 301,
+      "actions": {
+        "m": 137,
+        "b": 50,
+        "a": 103,
+        "c": 11
+      }
+    },
+    {
+      "seed": 43,
+      "status": "victory",
+      "winner": "A",
+      "turns": 23,
+      "examples": 229,
+      "actions": {
+        "b": 33,
+        "m": 99,
+        "a": 82,
+        "c": 15
+      }
+    },
+    {
+      "seed": 44,
+      "status": "victory",
+      "winner": "A",
+      "turns": 24,
+      "examples": 339,
+      "actions": {
+        "m": 157,
+        "b": 38,
+        "a": 118,
+        "c": 26
+      }
+    },
+    {
+      "seed": 45,
+      "status": "victory",
+      "winner": "B",
+      "turns": 30,
+      "examples": 360,
+      "actions": {
+        "b": 42,
+        "m": 142,
+        "a": 154,
+        "c": 22
+      }
+    },
+    {
+      "seed": 46,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 284,
+      "actions": {
+        "m": 130,
+        "b": 39,
+        "a": 80,
+        "c": 35
+      }
+    },
+    {
+      "seed": 47,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 240,
+      "actions": {
+        "m": 92,
+        "a": 109,
+        "b": 39
+      }
+    },
+    {
+      "seed": 48,
+      "status": "victory",
+      "winner": "A",
+      "turns": 23,
+      "examples": 268,
+      "actions": {
+        "m": 120,
+        "a": 98,
+        "b": 35,
+        "c": 15
+      }
+    },
+    {
+      "seed": 49,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 259,
+      "actions": {
+        "b": 55,
+        "m": 106,
+        "a": 98
+      }
+    },
+    {
+      "seed": 50,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 282,
+      "actions": {
+        "m": 104,
+        "a": 129,
+        "b": 49
+      }
+    },
+    {
+      "seed": 51,
+      "status": "victory",
+      "winner": "A",
+      "turns": 33,
+      "examples": 261,
+      "actions": {
+        "b": 41,
+        "m": 112,
+        "a": 92,
+        "c": 16
+      }
+    },
+    {
+      "seed": 52,
+      "status": "victory",
+      "winner": "A",
+      "turns": 36,
+      "examples": 266,
+      "actions": {
+        "m": 118,
+        "a": 102,
+        "b": 38,
+        "c": 8
+      }
+    },
+    {
+      "seed": 53,
+      "status": "victory",
+      "winner": "A",
+      "turns": 17,
+      "examples": 224,
+      "actions": {
+        "m": 115,
+        "a": 69,
+        "b": 25,
+        "c": 15
+      }
+    },
+    {
+      "seed": 54,
+      "status": "victory",
+      "winner": "A",
+      "turns": 20,
+      "examples": 242,
+      "actions": {
+        "m": 104,
+        "a": 96,
+        "b": 29,
+        "c": 13
+      }
+    },
+    {
+      "seed": 55,
+      "status": "victory",
+      "winner": "A",
+      "turns": 20,
+      "examples": 177,
+      "actions": {
+        "b": 24,
+        "m": 79,
+        "a": 67,
+        "c": 7
+      }
+    },
+    {
+      "seed": 56,
+      "status": "victory",
+      "winner": "A",
+      "turns": 35,
+      "examples": 339,
+      "actions": {
+        "m": 129,
+        "a": 110,
+        "b": 49,
+        "c": 51
+      }
+    },
+    {
+      "seed": 57,
+      "status": "victory",
+      "winner": "A",
+      "turns": 19,
+      "examples": 191,
+      "actions": {
+        "b": 24,
+        "m": 93,
+        "a": 66,
+        "c": 8
+      }
+    },
+    {
+      "seed": 58,
+      "status": "victory",
+      "winner": "A",
+      "turns": 25,
+      "examples": 193,
+      "actions": {
+        "m": 86,
+        "b": 30,
+        "a": 69,
+        "c": 8
+      }
+    },
+    {
+      "seed": 59,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 283,
+      "actions": {
+        "b": 50,
+        "m": 113,
+        "a": 120
+      }
+    },
+    {
+      "seed": 60,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 358,
+      "actions": {
+        "m": 138,
+        "b": 64,
+        "a": 156
+      }
+    },
+    {
+      "seed": 61,
+      "status": "victory",
+      "winner": "A",
+      "turns": 18,
+      "examples": 204,
+      "actions": {
+        "m": 99,
+        "a": 68,
+        "b": 23,
+        "c": 14
+      }
+    },
+    {
+      "seed": 62,
+      "status": "victory",
+      "winner": "A",
+      "turns": 24,
+      "examples": 263,
+      "actions": {
+        "m": 118,
+        "a": 90,
+        "b": 34,
+        "c": 21
+      }
+    },
+    {
+      "seed": 63,
+      "status": "victory",
+      "winner": "A",
+      "turns": 40,
+      "examples": 326,
+      "actions": {
+        "m": 155,
+        "b": 54,
+        "a": 103,
+        "c": 14
+      }
+    },
+    {
+      "seed": 64,
+      "status": "victory",
+      "winner": "A",
+      "turns": 27,
+      "examples": 233,
+      "actions": {
+        "m": 108,
+        "b": 33,
+        "a": 71,
+        "c": 21
+      }
+    },
+    {
+      "seed": 65,
+      "status": "victory",
+      "winner": "A",
+      "turns": 23,
+      "examples": 234,
+      "actions": {
+        "m": 107,
+        "a": 86,
+        "b": 32,
+        "c": 9
+      }
+    },
+    {
+      "seed": 66,
+      "status": "victory",
+      "winner": "A",
+      "turns": 17,
+      "examples": 201,
+      "actions": {
+        "b": 24,
+        "m": 89,
+        "a": 73,
+        "c": 15
+      }
+    },
+    {
+      "seed": 67,
+      "status": "victory",
+      "winner": "A",
+      "turns": 35,
+      "examples": 330,
+      "actions": {
+        "b": 46,
+        "m": 138,
+        "a": 109,
+        "c": 37
+      }
+    },
+    {
+      "seed": 68,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 343,
+      "actions": {
+        "m": 158,
+        "b": 50,
+        "a": 105,
+        "c": 30
+      }
+    },
+    {
+      "seed": 69,
+      "status": "victory",
+      "winner": "A",
+      "turns": 29,
+      "examples": 273,
+      "actions": {
+        "m": 139,
+        "b": 39,
+        "a": 79,
+        "c": 16
+      }
+    },
+    {
+      "seed": 70,
+      "status": "victory",
+      "winner": "A",
+      "turns": 35,
+      "examples": 314,
+      "actions": {
+        "m": 135,
+        "a": 104,
+        "b": 41,
+        "c": 34
+      }
+    },
+    {
+      "seed": 71,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 373,
+      "actions": {
+        "m": 172,
+        "b": 54,
+        "a": 133,
+        "c": 14
+      }
+    },
+    {
+      "seed": 72,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 369,
+      "actions": {
+        "b": 61,
+        "m": 132,
+        "a": 176
+      }
+    },
+    {
+      "seed": 73,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 273,
+      "actions": {
+        "b": 56,
+        "m": 101,
+        "a": 116
+      }
+    },
+    {
+      "seed": 74,
+      "status": "victory",
+      "winner": "A",
+      "turns": 35,
+      "examples": 281,
+      "actions": {
+        "m": 131,
+        "b": 42,
+        "a": 82,
+        "c": 26
+      }
+    },
+    {
+      "seed": 75,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 261,
+      "actions": {
+        "m": 107,
+        "b": 48,
+        "a": 106
+      }
+    },
+    {
+      "seed": 76,
+      "status": "victory",
+      "winner": "A",
+      "turns": 19,
+      "examples": 203,
+      "actions": {
+        "m": 100,
+        "b": 24,
+        "a": 63,
+        "c": 16
+      }
+    },
+    {
+      "seed": 77,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 232,
+      "actions": {
+        "m": 86,
+        "b": 37,
+        "a": 109
+      }
+    },
+    {
+      "seed": 78,
+      "status": "victory",
+      "winner": "A",
+      "turns": 36,
+      "examples": 361,
+      "actions": {
+        "m": 156,
+        "a": 128,
+        "b": 49,
+        "c": 28
+      }
+    },
+    {
+      "seed": 79,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 247,
+      "actions": {
+        "b": 45,
+        "m": 96,
+        "a": 106
+      }
+    },
+    {
+      "seed": 80,
+      "status": "victory",
+      "winner": "A",
+      "turns": 17,
+      "examples": 240,
+      "actions": {
+        "b": 29,
+        "m": 105,
+        "a": 88,
+        "c": 18
+      }
+    },
+    {
+      "seed": 81,
+      "status": "victory",
+      "winner": "A",
+      "turns": 39,
+      "examples": 337,
+      "actions": {
+        "m": 168,
+        "a": 87,
+        "b": 46,
+        "c": 36
+      }
+    },
+    {
+      "seed": 82,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 262,
+      "actions": {
+        "b": 52,
+        "m": 105,
+        "a": 105
+      }
+    },
+    {
+      "seed": 83,
+      "status": "victory",
+      "winner": "B",
+      "turns": 35,
+      "examples": 308,
+      "actions": {
+        "m": 133,
+        "b": 43,
+        "a": 124,
+        "c": 8
+      }
+    },
+    {
+      "seed": 84,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 288,
+      "actions": {
+        "m": 122,
+        "b": 39,
+        "a": 103,
+        "c": 24
+      }
+    },
+    {
+      "seed": 85,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 248,
+      "actions": {
+        "b": 48,
+        "m": 89,
+        "a": 111
+      }
+    },
+    {
+      "seed": 86,
+      "status": "victory",
+      "winner": "A",
+      "turns": 29,
+      "examples": 297,
+      "actions": {
+        "m": 126,
+        "a": 100,
+        "b": 41,
+        "c": 30
+      }
+    },
+    {
+      "seed": 87,
+      "status": "victory",
+      "winner": "A",
+      "turns": 17,
+      "examples": 184,
+      "actions": {
+        "b": 21,
+        "m": 80,
+        "a": 72,
+        "c": 11
+      }
+    },
+    {
+      "seed": 88,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 387,
+      "actions": {
+        "m": 170,
+        "a": 134,
+        "b": 53,
+        "c": 30
+      }
+    },
+    {
+      "seed": 89,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 236,
+      "actions": {
+        "b": 37,
+        "m": 106,
+        "a": 86,
+        "c": 7
+      }
+    },
+    {
+      "seed": 90,
+      "status": "victory",
+      "winner": "A",
+      "turns": 21,
+      "examples": 255,
+      "actions": {
+        "b": 30,
+        "m": 115,
+        "a": 99,
+        "c": 11
+      }
+    },
+    {
+      "seed": 91,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 324,
+      "actions": {
+        "b": 54,
+        "m": 110,
+        "a": 160
+      }
+    },
+    {
+      "seed": 92,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 290,
+      "actions": {
+        "m": 110,
+        "a": 132,
+        "b": 48
+      }
+    },
+    {
+      "seed": 93,
+      "status": "victory",
+      "winner": "A",
+      "turns": 30,
+      "examples": 162,
+      "actions": {
+        "m": 80,
+        "b": 27,
+        "a": 49,
+        "c": 6
+      }
+    },
+    {
+      "seed": 94,
+      "status": "victory",
+      "winner": "B",
+      "turns": 19,
+      "examples": 225,
+      "actions": {
+        "m": 100,
+        "b": 24,
+        "a": 87,
+        "c": 14
+      }
+    },
+    {
+      "seed": 95,
+      "status": "victory",
+      "winner": "A",
+      "turns": 39,
+      "examples": 320,
+      "actions": {
+        "m": 144,
+        "a": 88,
+        "b": 50,
+        "c": 38
+      }
+    },
+    {
+      "seed": 96,
+      "status": "victory",
+      "winner": "A",
+      "turns": 28,
+      "examples": 244,
+      "actions": {
+        "m": 103,
+        "a": 97,
+        "b": 37,
+        "c": 7
+      }
+    },
+    {
+      "seed": 97,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 268,
+      "actions": {
+        "b": 39,
+        "m": 141,
+        "a": 71,
+        "c": 17
+      }
+    },
+    {
+      "seed": 98,
+      "status": "victory",
+      "winner": "A",
+      "turns": 25,
+      "examples": 212,
+      "actions": {
+        "m": 97,
+        "b": 30,
+        "a": 78,
+        "c": 7
+      }
+    },
+    {
+      "seed": 99,
+      "status": "victory",
+      "winner": "A",
+      "turns": 17,
+      "examples": 164,
+      "actions": {
+        "m": 78,
+        "b": 21,
+        "a": 56,
+        "c": 9
+      }
+    },
+    {
+      "seed": 100,
+      "status": "victory",
+      "winner": "A",
+      "turns": 19,
+      "examples": 251,
+      "actions": {
+        "b": 27,
+        "m": 108,
+        "a": 95,
+        "c": 21
+      }
+    },
+    {
+      "seed": 101,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 454,
+      "actions": {
+        "m": 182,
+        "a": 187,
+        "b": 65,
+        "c": 20
+      }
+    },
+    {
+      "seed": 102,
+      "status": "victory",
+      "winner": "A",
+      "turns": 30,
+      "examples": 246,
+      "actions": {
+        "b": 39,
+        "m": 111,
+        "a": 83,
+        "c": 13
+      }
+    },
+    {
+      "seed": 103,
+      "status": "victory",
+      "winner": "A",
+      "turns": 39,
+      "examples": 329,
+      "actions": {
+        "m": 159,
+        "b": 44,
+        "a": 98,
+        "c": 28
+      }
+    },
+    {
+      "seed": 104,
+      "status": "victory",
+      "winner": "A",
+      "turns": 32,
+      "examples": 298,
+      "actions": {
+        "m": 137,
+        "a": 87,
+        "b": 45,
+        "c": 29
+      }
+    },
+    {
+      "seed": 105,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 370,
+      "actions": {
+        "m": 163,
+        "a": 135,
+        "b": 58,
+        "c": 14
+      }
+    },
+    {
+      "seed": 106,
+      "status": "victory",
+      "winner": "A",
+      "turns": 22,
+      "examples": 198,
+      "actions": {
+        "m": 99,
+        "b": 25,
+        "a": 64,
+        "c": 10
+      }
+    },
+    {
+      "seed": 107,
+      "status": "victory",
+      "winner": "A",
+      "turns": 19,
+      "examples": 198,
+      "actions": {
+        "b": 22,
+        "m": 85,
+        "a": 64,
+        "c": 27
+      }
+    },
+    {
+      "seed": 108,
+      "status": "victory",
+      "winner": "A",
+      "turns": 36,
+      "examples": 355,
+      "actions": {
+        "b": 48,
+        "m": 149,
+        "a": 137,
+        "c": 21
+      }
+    },
+    {
+      "seed": 109,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 298,
+      "actions": {
+        "b": 52,
+        "m": 102,
+        "a": 143,
+        "c": 1
+      }
+    },
+    {
+      "seed": 110,
+      "status": "victory",
+      "winner": "A",
+      "turns": 29,
+      "examples": 339,
+      "actions": {
+        "m": 154,
+        "a": 106,
+        "b": 45,
+        "c": 34
+      }
+    },
+    {
+      "seed": 111,
+      "status": "victory",
+      "winner": "A",
+      "turns": 25,
+      "examples": 225,
+      "actions": {
+        "m": 108,
+        "a": 71,
+        "b": 28,
+        "c": 18
+      }
+    },
+    {
+      "seed": 112,
+      "status": "victory",
+      "winner": "A",
+      "turns": 32,
+      "examples": 288,
+      "actions": {
+        "m": 130,
+        "a": 98,
+        "b": 39,
+        "c": 21
+      }
+    },
+    {
+      "seed": 113,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 275,
+      "actions": {
+        "b": 46,
+        "m": 98,
+        "a": 131
+      }
+    },
+    {
+      "seed": 114,
+      "status": "victory",
+      "winner": "A",
+      "turns": 25,
+      "examples": 339,
+      "actions": {
+        "b": 40,
+        "m": 159,
+        "a": 123,
+        "c": 17
+      }
+    },
+    {
+      "seed": 115,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 287,
+      "actions": {
+        "m": 122,
+        "b": 40,
+        "a": 113,
+        "c": 12
+      }
+    },
+    {
+      "seed": 116,
+      "status": "victory",
+      "winner": "A",
+      "turns": 20,
+      "examples": 252,
+      "actions": {
+        "m": 123,
+        "a": 81,
+        "b": 29,
+        "c": 19
+      }
+    },
+    {
+      "seed": 117,
+      "status": "victory",
+      "winner": "A",
+      "turns": 30,
+      "examples": 315,
+      "actions": {
+        "b": 43,
+        "m": 130,
+        "a": 126,
+        "c": 16
+      }
+    },
+    {
+      "seed": 118,
+      "status": "victory",
+      "winner": "A",
+      "turns": 16,
+      "examples": 186,
+      "actions": {
+        "m": 84,
+        "b": 21,
+        "a": 62,
+        "c": 19
+      }
+    },
+    {
+      "seed": 119,
+      "status": "victory",
+      "winner": "A",
+      "turns": 30,
+      "examples": 287,
+      "actions": {
+        "m": 119,
+        "a": 94,
+        "b": 38,
+        "c": 36
+      }
+    },
+    {
+      "seed": 120,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 365,
+      "actions": {
+        "m": 155,
+        "a": 141,
+        "b": 53,
+        "c": 16
+      }
+    },
+    {
+      "seed": 121,
+      "status": "victory",
+      "winner": "A",
+      "turns": 17,
+      "examples": 201,
+      "actions": {
+        "b": 25,
+        "m": 92,
+        "a": 68,
+        "c": 16
+      }
+    },
+    {
+      "seed": 122,
+      "status": "victory",
+      "winner": "A",
+      "turns": 23,
+      "examples": 212,
+      "actions": {
+        "m": 93,
+        "a": 75,
+        "b": 31,
+        "c": 13
+      }
+    },
+    {
+      "seed": 123,
+      "status": "victory",
+      "winner": "A",
+      "turns": 22,
+      "examples": 245,
+      "actions": {
+        "b": 29,
+        "m": 105,
+        "a": 93,
+        "c": 18
+      }
+    },
+    {
+      "seed": 124,
+      "status": "victory",
+      "winner": "A",
+      "turns": 19,
+      "examples": 198,
+      "actions": {
+        "m": 98,
+        "b": 22,
+        "a": 59,
+        "c": 19
+      }
+    },
+    {
+      "seed": 125,
+      "status": "victory",
+      "winner": "A",
+      "turns": 37,
+      "examples": 394,
+      "actions": {
+        "m": 180,
+        "a": 143,
+        "b": 57,
+        "c": 14
+      }
+    },
+    {
+      "seed": 126,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 319,
+      "actions": {
+        "m": 116,
+        "a": 141,
+        "b": 57,
+        "c": 5
+      }
+    },
+    {
+      "seed": 127,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 296,
+      "actions": {
+        "b": 51,
+        "m": 118,
+        "a": 127
+      }
+    },
+    {
+      "seed": 128,
+      "status": "victory",
+      "winner": "A",
+      "turns": 17,
+      "examples": 179,
+      "actions": {
+        "m": 89,
+        "b": 21,
+        "a": 55,
+        "c": 14
+      }
+    },
+    {
+      "seed": 129,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 287,
+      "actions": {
+        "m": 131,
+        "b": 51,
+        "a": 99,
+        "c": 6
+      }
+    },
+    {
+      "seed": 130,
+      "status": "victory",
+      "winner": "A",
+      "turns": 27,
+      "examples": 260,
+      "actions": {
+        "m": 115,
+        "a": 96,
+        "b": 39,
+        "c": 10
+      }
+    },
+    {
+      "seed": 131,
+      "status": "victory",
+      "winner": "A",
+      "turns": 30,
+      "examples": 293,
+      "actions": {
+        "m": 127,
+        "b": 34,
+        "a": 95,
+        "c": 37
+      }
+    },
+    {
+      "seed": 132,
+      "status": "victory",
+      "winner": "A",
+      "turns": 35,
+      "examples": 330,
+      "actions": {
+        "m": 139,
+        "a": 121,
+        "b": 43,
+        "c": 27
+      }
+    },
+    {
+      "seed": 133,
+      "status": "victory",
+      "winner": "A",
+      "turns": 27,
+      "examples": 263,
+      "actions": {
+        "m": 113,
+        "a": 98,
+        "b": 38,
+        "c": 14
+      }
+    },
+    {
+      "seed": 134,
+      "status": "victory",
+      "winner": "B",
+      "turns": 37,
+      "examples": 348,
+      "actions": {
+        "m": 161,
+        "a": 125,
+        "b": 44,
+        "c": 18
+      }
+    },
+    {
+      "seed": 135,
+      "status": "victory",
+      "winner": "A",
+      "turns": 36,
+      "examples": 309,
+      "actions": {
+        "m": 129,
+        "a": 118,
+        "b": 47,
+        "c": 15
+      }
+    },
+    {
+      "seed": 136,
+      "status": "victory",
+      "winner": "A",
+      "turns": 33,
+      "examples": 303,
+      "actions": {
+        "m": 129,
+        "a": 97,
+        "b": 39,
+        "c": 38
+      }
+    },
+    {
+      "seed": 137,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 271,
+      "actions": {
+        "b": 39,
+        "m": 115,
+        "a": 106,
+        "c": 11
+      }
+    },
+    {
+      "seed": 138,
+      "status": "victory",
+      "winner": "A",
+      "turns": 40,
+      "examples": 339,
+      "actions": {
+        "b": 48,
+        "m": 143,
+        "a": 117,
+        "c": 31
+      }
+    },
+    {
+      "seed": 139,
+      "status": "victory",
+      "winner": "A",
+      "turns": 26,
+      "examples": 302,
+      "actions": {
+        "b": 37,
+        "m": 136,
+        "a": 103,
+        "c": 26
+      }
+    },
+    {
+      "seed": 140,
+      "status": "victory",
+      "winner": "A",
+      "turns": 23,
+      "examples": 257,
+      "actions": {
+        "m": 110,
+        "b": 32,
+        "a": 105,
+        "c": 10
+      }
+    },
+    {
+      "seed": 141,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 244,
+      "actions": {
+        "m": 94,
+        "b": 38,
+        "a": 112
+      }
+    },
+    {
+      "seed": 142,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 297,
+      "actions": {
+        "m": 133,
+        "a": 105,
+        "b": 46,
+        "c": 13
+      }
+    },
+    {
+      "seed": 143,
+      "status": "victory",
+      "winner": "A",
+      "turns": 23,
+      "examples": 210,
+      "actions": {
+        "m": 84,
+        "b": 27,
+        "a": 74,
+        "c": 25
+      }
+    },
+    {
+      "seed": 144,
+      "status": "victory",
+      "winner": "A",
+      "turns": 25,
+      "examples": 267,
+      "actions": {
+        "m": 120,
+        "a": 89,
+        "b": 33,
+        "c": 25
+      }
+    },
+    {
+      "seed": 145,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 412,
+      "actions": {
+        "m": 202,
+        "a": 103,
+        "b": 51,
+        "c": 56
+      }
+    },
+    {
+      "seed": 146,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 294,
+      "actions": {
+        "b": 45,
+        "m": 136,
+        "a": 101,
+        "c": 12
+      }
+    },
+    {
+      "seed": 147,
+      "status": "victory",
+      "winner": "A",
+      "turns": 18,
+      "examples": 200,
+      "actions": {
+        "m": 88,
+        "a": 75,
+        "b": 23,
+        "c": 14
+      }
+    },
+    {
+      "seed": 148,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 314,
+      "actions": {
+        "m": 111,
+        "a": 149,
+        "b": 51,
+        "c": 3
+      }
+    },
+    {
+      "seed": 149,
+      "status": "victory",
+      "winner": "A",
+      "turns": 33,
+      "examples": 309,
+      "actions": {
+        "b": 45,
+        "m": 114,
+        "a": 139,
+        "c": 11
+      }
+    },
+    {
+      "seed": 150,
+      "status": "victory",
+      "winner": "A",
+      "turns": 21,
+      "examples": 276,
+      "actions": {
+        "m": 132,
+        "b": 33,
+        "a": 89,
+        "c": 22
+      }
+    },
+    {
+      "seed": 151,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 265,
+      "actions": {
+        "m": 104,
+        "b": 51,
+        "a": 105,
+        "c": 5
+      }
+    },
+    {
+      "seed": 152,
+      "status": "victory",
+      "winner": "A",
+      "turns": 29,
+      "examples": 296,
+      "actions": {
+        "m": 136,
+        "b": 39,
+        "a": 96,
+        "c": 25
+      }
+    },
+    {
+      "seed": 153,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 312,
+      "actions": {
+        "m": 138,
+        "a": 100,
+        "b": 47,
+        "c": 27
+      }
+    },
+    {
+      "seed": 154,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 326,
+      "actions": {
+        "b": 46,
+        "m": 146,
+        "a": 122,
+        "c": 12
+      }
+    },
+    {
+      "seed": 155,
+      "status": "victory",
+      "winner": "A",
+      "turns": 22,
+      "examples": 221,
+      "actions": {
+        "m": 108,
+        "a": 78,
+        "b": 28,
+        "c": 7
+      }
+    },
+    {
+      "seed": 156,
+      "status": "victory",
+      "winner": "A",
+      "turns": 19,
+      "examples": 214,
+      "actions": {
+        "m": 91,
+        "b": 29,
+        "a": 84,
+        "c": 10
+      }
+    },
+    {
+      "seed": 157,
+      "status": "victory",
+      "winner": "A",
+      "turns": 35,
+      "examples": 262,
+      "actions": {
+        "m": 114,
+        "b": 36,
+        "a": 94,
+        "c": 18
+      }
+    },
+    {
+      "seed": 158,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 354,
+      "actions": {
+        "m": 126,
+        "a": 167,
+        "b": 60,
+        "c": 1
+      }
+    },
+    {
+      "seed": 159,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 344,
+      "actions": {
+        "m": 136,
+        "b": 65,
+        "a": 143
+      }
+    },
+    {
+      "seed": 160,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 262,
+      "actions": {
+        "b": 39,
+        "m": 131,
+        "a": 59,
+        "c": 33
+      }
+    },
+    {
+      "seed": 161,
+      "status": "victory",
+      "winner": "A",
+      "turns": 19,
+      "examples": 191,
+      "actions": {
+        "m": 89,
+        "b": 21,
+        "a": 60,
+        "c": 21
+      }
+    },
+    {
+      "seed": 162,
+      "status": "victory",
+      "winner": "A",
+      "turns": 27,
+      "examples": 255,
+      "actions": {
+        "b": 31,
+        "m": 126,
+        "a": 74,
+        "c": 24
+      }
+    },
+    {
+      "seed": 163,
+      "status": "victory",
+      "winner": "A",
+      "turns": 30,
+      "examples": 228,
+      "actions": {
+        "m": 104,
+        "a": 78,
+        "b": 35,
+        "c": 11
+      }
+    },
+    {
+      "seed": 164,
+      "status": "victory",
+      "winner": "A",
+      "turns": 27,
+      "examples": 280,
+      "actions": {
+        "b": 36,
+        "m": 129,
+        "a": 89,
+        "c": 26
+      }
+    },
+    {
+      "seed": 165,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 327,
+      "actions": {
+        "b": 50,
+        "m": 127,
+        "a": 150
+      }
+    },
+    {
+      "seed": 166,
+      "status": "victory",
+      "winner": "A",
+      "turns": 36,
+      "examples": 349,
+      "actions": {
+        "b": 49,
+        "m": 157,
+        "a": 98,
+        "c": 45
+      }
+    },
+    {
+      "seed": 167,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 291,
+      "actions": {
+        "b": 47,
+        "m": 127,
+        "a": 89,
+        "c": 28
+      }
+    },
+    {
+      "seed": 168,
+      "status": "victory",
+      "winner": "A",
+      "turns": 22,
+      "examples": 218,
+      "actions": {
+        "m": 101,
+        "b": 32,
+        "a": 80,
+        "c": 5
+      }
+    },
+    {
+      "seed": 169,
+      "status": "victory",
+      "winner": "A",
+      "turns": 27,
+      "examples": 268,
+      "actions": {
+        "b": 37,
+        "m": 116,
+        "a": 104,
+        "c": 11
+      }
+    },
+    {
+      "seed": 170,
+      "status": "victory",
+      "winner": "A",
+      "turns": 31,
+      "examples": 221,
+      "actions": {
+        "m": 107,
+        "b": 31,
+        "a": 50,
+        "c": 33
+      }
+    },
+    {
+      "seed": 171,
+      "status": "victory",
+      "winner": "A",
+      "turns": 35,
+      "examples": 329,
+      "actions": {
+        "m": 175,
+        "a": 74,
+        "b": 42,
+        "c": 38
+      }
+    },
+    {
+      "seed": 172,
+      "status": "victory",
+      "winner": "A",
+      "turns": 38,
+      "examples": 311,
+      "actions": {
+        "m": 129,
+        "a": 117,
+        "b": 47,
+        "c": 18
+      }
+    },
+    {
+      "seed": 173,
+      "status": "victory",
+      "winner": "A",
+      "turns": 20,
+      "examples": 186,
+      "actions": {
+        "m": 88,
+        "a": 60,
+        "b": 24,
+        "c": 14
+      }
+    },
+    {
+      "seed": 174,
+      "status": "victory",
+      "winner": "A",
+      "turns": 28,
+      "examples": 277,
+      "actions": {
+        "m": 116,
+        "b": 40,
+        "a": 108,
+        "c": 13
+      }
+    },
+    {
+      "seed": 175,
+      "status": "victory",
+      "winner": "A",
+      "turns": 16,
+      "examples": 210,
+      "actions": {
+        "m": 100,
+        "b": 23,
+        "a": 73,
+        "c": 14
+      }
+    },
+    {
+      "seed": 176,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 283,
+      "actions": {
+        "b": 51,
+        "m": 105,
+        "a": 127
+      }
+    },
+    {
+      "seed": 177,
+      "status": "victory",
+      "winner": "A",
+      "turns": 19,
+      "examples": 211,
+      "actions": {
+        "m": 101,
+        "a": 62,
+        "b": 24,
+        "c": 24
+      }
+    },
+    {
+      "seed": 178,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 295,
+      "actions": {
+        "m": 129,
+        "a": 104,
+        "b": 45,
+        "c": 17
+      }
+    },
+    {
+      "seed": 179,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 329,
+      "actions": {
+        "m": 133,
+        "a": 127,
+        "b": 46,
+        "c": 23
+      }
+    },
+    {
+      "seed": 180,
+      "status": "victory",
+      "winner": "A",
+      "turns": 27,
+      "examples": 201,
+      "actions": {
+        "b": 30,
+        "m": 100,
+        "a": 63,
+        "c": 8
+      }
+    },
+    {
+      "seed": 181,
+      "status": "victory",
+      "winner": "A",
+      "turns": 23,
+      "examples": 234,
+      "actions": {
+        "m": 106,
+        "a": 70,
+        "b": 27,
+        "c": 31
+      }
+    },
+    {
+      "seed": 182,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 322,
+      "actions": {
+        "m": 144,
+        "b": 48,
+        "a": 98,
+        "c": 32
+      }
+    },
+    {
+      "seed": 183,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 310,
+      "actions": {
+        "b": 51,
+        "m": 117,
+        "a": 121,
+        "c": 21
+      }
+    },
+    {
+      "seed": 184,
+      "status": "victory",
+      "winner": "A",
+      "turns": 23,
+      "examples": 264,
+      "actions": {
+        "b": 34,
+        "m": 118,
+        "a": 89,
+        "c": 23
+      }
+    },
+    {
+      "seed": 185,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 345,
+      "actions": {
+        "m": 133,
+        "b": 47,
+        "a": 147,
+        "c": 18
+      }
+    },
+    {
+      "seed": 186,
+      "status": "victory",
+      "winner": "A",
+      "turns": 32,
+      "examples": 325,
+      "actions": {
+        "m": 140,
+        "b": 47,
+        "a": 106,
+        "c": 32
+      }
+    },
+    {
+      "seed": 187,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 339,
+      "actions": {
+        "m": 131,
+        "b": 53,
+        "a": 121,
+        "c": 34
+      }
+    },
+    {
+      "seed": 188,
+      "status": "victory",
+      "winner": "A",
+      "turns": 17,
+      "examples": 161,
+      "actions": {
+        "m": 72,
+        "b": 23,
+        "a": 59,
+        "c": 7
+      }
+    },
+    {
+      "seed": 189,
+      "status": "victory",
+      "winner": "A",
+      "turns": 20,
+      "examples": 250,
+      "actions": {
+        "m": 112,
+        "b": 28,
+        "a": 81,
+        "c": 29
+      }
+    },
+    {
+      "seed": 190,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 284,
+      "actions": {
+        "b": 36,
+        "m": 107,
+        "a": 133,
+        "c": 8
+      }
+    },
+    {
+      "seed": 191,
+      "status": "victory",
+      "winner": "A",
+      "turns": 25,
+      "examples": 256,
+      "actions": {
+        "m": 116,
+        "b": 36,
+        "a": 86,
+        "c": 18
+      }
+    },
+    {
+      "seed": 192,
+      "status": "victory",
+      "winner": "A",
+      "turns": 24,
+      "examples": 229,
+      "actions": {
+        "m": 91,
+        "a": 93,
+        "b": 30,
+        "c": 15
+      }
+    },
+    {
+      "seed": 193,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 336,
+      "actions": {
+        "m": 130,
+        "a": 123,
+        "b": 51,
+        "c": 32
+      }
+    },
+    {
+      "seed": 194,
+      "status": "victory",
+      "winner": "A",
+      "turns": 38,
+      "examples": 339,
+      "actions": {
+        "m": 159,
+        "a": 99,
+        "b": 44,
+        "c": 37
+      }
+    },
+    {
+      "seed": 195,
+      "status": "victory",
+      "winner": "A",
+      "turns": 17,
+      "examples": 193,
+      "actions": {
+        "m": 91,
+        "b": 20,
+        "a": 69,
+        "c": 13
+      }
+    },
+    {
+      "seed": 196,
+      "status": "victory",
+      "winner": "A",
+      "turns": 22,
+      "examples": 227,
+      "actions": {
+        "m": 89,
+        "b": 32,
+        "a": 99,
+        "c": 7
+      }
+    },
+    {
+      "seed": 197,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 321,
+      "actions": {
+        "m": 139,
+        "b": 49,
+        "a": 111,
+        "c": 22
+      }
+    },
+    {
+      "seed": 198,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 282,
+      "actions": {
+        "b": 39,
+        "m": 135,
+        "a": 81,
+        "c": 27
+      }
+    },
+    {
+      "seed": 199,
+      "status": "ongoing",
+      "winner": null,
+      "turns": 41,
+      "examples": 221,
+      "actions": {
+        "m": 88,
+        "b": 44,
+        "a": 87,
+        "c": 2
+      }
+    },
+    {
+      "seed": 200,
+      "status": "victory",
+      "winner": "A",
+      "turns": 21,
+      "examples": 234,
+      "actions": {
+        "b": 24,
+        "m": 119,
+        "a": 67,
+        "c": 24
+      }
+    }
+  ],
+  "actions": {
+    "b": 7806,
+    "m": 23715,
+    "a": 19590,
+    "c": 3414
+  }
+}

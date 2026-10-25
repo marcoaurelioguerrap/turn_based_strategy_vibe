@@ -1,0 +1,225 @@
+{
+  "personas": {
+    "aggressive": {
+      "train": {
+        "rows": 36367,
+        "games": 28,
+        "actions": {
+          "h": 10910,
+          "b": 3494,
+          "a": 8276,
+          "m": 12699,
+          "l": 437,
+          "c": 103,
+          "u": 448
+        },
+        "builds": {
+          "tank": 1741,
+          "aa_missile": 348,
+          "artillery": 1242,
+          "infantry": 163
+        },
+        "maps": {
+          "archipelago": 8173,
+          "mountain_pass": 7562,
+          "border_skirmish": 5325,
+          "last_stand": 7835,
+          "urban_delta": 7472
+        },
+        "opponents": {
+          "aggressive": 24282,
+          "armor": 1992,
+          "defensive": 5607,
+          "infantry": 2338,
+          "artillery": 2148
+        },
+        "raw_rows": 53329,
+        "hold_cap": 0.3
+      },
+      "test": {
+        "rows": 4832,
+        "games": 4,
+        "actions": {
+          "h": 1449,
+          "m": 1794,
+          "a": 888,
+          "b": 496,
+          "u": 78,
+          "l": 82,
+          "c": 45
+        },
+        "builds": {
+          "aa_missile": 47,
+          "infantry": 27,
+          "tank": 267,
+          "artillery": 155
+        },
+        "maps": {
+          "archipelago": 1574,
+          "last_stand": 1027,
+          "urban_delta": 399,
+          "border_skirmish": 1443,
+          "mountain_pass": 389
+        },
+        "opponents": {
+          "aggressive": 2241,
+          "infantry": 541,
+          "armor": 262,
+          "artillery": 512,
+          "defensive": 1276
+        },
+        "raw_rows": 8005,
+        "hold_cap": 0.3
+      },
+      "validation": {
+        "rows": 4650,
+        "games": 4,
+        "actions": {
+          "m": 1771,
+          "l": 74,
+          "h": 1395,
+          "a": 849,
+          "b": 457,
+          "u": 72,
+          "c": 32
+        },
+        "builds": {
+          "tank": 238,
+          "artillery": 162,
+          "infantry": 19,
+          "aa_missile": 38
+        },
+        "maps": {
+          "archipelago": 1510,
+          "mountain_pass": 550,
+          "urban_delta": 461,
+          "last_stand": 1128,
+          "border_skirmish": 1001
+        },
+        "opponents": {
+          "aggressive": 1920,
+          "infantry": 564,
+          "artillery": 512,
+          "defensive": 1249,
+          "armor": 405
+        },
+        "raw_rows": 8013,
+        "hold_cap": 0.3
+      }
+    },
+    "defensive": {
+      "train": {
+        "rows": 20228,
+        "games": 28,
+        "actions": {
+          "a": 4250,
+          "u": 362,
+          "h": 6068,
+          "m": 7926,
+          "b": 1224,
+          "l": 367,
+          "c": 31
+        },
+        "builds": {
+          "infantry": 483,
+          "tank": 89,
+          "artillery": 293,
+          "aa_missile": 359
+        },
+        "maps": {
+          "border_skirmish": 9447,
+          "last_stand": 2242,
+          "urban_delta": 5800,
+          "mountain_pass": 1609,
+          "archipelago": 1130
+        },
+        "opponents": {
+          "defensive": 12964,
+          "infantry": 2397,
+          "artillery": 1813,
+          "armor": 1244,
+          "aggressive": 1810
+        },
+        "raw_rows": 29631,
+        "hold_cap": 0.3
+      },
+      "test": {
+        "rows": 3295,
+        "games": 4,
+        "actions": {
+          "h": 988,
+          "a": 654,
+          "m": 1213,
+          "b": 198,
+          "l": 119,
+          "u": 112,
+          "c": 11
+        },
+        "builds": {
+          "aa_missile": 62,
+          "tank": 14,
+          "artillery": 42,
+          "infantry": 80
+        },
+        "maps": {
+          "mountain_pass": 624,
+          "last_stand": 897,
+          "border_skirmish": 1378,
+          "archipelago": 154,
+          "urban_delta": 242
+        },
+        "opponents": {
+          "defensive": 1771,
+          "artillery": 487,
+          "infantry": 586,
+          "aggressive": 324,
+          "armor": 127
+        },
+        "raw_rows": 5307,
+        "hold_cap": 0.3
+      },
+      "validation": {
+        "rows": 3407,
+        "games": 4,
+        "actions": {
+          "m": 1190,
+          "a": 771,
+          "h": 1022,
+          "l": 114,
+          "b": 185,
+          "u": 109,
+          "c": 16
+        },
+        "builds": {
+          "infantry": 59,
+          "artillery": 55,
+          "aa_missile": 55,
+          "tank": 16
+        },
+        "maps": {
+          "border_skirmish": 941,
+          "urban_delta": 421,
+          "mountain_pass": 613,
+          "last_stand": 1260,
+          "archipelago": 172
+        },
+        "opponents": {
+          "defensive": 1589,
+          "artillery": 673,
+          "infantry": 642,
+          "aggressive": 351,
+          "armor": 152
+        },
+        "raw_rows": 5380,
+        "hold_cap": 0.3
+      }
+    }
+  },
+  "scenarios": [
+    "C:\\Users\\marco\\OneDrive\\Documentos\\opencode_code\\turn_based_strategy_vibe\\data\\maps\\archipelago.json",
+    "C:\\Users\\marco\\OneDrive\\Documentos\\opencode_code\\turn_based_strategy_vibe\\data\\maps\\border_skirmish.json",
+    "C:\\Users\\marco\\OneDrive\\Documentos\\opencode_code\\turn_based_strategy_vibe\\data\\maps\\last_stand.json",
+    "C:\\Users\\marco\\OneDrive\\Documentos\\opencode_code\\turn_based_strategy_vibe\\data\\maps\\mountain_pass.json",
+    "C:\\Users\\marco\\OneDrive\\Documentos\\opencode_code\\turn_based_strategy_vibe\\data\\maps\\urban_delta.json"
+  ]
+}

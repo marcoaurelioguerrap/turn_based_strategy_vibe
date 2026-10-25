@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+saves/
+logs/
+
+# local helper scripts that contain credentials
+cmd_with_llm.txt
+
+# generated report artifacts (sources are tracked)
+docs/NCM_Training_Report/*.pdf
+docs/NCM_Training_Report/*.tex
+docs/NCM_Training_Report/*_files/
+docs/NCM_Training_Report/preview/

@@ -8,6 +8,7 @@ input routing or drawing is caught here rather than by a human.
 from __future__ import annotations
 
 import os
+import time
 
 os.environ.setdefault("SDL_VIDEODRIVER", "dummy")
 
@@ -15,7 +16,12 @@ import pytest
 
 pygame = pytest.importorskip("pygame")
 
+from tbs.agents.council import CouncilAgent
+from tbs.agents.generals import DEFAULT_GENERALS
+from tbs.agents.llm import LlmConfig, LlmTransportError
+from tbs.agents.protocol import AgentPlan
 from tbs.engine import rules
+from tbs.engine.data import default_scenario
 from tbs.engine.hexgrid import axial_to_offset
 from tbs.ui import buttons, render
 from tbs.ui.app import App, build_state
@@ -107,6 +113,29 @@ def test_main_menu_load_is_disabled_without_a_save(app):
     if not app.save_path.exists():
         load = next(item for item in app.main_menu.items if item.key == "load")
         assert load.enabled is False
+
+
+def test_build_state_defaults_to_the_intro_map():
+    assert build_state(None, None, None).scenario_name == "border_skirmish"
+
+
+def test_the_scenario_picker_labels_maps_with_titles_and_draws_a_preview(app):
+    app.show_main_menu()
+    press(app, pygame.K_RETURN)
+    assert app.screen == "scenario"
+    labels = [item.label for item in app.scenario_menu.items]
+    assert "Border Skirmish" in labels
+    assert "Archipelago" in labels
+    assert app.scenario_menu.visible_rows == app._menu_visible_rows()
+    assert app.scenario_menu.current().key == str(default_scenario()), "the intro map is highlighted by default"
+
+    selected = app._selected_scenario()
+    assert selected is not None and selected.rows
+    app.draw(pygame.Surface((800, 600)))  # the preview and detail lines draw
+
+    # Every map item is enabled; only the trailing Back wins the last slot.
+    assert all(item.enabled for item in app.scenario_menu.items if item.key != "__back__")
+    assert app.scenario_menu.items[-1].key == "__back__"
 
 
 def test_the_action_menu_move_option_moves_the_unit(app):
@@ -201,5 +230,251 @@ def test_the_build_menu_is_clickable(app):
     rows = render.build_menu_row_rects((800, 600), app.state, app.controller)
     click(app, rows[0].center)
     assert len(app.state.units_of("A")) == before + 1
+
+
+# ---------------------------------------------------------------------------
+# playing against a local LLM
+# ---------------------------------------------------------------------------
+
+
+class FakeAgent:
+    name = "fake"
+
+    def __init__(self, planner=None, error=None):
+        self.planner = planner
+        self.error = error
+        self.requests = []
+
+    def plan(self, request):
+        self.requests.append(request)
+        if self.error is not None:
+            raise self.error
+        if self.planner is not None:
+            return self.planner(request)
+        return AgentPlan(orders=[], commentary="fake pass")
+
+
+def llm_app(agent: FakeAgent) -> App:
+    pygame.init()
+    pygame.display.set_mode((800, 600))
+    state = build_state(None, None, None)
+    application = App(
+        state,
+        width=800,
+        height=600,
+        llm_config=LlmConfig(model="fake-local-model"),
+    )
+    application.agent_side = "B"
+    application.agent_enabled = True
+    application.agent = agent
+    return application
+
+
+def drain(application: App, *, timeout: float = 3.0) -> None:
+    deadline = time.monotonic() + timeout
+    while True:
+        application._poll_agent()
+        if not application.agent_busy and application.agent_session is None:
+            return
+        if time.monotonic() > deadline:
+            raise AssertionError("the fake LLM turn did not finish in time")
+        time.sleep(0.005)
+
+
+def test_an_llm_turn_runs_in_the_background_and_hands_control_back():
+    def planner(request):
+        for unit_id, summary in request.view["unit_actions"].items():
+            if summary.get("move_to"):
+                return AgentPlan(
+                    orders=[
+                        {
+                            "action": "move",
+                            "unit": unit_id,
+                            "to": summary["move_to"][0][0],
+                        }
+                    ],
+                    commentary="advance one unit",
+                )
+        return AgentPlan(orders=[])
+
+    agent = FakeAgent(planner)
+    application = llm_app(agent)
+    try:
+        press(application, pygame.K_SPACE)  # human A ends its turn
+        assert application.state.current_player == "B"
+        drain(application)
+        assert application.state.current_player == "A", "the LLM ended its turn"
+        assert agent.requests, "the agent received the same view an external agent gets"
+        assert "advance one unit" in "\n".join(application.log_lines)
+    finally:
+        pygame.quit()
+
+
+def test_an_injected_stepwise_agent_gets_a_fresh_view_per_batch():
+    calls = []
+
+    def planner(request):
+        calls.append(request)
+        for unit_id, summary in sorted(request.view["unit_actions"].items()):
+            if summary.get("move_to"):
+                return AgentPlan(
+                    orders=[
+                        {
+                            "action": "move",
+                            "unit": unit_id,
+                            "to": summary["move_to"][0][0],
+                        }
+                    ]
+                )
+        return AgentPlan(orders=[])
+
+    pygame.init()
+    pygame.display.set_mode((800, 600))
+    state = build_state(None, None, None)
+    application = App(
+        state,
+        width=800,
+        height=600,
+        agent=FakeAgent(planner),
+        stepwise=True,
+        agent_max_steps=16,
+    )
+    application.agent_side = "B"
+    application.agent_enabled = True
+    try:
+        press(application, pygame.K_SPACE)  # human A ends its turn
+        assert application.state.current_player == "B"
+        drain(application)
+        assert application.state.current_player == "A", "the stepwise agent ended its turn"
+        assert len(calls) >= 2, "a stepwise agent is asked again after each batch"
+        assert calls[0].view["units"] != calls[1].view["units"], (
+            "the second request must see the board the first order produced"
+        )
+    finally:
+        pygame.quit()
+
+
+def test_human_input_is_ignored_while_the_llm_is_thinking():
+    import threading
+    gate = threading.Event()
+
+    def planner(request):
+        gate.wait(2.0)
+        return AgentPlan(orders=[])
+
+    agent = FakeAgent(planner)
+    application = llm_app(agent)
+    try:
+        press(application, pygame.K_SPACE)
+        assert application.state.current_player == "B"
+        assert application.agent_busy
+        application.draw(pygame.Surface((800, 600)))  # thinking overlay renders
+        press(application, pygame.K_SPACE)  # ignored: not the human's turn
+        assert application.state.current_player == "B"
+        gate.set()
+        drain(application)
+        assert application.state.current_player == "A"
+    finally:
+        gate.set()
+        pygame.quit()
+
+
+def test_a_transport_failure_offers_retry_or_hotseat_without_forfeiting_the_turn():
+    agent = FakeAgent(error=LlmTransportError("server down"))
+    application = llm_app(agent)
+    try:
+        press(application, pygame.K_SPACE)
+        assert application.state.current_player == "B"
+        drain(application)
+        assert application.agent_error_menu is not None
+        assert application.state.current_player == "B", "the game waits for the human's decision"
+
+        application.agent_error_menu.index = 1  # Switch to hot-seat
+        press(application, pygame.K_RETURN)
+        assert application.agent_error_menu is None
+        assert application.agent_enabled is False
+        assert application.state.current_player == "B"
+    finally:
+        pygame.quit()
+
+
+def test_the_main_menu_offers_a_council_game():
+    pygame.init()
+    pygame.display.set_mode((800, 600))
+    application = App(
+        build_state(None, None, None),
+        width=800,
+        height=600,
+        llm_config=LlmConfig(model="fake-local-model"),
+        agent_kind="council",
+        council_generals=DEFAULT_GENERALS,
+    )
+    try:
+        application.show_main_menu()
+        labels = [item.label for item in application.main_menu.items]
+        assert "New Game vs Council" in labels
+    finally:
+        pygame.quit()
+
+
+def test_a_council_agent_plays_a_turn_in_the_window():
+    def member(request):
+        if not request.allowed_units:
+            return AgentPlan(orders=[])
+        return AgentPlan(
+            orders=[{"action": "hold", "unit": request.allowed_units[0]}],
+            commentary="holding",
+        )
+
+    pygame.init()
+    pygame.display.set_mode((800, 600))
+    state = build_state(None, None, None)
+    application = App(
+        state,
+        width=800,
+        height=600,
+        agent_kind="council",
+        council_generals=DEFAULT_GENERALS,
+    )
+    application.agent_side = "B"
+    application.agent_enabled = True
+    application.agent = CouncilAgent(
+        members={general.id: FakeAgent(member) for general in DEFAULT_GENERALS},
+        use_commander=False,
+    )
+    try:
+        assert application.agent_label == "Council"
+        press(application, pygame.K_SPACE)  # human A ends its turn
+        assert application.state.current_player == "B"
+        drain(application)
+        assert application.state.current_player == "A", "the council ended its turn"
+        assert any("holding" in line for line in application.log_lines)
+    finally:
+        pygame.quit()
+
+
+def test_the_main_menu_starts_a_new_game_against_the_llm_and_records_the_side():
+    pygame.init()
+    pygame.display.set_mode((800, 600))
+    application = App(
+        build_state(None, None, None),
+        width=800,
+        height=600,
+        llm_config=LlmConfig(model="fake-local-model"),
+    )
+    try:
+        application.show_main_menu()
+        application.main_menu.index = 1  # New Game vs LLM
+        press(application, pygame.K_RETURN)
+        assert application.screen == "scenario"
+        press(application, pygame.K_RETURN)  # first scenario
+        assert application.screen == "side"
+        press(application, pygame.K_RETURN)  # play as A
+        assert application.screen == "play"
+        assert application.agent_side == "B"
+        assert application.agent_enabled is True
+        assert application.state.current_player == "A"
+    finally:
+        pygame.quit()
 
 

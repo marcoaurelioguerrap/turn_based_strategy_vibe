@@ -50,3 +50,44 @@ def test_set_index_clamps_and_snaps():
     assert menu.current().key == "d"
     menu.set_index(0)
     assert menu.current().key == "b"
+
+
+def make_long_menu() -> Menu:
+    return Menu(
+        "long",
+        [MenuItem(f"item{i}", f"Item {i}") for i in range(20)],
+        visible_rows=5,
+    )
+
+
+def test_a_long_menu_scrolls_to_keep_the_highlight_visible():
+    menu = make_long_menu()
+    assert menu.window() == (0, 5)
+
+    for _ in range(5):
+        menu.move(1)
+    assert menu.index == 5
+    assert menu.window() == (1, 6), "one row off the top, one new at the bottom"
+
+    menu.set_index(19)
+    assert menu.window() == (15, 20)
+    menu.set_index(0)
+    assert menu.window() == (0, 5)
+
+
+def test_page_moves_by_a_whole_window_and_wraps():
+    menu = make_long_menu()
+    menu.page(1)
+    assert menu.index == 5
+    menu.page(1)
+    assert menu.index == 10
+    menu.page(-2)
+    assert menu.index == 0
+
+
+def test_visible_items_carry_their_real_indexes():
+    menu = make_long_menu()
+    menu.set_index(7)
+    visible = menu.visible_items()
+    assert [index for index, _ in visible] == [3, 4, 5, 6, 7]
+    assert [item.key for _, item in visible][-1] == "item7"

@@ -10,13 +10,13 @@ from __future__ import annotations
 from pathlib import Path
 
 import tbs.engine
-from tbs.engine.data import available_scenarios, load_scenario, load_specs
+from tbs.engine.data import default_scenario, load_scenario, load_specs
 from tbs.engine.state import new_game
 from tbs.ui import layout
 
 
 def fresh_state():
-    return new_game(load_scenario(available_scenarios()[0]), load_specs())
+    return new_game(load_scenario(default_scenario()), load_specs())
 
 
 # ---------------------------------------------------------------------------
@@ -24,14 +24,14 @@ def fresh_state():
 # ---------------------------------------------------------------------------
 
 
-def test_engine_never_imports_pygame_or_the_ui():
+def test_engine_never_imports_pygame_the_ui_or_the_agent_layer():
     engine_dir = Path(tbs.engine.__file__).resolve().parent
     offenders = []
     for path in engine_dir.glob("*.py"):
         text = path.read_text(encoding="utf-8")
-        if "import pygame" in text or "tbs.ui" in text:
+        if "import pygame" in text or "tbs.ui" in text or "tbs.agents" in text:
             offenders.append(path.name)
-    assert offenders == [], f"engine modules must stay UI-free, but these import it: {offenders}"
+    assert offenders == [], f"engine modules must stay client-free, but these import one: {offenders}"
 
 
 # ---------------------------------------------------------------------------
@@ -76,6 +76,19 @@ def test_hit_testing_finds_the_tile_under_a_point_and_rejects_off_board():
         x, y = camera.to_screen(pos)
         assert layout.hex_at(state, x, y, camera) == pos
     assert layout.hex_at(state, -10_000, -10_000, camera) is None
+
+
+def test_fit_keeps_every_bundled_map_on_screen():
+    from tbs.engine.data import available_scenarios
+
+    for path in available_scenarios():
+        state = new_game(load_scenario(path), load_specs())
+        camera = layout.Camera.fit(state, 800, 600)
+        assert layout.MIN_HEX_SIZE <= camera.size <= layout.MAX_HEX_SIZE
+        for pos in state.map.tiles:
+            x, y = camera.to_screen(pos)
+            assert -1 <= x <= 801, f"{path.stem}: hex {pos} is off-screen horizontally"
+            assert -1 <= y <= 601, f"{path.stem}: hex {pos} is off-screen vertically"
 
 
 def test_zoom_keeps_the_hex_under_the_cursor():

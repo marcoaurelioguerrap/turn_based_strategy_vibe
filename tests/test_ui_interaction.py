@@ -8,7 +8,7 @@ orders, and that a UI-played game still replays from its order log.
 from __future__ import annotations
 
 from tbs.engine import rules
-from tbs.engine.data import available_scenarios, load_scenario, load_specs
+from tbs.engine.data import default_scenario, load_scenario, load_specs
 from tbs.engine.hexgrid import axial_to_offset, hex_distance
 from tbs.engine.serialize import replay, state_hash
 from tbs.engine.state import new_game
@@ -19,7 +19,7 @@ from .helpers import unit as placement
 
 
 def fresh_state():
-    scenario = load_scenario(available_scenarios()[0])
+    scenario = load_scenario(default_scenario())
     state = new_game(scenario, load_specs())
     rules.start_game(state)
     return scenario, state

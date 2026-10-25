@@ -704,45 +704,170 @@ def _draw_game_over(surface: pygame.Surface, state: GameState, fonts: Fonts) -> 
 # ---------------------------------------------------------------------------
 
 
-def menu_item_rects(surface_size: tuple[int, int], menu: Menu) -> list[pygame.Rect]:
-    """The clickable rectangles of a menu's items, centred on the screen."""
+def menu_item_rects(surface_size: tuple[int, int], menu: Menu) -> list[tuple[int, pygame.Rect]]:
+    """``(item_index, clickable rect)`` for the menu's visible window.
+
+    Only the rows of ``menu.window()`` are returned, so a menu longer than the
+    window scrolls instead of drawing past the screen edge.  Carrying the real
+    item index keeps click routing correct while scrolled.
+    """
     width, height = surface_size
-    total = len(menu.items)
-    top = height // 2 - total * MENU_ITEM_HEIGHT // 2
-    rects = []
-    for index in range(total):
+    first, stop = menu.window()
+    count = stop - first
+    total = count * MENU_ITEM_HEIGHT
+    top = height // 2 - total // 2
+    rects: list[tuple[int, pygame.Rect]] = []
+    for row, index in enumerate(range(first, stop)):
         rect = pygame.Rect(0, 0, MENU_WIDTH, MENU_ITEM_HEIGHT - 8)
         rect.centerx = width // 2
-        rect.y = top + index * MENU_ITEM_HEIGHT
-        rects.append(rect)
+        rect.y = top + row * MENU_ITEM_HEIGHT
+        rects.append((index, rect))
     return rects
 
 
-def draw_menu_screen(surface: pygame.Surface, menu: Menu, fonts: Fonts, *, subtitle: str = "") -> None:
+def _draw_menu_row(surface: pygame.Surface, menu: Menu, fonts: "Fonts", index: int, rect: pygame.Rect) -> None:
+    item = menu.items[index]
+    selected = index == menu.index
+    background = palette.PANEL if not selected else palette.mix(palette.PANEL, palette.MOVE_HIGHLIGHT, 0.5)
+    pygame.draw.rect(surface, background, rect)
+    pygame.draw.rect(surface, palette.PANEL_EDGE, rect, 1)
+    if not item.enabled:
+        color = palette.TEXT_DIM
+    elif selected:
+        color = palette.SELECT_HIGHLIGHT
+    else:
+        color = palette.TEXT
+    if item.hint:
+        _text(surface, fonts.body, item.label, (rect.centerx, rect.centery - 8), color)
+        _text(surface, fonts.tiny, item.hint, (rect.centerx, rect.bottom - 8), palette.TEXT_DIM)
+    else:
+        _text(surface, fonts.body, item.label, rect.center, color)
+
+
+def _draw_preview(
+    surface: pygame.Surface,
+    menu: Menu,
+    preview: Iterable[str],
+    *,
+    cell: int = 8,
+) -> None:
+    """Draw a terrain-coloured thumbnail to the right of a centred menu."""
+    rows = list(preview)
+    if not rows or not rows[0]:
+        return
+    width, height = surface.get_size()
+    columns = len(rows[0])
+    rects = menu_item_rects((width, height), menu)
+    if not rects:
+        return
+    menu_right = rects[0][1].right
+    menu_top = rects[0][1].top
+    menu_bottom = rects[-1][1].bottom
+    x0 = menu_right + 40
+    available = width - 20 - x0
+    if available < columns * 3:
+        return
+    cell = max(3, min(cell, available // columns, max(3, (menu_bottom - menu_top) // max(1, len(rows)))))
+    y0 = (menu_top + menu_bottom) // 2 - len(rows) * cell // 2
+    for row_index, row in enumerate(rows):
+        for col_index, code in enumerate(row):
+            color = palette.terrain_color(code)
+            pygame.draw.rect(
+                surface,
+                color,
+                (x0 + col_index * cell, y0 + row_index * cell, cell - 1, cell - 1),
+            )
+    pygame.draw.rect(
+        surface,
+        palette.PANEL_EDGE,
+        (x0 - 2, y0 - 2, columns * cell + 2, len(rows) * cell + 2),
+        1,
+    )
+
+
+def _wrap_text(text: str, max_chars: int, max_lines: int = 3) -> list[str]:
+    """Split ``text`` into at most ``max_lines`` lines, ellipsising the tail."""
+    lines: list[str] = []
+    remaining = " ".join(text.split())
+    while remaining and len(lines) < max_lines:
+        if len(remaining) <= max_chars:
+            lines.append(remaining)
+            remaining = ""
+            break
+        cut = remaining.rfind(" ", 0, max_chars)
+        if cut <= 0:
+            cut = max_chars
+        lines.append(remaining[:cut].rstrip())
+        remaining = remaining[cut:].strip()
+    if remaining and lines:
+        lines[-1] = lines[-1][: max(0, max_chars - 3)].rstrip() + "..."
+    return lines
+
+
+def draw_menu_screen(
+    surface: pygame.Surface,
+    menu: Menu,
+    fonts: "Fonts",
+    *,
+    subtitle: str = "",
+    detail_lines: Iterable[str] = (),
+    preview: Iterable[str] = (),
+) -> None:
     surface.fill(palette.BACKGROUND)
     _text(surface, fonts.big, menu.title, (surface.get_width() // 2, surface.get_height() // 2 - 150), palette.TEXT)
     if subtitle:
         _text(surface, fonts.small, subtitle, (surface.get_width() // 2, surface.get_height() // 2 - 105), palette.TEXT_DIM)
     rects = menu_item_rects(surface.get_size(), menu)
-    for index, (item, rect) in enumerate(zip(menu.items, rects)):
-        selected = index == menu.index
-        background = palette.PANEL if not selected else palette.mix(palette.PANEL, palette.MOVE_HIGHLIGHT, 0.5)
-        pygame.draw.rect(surface, background, rect)
-        pygame.draw.rect(surface, palette.PANEL_EDGE, rect, 1)
-        if not item.enabled:
-            color = palette.TEXT_DIM
-        elif selected:
-            color = palette.SELECT_HIGHLIGHT
-        else:
-            color = palette.TEXT
-        _text(surface, fonts.body, item.label, rect.center, color)
-        if item.hint:
-            _text(surface, fonts.tiny, item.hint, (rect.right + 60, rect.centery), palette.TEXT_DIM)
+    for index, rect in rects:
+        _draw_menu_row(surface, menu, fonts, index, rect)
+    _draw_preview(surface, menu, preview)
+
+    detail: list[str] = []
+    for line in detail_lines:
+        detail.extend(_wrap_text(line, max(40, int(surface.get_width() / 7.0))))
+    menu_bottom = rects[-1][1].bottom if rects else surface.get_height() // 2
+    for line_index, line in enumerate(detail[:3]):
+        _text(
+            surface,
+            fonts.tiny,
+            line,
+            (surface.get_width() // 2, menu_bottom + 18 + line_index * 16),
+            palette.TEXT_DIM,
+        )
+
+    first, stop = menu.window()
+    instruction = "arrows move, enter chooses, Esc back"
+    if stop - first < len(menu.items):
+        instruction += f"   [{first + 1}-{stop} of {len(menu.items)}]"
     _text(
         surface,
         fonts.tiny,
-        "arrows move, enter chooses, Esc back",
+        instruction,
         (surface.get_width() // 2, surface.get_height() - 40),
+        palette.TEXT_DIM,
+    )
+
+
+def draw_thinking_overlay(
+    surface: pygame.Surface, fonts: Fonts, title: str, subtitle: str = ""
+) -> None:
+    """Dim the board while the local LLM is planning."""
+    overlay = pygame.Surface(surface.get_size(), pygame.SRCALPHA)
+    overlay.fill((0, 0, 0, 150))
+    surface.blit(overlay, (0, 0))
+    box = pygame.Rect(0, 0, MENU_WIDTH + 140, 120)
+    box.center = (surface.get_width() // 2, surface.get_height() // 2)
+    pygame.draw.rect(surface, palette.PANEL, box)
+    pygame.draw.rect(surface, palette.PANEL_EDGE, box, 2)
+    dots = "." * (1 + (pygame.time.get_ticks() // 500) % 3)
+    _text(surface, fonts.body, title + dots, (box.centerx, box.y + 38), palette.TEXT)
+    if subtitle:
+        _text(surface, fonts.tiny, subtitle, (box.centerx, box.y + 76), palette.TEXT_DIM)
+    _text(
+        surface,
+        fonts.tiny,
+        "Esc or M opens the menu (take over for the LLM there)",
+        (surface.get_width() // 2, box.bottom + 24),
         palette.TEXT_DIM,
     )
 
@@ -753,15 +878,10 @@ def draw_modal_menu(surface: pygame.Surface, menu: Menu, fonts: Fonts, title: st
     overlay.fill((0, 0, 0, 150))
     surface.blit(overlay, (0, 0))
     rects = menu_item_rects(surface.get_size(), menu)
-    box = pygame.Rect(0, 0, MENU_WIDTH + 60, len(menu.items) * MENU_ITEM_HEIGHT + 90)
+    box = pygame.Rect(0, 0, MENU_WIDTH + 60, len(rects) * MENU_ITEM_HEIGHT + 90)
     box.center = (surface.get_width() // 2, surface.get_height() // 2)
     pygame.draw.rect(surface, palette.PANEL, box)
     pygame.draw.rect(surface, palette.PANEL_EDGE, box, 2)
     _text(surface, fonts.body, title, (box.centerx, box.y + 24), palette.TEXT)
-    for index, (item, rect) in enumerate(zip(menu.items, rects)):
-        selected = index == menu.index
-        background = palette.PANEL if not selected else palette.mix(palette.PANEL, palette.MOVE_HIGHLIGHT, 0.5)
-        pygame.draw.rect(surface, background, rect)
-        pygame.draw.rect(surface, palette.PANEL_EDGE, rect, 1)
-        color = palette.TEXT_DIM if not item.enabled else (palette.SELECT_HIGHLIGHT if selected else palette.TEXT)
-        _text(surface, fonts.body, item.label, rect.center, color)
+    for index, rect in rects:
+        _draw_menu_row(surface, menu, fonts, index, rect)

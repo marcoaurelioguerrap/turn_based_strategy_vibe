@@ -73,6 +73,31 @@ class Camera:
         camera.pan_y = (min_y + max_y) / 2.0 - viewport_height / 2.0
         return camera
 
+    @classmethod
+    def fit(
+        cls,
+        state: GameState,
+        viewport_width: float,
+        viewport_height: float,
+        *,
+        padding: float = 40.0,
+    ) -> "Camera":
+        """A camera whose hex size makes the whole board fit the viewport.
+
+        ``board_bounds`` scales linearly with the hex size, so one measurement
+        at size 1 gives the aspect ratio; the result is clamped to the zoom
+        range so a tiny map is not blown up past ``MAX_HEX_SIZE`` and a huge
+        one stays legible.
+        """
+        min_x, min_y, max_x, max_y = board_bounds(state, 1.0)
+        span_x = max(max_x - min_x, 1e-9)
+        span_y = max(max_y - min_y, 1e-9)
+        available_x = max(1.0, viewport_width - 2.0 * padding)
+        available_y = max(1.0, viewport_height - 2.0 * padding)
+        size = min(available_x / span_x, available_y / span_y)
+        size = max(MIN_HEX_SIZE, min(MAX_HEX_SIZE, size))
+        return cls.centered(state, viewport_width, viewport_height, size=size)
+
     def to_screen(self, pos: Hex) -> tuple[float, float]:
         x, y = axial_to_pixel(tuple(pos), self.size)
         return (x - self.pan_x, y - self.pan_y)

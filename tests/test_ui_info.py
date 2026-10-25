@@ -3,13 +3,13 @@
 from __future__ import annotations
 
 from tbs.engine import rules
-from tbs.engine.data import available_scenarios, load_scenario, load_specs
+from tbs.engine.data import default_scenario, load_scenario, load_specs
 from tbs.engine.state import new_game
 from tbs.ui import info
 
 
 def fresh_state():
-    state = new_game(load_scenario(available_scenarios()[0]), load_specs())
+    state = new_game(load_scenario(default_scenario()), load_specs())
     rules.start_game(state)
     return state
 

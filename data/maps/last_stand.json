@@ -1,0 +1,270 @@
+{
+  "schema": 1,
+  "name": "last_stand",
+  "title": "Last Stand",
+  "description": "Asymmetric attack and defence: the Red Federation fields a larger army, while the Blue Republic holds the fortified city and the income to outlast them.",
+  "difficulty": "expert",
+  "fair": false,
+  "tags": [
+    "land",
+    "air"
+  ],
+  "comment": "Asymmetric attack and defence: the Red Federation fields a larger army, while the Blue Republic holds the fortified city and the income to outlast them.",
+  "seed": 20261024,
+  "first_player": "B",
+  "initial_income": 800,
+  "max_turns": 50,
+  "fog_of_war": false,
+  "players": [
+    {
+      "id": "A",
+      "name": "Blue Republic",
+      "funds": 7000
+    },
+    {
+      "id": "B",
+      "name": "Red Federation",
+      "funds": 10000
+    }
+  ],
+  "regions": [
+    {
+      "owner": "A",
+      "offset_cols": [
+        0,
+        7
+      ]
+    },
+    {
+      "owner": "B",
+      "offset_cols": [
+        8,
+        15
+      ]
+    }
+  ],
+  "rows": [
+    "........~.......",
+    ".C..F...~.......",
+    "..C.....~..#.H..",
+    "rC#.M...r...F.f.",
+    "frrCr...~...rrrr",
+    "..HrM...~...C.C.",
+    ".C.#....r.......",
+    "F..A....~..F.A.#",
+    ".......~~.......",
+    ".......~~......."
+  ],
+  "units": [
+    {
+      "id": "A1",
+      "type": "hq",
+      "owner": "A",
+      "offset": [
+        2,
+        5
+      ],
+      "label": "Blue HQ"
+    },
+    {
+      "id": "A2",
+      "type": "infantry",
+      "owner": "A",
+      "offset": [
+        1,
+        1
+      ],
+      "label": "Blue Militia 1"
+    },
+    {
+      "id": "A3",
+      "type": "infantry",
+      "owner": "A",
+      "offset": [
+        1,
+        3
+      ],
+      "label": "Blue Militia 2"
+    },
+    {
+      "id": "A4",
+      "type": "infantry",
+      "owner": "A",
+      "offset": [
+        3,
+        4
+      ],
+      "label": "Blue Militia 3"
+    },
+    {
+      "id": "A5",
+      "type": "tank",
+      "owner": "A",
+      "offset": [
+        0,
+        4
+      ],
+      "label": "Blue Reserve Tank"
+    },
+    {
+      "id": "A6",
+      "type": "artillery",
+      "owner": "A",
+      "offset": [
+        2,
+        4
+      ],
+      "label": "Blue Battery"
+    },
+    {
+      "id": "A7",
+      "type": "aa_missile",
+      "owner": "A",
+      "offset": [
+        2,
+        3
+      ],
+      "label": "Blue AA Guard"
+    },
+    {
+      "id": "A8",
+      "type": "truck",
+      "owner": "A",
+      "offset": [
+        1,
+        4
+      ],
+      "label": "Blue Supply Truck"
+    },
+    {
+      "id": "A9",
+      "type": "attack_plane",
+      "owner": "A",
+      "offset": [
+        3,
+        7
+      ],
+      "label": "Blue Interceptor"
+    },
+    {
+      "id": "B1",
+      "type": "hq",
+      "owner": "B",
+      "offset": [
+        13,
+        2
+      ],
+      "label": "Red HQ"
+    },
+    {
+      "id": "B2",
+      "type": "infantry",
+      "owner": "B",
+      "offset": [
+        12,
+        5
+      ],
+      "label": "Red Rifles 1"
+    },
+    {
+      "id": "B3",
+      "type": "infantry",
+      "owner": "B",
+      "offset": [
+        14,
+        5
+      ],
+      "label": "Red Rifles 2"
+    },
+    {
+      "id": "B4",
+      "type": "infantry",
+      "owner": "B",
+      "offset": [
+        12,
+        7
+      ],
+      "label": "Red Rifles 3"
+    },
+    {
+      "id": "B5",
+      "type": "infantry",
+      "owner": "B",
+      "offset": [
+        13,
+        4
+      ],
+      "label": "Red Rifles 4"
+    },
+    {
+      "id": "B6",
+      "type": "tank",
+      "owner": "B",
+      "offset": [
+        14,
+        3
+      ],
+      "label": "Red Tank 1"
+    },
+    {
+      "id": "B7",
+      "type": "tank",
+      "owner": "B",
+      "offset": [
+        15,
+        4
+      ],
+      "label": "Red Tank 2"
+    },
+    {
+      "id": "B8",
+      "type": "tank",
+      "owner": "B",
+      "offset": [
+        13,
+        5
+      ],
+      "label": "Red Tank 3"
+    },
+    {
+      "id": "B9",
+      "type": "artillery",
+      "owner": "B",
+      "offset": [
+        12,
+        4
+      ],
+      "label": "Red Battery"
+    },
+    {
+      "id": "B10",
+      "type": "aa_missile",
+      "owner": "B",
+      "offset": [
+        12,
+        3
+      ],
+      "label": "Red AA Guard"
+    },
+    {
+      "id": "B11",
+      "type": "truck",
+      "owner": "B",
+      "offset": [
+        13,
+        6
+      ],
+      "label": "Red Supply Truck"
+    },
+    {
+      "id": "B12",
+      "type": "attack_plane",
+      "owner": "B",
+      "offset": [
+        13,
+        7
+      ],
+      "label": "Red Interceptor"
+    }
+  ]
+}

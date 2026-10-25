@@ -1,0 +1,220 @@
+{
+  "schema": 1,
+  "name": "mountain_pass",
+  "title": "Mountain Pass",
+  "description": "A broken ridge splits the continent. Two narrow passes are the only way through; whoever holds them decides the war.",
+  "difficulty": "standard",
+  "fair": true,
+  "tags": [
+    "land",
+    "air"
+  ],
+  "comment": "A broken ridge splits the continent. Two narrow passes are the only way through; whoever holds them decides the war.",
+  "seed": 20261021,
+  "first_player": "A",
+  "initial_income": 800,
+  "max_turns": 60,
+  "fog_of_war": false,
+  "players": [
+    {
+      "id": "A",
+      "name": "Blue Republic",
+      "funds": 8000
+    },
+    {
+      "id": "B",
+      "name": "Red Federation",
+      "funds": 8000
+    }
+  ],
+  "regions": [
+    {
+      "owner": "A",
+      "offset_cols": [
+        0,
+        8
+      ]
+    },
+    {
+      "owner": "B",
+      "offset_cols": [
+        9,
+        17
+      ]
+    }
+  ],
+  "rows": [
+    "..r..#.MMMM.#..r..",
+    "....F..#M#..F.....",
+    "....CF.#MM#.FC....",
+    ".C.F...#M#...F.C..",
+    ".fHrrrrr..rrrrrHf.",
+    "....F..#M#..F.....",
+    "..C..F.MMMM.F..C..",
+    ".rrrrrrF.Frrrrrr..",
+    "..#A...MMMM...A#..",
+    "....#..MMM..#....."
+  ],
+  "units": [
+    {
+      "id": "A1",
+      "type": "hq",
+      "owner": "A",
+      "offset": [
+        2,
+        4
+      ],
+      "label": "Blue HQ"
+    },
+    {
+      "id": "B1",
+      "type": "hq",
+      "owner": "B",
+      "offset": [
+        15,
+        4
+      ],
+      "label": "Red HQ"
+    },
+    {
+      "id": "A2",
+      "type": "infantry",
+      "owner": "A",
+      "offset": [
+        1,
+        3
+      ],
+      "label": "Blue Highland Guard 1"
+    },
+    {
+      "id": "B2",
+      "type": "infantry",
+      "owner": "B",
+      "offset": [
+        15,
+        3
+      ],
+      "label": "Red Highland Guard 1"
+    },
+    {
+      "id": "A3",
+      "type": "infantry",
+      "owner": "A",
+      "offset": [
+        2,
+        6
+      ],
+      "label": "Blue Highland Guard 2"
+    },
+    {
+      "id": "B3",
+      "type": "infantry",
+      "owner": "B",
+      "offset": [
+        15,
+        6
+      ],
+      "label": "Red Highland Guard 2"
+    },
+    {
+      "id": "A4",
+      "type": "tank",
+      "owner": "A",
+      "offset": [
+        3,
+        4
+      ],
+      "label": "Blue Heavy Tank"
+    },
+    {
+      "id": "B4",
+      "type": "tank",
+      "owner": "B",
+      "offset": [
+        14,
+        4
+      ],
+      "label": "Red Heavy Tank"
+    },
+    {
+      "id": "A5",
+      "type": "artillery",
+      "owner": "A",
+      "offset": [
+        4,
+        2
+      ],
+      "label": "Blue Battery"
+    },
+    {
+      "id": "B5",
+      "type": "artillery",
+      "owner": "B",
+      "offset": [
+        13,
+        2
+      ],
+      "label": "Red Battery"
+    },
+    {
+      "id": "A6",
+      "type": "truck",
+      "owner": "A",
+      "offset": [
+        1,
+        5
+      ],
+      "label": "Blue Supply Truck"
+    },
+    {
+      "id": "B6",
+      "type": "truck",
+      "owner": "B",
+      "offset": [
+        15,
+        5
+      ],
+      "label": "Red Supply Truck"
+    },
+    {
+      "id": "A7",
+      "type": "aa_missile",
+      "owner": "A",
+      "offset": [
+        3,
+        8
+      ],
+      "label": "Blue AA Guard"
+    },
+    {
+      "id": "B7",
+      "type": "aa_missile",
+      "owner": "B",
+      "offset": [
+        14,
+        8
+      ],
+      "label": "Red AA Guard"
+    },
+    {
+      "id": "A8",
+      "type": "attack_plane",
+      "owner": "A",
+      "offset": [
+        3,
+        8
+      ],
+      "label": "Blue Interceptor"
+    },
+    {
+      "id": "B8",
+      "type": "attack_plane",
+      "owner": "B",
+      "offset": [
+        14,
+        8
+      ],
+      "label": "Red Interceptor"
+    }
+  ]
+}

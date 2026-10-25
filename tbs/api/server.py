@@ -9,7 +9,7 @@ exactly one line per request line.
 
 Run::
 
-    py -m tbs.api.server                              # the bundled border skirmish
+    py -m tbs.api.server                              # Border Skirmish (the default map)
     py -m tbs.api.server --scenario data/maps/x.json --seed 7
     py -m tbs.api.server --session saves/mid_game.json
 
@@ -27,7 +27,7 @@ from pathlib import Path, PurePath
 from typing import Any, Callable
 
 from tbs.engine import rules, view
-from tbs.engine.data import available_scenarios, load_scenario, load_specs
+from tbs.engine.data import default_scenario, load_scenario, load_specs
 from tbs.engine.errors import ActionError
 from tbs.engine.serialize import load_game, save_game, state_hash
 from tbs.engine.state import GameState, new_game
@@ -70,7 +70,7 @@ class Session:
 
     @classmethod
     def new(cls, scenario: str | Path | None = None, seed: int | None = None, root: str | Path | None = None) -> "Session":
-        path = Path(scenario) if scenario is not None else available_scenarios()[0]
+        path = Path(scenario) if scenario is not None else default_scenario()
         data = load_scenario(path)
         if seed is not None:
             data["seed"] = seed

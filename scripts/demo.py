@@ -20,7 +20,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))  # `py scripts/demo.py` from anywhere
 
 from tbs.engine import rules, view
-from tbs.engine.data import available_scenarios, load_scenario, load_specs
+from tbs.engine.data import default_scenario, load_scenario, load_specs
 from tbs.engine.errors import ActionError
 from tbs.engine.hexgrid import hex_distance
 from tbs.engine.serialize import load_game, log_hash, save_game, state_hash
@@ -92,11 +92,11 @@ def play_half_turn(state) -> None:
 
 def main() -> None:
     specs = load_specs()
-    scenario = load_scenario(available_scenarios()[0])
+    scenario = load_scenario(default_scenario())
     state = new_game(scenario, specs)
     rules.start_game(state)
 
-    print(f"== {scenario['name']} ==")
+    print(f"== {scenario.get('title') or scenario['name']} ==")
     print(view.render_status(state))
     print()
     print(view.render_map(state))
@@ -126,7 +126,7 @@ def main() -> None:
 
     print(f"\nEnd of demo: status={state.status} turn={state.turn_number}")
     print(f"state hash {state_hash(state)[:16]}  log hash {log_hash(state)[:16]}")
-    print("Everything above is reproduced by `py -m pytest`: 240 tests pin every rule this demo touched.")
+    print("Everything above is reproduced by `py -m pytest`: 362 tests pin every rule this demo touched.")
 
 
 if __name__ == "__main__":

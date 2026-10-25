@@ -92,6 +92,19 @@ def test_no_unit_is_stranded_by_the_build_site_it_is_built_on():
                 )
 
 
+def test_every_scenario_publishes_the_picker_metadata():
+    """Every bundled map can be shown in the picker without loading a game."""
+    paths = available_scenarios()
+    assert paths, "data/maps ships no scenarios at all"
+    assert [path.stem for path in paths if load_scenario(path).get("fair")], "at least one fair map ships"
+    for path in paths:
+        data = load_scenario(path)
+        assert data.get("title"), f"{path.name}: missing 'title'"
+        assert data.get("description"), f"{path.name}: missing 'description'"
+        assert data.get("difficulty"), f"{path.name}: missing 'difficulty'"
+        assert isinstance(data.get("fair"), bool), f"{path.name}: 'fair' must be true or false"
+
+
 def test_every_scenario_map_places_units_on_ground_they_can_stand_on():
     scenario_paths = available_scenarios()
     assert scenario_paths, "data/maps ships no scenarios at all"

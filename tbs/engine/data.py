@@ -16,6 +16,11 @@ from typing import Any
 
 DATA_ROOT = Path(__file__).resolve().parents[2] / "data"
 
+#: The scenario a bare launch starts: border_skirmish is the introduction map.
+#: It is named explicitly rather than taken from ``available_scenarios()[0]``
+#: so that adding a map whose filename sorts earlier never changes the default.
+DEFAULT_SCENARIO_NAME = "border_skirmish"
+
 #: How a unit moves, which decides which terrain it may enter.
 MOVEMENT_TYPES = frozenset({"foot", "wheel", "tread", "air", "sea"})
 
@@ -287,3 +292,19 @@ def load_scenario(path: Path | str) -> dict[str, Any]:
 def available_scenarios(data_dir: Path | str | None = None) -> list[Path]:
     root = (Path(data_dir).resolve() if data_dir else DATA_ROOT) / "maps"
     return sorted(root.glob("*.json")) if root.exists() else []
+
+
+def default_scenario(data_dir: Path | str | None = None) -> Path:
+    """The scenario a launch without ``--scenario`` picks.
+
+    Resolved by name, not by sort order, so a newly added map cannot silently
+    become the default.  The name is the scenario file stem (``border_skirmish``).
+    """
+    scenarios = available_scenarios(data_dir)
+    for path in scenarios:
+        if path.stem == DEFAULT_SCENARIO_NAME:
+            return path
+    known = ", ".join(path.name for path in scenarios) or "none"
+    raise FileNotFoundError(
+        f"default scenario {DEFAULT_SCENARIO_NAME!r} is missing from data/maps; found: {known}"
+    )

@@ -1,0 +1,261 @@
+{
+  "schema": 1,
+  "name": "urban_delta",
+  "title": "Urban Delta",
+  "description": "A packed river city of factories and bridges. Short fronts, heavy cover and an income race decide the street fight.",
+  "difficulty": "standard",
+  "fair": true,
+  "tags": [
+    "land",
+    "air",
+    "naval"
+  ],
+  "comment": "A packed river city of factories and bridges. Short fronts, heavy cover and an income race decide the street fight.",
+  "seed": 20261023,
+  "first_player": "A",
+  "initial_income": 1000,
+  "max_turns": 60,
+  "fog_of_war": false,
+  "players": [
+    {
+      "id": "A",
+      "name": "Blue Republic",
+      "funds": 8000
+    },
+    {
+      "id": "B",
+      "name": "Red Federation",
+      "funds": 8000
+    }
+  ],
+  "regions": [
+    {
+      "owner": "A",
+      "offset_cols": [
+        0,
+        7
+      ]
+    },
+    {
+      "owner": "B",
+      "offset_cols": [
+        8,
+        15
+      ]
+    }
+  ],
+  "rows": [
+    ".r............r.",
+    ".HCA.F...F.ACH..",
+    ".C..C......C..C.",
+    "rrrFrrrrrrrFrrrr",
+    ".fC..........Cf.",
+    ".r..C#...#C..r..",
+    "Frrf#rrrrrr#frrF",
+    ".r...C.~.C...r..",
+    ".r....p~~p....r.",
+    ".r....~~~....r.."
+  ],
+  "units": [
+    {
+      "id": "A1",
+      "type": "hq",
+      "owner": "A",
+      "offset": [
+        1,
+        1
+      ],
+      "label": "Blue HQ"
+    },
+    {
+      "id": "B1",
+      "type": "hq",
+      "owner": "B",
+      "offset": [
+        13,
+        1
+      ],
+      "label": "Red HQ"
+    },
+    {
+      "id": "A2",
+      "type": "infantry",
+      "owner": "A",
+      "offset": [
+        1,
+        2
+      ],
+      "label": "Blue City Guard 1"
+    },
+    {
+      "id": "B2",
+      "type": "infantry",
+      "owner": "B",
+      "offset": [
+        14,
+        2
+      ],
+      "label": "Red City Guard 1"
+    },
+    {
+      "id": "A3",
+      "type": "infantry",
+      "owner": "A",
+      "offset": [
+        2,
+        4
+      ],
+      "label": "Blue City Guard 2"
+    },
+    {
+      "id": "B3",
+      "type": "infantry",
+      "owner": "B",
+      "offset": [
+        13,
+        4
+      ],
+      "label": "Red City Guard 2"
+    },
+    {
+      "id": "A4",
+      "type": "infantry",
+      "owner": "A",
+      "offset": [
+        4,
+        5
+      ],
+      "label": "Blue City Guard 3"
+    },
+    {
+      "id": "B4",
+      "type": "infantry",
+      "owner": "B",
+      "offset": [
+        10,
+        5
+      ],
+      "label": "Red City Guard 3"
+    },
+    {
+      "id": "A5",
+      "type": "tank",
+      "owner": "A",
+      "offset": [
+        2,
+        1
+      ],
+      "label": "Blue Heavy Tank"
+    },
+    {
+      "id": "B5",
+      "type": "tank",
+      "owner": "B",
+      "offset": [
+        12,
+        1
+      ],
+      "label": "Red Heavy Tank"
+    },
+    {
+      "id": "A6",
+      "type": "tank",
+      "owner": "A",
+      "offset": [
+        4,
+        2
+      ],
+      "label": "Blue Medium Tank"
+    },
+    {
+      "id": "B6",
+      "type": "tank",
+      "owner": "B",
+      "offset": [
+        11,
+        2
+      ],
+      "label": "Red Medium Tank"
+    },
+    {
+      "id": "A7",
+      "type": "artillery",
+      "owner": "A",
+      "offset": [
+        4,
+        1
+      ],
+      "label": "Blue Battery"
+    },
+    {
+      "id": "B7",
+      "type": "artillery",
+      "owner": "B",
+      "offset": [
+        10,
+        1
+      ],
+      "label": "Red Battery"
+    },
+    {
+      "id": "A8",
+      "type": "truck",
+      "owner": "A",
+      "offset": [
+        2,
+        2
+      ],
+      "label": "Blue Supply Truck"
+    },
+    {
+      "id": "B8",
+      "type": "truck",
+      "owner": "B",
+      "offset": [
+        13,
+        2
+      ],
+      "label": "Red Supply Truck"
+    },
+    {
+      "id": "A9",
+      "type": "aa_missile",
+      "owner": "A",
+      "offset": [
+        3,
+        2
+      ],
+      "label": "Blue AA Guard"
+    },
+    {
+      "id": "B9",
+      "type": "aa_missile",
+      "owner": "B",
+      "offset": [
+        12,
+        2
+      ],
+      "label": "Red AA Guard"
+    },
+    {
+      "id": "A10",
+      "type": "attack_plane",
+      "owner": "A",
+      "offset": [
+        3,
+        1
+      ],
+      "label": "Blue Interceptor"
+    },
+    {
+      "id": "B10",
+      "type": "attack_plane",
+      "owner": "B",
+      "offset": [
+        11,
+        1
+      ],
+      "label": "Red Interceptor"
+    }
+  ]
+}

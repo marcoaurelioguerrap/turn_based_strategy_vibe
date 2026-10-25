@@ -26,7 +26,12 @@ from collections import Counter
 
 import pytest
 
-from tbs.engine.data import DATA_ROOT, available_scenarios, load_scenario
+from tbs.engine.data import (
+    DATA_ROOT,
+    available_scenarios,
+    default_scenario,
+    load_scenario,
+)
 from tbs.engine.rules import _near_supply_source, is_supplied, turn_income
 from tbs.engine.state import new_game
 from .helpers import PLAIN_ROWS, SPECS, bundled_path, bundled_scenario, scenario, unit
@@ -66,11 +71,14 @@ def functional_bases(state, player_id: str) -> Counter:
 
 def test_the_bundled_scenario_ships_with_the_game_and_loads_by_name():
     assert "border_skirmish.json" in [path.name for path in available_scenarios()]
+    assert default_scenario().name == "border_skirmish.json"
     assert load_scenario(bundled_path()) == bundled_scenario()
 
     with pytest.raises(FileNotFoundError) as info:
         load_scenario(DATA_ROOT / "maps" / "no_such_map.json")
-    assert "not found; bundled scenarios: border_skirmish.json" in str(info.value)
+    message = str(info.value)
+    assert "not found; bundled scenarios:" in message
+    assert "border_skirmish.json" in message
 
 
 def test_border_skirmish_starts_a_legal_game():
@@ -116,6 +124,83 @@ def test_every_unit_on_the_border_begins_connected_to_supply():
     stranded = [u.id for u in state.units.values() if not _near_supply_source(state, u)]
     assert stranded == []
     assert all(is_supplied(state, u) for u in state.units.values())
+
+
+# ---------------------------------------------------------------------------
+# the rest of the map pack
+# ---------------------------------------------------------------------------
+
+
+def fair_map_paths() -> list:
+    return [path for path in available_scenarios() if load_scenario(path).get("fair")]
+
+
+FAIR_MAPS = fair_map_paths()
+
+
+@pytest.mark.parametrize("path", FAIR_MAPS, ids=lambda path: path.stem)
+def test_every_fair_map_starts_a_balanced_game(path):
+    """A map that advertises fairness really is materially symmetric.
+
+    This is the generic version of the border_skirmish assertions: the same
+    functional sites, the same army, the same income and every unit in supply.
+    The terrain itself is hex-true mirrored by the authoring script, so each
+    side sees the same ground under its own half of the board.
+    """
+    data = load_scenario(path)
+    state = new_game(data, SPECS)
+
+    assert state.status == "ongoing"
+    assert len(state.players) == 2, f"{path.stem}: fair maps are two-sided"
+    first, second = state.player_ids()
+    assert state.players[first].funds == state.players[second].funds
+    assert functional_bases(state, first) == functional_bases(state, second)
+    assert functional_bases(state, first), f"{path.stem}: both sides own functional sites"
+
+    armies = {pid: Counter(u.type_id for u in state.units_of(pid)) for pid in (first, second)}
+    assert armies[first] == armies[second], f"{path.stem}: the two armies differ"
+
+    assert turn_income(state, first) == turn_income(state, second)
+
+    stranded = [u.id for u in state.units.values() if not _near_supply_source(state, u)]
+    assert stranded == [], f"{path.stem}: units start out of supply: {stranded}"
+
+    for player_id in (first, second):
+        objectives = [tile for tile in state.owned_tiles(player_id) if tile.objective]
+        assert len(objectives) == 1, f"{path.stem}: {player_id} owns {len(objectives)} objectives"
+        guard = next(unit for unit in state.units_of(player_id) if unit.type_id == "hq")
+        assert guard.pos == objectives[0].pos
+
+
+@pytest.mark.parametrize("path", FAIR_MAPS, ids=lambda path: path.stem)
+def test_every_fair_map_is_hex_true_mirrored(path):
+    """The two halves are the same ground, not a reversed string.
+
+    On odd-r authoring rows the mirror of column ``c`` is ``width - 2 - c``
+    (not ``width - 1 - c``), so a plain ``row[::-1]`` would be wrong.  Pinning
+    the real transform keeps the visual symmetry the fairness tests assume.
+    """
+    rows = load_scenario(path)["rows"]
+    width = len(rows[0])
+    for row_index, row in enumerate(rows):
+        for col in range(width):
+            mirror = width - 1 - col if row_index % 2 == 0 else width - 2 - col
+            if 0 <= mirror < width:
+                assert row[col] == row[mirror], (
+                    f"{path.stem}: ({col},{row_index}) is {row[col]!r} but its mirror "
+                    f"({mirror},{row_index}) is {row[mirror]!r}"
+                )
+
+
+def test_last_stand_is_intentionally_asymmetric_but_still_starts_cleanly():
+    path = next(path for path in available_scenarios() if path.stem == "last_stand")
+    data = load_scenario(path)
+    assert data["fair"] is False
+
+    state = new_game(data, SPECS)
+    assert state.status == "ongoing"
+    assert len(state.units_of("B")) > len(state.units_of("A")), "the attacker fields the larger army"
+    assert [unit.id for unit in state.units.values() if not _near_supply_source(state, unit)] == []
 
 
 # ---------------------------------------------------------------------------

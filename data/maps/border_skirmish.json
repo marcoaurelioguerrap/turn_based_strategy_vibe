@@ -1,6 +1,15 @@
 {
   "schema": 1,
   "name": "border_skirmish",
+  "title": "Border Skirmish",
+  "description": "Two nations split by a broken ridge with a sea bay cut through it. The introductory map: mirrored armies, a ridge for infantry and a bay for ships.",
+  "difficulty": "intro",
+  "fair": true,
+  "tags": [
+    "land",
+    "air",
+    "naval"
+  ],
   "comment": "Two nations split by a broken ridge with a sea bay cut through it. Authored as 14x8 text rows in odd-r offset layout; regions claim whole authoring columns. Every Red feature and every Red starting unit is the hex-true mirror of Blue's, so both sides start with the same bases, the same income and the same supply situation. Infantry cross the ridge, wheeled vehicles must go round it by the bay.",
   "seed": 20261019,
   "first_player": "A",

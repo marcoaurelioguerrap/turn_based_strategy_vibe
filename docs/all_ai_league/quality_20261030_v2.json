@@ -1,0 +1,40 @@
+{
+  "games": 60,
+  "batch": "all_ai_league_20261030_v2",
+  "teams": {
+    "NCM Siege": {
+      "games": 30,
+      "steps": 20338,
+      "samples": 20338,
+      "generated": 213,
+      "repaired": 0,
+      "constrained": 20125,
+      "tactical": 18339,
+      "fallbacks": 0,
+      "illegal": 0,
+      "rejected": 0,
+      "model_orders": 20338,
+      "constrained_share": 0.9895,
+      "generated_share": 0.0105,
+      "fallback_rate": 0.0,
+      "model_share": 1.0
+    },
+    "NCM Vanguard": {
+      "games": 30,
+      "steps": 20103,
+      "samples": 20103,
+      "generated": 27,
+      "repaired": 0,
+      "constrained": 20076,
+      "tactical": 16802,
+      "fallbacks": 0,
+      "illegal": 0,
+      "rejected": 0,
+      "model_orders": 20103,
+      "constrained_share": 0.9987,
+      "generated_share": 0.0013,
+      "fallback_rate": 0.0,
+      "model_share": 1.0
+    }
+  }
+}

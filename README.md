@@ -552,6 +552,15 @@ instead of the full round-robin. The compact codec is ~3.4-5.0k characters on
 these maps, so the league uses a 4096-token prefix instead of the old 2048
 default.
 
+The 60-game all-AI league is a **system** result, not a raw-generation result.
+With `--decode legal`, the NCM samples an intended action/unit and then ranks
+the legal candidate lines. In the released 60-game run only 0.13% of NCM
+Vanguard's orders (27 of 20,103) and 1.05% of NCM Siege's (213 of 20,338) were
+exact raw generations; the rest were chosen by the constrained decoder, with
+zero fallback. The 25.2% exact-match figure in the NCM report is raw generation
+on held-out states, a different measurement. The quality table is in
+[`docs/all_ai_league/quality_20261030_v2.json`](docs/all_ai_league/quality_20261030_v2.json).
+
 Headless smoke test with a replayable order log and a final save:
 
 ```powershell

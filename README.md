@@ -502,10 +502,12 @@ $env:TBS_GAME_REPO = "..\turn_based_strategy_vibe"
 
 On an NVIDIA Windows machine, install the CUDA torch wheel before the
 requirements; `SETUP-LOCAL.md` in the fork has the exact command. The release
-contains the tokenizer, the base generator and `config.yaml`. The five persona
-checkpoints used in the 60-game league are not part of the base release: the
-league table is recorded evidence from those checkpoints, not a claim the base
-download can rerun. The reports and match files are in
+contains the tokenizer, the base generator, `config.yaml`, the learned ferry
+action selector and two evaluation samples. The selector is required for
+reliable ferry play: without it the generator often collapses load/unload to
+move. The five persona checkpoints used in the 60-game league are not part of
+the base release: the league table is recorded evidence from those checkpoints,
+not a claim the base download can rerun. The reports and match files are in
 [`docs/all_ai_league`](docs/all_ai_league).
 
 The UI uses `StepwiseSession`: one order at a time with a fresh view. The

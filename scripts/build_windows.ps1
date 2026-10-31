@@ -19,14 +19,16 @@ try {
     }
     $py = Join-Path $root ".build-venv\Scripts\python.exe"
     uv pip install --python $py -e ".[ui]" pyinstaller
+    if ($LASTEXITCODE -ne 0) { throw "uv pip install failed" }
 
     & $py -m PyInstaller `
         --noconfirm --clean --windowed `
         --name $Name `
-        --add-data "data;data" `
-        --paths . `
+        --add-data "$root\data;data" `
+        --paths "$root" `
         --specpath build `
         scripts\run_game.py
+    if ($LASTEXITCODE -ne 0) { throw "PyInstaller failed" }
 
     $zip = Join-Path $root "dist\$Name-windows-x64.zip"
     if (Test-Path $zip) { Remove-Item $zip -Force }

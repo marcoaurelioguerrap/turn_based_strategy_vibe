@@ -1,9 +1,14 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "tbs"
 version = "0.1.0"
 description = "Modern hex-based turn-based strategy game with an LLM-agent-first engine"
 readme = "README.md"
-license = { text = "MIT" }
+license = "MIT"
+license-files = ["LICENSE"]
 authors = [{ name = "Marco Guerra" }]
 requires-python = ">=3.11"
 dependencies = []
@@ -14,6 +19,9 @@ dev = ["pytest>=8"]
 # pygame and is the one that ships a wheel for Python 3.14; the import name is
 # still `pygame`.  The engine core stays dependency-free.
 ui = ["pygame-ce>=2.5"]
+
+[tool.setuptools.packages.find]
+include = ["tbs*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

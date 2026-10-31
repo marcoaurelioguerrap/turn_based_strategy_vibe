@@ -103,11 +103,16 @@ def play_game(
                 item for item in (ferry.get("operations") or ()) if isinstance(item, dict)
             ]
             unit = str(order.get("unit") or "")
-            amphibious = order.get("action") in ("load", "unload") or any(
-                str(item.get("transport") or "") == unit
-                or str(item.get("cargo") or "") == unit
-                for item in operations
+            operation = next(
+                (
+                    item
+                    for item in operations
+                    if str(item.get("transport") or "") == unit
+                    or str(item.get("cargo") or "") == unit
+                ),
+                None,
             )
+            amphibious = order.get("action") in ("load", "unload") or operation is not None
             rows.append(
                 {
                     "prefix": prefix,
@@ -117,6 +122,9 @@ def play_game(
                     "turn": request.view["turn"],
                     "player": player,
                     "amphibious": amphibious,
+                    "ferry_action": (
+                        str(operation.get("action")) if operation is not None else ""
+                    ),
                 }
             )
             steps += 1

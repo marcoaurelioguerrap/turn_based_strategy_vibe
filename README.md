@@ -302,11 +302,12 @@ lands the first infantry on the enemy home island on the player's second turn.
 The same hint is available to the LLM prompt and to the compact NCM codec. The
 codec adds one line per operation (`transport cargo action cargo_to
 transport_to at target`, `-` for absent fields), and the LLM prompt explains
-how to execute it. The NCM player applies the same advisor before its sampler,
-so the released checkpoint crosses even though its rare-action head still
-prefers `move`; a later fine-tune can internalize the policy. The coordinator
-now allows one move followed by one non-move action for the same unit, matching
-the engine's `move then load / unload` rule; duplicate moves are still ignored.
+how to execute it. The NCM player uses a small **learned action selector**
+trained on these states to choose the action character (`l`, `u`, `p`, `s`,
+`r`); the full NCM still supplies the arguments through legal candidates. No
+scripted ferry override is called by the deployed NCM. The coordinator now
+allows one move followed by one non-move action for the same unit, matching the
+engine's `move then load / unload` rule; duplicate moves are still ignored.
 
 Two model-free tools measure and collect the behavior:
 

@@ -54,7 +54,7 @@ def played_state(turns: int = 3):
 
 def sections(text: str) -> dict[str, list[str]]:
     """Split encoded state text into its named sections."""
-    names = {"players", "terrain", "sites", "units", "builds"}
+    names = {"players", "terrain", "sites", "units", "builds", "ferry"}
     found: dict[str, list[str]] = {}
     current = None
     for line in text.splitlines():

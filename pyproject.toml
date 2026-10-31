@@ -2,6 +2,9 @@
 name = "tbs"
 version = "0.1.0"
 description = "Modern hex-based turn-based strategy game with an LLM-agent-first engine"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Marco Guerra" }]
 requires-python = ">=3.11"
 dependencies = []
 

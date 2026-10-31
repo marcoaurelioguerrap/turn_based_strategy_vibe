@@ -11,6 +11,25 @@ answer and retry instead of guessing.
 A UI, an LLM driver, and a replay tool are interchangeable clients of the same
 pure core: `state + action → new_state + events`.
 
+## Download and play
+
+- **Play the game on Windows (no Python):** download `tbs-windows-x64.zip` from
+  the [latest release](https://github.com/marcoaurelioguerrap/turn_based_strategy_vibe/releases/latest),
+  extract it and run `tbs.exe`.
+- **Game source:** this repository. `py -m pip install -e ".[ui]"` then
+  `py -m tbs.ui.app`.
+- **Play against NCM:** clone the
+  [NCM fork](https://github.com/marcoaurelioguerrap/NCM_fork), download the base
+  checkpoint from its [releases](https://github.com/marcoaurelioguerrap/NCM_fork/releases),
+  and follow `tbs_ncm/README.md`. NCM needs Python, PyTorch and the checkpoint;
+  the standalone game build does not include it.
+- **Experiment report:** [`ncm_training.pdf`](https://github.com/marcoaurelioguerrap/turn_based_strategy_vibe/releases/latest/download/ncm_training.pdf)
+  covers the data, tokenizer, generator and league results.
+
+The game is a hot-seat window out of the box. The **New Game vs LLM** menu needs
+an OpenAI-compatible endpoint; the NCM opponent is launched from the NCM checkout
+with `py -m tbs_ncm.play_ui`.
+
 ## Status
 
 Milestones from the agreed plan (kept in `~/.opencode/plan/turn-based-strategy-plan.md`):
@@ -29,7 +48,7 @@ Milestones from the agreed plan (kept in `~/.opencode/plan/turn-based-strategy-p
 | M3 | pygame UI | done — a hot-seat window (`tbs/ui/`, `py -m tbs.ui.app`) over the same action API |
 | M9+ | Fog of war, scenario editor | planned |
 
-Everything that follows is enforced by **362 passing tests** (`py -m pytest`,
+Everything that follows is enforced by **407 passing tests** (`py -m pytest`,
 a few seconds) — each claim in this README is pinned by one of them.
 
 ## Run it
@@ -39,8 +58,10 @@ dependency, and the optional window needs `pygame-ce`.
 
 ```
 py -m pip install -e ".[dev]"       # or just: py -m pip install pytest
-py -m pytest                        # 362 tests in ~6 s
+py -m pytest                        # 407 tests in ~10 s
 py scripts/demo.py                  # a two-minute tour: view → bad order rejected → two AI half-turns → save/load/resume
+py scripts/landing_benchmark.py     # scripted self-play landing/load/unload metrics on the island maps
+py scripts/generate_ferry_data.py   # NCM-format rows from ferry-capable scripted games
 py -m pip install -e ".[ui]"        # the hot-seat window (pygame-ce; import name is `pygame`)
 py -m tbs.ui.app                    # opens the main menu: New Game / New Game vs LLM / Load Game / Quit
 py -m tbs.ui.app --no-menu          # skip the title screen and play Border Skirmish
@@ -84,7 +105,8 @@ hashes and replays exactly like an agent's.
 
 ## Maps
 
-Five scenarios ship in `data/maps/`. The picker reads each file's `title`,
+Ten scenarios ship in `data/maps/`: the five original maps and five `_m`
+variants at about ten times the tile area. The picker reads each file's `title`,
 `description`, `difficulty` and `fair` fields; `name` stays the stable id used
 by saves. A bare launch, the agent server and `tbs.agents.match` all default to
 `border_skirmish`, resolved by name rather than by filename order.
@@ -96,20 +118,95 @@ by saves. A bare launch, the agent server and `tbs.agents.match` all default to
 | `archipelago` | 20×12 | Island war: ports, transports, destroyers | yes |
 | `urban_delta` | 16×10 | Dense city blocks, factories, income race | yes |
 | `last_stand` | 16×10 | Asymmetric attack/defence, larger Red army | no |
+| `border_skirmish_m` | 44×25 | Large ridge + bay, 25 units a side | yes |
+| `mountain_pass_m` | 56×32 | Large pass war, 23 units a side | yes |
+| `archipelago_m` | 64×38 | Large island war, 28 units a side | yes |
+| `urban_delta_m` | 50×32 | Large city and river, 26 units a side | yes |
+| `last_stand_m` | 50×32 | Large attack/defence, 16 Blue vs 29 Red | no |
 
 Maps are plain JSON: text rows in odd-r offset layout, `regions` for ownership,
 `units` placed with `offset` `[column, row]`. The bundled fair maps are
 hex-true mirrored (a plain string reverse is **not** a mirror on odd rows) and
 are held to the same material checks as the intro map by
 `tests/test_scenarios.py`: equal functional sites, army, income, objectives and
-every starting unit in supply. Run any of them directly:
+every starting unit in supply.
+
+Every team is capped at **50 live units** by `max_units_per_player` (a scenario
+field, default 50). Production is refused with a correction-shaped message at
+the cap, and `build_options` and the agent view expose the limit.
+
+The `_m` maps also set `view_move_limit: 12`. The hot-seat UI still uses the
+full `rules.legal_moves`/`legal_actions` API; the agent view keeps a strategic
+sample of destinations (sites, contact, frontier, nearest/farthest). That keeps
+a legal-order reranker such as the NCM league tractable on a 2,400-tile board.
+
+Run any map directly:
 
 ```
-py -m tbs.ui.app --scenario data/maps/archipelago.json
-py -m tbs.api.server --scenario data/maps/urban_delta.json
+py -m tbs.ui.app --scenario data/maps/archipelago_m.json
+py -m tbs.api.server --scenario data/maps/urban_delta_m.json
 ```
 
+The large maps open on the current player's HQ at a playable zoom; `Home`
+switches to the full-map overview, and the camera pans with `Shift`+arrows,
+middle-mouse drag or the arrow keys.
 
+### The large-map league
+
+`scripts/league_m.py` runs the five scripted persona teachers from the NCM
+checkout in a round-robin over the `_m` maps (no model weights required), with
+40 turns and up to 12 orders per side per turn:
+
+```
+py scripts/league_m.py --max-turns 40 --max-steps 12
+```
+
+It writes `docs/league_m/report.json` and `report.md`. Raise `--max-turns` and
+`--max-steps` for a deeper league. `--ncm-root` points at the NCM checkout when
+it is not the sibling `..\NCM_fork`. The trained NCM model league command is in
+*Playing against NCM* below.
+
+### The World Cup
+
+`scripts/world_cup.py` runs a 10-team World Cup over the five `_m` maps: the five
+trained NCM personas, four randomized conventional AIs and the greedy baseline.
+Two groups of five play a five-round round-robin (one bye per team); the top two
+in each group meet in cross-group semifinals, then the third-place match and the
+final. The group stage rotates through all five new maps, while the four fair
+mirrored maps host the knockout. It is 24 games, 30 turns and up to 10 orders
+per side per turn by default.
+
+Run it with the NCM virtualenv so torch and the checkpoints are available:
+
+```powershell
+..\NCM_fork\.venv\Scripts\python.exe scripts\world_cup.py `
+  --ncm-root ..\NCM_fork `
+  --resume
+```
+
+The defaults are `--generator mixed_generator.pt --decode legal --prefix-len
+4096 --max-turns 30 --max-steps 10`. A full run is resumable; `--resume`
+continues an interrupted tournament and `--report-only` rebuilds the reports
+without loading models. Use `--dry-run` to print the draw, and `--limit N` for a
+short smoke run. If legal-order decoding is too slow for a deeper run, the NCM
+large-map fast mode is `--decode sample --retries 1`.
+
+The human report and resume state are written to `docs/world_cup/report.md`,
+`report.json` and `tournament.json`. Match saves, order logs and meta sidecars
+are written directly to the NCM dashboard directory,
+`..\NCM_fork\artifacts\tbs\matches`, and the league is written as a batch under
+`..\NCM_fork\artifacts\tbs\personas\world_cup_<seed>`. The NCM dashboard therefore
+shows every game in **Games** and the whole tournament as one batch in
+**Overview**:
+
+```powershell
+cd ..\NCM_fork
+.\.venv\Scripts\python.exe -m tbs_ncm.dashboard --open
+```
+
+`--allow-asymmetric-knockout` opts `last_stand_m` into the knockout rotation;
+the default keeps it in the group stage and uses the four fair maps for
+elimination games.
 
 
 ## Quickstart
@@ -139,7 +236,9 @@ rules.perform(state, {"action": "end_turn"})
    asking player's units a `unit_actions` entry listing its legal attacks (with
    luck-free damage previews), moves, capture hints, load/unload options, and
    `"hold": true` (a unit is never left without a legal order). For the bundled
-   14×8 skirmish the entire view is ~10 KB of JSON.
+   14×8 skirmish the entire view is ~10 KB of JSON. On the large `_m` maps the
+   local-LLM prompt keeps every attack/capture/load and a bounded strategic
+   sample of legal move destinations, so an 8K-context model still fits.
 2. **Choose an order.** Attack previews, move endpoints and capture hints all
    arrive in the view itself; `rules.unit_options()` is the same data as typed
    Python objects, including `preview_damage` per target and human-readable
@@ -168,13 +267,71 @@ All orders are JSON objects; coordinates are axial `[q, r]` (see *Coordinates*).
 options-derived greedy policy, replays the whole game from its recorded orders,
 and proves a reader who sees only the view JSON can pick valid attacks from it.
 
+## Amphibious operations
+
+Land units cannot enter the sea; a Transport Ship must lift them. The rules
+already allow a transport to **move and then load or unload one cargo in the
+same turn**, and an unloaded unit may act immediately. What a one-step view
+could not express was the multi-turn operation, so the view now carries an
+advisory `ferry` block on maps with sea transports:
+
+```json
+"ferry": {
+  "stranded": ["A3", "A4"],
+  "transports": ["A10"],
+  "operations": [
+    {"transport": "A10", "cargo": "A3", "action": "pickup",
+     "cargo_to": [3, 5], "target": [15, 3]}
+  ]
+}
+```
+
+`island` ids (sparse, only on maps with a ferry layer) and `stranded: true`
+make the geography explicit; `operations` names a transport, cargo, pickup or
+landing hex and the strategic target. The operations are advisory, not new
+legal actions: every coordinate comes from `rules.legal_moves`,
+`load_options` or `unload_options`, and the engine still validates each order.
+
+The scripted `GreedyAgent` now executes these hints before its normal
+attack/capture/approach policy: it moves a cargo to the pickup, loads, sails to
+the beach, unloads, and then hands the landed unit back to the ordinary capture
+logic. It also repositions an empty transport toward the next stranded unit
+instead of sailing it at the enemy. On the stock `archipelago` opening this
+lands the first infantry on the enemy home island on the player's second turn.
+
+The same hint is available to the LLM prompt and to the compact NCM codec. The
+codec adds one line per operation (`transport cargo action cargo_to
+transport_to at target`, `-` for absent fields), and the LLM prompt explains
+how to execute it. The NCM player applies the same advisor before its sampler,
+so the released checkpoint crosses even though its rare-action head still
+prefers `move`; a later fine-tune can internalize the policy. The coordinator
+now allows one move followed by one non-move action for the same unit, matching
+the engine's `move then load / unload` rule; duplicate moves are still ignored.
+
+Two model-free tools measure and collect the behavior:
+
+```
+py scripts/landing_benchmark.py
+py scripts/generate_ferry_data.py --amphibious-repeat 4
+```
+
+`landing_benchmark.py` runs scripted self-play on `archipelago` and
+`archipelago_m` and reports first landing turn, units that ever landed, units
+that reached the enemy home island, and load/unload counts. The default seed
+set lands on turn 2 on the small map and turn 7 on the large map.
+`generate_ferry_data.py` writes the same `prefix`/`target` JSONL rows the NCM
+trainer consumes, tags load/unload rows with `"amphibious": true`, and gives a
+new NCM fine-tune the demonstrations the original border-skirmish dataset never
+contained.
+
 ## Compact codecs and stepwise turns
 
 `tbs/agents/codec.py` is a stdlib-only transport for models with a token budget.
 `encode_state` turns a `state_view` into deterministic line-oriented text:
 terrain rows, every site with owner and capture progress, every unit with
-position/hp/fuel/ammo and its acted/moved/new/loaded/cargo flags, and the legal
-build list. For the bundled scenario, the first five player-turn views encode to
+position/hp/fuel/ammo and its acted/moved/new/loaded/cargo flags, the legal
+build list, and (on maps with transports) the `ferry` recommendations. For the
+bundled scenario, the first five player-turn views encode to
 1,061–1,125 characters — **511–541 GPT-2 tokens** measured with the released NCM
 prefix tokenizer, against 3.8–4.7k tokens for the full JSON view. Static spec
 data and `unit_actions` are deliberately absent: legality stays the
@@ -228,19 +385,18 @@ correction message and a fresh view; after that the turn ends anyway, so a weak
 model can never stall the game. The HTTP call runs in a worker thread, so the
 window keeps drawing while the model thinks.
 
-Reference setup on this machine (Unsloth Desktop):
+Reference setup used for the NCM league (Unsloth Desktop):
 
 ```
 http://127.0.0.1:8888/v1
-unsloth/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-GGUF   (quant UD-IQ2_M)
+ISTA-DASLab/Qwen3.8-27B-GSQ-RCO-GGUF   (quant IQ3_S)
 ```
 
-The server lists the loaded weights under that id (without a `:quant` suffix);
-`/v1/models` reports a 262,144-token native context but an 8,192-token request
-window, so the client compacts the view and disables the model's reasoning mode
-by default. With reasoning enabled, the model spends the whole completion budget
-before writing JSON and returns empty content. Use `--llm-thinking` only if you
-raise the server's request window.
+The server lists the loaded weights under the id without the `:quant` suffix;
+check `/v1/models` for the loaded context. The client compacts the view and can
+disable the model's reasoning mode; use `--llm-thinking` only when the server's
+request window is large enough. The earlier 74B Nemotron match is preserved in
+the NCM report as a historical run.
 
 The server above requires a bearer token (an unauthenticated probe returns HTTP
 401), so pass the key it prints, either as `--llm-api-key` or through
@@ -250,7 +406,7 @@ Play in the window:
 
 ```
 $env:TBS_LLM_BASE_URL = "http://127.0.0.1:8888/v1"
-$env:TBS_LLM_MODEL    = "unsloth/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-GGUF"
+$env:TBS_LLM_MODEL    = "ISTA-DASLab/Qwen3.8-27B-GSQ-RCO-GGUF"
 $env:TBS_LLM_API_KEY  = "<the key Unsloth Desktop shows>"
 py -m tbs.ui.app --no-menu --agent-side B
 ```
@@ -293,7 +449,7 @@ turn (commander + five generals). For a faster game, pass a subset:
 
 ```powershell
 $env:TBS_LLM_BASE_URL = "http://127.0.0.1:8888/v1"
-$env:TBS_LLM_MODEL    = "unsloth/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-GGUF"
+$env:TBS_LLM_MODEL    = "ISTA-DASLab/Qwen3.8-27B-GSQ-RCO-GGUF"
 $env:TBS_LLM_API_KEY  = "<the key Unsloth Desktop shows>"
 
 py -m tbs.agents.match --a greedy --b council `
@@ -323,28 +479,48 @@ A custom roster is a JSON file:
 
 ## Playing against NCM
 
-The NCM player lives in the separate `C:\AIs\NCM` repository (`tbs_ncm/`)
-because it needs torch. It trains its own character-level tokenizer on order
-lines, then an NCM generator that reads the compact state text and writes one
-order per step. Launch the window from the NCM environment:
+The NCM player lives in the separate
+[NCM fork](https://github.com/marcoaurelioguerrap/NCM_fork) (`tbs_ncm/`) because
+it needs torch. It trains its own character-level tokenizer on order lines, then
+an NCM generator that reads the compact state text and writes one order per step.
 
-```
-cd C:\AIs\NCM
-.venv\Scripts\python.exe -m tbs_ncm.play_ui --no-menu --agent-side B
+Clone both repositories side by side, download the base checkpoint from the
+[fork's releases](https://github.com/marcoaurelioguerrap/NCM_fork/releases) into
+`NCM_fork/artifacts/tbs`, and launch the window from the NCM environment:
+
+```powershell
+git clone https://github.com/marcoaurelioguerrap/turn_based_strategy_vibe.git
+git clone https://github.com/marcoaurelioguerrap/NCM_fork.git
+cd NCM_fork
+py -3.12 -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt pygame-ce
+$env:TBS_GAME_REPO = "..\turn_based_strategy_vibe"
+.venv\Scripts\python.exe -m tbs_ncm.play_ui --no-menu --agent-side B --ncm-decode legal
 ```
 
-The UI uses `StepwiseSession`: one generated order at a time with a fresh view.
-A sample that is unparseable or illegal for the current view is repaired by
-snapping the model's chosen unit/action to that unit's nearest legal option, then
-resampled, and only then falls back to the greedy agent, so the turn always
-finishes. `--ncm-max-steps` bounds the batches per turn; `--ncm-checkpoint`
-selects the artifact directory (default `artifacts/tbs`).
+On an NVIDIA Windows machine, install the CUDA torch wheel before the
+requirements; `SETUP-LOCAL.md` in the fork has the exact command. The release
+contains the tokenizer, the base generator and `config.yaml`. The five persona
+checkpoints used in the 60-game league are not part of the base release: the
+league table is recorded evidence from those checkpoints, not a claim the base
+download can rerun. The reports and match files are in
+[`docs/all_ai_league`](docs/all_ai_league).
+
+The UI uses `StepwiseSession`: one order at a time with a fresh view. The
+default `--ncm-decode legal` is a constrained decoder: it samples once for the
+model's intended action/unit, ranks the view's legal orders for that choice with
+the model, and returns the best legal order. The older free-generation path
+(`--ncm-decode sample`) repairs an unparseable or illegal sample by snapping the
+model's chosen unit/action to the nearest legal option, resamples, and only then
+falls back to the greedy agent. `--ncm-max-steps` bounds the batches per turn;
+`--ncm-checkpoint` selects the artifact directory (default `artifacts/tbs`).
 
 The NCM bridge can also play the council headlessly and write the result where
 its dashboard tracks it (`artifacts/tbs/matches`):
 
 ```powershell
-cd C:\AIs\NCM
+cd NCM_fork
 .\.venv\Scripts\python.exe -m tbs_ncm.play --opponent council --ncm-side B `
   --seed 60001 --council-members vanguard,anvil,quartermaster --council-parallel `
   --max-turns 40
@@ -353,18 +529,39 @@ cd C:\AIs\NCM
 Dashboards read the match save, its `.orders.json` replay and the `.meta.json`
 sidecar written next to it.
 
+The large `_m` maps form their own persona league. The league resolves maps by
+the JSON `name`, so no NCM code changes are needed; point `--maps` at the new
+stems and raise the turn cap:
+
+```powershell
+cd NCM_fork
+.\.venv\Scripts\python.exe -m tbs_ncm.persona_league `
+  --maps border_skirmish_m,mountain_pass_m,archipelago_m,urban_delta_m,last_stand_m `
+  --games-per-map 1 --max-turns 20 --max-steps 6 `
+  --decode sample --retries 1 --prefix-len 4096 `
+  --out-dir artifacts/tbs/personas/league_m_20261025 `
+  --match-dir artifacts/tbs/matches/m_league
+```
+
+The report is written as `report.json` / `report.md` in `--out-dir`, and every
+game keeps its replayable save, order log and meta sidecar under `--match-dir`.
+`--decode sample` keeps the model league practical on a 2,400-tile board; drop
+it to use the slower legal-order reranker. The scripted league above is the
+fast balance run; use `--pairs aggressive:defensive` for a quick model smoke
+instead of the full round-robin. The compact codec is ~3.4-5.0k characters on
+these maps, so the league uses a 4096-token prefix instead of the old 2048
+default.
+
 Headless smoke test with a replayable order log and a final save:
 
-```
-py -m tbs.agents.match --a greedy --b llm \
-  --llm-model "unsloth/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-GGUF" \
-  --llm-api-key "<key>" --max-turns 40 \
-  --out saves/llm_match.json --llm-log logs/llm/match.jsonl
+```powershell
+cd NCM_fork
+.\.venv\Scripts\python.exe -m tbs_ncm.play --opponent greedy --ncm-side B --seed 7
 ```
 
-The command writes `saves/llm_match.orders.json`, replays it from scratch and
-prints whether the final `state_hash` matches. An LLM's choices are not
-deterministic, but its accepted orders are a deterministic game.
+The command writes a replayable save and order log; the NCM dashboard reads the
+same sidecars. An LLM's choices are not deterministic, but its accepted orders
+are a deterministic game.
 
 The prompt lists move **destinations** (`unit_actions[id].move_to`), not paths.
 The model answers with `{"action":"move","unit":"A2","to":[q,r]}` and the
@@ -453,6 +650,7 @@ tbs/engine/     pure logic, no I/O, no pygame, stdlib only
   combat.py     damage maths (integer-only)
   rng.py        stateless dice: seed + acting context → 0..99 roll
   view.py       text and JSON views — the same views agents receive
+  amphibious.py landmass ids, stranded units and advisory ferry hints
   serialize.py  save/load, replay, state/log hashes
   errors.py     ActionError with correction-shaped messages
 tbs/api/
@@ -465,7 +663,9 @@ tbs/agents/
   turn.py       validate whole-turn plans, retry rejections, always end the turn;
                 run_turn_stepwise re-asks with a fresh view after each batch
   codec.py      compact deterministic state text + one-line order codec (stdlib)
-  greedy.py     deterministic scripted baseline agent
+  ferry.py      executes the view's ferry hints as legal orders
+  greedy.py     deterministic scripted baseline agent (now ferry-aware)
+  league.py     World Cup draw, schedule, standings, bracket and report (pure)
   match.py      headless LLM-vs-agent CLI with save + replayable order log
 tbs/ui/
   palette.py    UI colours (pure)
@@ -480,9 +680,13 @@ tbs/ui/
 data/
   units.json    14 unit types + the weapon × damage-class matrix
   terrain.json  11 tile types: cover, move costs, build/capture/supply rules
-  maps/         five scenarios as text-row maps + metadata + starting armies
+  maps/         ten scenarios: five originals and five ~10x `_m` maps
 scripts/demo.py headless end-to-end tour of the API
-tests/          362 tests pinning every rule above
+scripts/landing_benchmark.py first-landing, enemy-home and load/unload metrics
+scripts/generate_ferry_data.py NCM-format rows from ferry-capable scripted games
+scripts/league_m.py fast scripted-persona round-robin on the `_m` maps
+scripts/world_cup.py 10-team NCM + conventional-AI World Cup with dashboard feeds
+tests/          407 tests pinning every rule above
 ```
 
 ## Tests
@@ -493,32 +697,36 @@ tests/          362 tests pinning every rule above
 | `test_movement.py` | 22 | move costs, fuel, blocking, occupied hexes, no second move after moving |
 | `test_combat.py` | 30 | the full damage chain, counters, cover, weapon choice, ammo as the firing limit, direct fire after moving and indirect fire only when stationary |
 | `test_logistics.py` | 23 | supply domains, resupply, load/unload, fuel attrition |
-| `test_capture_economy.py` | 14 | capture progress, income, production, victory by capture |
-| `test_scenarios.py` | 20 | scenario validation, per-map fairness (sites, army, income, supply), hex-true mirroring, the asymmetric map |
+| `test_capture_economy.py` | 15 | capture progress, income, production, victory by capture, the 50-unit team cap |
+| `test_scenarios.py` | 28 | scenario validation, per-map fairness (sites, army, income, supply), hex-true mirroring, the asymmetric map |
 | `test_stacking.py` | 11 | aircraft sharing a hex with one land/naval unit, two-layer movement, targeting, unloading, production and views |
 | `test_determinism.py` | 11 | replays, seeded dice, hashes, save/load continuation |
 | `test_data_integrity.py` | 27 | cross-file data rules + every validator message |
 | `test_agent_play.py` | 4 | greedy-agent play, order-log replay, view/API agreement, view-only orders |
 | `test_agent_server.py` | 7 | JSON-lines protocol over the wire, structured rejections, save/load continuation, the real `py -m tbs.api.server` process |
 | `test_agent_protocol.py` | 8 | tolerant plan parsing: fenced/embedded/bare JSON, end_turn absorption, retryable format errors |
-| `test_agent_llm.py` | 11 | OpenAI-compatible request shape, thinking controls, content parts, HTTP retry/backoff vs immediate 4xx, compact prompt, JSONL logging, a real local HTTP round trip |
-| `test_agent_turn.py` | 19 | move-shorthand and friendly option validation, legal-prefix retention, duplicate-order ignoring, repaired retries, exhausted-budget end turn, transport abort, victory without end_turn, replay, stepwise fresh-view play, step budget, one-step whole-turn plans, the async session and its abort |
+| `test_agent_llm.py` | 12 | OpenAI-compatible request shape, thinking controls, content parts, HTTP retry/backoff vs immediate 4xx, compact prompt, bounded move menus, JSONL logging, a real local HTTP round trip |
+| `test_agent_turn.py` | 20 | move-shorthand and friendly option validation, legal-prefix retention, duplicate-order ignoring, a transport move-then-unload plan, repaired retries, exhausted-budget end turn, transport abort, victory without end_turn, replay, stepwise fresh-view play, step budget, one-step whole-turn plans, the async session and its abort |
 | `test_agent_council.py` | 27 | unit assignment, filtered views and prompts, merge priority/dedupe/build rules, snapshot-level order filtering, commander brief, partial and total general failures, parallel merge, roster JSON, council replay |
 | `test_agent_codec.py` | 25 | compact board text budget and canonical order, every legal order round-trip, engine path equivalence, loaded cargo flags, malformed text rejection, a stepwise agent whose orders travel through the codec |
+| `test_amphibious.py` | 5 | landmass ids, stranded marking and ferry hints, a scripted board → sail → enemy-island landing, large-map ferry anchors, and the codec/LLM exposure of the crossing |
 | `test_agent_match.py` | 4 | greedy self-play from the view alone replays exactly; the match CLI writes a save and order log; a real HTTP LLM side drives the full CLI; a council side consults commander and generals |
-| `test_ui_layout.py` | 12 | hex/pixel round trip, centring, fit-to-view for every bundled map, hit-testing, zoom, the reachable-area outline, and a guard that `engine/` imports neither pygame, the UI nor the agent layer |
+| `test_agent_league.py` | 8 | World Cup draw and pot split, five-round schedule with byes and balanced sides, group map rotation, standings and head-to-head tiebreaks, semifinal/final bracket, knockout board/seed resolution, dashboard metadata and report payload |
+| `test_world_cup_runner.py` | 2 | the model-free 10-team setup, five-map group rotation, 24-match state and the asymmetric-knockout opt-in |
+| `test_ui_layout.py` | 13 | hex/pixel round trip, centring, fit-to-view for every bundled map, HQ-focused opening camera for large maps, hit-testing, zoom, the reachable-area outline, and a guard that `engine/` imports neither pygame, the UI nor the agent layer |
 | `test_ui_menu.py` | 8 | menu navigation skips disabled entries, wraps around, and scrolls a window |
 | `test_ui_picker.py` | 5 | scenario titles/metadata, thumbnail sampling, graceful handling of broken maps |
 | `test_ui_info.py` | 5 | hover text for terrain, owners, units, ammo, rearm and status |
+| `test_large_maps.py` | 12 | the `_m` pack dimensions, ten-times-area claim, 50-unit cap, forty-turn replays, and the large-map prompt/codec budgets |
 | `test_ui_buttons.py` | 3 | toolbar layout, overflow and hit-testing |
 | `test_ui_interaction.py` | 22 | select/move/attack/build/action-menu/weapon-picker held to the engine's own options; cursor and attack region; move-then-attack for direct weapons; blocked-attack reasons; a UI-played turn replays from its orders |
 | `test_ui_app.py` | 27 | the real pygame loop on SDL's dummy driver: draw, menus, the titled scenario picker with preview, hover, toolbar, click-to-move, cursor, action menu, status, pause, end turn, build menu, zoom, a local-LLM turn in a worker thread (thinking overlay, input guard, transport-error recovery, side picker), an injected stepwise agent getting a fresh view per batch, and a council menu/turn |
 
 ## Next
 
-- **M8:** done — the local Nemotron endpoint played a full headless game to a
-  turn-60 draw, and its accepted orders replayed exactly. The pygame window uses
-  the same loop; play it in **New Game vs LLM**.
+- **M8:** done — a local OpenAI-compatible model plays a full game. The earlier
+  74B Nemotron run reached a turn-60 draw and replayed exactly; the current
+  league baseline is Qwen3.8-27B IQ3_S. Play it in **New Game vs LLM**.
 - **M10:** done — the council adds a commander pre-brief, five role generals with
   disjoint unit slices, a deterministic priority merger, and graceful partial
   failures. Play it in **New Game vs Council** or through
@@ -526,8 +734,22 @@ tests/          362 tests pinning every rule above
 - **M11:** done — five maps (three fair, one asymmetric, plus the intro),
   metadata and thumbnails in a scrolling picker, an explicit default scenario,
   fit-to-view cameras and per-map fairness tests.
+- **M11b:** done — five `_m` maps at about ten times the tile area, the 50-unit
+  per-team cap, an HQ-focused opening camera with overview fit, a bounded
+  large-map LLM prompt, and a dedicated NCM persona league command.
+- **NCM experiment:** done — the [NCM fork](https://github.com/marcoaurelioguerrap/NCM_fork)
+  trains a 53M NCM player for this engine and releases a base checkpoint. The
+  60-game all-AI league against Qwen3.8-27B IQ3_S is in
+  [`docs/all_ai_league`](docs/all_ai_league); the league used persona checkpoints,
+  not the base download.
 - **M9:** fog of war and scenario configuration.
 - **M12 (proposed):** map authoring tools — a `mapcheck` linter for supply
   connectivity and per-side economy, then a deterministic symmetric map
   generator exposed as "Random Skirmish".
 - **M3 polish:** combat animations, snapshot undo and a minimap.
+
+## License
+
+MIT. See [LICENSE](LICENSE). The NCM fork is a separate MIT-licensed derivative
+of [HazyResearch/ncm](https://github.com/HazyResearch/ncm); this project is not
+an official Stanford or HazyResearch release.

@@ -131,6 +131,14 @@ def draw_frame(
         _draw_tooltip(surface, tooltip_lines, tooltip_pos or (0, 0), fonts)
 
 
+def _on_screen(surface: pygame.Surface, center: tuple[float, float], size: float) -> bool:
+    """Whether a hex centred at ``center`` can touch the drawable surface."""
+    return (
+        -size <= center[0] <= surface.get_width() + size
+        and -size <= center[1] <= surface.get_height() + size
+    )
+
+
 def _draw_terrain(
     surface: pygame.Surface,
     state: GameState,
@@ -141,6 +149,8 @@ def _draw_terrain(
     ids = state.player_ids()
     for pos, tile in sorted(state.map.tiles.items(), key=lambda kv: (kv[0][1], kv[0][0])):
         center = camera.to_screen(pos)
+        if not _on_screen(surface, center, camera.size):
+            continue
         corners = hex_corners(center, camera.size)
         color = palette.terrain_color(tile.terrain)
         if tile.owner:
@@ -157,6 +167,8 @@ def _draw_capture_progress(surface: pygame.Surface, state: GameState, camera: Ca
         if not tile.capture_points or not tile.capture_progress:
             continue
         center = camera.to_screen(tile.pos)
+        if not _on_screen(surface, center, camera.size):
+            continue
         ratio = min(1.0, tile.capture_progress / tile.capture_points)
         width = int(camera.size * 1.3)
         bar = pygame.Rect(int(center[0] - width / 2), int(center[1] + camera.size * 0.72), width, 5)
@@ -171,6 +183,8 @@ def _draw_build_sites(surface: pygame.Surface, state: GameState, camera: Camera)
         if tuple(site.pos) not in buildable:
             continue
         center = camera.to_screen(site.pos)
+        if not _on_screen(surface, center, camera.size):
+            continue
         size = camera.size * 0.16
         rect = pygame.Rect(int(center[0] - size), int(center[1] - size), int(size * 2), int(size * 2))
         pygame.draw.rect(surface, palette.LOAD_HIGHLIGHT, rect, 2)

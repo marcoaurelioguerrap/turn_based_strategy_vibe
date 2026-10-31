@@ -310,4 +310,10 @@ def test_a_minimal_scenario_gets_sane_defaults():
     assert state.players["Solo"].funds == 8000  # a player with no stated purse starts funded
     assert state.current_player == "Solo", "the first listed player simply starts"
     assert state.turn_number == 1 and state.status == "ongoing"
-    assert state.config == {"fog_of_war": False, "max_turns": 200, "damage_luck": True}
+    assert state.config == {
+        "fog_of_war": False,
+        "max_turns": 200,
+        "damage_luck": True,
+        "max_units_per_player": 50,
+        "view_move_limit": 0,
+    }

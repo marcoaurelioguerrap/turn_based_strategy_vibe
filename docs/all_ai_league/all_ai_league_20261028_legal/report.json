@@ -1,0 +1,1201 @@
+{
+  "batch": "all_ai_league_20261028_legal",
+  "agents": [
+    "llm",
+    "ncm",
+    "greedy"
+  ],
+  "labels": {
+    "llm": "Qwen LLM",
+    "ncm": "NCM Vanguard",
+    "greedy": "Greedy conventional"
+  },
+  "maps": [
+    "archipelago",
+    "archipelago_m",
+    "border_skirmish",
+    "border_skirmish_m",
+    "last_stand",
+    "last_stand_m",
+    "mountain_pass",
+    "mountain_pass_m",
+    "urban_delta",
+    "urban_delta_m"
+  ],
+  "max_turns": 50,
+  "games": 30,
+  "standings": {
+    "llm": {
+      "agent": "llm",
+      "label": "Qwen LLM",
+      "games": 20,
+      "wins": 0,
+      "losses": 2,
+      "draws": 18,
+      "unfinished": 0,
+      "failed": 0,
+      "points": 9.0,
+      "board_total": 19164.63,
+      "units_total": 537.0,
+      "average_score": 958.23,
+      "average_units": 26.85
+    },
+    "ncm": {
+      "agent": "ncm",
+      "label": "NCM Vanguard",
+      "games": 20,
+      "wins": 2,
+      "losses": 0,
+      "draws": 18,
+      "unfinished": 0,
+      "failed": 0,
+      "points": 11.0,
+      "board_total": 19094.26,
+      "units_total": 480.0,
+      "average_score": 954.71,
+      "average_units": 24.0
+    },
+    "greedy": {
+      "agent": "greedy",
+      "label": "Greedy conventional",
+      "games": 20,
+      "wins": 0,
+      "losses": 0,
+      "draws": 20,
+      "unfinished": 0,
+      "failed": 0,
+      "points": 10.0,
+      "board_total": 18344.690000000002,
+      "units_total": 105.0,
+      "average_score": 917.23,
+      "average_units": 5.25
+    }
+  },
+  "head_to_head": {
+    "llm": {
+      "ncm": {
+        "wins": 0,
+        "losses": 2,
+        "draws": 8,
+        "failed": 0
+      },
+      "greedy": {
+        "wins": 0,
+        "losses": 0,
+        "draws": 10,
+        "failed": 0
+      }
+    },
+    "ncm": {
+      "llm": {
+        "wins": 2,
+        "losses": 0,
+        "draws": 8,
+        "failed": 0
+      },
+      "greedy": {
+        "wins": 0,
+        "losses": 0,
+        "draws": 10,
+        "failed": 0
+      }
+    },
+    "greedy": {
+      "llm": {
+        "wins": 0,
+        "losses": 0,
+        "draws": 10,
+        "failed": 0
+      },
+      "ncm": {
+        "wins": 0,
+        "losses": 0,
+        "draws": 10,
+        "failed": 0
+      }
+    }
+  },
+  "results": [
+    {
+      "id": "all_ai_league_20261028_legal-all-ai-archipelago-llm-vs-ncm-seed880000",
+      "map": "archipelago",
+      "agents": {
+        "A": "llm",
+        "B": "ncm"
+      },
+      "board": {
+        "A": {
+          "units": 21,
+          "hp": 1925,
+          "sites": 120,
+          "funds": 127800,
+          "hq_hp": 38,
+          "score": 280.25
+        },
+        "B": {
+          "units": 34,
+          "hp": 3226,
+          "sites": 120,
+          "funds": 122200,
+          "hq_hp": 69,
+          "score": 306.26
+        }
+      },
+      "status": "draw",
+      "winner_side": null,
+      "winner": null,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-archipelago-llm-vs-ncm-seed880000.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-archipelago-llm-vs-ncm-seed880000.meta.json",
+      "seconds": 511.6,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261028_legal-all-ai-archipelago-greedy-vs-llm-seed880001",
+      "map": "archipelago",
+      "agents": {
+        "A": "greedy",
+        "B": "llm"
+      },
+      "board": {
+        "A": {
+          "units": 7,
+          "hp": 697,
+          "sites": 120,
+          "funds": 166100,
+          "hq_hp": 100,
+          "score": 253.97
+        },
+        "B": {
+          "units": 22,
+          "hp": 2158,
+          "sites": 120,
+          "funds": 143200,
+          "hq_hp": 100,
+          "score": 283.58
+        }
+      },
+      "status": "draw",
+      "winner_side": null,
+      "winner": null,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-archipelago-greedy-vs-llm-seed880001.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-archipelago-greedy-vs-llm-seed880001.meta.json",
+      "seconds": 341.35,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261028_legal-all-ai-archipelago-ncm-vs-greedy-seed880002",
+      "map": "archipelago",
+      "agents": {
+        "A": "ncm",
+        "B": "greedy"
+      },
+      "board": {
+        "A": {
+          "units": 48,
+          "hp": 4714,
+          "sites": 120,
+          "funds": 116900,
+          "hq_hp": 100,
+          "score": 335.14
+        },
+        "B": {
+          "units": 6,
+          "hp": 518,
+          "sites": 120,
+          "funds": 163000,
+          "hq_hp": 99,
+          "score": 251.18
+        }
+      },
+      "status": "draw",
+      "winner_side": null,
+      "winner": null,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-archipelago-ncm-vs-greedy-seed880002.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-archipelago-ncm-vs-greedy-seed880002.meta.json",
+      "seconds": 82.48,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261028_legal-all-ai-archipelago_m-llm-vs-ncm-seed880103",
+      "map": "archipelago_m",
+      "agents": {
+        "A": "llm",
+        "B": "ncm"
+      },
+      "board": {
+        "A": {
+          "units": 42,
+          "hp": 3756,
+          "sites": 1178,
+          "funds": 258400,
+          "hq_hp": 34,
+          "score": 2435.56
+        },
+        "B": {
+          "units": 37,
+          "hp": 3303,
+          "sites": 1178,
+          "funds": 256200,
+          "hq_hp": 100,
+          "score": 2426.03
+        }
+      },
+      "status": "draw",
+      "winner_side": null,
+      "winner": null,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-archipelago_m-llm-vs-ncm-seed880103.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-archipelago_m-llm-vs-ncm-seed880103.meta.json",
+      "seconds": 811.45,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261028_legal-all-ai-archipelago_m-greedy-vs-llm-seed880104",
+      "map": "archipelago_m",
+      "agents": {
+        "A": "greedy",
+        "B": "llm"
+      },
+      "board": {
+        "A": {
+          "units": 19,
+          "hp": 1900,
+          "sites": 1178,
+          "funds": 296500,
+          "hq_hp": 100,
+          "score": 2394.0
+        },
+        "B": {
+          "units": 50,
+          "hp": 4875,
+          "sites": 1178,
+          "funds": 253800,
+          "hq_hp": 100,
+          "score": 2454.75
+        }
+      },
+      "status": "draw",
+      "winner_side": null,
+      "winner": null,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-archipelago_m-greedy-vs-llm-seed880104.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-archipelago_m-greedy-vs-llm-seed880104.meta.json",
+      "seconds": 704.02,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261028_legal-all-ai-archipelago_m-ncm-vs-greedy-seed880105",
+      "map": "archipelago_m",
+      "agents": {
+        "A": "ncm",
+        "B": "greedy"
+      },
+      "board": {
+        "A": {
+          "units": 50,
+          "hp": 4936,
+          "sites": 1178,
+          "funds": 262100,
+          "hq_hp": 100,
+          "score": 2455.36
+        },
+        "B": {
+          "units": 10,
+          "hp": 901,
+          "sites": 1178,
+          "funds": 291000,
+          "hq_hp": 70,
+          "score": 2375.01
+        }
+      },
+      "status": "draw",
+      "winner_side": null,
+      "winner": null,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-archipelago_m-ncm-vs-greedy-seed880105.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-archipelago_m-ncm-vs-greedy-seed880105.meta.json",
+      "seconds": 240.1,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261028_legal-all-ai-border_skirmish-llm-vs-ncm-seed880206",
+      "map": "border_skirmish",
+      "agents": {
+        "A": "llm",
+        "B": "ncm"
+      },
+      "board": {
+        "A": {
+          "units": 10,
+          "hp": 852,
+          "sites": 48,
+          "funds": 127900,
+          "hq_hp": 0,
+          "score": 114.52
+        },
+        "B": {
+          "units": 16,
+          "hp": 1470,
+          "sites": 48,
+          "funds": 113800,
+          "hq_hp": 100,
+          "score": 126.7
+        }
+      },
+      "status": "draw",
+      "winner_side": null,
+      "winner": null,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-border_skirmish-llm-vs-ncm-seed880206.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-border_skirmish-llm-vs-ncm-seed880206.meta.json",
+      "seconds": 364.65,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261028_legal-all-ai-border_skirmish-greedy-vs-llm-seed880207",
+      "map": "border_skirmish",
+      "agents": {
+        "A": "greedy",
+        "B": "llm"
+      },
+      "board": {
+        "A": {
+          "units": 0,
+          "hp": 0,
+          "sites": 48,
+          "funds": 166100,
+          "hq_hp": 0,
+          "score": 96.0
+        },
+        "B": {
+          "units": 21,
+          "hp": 1887,
+          "sites": 48,
+          "funds": 140200,
+          "hq_hp": 100,
+          "score": 135.87
+        }
+      },
+      "status": "draw",
+      "winner_side": null,
+      "winner": null,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-border_skirmish-greedy-vs-llm-seed880207.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-border_skirmish-greedy-vs-llm-seed880207.meta.json",
+      "seconds": 312.25,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261028_legal-all-ai-border_skirmish-ncm-vs-greedy-seed880208",
+      "map": "border_skirmish",
+      "agents": {
+        "A": "ncm",
+        "B": "greedy"
+      },
+      "board": {
+        "A": {
+          "units": 37,
+          "hp": 3381,
+          "sites": 51,
+          "funds": 145900,
+          "hq_hp": 100,
+          "score": 172.81
+        },
+        "B": {
+          "units": 0,
+          "hp": 0,
+          "sites": 45,
+          "funds": 132200,
+          "hq_hp": 0,
+          "score": 90.0
+        }
+      },
+      "status": "draw",
+      "winner_side": null,
+      "winner": null,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-border_skirmish-ncm-vs-greedy-seed880208.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-border_skirmish-ncm-vs-greedy-seed880208.meta.json",
+      "seconds": 89.24,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261028_legal-all-ai-border_skirmish_m-llm-vs-ncm-seed880309",
+      "map": "border_skirmish_m",
+      "agents": {
+        "A": "llm",
+        "B": "ncm"
+      },
+      "board": {
+        "A": {
+          "units": 36,
+          "hp": 3510,
+          "sites": 525,
+          "funds": 229500,
+          "hq_hp": 0,
+          "score": 1121.1
+        },
+        "B": {
+          "units": 24,
+          "hp": 2172,
+          "sites": 525,
+          "funds": 261800,
+          "hq_hp": 100,
+          "score": 1095.72
+        }
+      },
+      "status": "draw",
+      "winner_side": null,
+      "winner": null,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-border_skirmish_m-llm-vs-ncm-seed880309.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-border_skirmish_m-llm-vs-ncm-seed880309.meta.json",
+      "seconds": 759.72,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261028_legal-all-ai-border_skirmish_m-greedy-vs-llm-seed880310",
+      "map": "border_skirmish_m",
+      "agents": {
+        "A": "greedy",
+        "B": "llm"
+      },
+      "board": {
+        "A": {
+          "units": 20,
+          "hp": 1923,
+          "sites": 525,
+          "funds": 280200,
+          "hq_hp": 100,
+          "score": 1089.23
+        },
+        "B": {
+          "units": 36,
+          "hp": 3389,
+          "sites": 525,
+          "funds": 249100,
+          "hq_hp": 100,
+          "score": 1119.89
+        }
+      },
+      "status": "draw",
+      "winner_side": null,
+      "winner": null,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-border_skirmish_m-greedy-vs-llm-seed880310.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-border_skirmish_m-greedy-vs-llm-seed880310.meta.json",
+      "seconds": 473.09,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261028_legal-all-ai-border_skirmish_m-ncm-vs-greedy-seed880311",
+      "map": "border_skirmish_m",
+      "agents": {
+        "A": "ncm",
+        "B": "greedy"
+      },
+      "board": {
+        "A": {
+          "units": 15,
+          "hp": 1174,
+          "sites": 525,
+          "funds": 264000,
+          "hq_hp": 100,
+          "score": 1076.74
+        },
+        "B": {
+          "units": 6,
+          "hp": 534,
+          "sites": 525,
+          "funds": 275000,
+          "hq_hp": 58,
+          "score": 1061.34
+        }
+      },
+      "status": "draw",
+      "winner_side": null,
+      "winner": null,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-border_skirmish_m-ncm-vs-greedy-seed880311.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-border_skirmish_m-ncm-vs-greedy-seed880311.meta.json",
+      "seconds": 237.93,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261028_legal-all-ai-last_stand-llm-vs-ncm-seed880412",
+      "map": "last_stand",
+      "agents": {
+        "A": "llm",
+        "B": "ncm"
+      },
+      "board": {
+        "A": {
+          "units": 0,
+          "hp": 0,
+          "sites": 77,
+          "funds": 54800,
+          "hq_hp": 0,
+          "score": 154.0
+        },
+        "B": {
+          "units": 9,
+          "hp": 845,
+          "sites": 83,
+          "funds": 58600,
+          "hq_hp": 100,
+          "score": 183.45
+        }
+      },
+      "status": "victory",
+      "winner_side": "B",
+      "winner": "ncm",
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-last_stand-llm-vs-ncm-seed880412.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-last_stand-llm-vs-ncm-seed880412.meta.json",
+      "seconds": 573.5,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261028_legal-all-ai-last_stand-greedy-vs-llm-seed880413",
+      "map": "last_stand",
+      "agents": {
+        "A": "greedy",
+        "B": "llm"
+      },
+      "board": {
+        "A": {
+          "units": 1,
+          "hp": 100,
+          "sites": 80,
+          "funds": 177000,
+          "hq_hp": 100,
+          "score": 162.0
+        },
+        "B": {
+          "units": 18,
+          "hp": 1689,
+          "sites": 80,
+          "funds": 121800,
+          "hq_hp": 57,
+          "score": 194.89
+        }
+      },
+      "status": "draw",
+      "winner_side": null,
+      "winner": null,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-last_stand-greedy-vs-llm-seed880413.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-last_stand-greedy-vs-llm-seed880413.meta.json",
+      "seconds": 1838.21,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261028_legal-all-ai-last_stand-ncm-vs-greedy-seed880414",
+      "map": "last_stand",
+      "agents": {
+        "A": "ncm",
+        "B": "greedy"
+      },
+      "board": {
+        "A": {
+          "units": 26,
+          "hp": 2465,
+          "sites": 80,
+          "funds": 147000,
+          "hq_hp": 100,
+          "score": 210.65
+        },
+        "B": {
+          "units": 0,
+          "hp": 0,
+          "sites": 80,
+          "funds": 135000,
+          "hq_hp": 0,
+          "score": 160.0
+        }
+      },
+      "status": "draw",
+      "winner_side": null,
+      "winner": null,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-last_stand-ncm-vs-greedy-seed880414.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-last_stand-ncm-vs-greedy-seed880414.meta.json",
+      "seconds": 80.49,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261028_legal-all-ai-last_stand_m-llm-vs-ncm-seed880515",
+      "map": "last_stand_m",
+      "agents": {
+        "A": "llm",
+        "B": "ncm"
+      },
+      "board": {
+        "A": {
+          "units": 28,
+          "hp": 2653,
+          "sites": 798,
+          "funds": 224900,
+          "hq_hp": 79,
+          "score": 1650.53
+        },
+        "B": {
+          "units": 21,
+          "hp": 2084,
+          "sites": 770,
+          "funds": 209800,
+          "hq_hp": 100,
+          "score": 1581.84
+        }
+      },
+      "status": "draw",
+      "winner_side": null,
+      "winner": null,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-last_stand_m-llm-vs-ncm-seed880515.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-last_stand_m-llm-vs-ncm-seed880515.meta.json",
+      "seconds": 3324.21,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261028_legal-all-ai-last_stand_m-greedy-vs-llm-seed880516",
+      "map": "last_stand_m",
+      "agents": {
+        "A": "greedy",
+        "B": "llm"
+      },
+      "board": {
+        "A": {
+          "units": 3,
+          "hp": 300,
+          "sites": 800,
+          "funds": 274000,
+          "hq_hp": 100,
+          "score": 1606.0
+        },
+        "B": {
+          "units": 50,
+          "hp": 4826,
+          "sites": 768,
+          "funds": 184700,
+          "hq_hp": 100,
+          "score": 1634.26
+        }
+      },
+      "status": "draw",
+      "winner_side": null,
+      "winner": null,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-last_stand_m-greedy-vs-llm-seed880516.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-last_stand_m-greedy-vs-llm-seed880516.meta.json",
+      "seconds": 617.51,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261028_legal-all-ai-last_stand_m-ncm-vs-greedy-seed880517",
+      "map": "last_stand_m",
+      "agents": {
+        "A": "ncm",
+        "B": "greedy"
+      },
+      "board": {
+        "A": {
+          "units": 15,
+          "hp": 1092,
+          "sites": 800,
+          "funds": 238000,
+          "hq_hp": 100,
+          "score": 1625.92
+        },
+        "B": {
+          "units": 5,
+          "hp": 388,
+          "sites": 768,
+          "funds": 218000,
+          "hq_hp": 76,
+          "score": 1544.88
+        }
+      },
+      "status": "draw",
+      "winner_side": null,
+      "winner": null,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-last_stand_m-ncm-vs-greedy-seed880517.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-last_stand_m-ncm-vs-greedy-seed880517.meta.json",
+      "seconds": 237.69,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261028_legal-all-ai-mountain_pass-llm-vs-ncm-seed880618",
+      "map": "mountain_pass",
+      "agents": {
+        "A": "llm",
+        "B": "ncm"
+      },
+      "board": {
+        "A": {
+          "units": 5,
+          "hp": 499,
+          "sites": 89,
+          "funds": 117100,
+          "hq_hp": 0,
+          "score": 187.99
+        },
+        "B": {
+          "units": 15,
+          "hp": 1336,
+          "sites": 91,
+          "funds": 133300,
+          "hq_hp": 100,
+          "score": 210.36
+        }
+      },
+      "status": "draw",
+      "winner_side": null,
+      "winner": null,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-mountain_pass-llm-vs-ncm-seed880618.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-mountain_pass-llm-vs-ncm-seed880618.meta.json",
+      "seconds": 369.73,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261028_legal-all-ai-mountain_pass-greedy-vs-llm-seed880619",
+      "map": "mountain_pass",
+      "agents": {
+        "A": "greedy",
+        "B": "llm"
+      },
+      "board": {
+        "A": {
+          "units": 1,
+          "hp": 100,
+          "sites": 91,
+          "funds": 161600,
+          "hq_hp": 100,
+          "score": 184.0
+        },
+        "B": {
+          "units": 8,
+          "hp": 692,
+          "sites": 89,
+          "funds": 128600,
+          "hq_hp": 100,
+          "score": 192.92
+        }
+      },
+      "status": "draw",
+      "winner_side": null,
+      "winner": null,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-mountain_pass-greedy-vs-llm-seed880619.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-mountain_pass-greedy-vs-llm-seed880619.meta.json",
+      "seconds": 219.25,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261028_legal-all-ai-mountain_pass-ncm-vs-greedy-seed880620",
+      "map": "mountain_pass",
+      "agents": {
+        "A": "ncm",
+        "B": "greedy"
+      },
+      "board": {
+        "A": {
+          "units": 21,
+          "hp": 1605,
+          "sites": 90,
+          "funds": 126800,
+          "hq_hp": 100,
+          "score": 217.05
+        },
+        "B": {
+          "units": 0,
+          "hp": 0,
+          "sites": 90,
+          "funds": 148000,
+          "hq_hp": 0,
+          "score": 180.0
+        }
+      },
+      "status": "draw",
+      "winner_side": null,
+      "winner": null,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-mountain_pass-ncm-vs-greedy-seed880620.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-mountain_pass-ncm-vs-greedy-seed880620.meta.json",
+      "seconds": 85.49,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261028_legal-all-ai-mountain_pass_m-llm-vs-ncm-seed880721",
+      "map": "mountain_pass_m",
+      "agents": {
+        "A": "llm",
+        "B": "ncm"
+      },
+      "board": {
+        "A": {
+          "units": 26,
+          "hp": 2429,
+          "sites": 864,
+          "funds": 219400,
+          "hq_hp": 39,
+          "score": 1778.29
+        },
+        "B": {
+          "units": 9,
+          "hp": 726,
+          "sites": 864,
+          "funds": 230900,
+          "hq_hp": 100,
+          "score": 1744.26
+        }
+      },
+      "status": "draw",
+      "winner_side": null,
+      "winner": null,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-mountain_pass_m-llm-vs-ncm-seed880721.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-mountain_pass_m-llm-vs-ncm-seed880721.meta.json",
+      "seconds": 1068.84,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261028_legal-all-ai-mountain_pass_m-greedy-vs-llm-seed880722",
+      "map": "mountain_pass_m",
+      "agents": {
+        "A": "greedy",
+        "B": "llm"
+      },
+      "board": {
+        "A": {
+          "units": 6,
+          "hp": 588,
+          "sites": 864,
+          "funds": 249600,
+          "hq_hp": 100,
+          "score": 1739.88
+        },
+        "B": {
+          "units": 27,
+          "hp": 2501,
+          "sites": 864,
+          "funds": 218800,
+          "hq_hp": 93,
+          "score": 1780.01
+        }
+      },
+      "status": "draw",
+      "winner_side": null,
+      "winner": null,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-mountain_pass_m-greedy-vs-llm-seed880722.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-mountain_pass_m-greedy-vs-llm-seed880722.meta.json",
+      "seconds": 544.91,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261028_legal-all-ai-mountain_pass_m-ncm-vs-greedy-seed880723",
+      "map": "mountain_pass_m",
+      "agents": {
+        "A": "ncm",
+        "B": "greedy"
+      },
+      "board": {
+        "A": {
+          "units": 23,
+          "hp": 2160,
+          "sites": 864,
+          "funds": 226800,
+          "hq_hp": 100,
+          "score": 1772.6
+        },
+        "B": {
+          "units": 1,
+          "hp": 100,
+          "sites": 864,
+          "funds": 245000,
+          "hq_hp": 0,
+          "score": 1730.0
+        }
+      },
+      "status": "draw",
+      "winner_side": null,
+      "winner": null,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-mountain_pass_m-ncm-vs-greedy-seed880723.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-mountain_pass_m-ncm-vs-greedy-seed880723.meta.json",
+      "seconds": 247.52,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261028_legal-all-ai-urban_delta-llm-vs-ncm-seed880824",
+      "map": "urban_delta",
+      "agents": {
+        "A": "llm",
+        "B": "ncm"
+      },
+      "board": {
+        "A": {
+          "units": 12,
+          "hp": 981,
+          "sites": 77,
+          "funds": 80500,
+          "hq_hp": 0,
+          "score": 175.81
+        },
+        "B": {
+          "units": 7,
+          "hp": 597,
+          "sites": 83,
+          "funds": 104500,
+          "hq_hp": 100,
+          "score": 178.97
+        }
+      },
+      "status": "victory",
+      "winner_side": "B",
+      "winner": "ncm",
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-urban_delta-llm-vs-ncm-seed880824.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-urban_delta-llm-vs-ncm-seed880824.meta.json",
+      "seconds": 273.95,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261028_legal-all-ai-urban_delta-greedy-vs-llm-seed880825",
+      "map": "urban_delta",
+      "agents": {
+        "A": "greedy",
+        "B": "llm"
+      },
+      "board": {
+        "A": {
+          "units": 1,
+          "hp": 46,
+          "sites": 80,
+          "funds": 247700,
+          "hq_hp": 46,
+          "score": 161.46
+        },
+        "B": {
+          "units": 39,
+          "hp": 3624,
+          "sites": 80,
+          "funds": 202000,
+          "hq_hp": 100,
+          "score": 235.24
+        }
+      },
+      "status": "draw",
+      "winner_side": null,
+      "winner": null,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-urban_delta-greedy-vs-llm-seed880825.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-urban_delta-greedy-vs-llm-seed880825.meta.json",
+      "seconds": 514.84,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261028_legal-all-ai-urban_delta-ncm-vs-greedy-seed880826",
+      "map": "urban_delta",
+      "agents": {
+        "A": "ncm",
+        "B": "greedy"
+      },
+      "board": {
+        "A": {
+          "units": 37,
+          "hp": 3566,
+          "sites": 80,
+          "funds": 197300,
+          "hq_hp": 100,
+          "score": 232.66
+        },
+        "B": {
+          "units": 0,
+          "hp": 0,
+          "sites": 80,
+          "funds": 243000,
+          "hq_hp": 0,
+          "score": 160.0
+        }
+      },
+      "status": "draw",
+      "winner_side": null,
+      "winner": null,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-urban_delta-ncm-vs-greedy-seed880826.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-urban_delta-ncm-vs-greedy-seed880826.meta.json",
+      "seconds": 91.57,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261028_legal-all-ai-urban_delta_m-llm-vs-ncm-seed880927",
+      "map": "urban_delta_m",
+      "agents": {
+        "A": "llm",
+        "B": "ncm"
+      },
+      "board": {
+        "A": {
+          "units": 36,
+          "hp": 3218,
+          "sites": 768,
+          "funds": 303700,
+          "hq_hp": 0,
+          "score": 1604.18
+        },
+        "B": {
+          "units": 15,
+          "hp": 996,
+          "sites": 768,
+          "funds": 310600,
+          "hq_hp": 0,
+          "score": 1560.96
+        }
+      },
+      "status": "draw",
+      "winner_side": null,
+      "winner": null,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-urban_delta_m-llm-vs-ncm-seed880927.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-urban_delta_m-llm-vs-ncm-seed880927.meta.json",
+      "seconds": 883.49,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261028_legal-all-ai-urban_delta_m-greedy-vs-llm-seed880928",
+      "map": "urban_delta_m",
+      "agents": {
+        "A": "greedy",
+        "B": "llm"
+      },
+      "board": {
+        "A": {
+          "units": 12,
+          "hp": 1200,
+          "sites": 769,
+          "funds": 348400,
+          "hq_hp": 100,
+          "score": 1562.0
+        },
+        "B": {
+          "units": 50,
+          "hp": 4699,
+          "sites": 767,
+          "funds": 279000,
+          "hq_hp": 100,
+          "score": 1630.99
+        }
+      },
+      "status": "draw",
+      "winner_side": null,
+      "winner": null,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-urban_delta_m-greedy-vs-llm-seed880928.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-urban_delta_m-greedy-vs-llm-seed880928.meta.json",
+      "seconds": 794.68,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261028_legal-all-ai-urban_delta_m-ncm-vs-greedy-seed880929",
+      "map": "urban_delta_m",
+      "agents": {
+        "A": "ncm",
+        "B": "greedy"
+      },
+      "board": {
+        "A": {
+          "units": 21,
+          "hp": 1978,
+          "sites": 770,
+          "funds": 336300,
+          "hq_hp": 100,
+          "score": 1580.78
+        },
+        "B": {
+          "units": 7,
+          "hp": 474,
+          "sites": 766,
+          "funds": 318200,
+          "hq_hp": 38,
+          "score": 1543.74
+        }
+      },
+      "status": "draw",
+      "winner_side": null,
+      "winner": null,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-urban_delta_m-ncm-vs-greedy-seed880929.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261028_legal-all-ai-urban_delta_m-ncm-vs-greedy-seed880929.meta.json",
+      "seconds": 246.07,
+      "replay_matches": true
+    }
+  ],
+  "updated_at": "2026-10-30T16:43:29.633745+00:00"
+}

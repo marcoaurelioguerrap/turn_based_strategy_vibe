@@ -1,7 +1,8 @@
 """A deterministic scripted agent, useful as a baseline and for offline matches.
 
 It sees only the same view an LLM sees, so it is a fair smoke test of the agent
-protocol: attacks first, then captures underfoot, then walks toward the nearest
+protocol: it first executes the engine's ferry hints (a transport pickup, sail
+or landing), then attacks, captures underfoot, and walks toward the nearest
 enemy or uncaptured site.  It never builds and never invents coordinates.
 """
 
@@ -9,6 +10,7 @@ from __future__ import annotations
 
 from typing import Any
 
+from tbs.agents.ferry import plan_ferry
 from tbs.agents.protocol import AgentPlan, TurnRequest
 from tbs.engine.hexgrid import hex_distance
 
@@ -37,11 +39,15 @@ class GreedyAgent:
             if site.get("owner") != current and site.get("capture_needed") is not None:
                 targets.append(tuple(site["pos"]))
 
-        orders: list[dict[str, Any]] = []
+        ferry = plan_ferry(view)
+        orders: list[dict[str, Any]] = list(ferry.orders)
         attacked: set[str] = set()
-        used_destinations: set[tuple[int, int]] = set()
+        used_destinations: set[tuple[int, int]] = set(ferry.destinations)
+        claimed: set[str] = set(ferry.claimed)
 
         for unit_id in sorted(view.get("unit_actions", {})):
+            if unit_id in claimed:
+                continue
             summary = view["unit_actions"][unit_id]
             if not isinstance(summary, dict):
                 continue

@@ -1,0 +1,306 @@
+{
+  "maps": {
+    "archipelago": {
+      "games": 3,
+      "landed_games": 3,
+      "enemy_home_games": 3,
+      "first_landing_avg": 2,
+      "first_landing_best": 2,
+      "units_landed": 29,
+      "enemy_home_units": 29,
+      "final_landed_units": 6,
+      "final_enemy_home_units": 6,
+      "loads": 26,
+      "unloads": 26,
+      "wins": 0,
+      "draws": 3
+    },
+    "archipelago_m": {
+      "games": 3,
+      "landed_games": 3,
+      "enemy_home_games": 3,
+      "first_landing_avg": 7,
+      "first_landing_best": 7,
+      "units_landed": 22,
+      "enemy_home_units": 22,
+      "final_landed_units": 6,
+      "final_enemy_home_units": 6,
+      "loads": 20,
+      "unloads": 20,
+      "wins": 0,
+      "draws": 3
+    }
+  },
+  "games": [
+    {
+      "map": "archipelago",
+      "seed": 900000,
+      "status": "draw",
+      "winner": null,
+      "turns": 21,
+      "first_landing_turn": 2,
+      "first_landing_side": "A",
+      "landed_units": [
+        {
+          "unit": "A6",
+          "owner": "A",
+          "type": "truck",
+          "island": 1
+        }
+      ],
+      "enemy_home_units": [
+        {
+          "unit": "A6",
+          "owner": "A",
+          "type": "truck",
+          "island": 1
+        }
+      ],
+      "ever_landed": 9,
+      "ever_enemy_home": 9,
+      "loads": 8,
+      "unloads": 8,
+      "builds": 0,
+      "captures": 0,
+      "moves": 54,
+      "holds": 0
+    },
+    {
+      "map": "archipelago",
+      "seed": 900001,
+      "status": "draw",
+      "winner": null,
+      "turns": 21,
+      "first_landing_turn": 2,
+      "first_landing_side": "A",
+      "landed_units": [
+        {
+          "unit": "B2",
+          "owner": "B",
+          "type": "infantry",
+          "island": 0
+        },
+        {
+          "unit": "B4",
+          "owner": "B",
+          "type": "tank",
+          "island": 0
+        },
+        {
+          "unit": "B6",
+          "owner": "B",
+          "type": "truck",
+          "island": 0
+        },
+        {
+          "unit": "B7",
+          "owner": "B",
+          "type": "aa_missile",
+          "island": 0
+        }
+      ],
+      "enemy_home_units": [
+        {
+          "unit": "B2",
+          "owner": "B",
+          "type": "infantry",
+          "island": 0
+        },
+        {
+          "unit": "B4",
+          "owner": "B",
+          "type": "tank",
+          "island": 0
+        },
+        {
+          "unit": "B6",
+          "owner": "B",
+          "type": "truck",
+          "island": 0
+        },
+        {
+          "unit": "B7",
+          "owner": "B",
+          "type": "aa_missile",
+          "island": 0
+        }
+      ],
+      "ever_landed": 10,
+      "ever_enemy_home": 10,
+      "loads": 9,
+      "unloads": 9,
+      "builds": 0,
+      "captures": 0,
+      "moves": 63,
+      "holds": 0
+    },
+    {
+      "map": "archipelago",
+      "seed": 900002,
+      "status": "draw",
+      "winner": null,
+      "turns": 21,
+      "first_landing_turn": 2,
+      "first_landing_side": "A",
+      "landed_units": [
+        {
+          "unit": "B7",
+          "owner": "B",
+          "type": "aa_missile",
+          "island": 0
+        }
+      ],
+      "enemy_home_units": [
+        {
+          "unit": "B7",
+          "owner": "B",
+          "type": "aa_missile",
+          "island": 0
+        }
+      ],
+      "ever_landed": 10,
+      "ever_enemy_home": 10,
+      "loads": 9,
+      "unloads": 9,
+      "builds": 0,
+      "captures": 0,
+      "moves": 67,
+      "holds": 0
+    },
+    {
+      "map": "archipelago_m",
+      "seed": 901000,
+      "status": "draw",
+      "winner": null,
+      "turns": 21,
+      "first_landing_turn": 7,
+      "first_landing_side": "A",
+      "landed_units": [
+        {
+          "unit": "A17",
+          "owner": "A",
+          "type": "infantry",
+          "island": 1
+        },
+        {
+          "unit": "B22",
+          "owner": "B",
+          "type": "tank",
+          "island": 0
+        }
+      ],
+      "enemy_home_units": [
+        {
+          "unit": "A17",
+          "owner": "A",
+          "type": "infantry",
+          "island": 1
+        },
+        {
+          "unit": "B22",
+          "owner": "B",
+          "type": "tank",
+          "island": 0
+        }
+      ],
+      "ever_landed": 7,
+      "ever_enemy_home": 7,
+      "loads": 7,
+      "unloads": 7,
+      "builds": 0,
+      "captures": 0,
+      "moves": 288,
+      "holds": 0
+    },
+    {
+      "map": "archipelago_m",
+      "seed": 901001,
+      "status": "draw",
+      "winner": null,
+      "turns": 21,
+      "first_landing_turn": 7,
+      "first_landing_side": "A",
+      "landed_units": [
+        {
+          "unit": "A17",
+          "owner": "A",
+          "type": "infantry",
+          "island": 1
+        },
+        {
+          "unit": "B22",
+          "owner": "B",
+          "type": "tank",
+          "island": 0
+        }
+      ],
+      "enemy_home_units": [
+        {
+          "unit": "A17",
+          "owner": "A",
+          "type": "infantry",
+          "island": 1
+        },
+        {
+          "unit": "B22",
+          "owner": "B",
+          "type": "tank",
+          "island": 0
+        }
+      ],
+      "ever_landed": 8,
+      "ever_enemy_home": 8,
+      "loads": 7,
+      "unloads": 7,
+      "builds": 0,
+      "captures": 0,
+      "moves": 295,
+      "holds": 0
+    },
+    {
+      "map": "archipelago_m",
+      "seed": 901002,
+      "status": "draw",
+      "winner": null,
+      "turns": 21,
+      "first_landing_turn": 7,
+      "first_landing_side": "A",
+      "landed_units": [
+        {
+          "unit": "A21",
+          "owner": "A",
+          "type": "infantry",
+          "island": 1
+        },
+        {
+          "unit": "B25",
+          "owner": "B",
+          "type": "infantry",
+          "island": 0
+        }
+      ],
+      "enemy_home_units": [
+        {
+          "unit": "A21",
+          "owner": "A",
+          "type": "infantry",
+          "island": 1
+        },
+        {
+          "unit": "B25",
+          "owner": "B",
+          "type": "infantry",
+          "island": 0
+        }
+      ],
+      "ever_landed": 7,
+      "ever_enemy_home": 7,
+      "loads": 6,
+      "unloads": 6,
+      "builds": 0,
+      "captures": 0,
+      "moves": 295,
+      "holds": 0
+    }
+  ]
+}

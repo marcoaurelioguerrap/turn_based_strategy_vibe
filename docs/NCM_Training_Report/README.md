@@ -6,7 +6,6 @@ This folder contains the R/Quarto source and rendered PDF for the TBS NCM traini
 - `ncm_training.pdf` — rendered A4 PDF
 - `assets/overview.png` — NCM overview figure
 - `data/` — small snapshots of the training summaries, metrics, and reports used by the R chunks
-- `ncm_training_files/` — generated figure assets from the last render (safe to delete; Quarto recreates them)
 
 ## Render
 

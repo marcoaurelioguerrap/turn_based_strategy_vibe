@@ -450,6 +450,9 @@ class Controller:
     # -- build menu ---------------------------------------------------------
 
     def open_build_menu(self, state: GameState, pos: Hex | None = None) -> Hex | None:
+        if not rules.build_options(state, state.current_player):
+            self.build_site = None
+            return None
         if pos is not None and self._is_empty_build_site(state, pos, state.current_player):
             self.mode = MODE_BUILD
             self.build_site = tuple(pos)

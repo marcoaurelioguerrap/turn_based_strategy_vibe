@@ -27,6 +27,7 @@ from pathlib import Path
 from typing import Any, Callable
 
 from tbs.agents.protocol import AgentPlan, PlanFormatError, TurnRequest, parse_plan
+from tbs.engine.hexgrid import hex_distance, hex_neighbors
 
 __all__ = [
     "DEFAULT_BASE_URL",
@@ -42,6 +43,12 @@ __all__ = [
 
 #: Unsloth Desktop's local OpenAI-compatible server on this machine.
 DEFAULT_BASE_URL = "http://127.0.0.1:8888/v1"
+
+#: The full engine view can list every reachable hex for every unit.  That is
+#: useful to an external agent with a large context, but a local model on an 8k
+#: window needs a bounded menu.  This cap keeps the nearest/farthest destinations
+#: plus every site, contact hex and frontier hex (see ``_bound_actions``).
+MAX_MOVE_OPTIONS = 12
 
 class LlmError(Exception):
     """Base class for client failures."""
@@ -160,6 +167,11 @@ class LlmClient:
             # reasoning turn can consume the whole completion budget before it
             # emits JSON, so the game disables it by default on small contexts.
             payload["enable_thinking"] = self.config.enable_thinking
+            # llama.cpp's OpenAI-compatible server reads the same switch from
+            # the Jinja template kwargs rather than the top-level field.
+            payload["chat_template_kwargs"] = {
+                "enable_thinking": self.config.enable_thinking
+            }
         if self.config.reasoning_effort is not None:
             payload["reasoning_effort"] = self.config.reasoning_effort
         body = json.dumps(payload).encode("utf-8")
@@ -192,8 +204,8 @@ class LlmClient:
 
         raise last_error or LlmTransportError("the LLM request failed")
 
-    def as_agent(self, *, logger: JsonlLogger | None = None, history: int = 8) -> "SingleLlmAgent":
-        return SingleLlmAgent(self, logger=logger, history=history)
+    def as_agent(self, *, logger: JsonlLogger | None = None, history: int = 8, auto_tactics: bool = True) -> "SingleLlmAgent":
+        return SingleLlmAgent(self, logger=logger, history=history, auto_tactics=auto_tactics)
 
 
 def _http_detail(exc: urllib.error.HTTPError) -> str:
@@ -289,12 +301,14 @@ def _system_prompt(
     return (
         opening
         + "Your goal is to win: capture the enemy HQ (the objective) or eliminate all enemy units.\n"
-        "You will receive the complete game view as JSON. Plan the whole turn, then reply with\n"
+        "You will receive the game view as JSON. On large maps move_to is a bounded sample of\n"
+        "useful legal destinations, not every reachable hex. Plan the whole turn, then reply with\n"
         "exactly one JSON object and nothing else - no markdown and no prose outside the JSON.\n"
         "\n"
         "Response schema:\n"
         '{"orders":[{"action":"move","unit":"A2","to":[q,r]},'
-        '{"action":"attack","unit":"A3","target":"B2","weapon":"optional-weapon-id"}],'
+        '{"action":"attack","unit":"A3","target":"B2","weapon":"optional-weapon-id"},'
+        '{"action":"build","site":[q,r],"unit":"infantry"}],'
         '"commentary":"one short sentence"}\n'
         "\n"
         "Order shapes (use exact ids and coordinates from the view):\n"
@@ -310,16 +324,45 @@ def _system_prompt(
         "\n"
         "Rules for a legal turn:\n"
         "- Only order units in unit_actions whose entry is not acted/loaded/new.\n"
-        "- Each unit gets exactly one order this turn. The attack list is only valid\n"
+        "- Each unit gets one order this turn, except a transport may move and then\n"
+        "  load or unload one cargo in the same turn. The attack list is only valid\n"
         "  from the unit's current position, so do not move and attack with the same\n"
-        "  unit. Choose one: move OR attack OR capture OR load OR unload OR hold.\n"
+        "  unit. Choose one: move OR attack OR capture OR load OR unload OR hold\n"
+        "  (transports: move then load/unload is allowed; put the move first).\n"
         "- For an attack, copy a target/weapon pair from unit_actions[id].attack.  Any\n"
         "  other target or weapon is rejected; never list two attacks for one unit.\n"
         "- Move only to destinations the view lists; never invent a path or a coordinate.\n"
-        "- Build only from build_options, only affordable entries, and only if it helps\n"
-        "  you win.  Do not build at a site occupied by any unit on the map.\n"
+        "- Build only from build_options, only affordable entries. Build orders are\n"
+        "  separate from unit_actions and do not use a unit's action.\n"
+        "- Do not build at a site occupied by any unit on the map.\n"
         "- Do not output end_turn; the coordinator ends your turn after applying your orders.\n"
         "- If a unit has no useful action, omit it or hold it. Empty orders are valid.\n"
+        "\n"
+        "AMPHIBIOUS OPERATIONS:\n"
+        "- If the view has a ferry object, it is the engine's recommended crossing.\n"
+        "  For action 'load', load that cargo. For 'pickup', move the cargo to\n"
+        "  cargo_to and the transport to transport_to, then load. For 'unload',\n"
+        "  unload at 'at'. For 'sail', move the transport to transport_to and unload\n"
+        "  at 'at'. For 'reposition', sail the empty transport to transport_to to\n"
+        "  fetch the next cargo. A stranded unit cannot reach any enemy or neutral\n"
+        "  site by land: do not march it into the sea; board it instead.\n"
+        "\n"
+        "ECONOMY AND BUILDING:\n"
+        "- build_options lists units you can produce right now at your own free\n"
+        "  factories, ports and airports.\n"
+        "- Spend your income: if build_options is non-empty, include at least one build\n"
+        "  order this turn unless you are deliberately saving for a specific expensive\n"
+        "  unit. Unspent income is wasted; production wins long games.\n"
+        '- Build order: {"action":"build","site":[q,r],"unit":"<unit type id>"} using an\n'
+        '  affordable build_options entry. "unit" is the type to produce, not an existing\n'
+        "  unit id.\n"
+        "\n"
+        "FINISHING THE GAME:\n"
+        "- A draw is not a win. If the enemy HQ or a unit defending it is attackable,\n"
+        "  attack it. Use infantry to capture the enemy HQ objective; do not stop at\n"
+        "  board control.\n"
+        "- If you have a stronger army, push the enemy HQ. Do not spend the turn holding.\n"
+        "- A unit with a legal attack or objective capture should not hold.\n"
         "\n"
         "Tactics: focus fire to destroy units; capture cities/factories for income; keep indirect\n"
         "weapons stationary; protect your HQ; use terrain cover; do not leave your own HQ exposed.\n"
@@ -340,6 +383,10 @@ def _compact_view(
     council member's own slice; the rest of the board stays visible.
     """
     compact: dict[str, Any] = {}
+    terrain_rows = view.get("map_terrain_rows") or []
+    # Large maps get the strict prompt budget: one unit layer instead of three,
+    # no redundant ownership layer, and a shorter unit table.
+    large = len(terrain_rows) * (len(terrain_rows[0]) if terrain_rows else 0) > 600
     for key in (
         "scenario",
         "seed",
@@ -348,13 +395,15 @@ def _compact_view(
         "current_player",
         "map_size",
         "map_terrain_rows",
-        "map_ownership_rows",
-        "map_unit_rows",
         "coordinates",
         "players",
     ):
         if key in view:
             compact[key] = view[key]
+    if not large and "map_ownership_rows" in view:
+        # Sites already carry their owner; the duplicate territory layer is
+        # only worth its tokens on a small board.
+        compact["map_ownership_rows"] = view["map_ownership_rows"]
     if view.get("winner"):
         compact["winner"] = view["winner"]
     if view.get("unit_stacks"):
@@ -362,6 +411,8 @@ def _compact_view(
         for key in ("map_ground_unit_rows", "map_air_unit_rows"):
             if key in view:
                 compact[key] = view[key]
+    elif "map_unit_rows" in view:
+        compact["map_unit_rows"] = view["map_unit_rows"]
 
     compact["sites"] = [
         {
@@ -374,8 +425,13 @@ def _compact_view(
 
     compact["units"] = []
     for unit in view.get("units", []):
-        entry = {key: unit[key] for key in ("id", "owner", "type", "name", "pos", "hp", "max_hp") if key in unit}
-        for key in ("ammo", "fuel", "cargo"):
+        keys = ("id", "owner", "type", "pos", "hp") if large else (
+            "id", "owner", "type", "name", "pos", "hp", "max_hp"
+        )
+        entry = {key: unit[key] for key in keys if key in unit}
+        # The compact menu has already filtered attacks and moves by ammo/fuel;
+        # on a large map the exact counters are redundant prompt weight.
+        for key in ("cargo",) if large else ("ammo", "fuel", "cargo"):
             if unit.get(key) not in (None, {}, []):
                 entry[key] = unit[key]
         for key in ("loaded", "moved", "acted", "new", "can_rearm"):
@@ -387,19 +443,308 @@ def _compact_view(
         compact["build_options"] = [
             {key: option[key] for key in ("site", "unit", "cost", "affordable") if key in option}
             for option in view["build_options"]
+            if option.get("affordable", True)
         ]
+    if "ferry" in view:
+        compact["ferry"] = view["ferry"]
     if "unit_actions" in view:
         actions = view["unit_actions"]
         if allowed_units is not None:
             allowed = set(allowed_units)
             actions = {unit_id: entry for unit_id, entry in actions.items() if unit_id in allowed}
+        if large:
+            # The move/attack list already shows what is possible; the
+            # explanatory blocker strings are prompt weight on a 50-unit map.
+            actions = {
+                unit_id: (
+                    {key: value for key, value in entry.items() if key != "blockers"}
+                    if isinstance(entry, dict)
+                    else entry
+                )
+                for unit_id, entry in actions.items()
+            }
         compact["unit_actions"] = actions
     return compact
 
 
-def build_messages(request: TurnRequest) -> list[dict[str, str]]:
+def _objective_summary(view: dict[str, Any], player: str) -> dict[str, Any]:
+    """A small, high-signal victory summary for the top of the prompt.
+
+    The full view already contains every fact, but a 27B model can miss the
+    objective inside a 50-unit action table.  This names the enemy HQ, the
+    units that can hit it, and any objective a unit can capture right now.
+    """
+    units = view.get("units") or []
+    sites = view.get("sites") or []
+    actions = view.get("unit_actions") or {}
+    own_units = [unit for unit in units if unit.get("owner") == player]
+    enemy_hq = next(
+        (
+            unit
+            for unit in units
+            if unit.get("owner") != player and unit.get("type") == "hq"
+        ),
+        None,
+    )
+
+    summary: dict[str, Any] = {
+        "enemy_hq": None,
+        "best_hq_attacks": [],
+        "capturable_objectives": [],
+        "unit_cap": None,
+        "standing": None,
+    }
+    if enemy_hq is not None:
+        hq_pos = enemy_hq.get("pos")
+        nearest = None
+        if hq_pos is not None:
+            for unit in own_units:
+                pos = unit.get("pos")
+                if pos is None:
+                    continue
+                distance = hex_distance(tuple(pos), tuple(hq_pos))
+                nearest = distance if nearest is None else min(nearest, distance)
+        summary["enemy_hq"] = {
+            "id": enemy_hq.get("id"),
+            "pos": hq_pos,
+            "hp": enemy_hq.get("hp"),
+            "nearest_own_distance": nearest,
+        }
+        hq_attacks = []
+        for unit_id, entry in actions.items():
+            for option in entry.get("attack") or []:
+                if len(option) >= 4 and option[0] == enemy_hq.get("id"):
+                    hq_attacks.append(
+                        {
+                            "unit": unit_id,
+                            "weapon": option[1],
+                            "distance": option[2],
+                            "damage": option[3],
+                        }
+                    )
+        hq_attacks.sort(
+            key=lambda item: (-int(item["damage"] or 0), int(item["distance"] or 99))
+        )
+        summary["best_hq_attacks"] = hq_attacks[:5]
+
+    objective_positions = {
+        tuple(site["pos"])
+        for site in sites
+        if site.get("objective") and site.get("pos") is not None
+    }
+    for unit in own_units:
+        entry = actions.get(unit.get("id"), {})
+        pos = unit.get("pos")
+        if (
+            pos is not None
+            and entry.get("capture_remaining_hp") is not None
+            and tuple(pos) in objective_positions
+        ):
+            summary["capturable_objectives"].append(
+                {
+                    "unit": unit.get("id"),
+                    "pos": pos,
+                    "remaining_hp": entry.get("capture_remaining_hp"),
+                }
+            )
+
+    players = view.get("players") or []
+    if isinstance(players, dict):
+        players = [
+            {"id": player_id, **(data if isinstance(data, dict) else {"value": data})}
+            for player_id, data in players.items()
+        ]
+    own = next((item for item in players if item.get("id") == player), None)
+    enemy = next((item for item in players if item.get("id") != player), None)
+    if own is not None:
+        summary["unit_cap"] = {
+            "units": own.get("unit_count"),
+            "limit": own.get("unit_limit"),
+        }
+    if own is not None or enemy is not None:
+        summary["standing"] = {
+            "own_units": own.get("unit_count") if own else None,
+            "enemy_units": enemy.get("unit_count") if enemy else None,
+            "own_funds": own.get("funds") if own else None,
+            "enemy_funds": enemy.get("funds") if enemy else None,
+        }
+    return summary
+
+
+def _attack_order(unit_id: str, option: list[Any]) -> dict[str, Any]:
+    order: dict[str, Any] = {"action": "attack", "unit": unit_id, "target": option[0]}
+    if len(option) > 1 and option[1]:
+        order["weapon"] = option[1]
+    return order
+
+
+def _tactical_order(
+    unit: dict[str, Any],
+    entry: dict[str, Any],
+    *,
+    enemy_hq_id: str | None,
+    objective_positions: set[tuple[int, int]],
+) -> dict[str, Any] | None:
+    """One legal, objective-biased replacement for an idle/holding unit."""
+    unit_id = str(unit.get("id"))
+    attacks = entry.get("attack") or []
+    hq_attacks = [
+        option for option in attacks if enemy_hq_id and option and option[0] == enemy_hq_id
+    ]
+    if hq_attacks:
+        return _attack_order(unit_id, max(hq_attacks, key=lambda item: int(item[3] or 0)))
+    pos = unit.get("pos")
+    if (
+        entry.get("capture_remaining_hp") is not None
+        and pos is not None
+        and tuple(pos) in objective_positions
+    ):
+        return {"action": "capture", "unit": unit_id}
+    if attacks:
+        return _attack_order(unit_id, max(attacks, key=lambda item: int(item[3] or 0)))
+    if entry.get("capture_remaining_hp") is not None:
+        return {"action": "capture", "unit": unit_id}
+    return None
+
+
+def _complete_plan(
+    view: dict[str, Any], plan: AgentPlan, player: str
+) -> AgentPlan:
+    """Fill idle or holding units with legal attacks/captures.
+
+    This is deliberately conservative: it never replaces a move, attack,
+    capture, load or unload the model chose.  It only replaces ``hold`` and
+    fills units the model omitted, and only when the view lists a legal,
+    objective-biased action.  The coordinator still validates every order.
+    """
+    units = view.get("units") or []
+    actions = view.get("unit_actions") or {}
+    enemy_hq_id = next(
+        (
+            str(unit.get("id"))
+            for unit in units
+            if unit.get("owner") != player and unit.get("type") == "hq"
+        ),
+        None,
+    )
+    objective_positions = {
+        tuple(site["pos"])
+        for site in (view.get("sites") or [])
+        if site.get("objective") and site.get("pos") is not None
+    }
+    by_unit = {
+        str(order.get("unit")): index
+        for index, order in enumerate(plan.orders)
+        if order.get("unit")
+    }
+    for unit in units:
+        if unit.get("owner") != player:
+            continue
+        unit_id = str(unit.get("id"))
+        entry = actions.get(unit_id) or {}
+        if entry.get("acted") or entry.get("loaded_in") or entry.get("new_unit"):
+            continue
+        replacement = _tactical_order(
+            unit,
+            entry,
+            enemy_hq_id=enemy_hq_id,
+            objective_positions=objective_positions,
+        )
+        if replacement is None:
+            continue
+        index = by_unit.get(unit_id)
+        if index is None:
+            plan.orders.append(replacement)
+            by_unit[unit_id] = len(plan.orders) - 1
+        elif plan.orders[index].get("action") == "hold":
+            plan.orders[index] = replacement
+    return plan
+
+
+def _thin(items: list[Any], limit: int) -> list[Any]:
+    """Deterministically keep at most ``limit`` items, including both ends."""
+    if len(items) <= limit:
+        return items
+    if limit <= 0:
+        return []
+    if limit == 1:
+        return [items[0]]
+    picks = {round(index * (len(items) - 1) / (limit - 1)) for index in range(limit)}
+    return [item for index, item in enumerate(items) if index in picks]
+
+
+def _bound_actions(view: dict[str, Any], max_moves: int = MAX_MOVE_OPTIONS) -> dict[str, Any]:
+    """Trim every ``unit_actions`` move menu to a bounded, strategic subset.
+
+    The model still receives every attack, capture, load, unload and hold
+    option.  For movement it keeps all destinations on sites, all contact
+    hexes (adjacent to an enemy), all frontier hexes (where the reachable area
+    ends), and then evenly spaced fillers.  Every retained destination is a
+    legal engine destination; the coordinator still validates the final order.
+    """
+    actions = view.get("unit_actions")
+    if not actions:
+        return view
+    asking = view.get("asking_about") or view.get("current_player")
+    sites = {tuple(site["pos"]) for site in view.get("sites", []) if "pos" in site}
+    enemies = {
+        tuple(unit["pos"])
+        for unit in view.get("units", [])
+        if unit.get("pos") is not None and unit.get("owner") != asking
+    }
+    contact: set[tuple[int, int]] = set()
+    for pos in enemies:
+        contact.update(hex_neighbors(pos))
+
+    for entry in actions.values():
+        moves = entry.get("move_to")
+        if not isinstance(moves, list) or len(moves) <= max_moves:
+            continue
+        reachable = {tuple(move[0]) for move in moves if move}
+        priority: list[Any] = []
+        chosen: set[tuple[int, int]] = set()
+
+        def add(move: Any) -> None:
+            pos = tuple(move[0])
+            if pos not in chosen:
+                chosen.add(pos)
+                priority.append(move)
+
+        for move in moves:
+            if not move:
+                continue
+            pos = tuple(move[0])
+            if pos in sites or pos in contact:
+                add(move)
+        for move in moves:
+            if not move:
+                continue
+            pos = tuple(move[0])
+            if not any(neighbor not in reachable for neighbor in hex_neighbors(pos)):
+                continue
+            add(move)
+        # Nearest and farthest destinations are always useful anchors.
+        if moves:
+            add(moves[0])
+            add(moves[-1])
+
+        anchors = [moves[0], moves[-1]]
+        anchor_positions = {tuple(move[0]) for move in anchors}
+        rest = [move for move in priority if tuple(move[0]) not in anchor_positions]
+        kept = anchors[:max_moves] + _thin(rest, max(0, max_moves - len(anchors)))
+        kept_positions = {tuple(move[0]) for move in kept}
+        fillers = [move for move in moves if tuple(move[0]) not in kept_positions]
+        if len(kept) < max_moves:
+            kept.extend(_thin(fillers, max_moves - len(kept)))
+        entry["move_to"] = kept
+    return view
+
+
+def build_messages(
+    request: TurnRequest, *, max_move_options: int = MAX_MOVE_OPTIONS
+) -> list[dict[str, str]]:
     """The two chat messages for one whole-turn decision."""
-    view = _compact_view(request.view, request.allowed_units)
+    view = _bound_actions(_compact_view(request.view, request.allowed_units), max_move_options)
     user_payload: dict[str, Any] = {
         "you_are": request.player,
         "turn": view.get("turn"),
@@ -408,6 +753,9 @@ def build_messages(request: TurnRequest) -> list[dict[str, str]]:
         "recent_events": request.recent_events[-10:],
         "view": view,
     }
+    victory = _objective_summary(view, request.player)
+    if victory["enemy_hq"] is not None:
+        user_payload["victory"] = victory
     if request.allowed_units is not None:
         user_payload["your_units"] = list(request.allowed_units)
     if request.brief:
@@ -443,11 +791,13 @@ class SingleLlmAgent:
         logger: JsonlLogger | None = None,
         history: int = 8,
         name: str = "llm",
+        auto_tactics: bool = True,
     ):
         self.client = client
         self.logger = logger
         self.history = history
         self.name = name
+        self.auto_tactics = auto_tactics
 
     def plan(self, request: TurnRequest) -> AgentPlan:
         messages = build_messages(request)
@@ -480,6 +830,8 @@ class SingleLlmAgent:
                     }
                 )
             raise
+        if self.auto_tactics:
+            plan = _complete_plan(request.view, plan, request.player)
         if self.logger is not None:
             self.logger.write(
                 {

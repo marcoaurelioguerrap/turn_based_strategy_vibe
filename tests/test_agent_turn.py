@@ -24,6 +24,7 @@ from tbs.engine.state import new_game
 from .helpers import (
     SPECS,
     bundled_scenario,
+    cell,
     make_state,
     owned_cells,
     unit,
@@ -114,6 +115,41 @@ def test_duplicate_orders_for_one_unit_are_ignored_not_rejected():
     assert result.errors == []
     assert len(result.ignored) == 1
     assert result.ended_turn is True
+
+
+def test_a_transport_move_then_unload_is_one_legal_plan():
+    state = make_state(
+        rows=["..........", "..~~~~....", "..........", ".........."],
+        units=[
+            unit("transport_ship", "A", 2, 1, "A1"),
+            unit("infantry", "A", 2, 0, "A2"),
+            unit("infantry", "B", 9, 3, "B9"),
+        ],
+    )
+    rules.perform(state, {"action": "load", "unit": "A1", "cargo": "A2"})
+    rules.perform(state, {"action": "end_turn"})
+    rules.perform(state, {"action": "end_turn"})
+    assert state.current_player == "A"
+
+    result = run_turn(
+        state,
+        ScriptedAgent(
+            AgentPlan(
+                orders=[
+                    {"action": "move", "unit": "A1", "to": cell(5, 1)},
+                    {
+                        "action": "unload",
+                        "unit": "A1",
+                        "cargo": "A2",
+                        "target": cell(5, 2),
+                    },
+                ]
+            )
+        ),
+    )
+    assert result.errors == []
+    assert [item.order["action"] for item in result.applied] == ["move", "unload"]
+    assert state.unit("A2").pos == tuple(cell(5, 2))
 
 
 def test_no_orders_is_a_complete_turn_and_still_ends():

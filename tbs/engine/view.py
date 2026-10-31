@@ -23,7 +23,8 @@ import json
 from collections.abc import Callable
 from typing import Any
 
-from .hexgrid import axial_to_offset, offset_to_axial
+from .amphibious import ferry_hints, landmass_index
+from .hexgrid import axial_to_offset, hex_neighbors, offset_to_axial
 from .rules import (
     attack_options,
     build_options,
@@ -35,7 +36,7 @@ from .rules import (
     turn_income,
     unload_options,
 )
-from .state import GameState
+from .state import DEFAULT_MAX_UNITS_PER_PLAYER, GameState, Unit
 
 
 # --------------------------------------------------------------------------
@@ -326,13 +327,123 @@ RULE_SUMMARY = (
     "city/factory/port/airport/HQ or a supply vehicle. Supply never blocks an attack by itself. "
     "Air units fly above the surface: one aircraft may share a hex with one land or naval unit, "
     "but two aircraft or two surface units still block each other. "
+    "Transport ships carry up to four ground units. A transport may move and then load or "
+    "unload one cargo in the same turn; loaded cargo cannot act, but a unit unloaded onto "
+    "land may act that same turn. The view's ferry field recommends a boat, cargo, pickup "
+    "hex and landing beach when a crossing is possible. "
     "Capturing adds your current HP to the site each time you act "
     "there; capturing an enemy HQ ends the game. Income is paid at the start of your turn and "
-    "produced units act next turn. Coordinates are axial [q,r]."
+    "produced units act next turn. Each side is limited to its scenario's max_units_per_player "
+    "(50 by default). Coordinates are axial [q,r]."
 )
 
 
-def unit_options_summary(state: GameState, unit_id: str) -> dict[str, Any]:
+def _thin(items: list[Any], limit: int) -> list[Any]:
+    """Deterministically keep at most ``limit`` items, including both ends."""
+    if len(items) <= limit:
+        return items
+    if limit <= 0:
+        return []
+    if limit == 1:
+        return [items[0]]
+    picks = {round(index * (len(items) - 1) / (limit - 1)) for index in range(limit)}
+    return [item for index, item in enumerate(items) if index in picks]
+
+
+def _bounded_moves(
+    state: GameState,
+    unit: Unit,
+    moves: list[dict[str, Any]],
+    *,
+    site_positions: set[tuple[int, int]] | None = None,
+    enemy_positions: set[tuple[int, int]] | None = None,
+    extra_positions: set[tuple[int, int]] | None = None,
+) -> list[dict[str, Any]]:
+    """Trim a move menu to the destinations an agent needs to plan.
+
+    Sites, contact hexes, the reachable frontier and the nearest/farthest
+    destinations survive; the rest are evenly spaced fillers.  The cap is a
+    scenario field (``view_move_limit``), off by default.  Legal-order
+    rerankers on huge maps otherwise spend all their time scoring thousands of
+    equivalent moves.
+
+    ``extra_positions`` names destinations an advisory layer has already found
+    useful (for example a ferry pickup or landing hex).  They are kept before
+    any other priority so a 12-destination menu can never hide the one move a
+    transport operation needs.
+    """
+    limit = int(state.config.get("view_move_limit", 0))
+    if limit <= 0 or len(moves) <= limit:
+        return moves
+    sites = site_positions
+    if sites is None:
+        sites = {
+            tile.pos
+            for tile in state.map.tiles.values()
+            if state.terrain_of(tile).capture_points is not None or state.terrain_of(tile).build
+        }
+    enemies = enemy_positions
+    if enemies is None:
+        enemies = {enemy.pos for enemy in state.enemies_of(unit.owner) if enemy.pos is not None}
+    contact: set[tuple[int, int]] = set()
+    for pos in enemies:
+        contact.update(hex_neighbors(pos))
+    reachable = {tuple(move["pos"]) for move in moves}
+    extras = set(extra_positions or ())
+
+    priority: list[dict[str, Any]] = []
+    chosen: set[tuple[int, int]] = set()
+
+    def add(move: dict[str, Any]) -> None:
+        pos = tuple(move["pos"])
+        if pos not in chosen:
+            chosen.add(pos)
+            priority.append(move)
+
+    for move in moves:
+        if tuple(move["pos"]) in extras:
+            add(move)
+    for move in moves:
+        if tuple(move["pos"]) in sites or tuple(move["pos"]) in contact:
+            add(move)
+    for move in moves:
+        pos = tuple(move["pos"])
+        if any(neighbor not in reachable for neighbor in hex_neighbors(pos)):
+            add(move)
+
+    kept: list[dict[str, Any]] = []
+    kept_positions: set[tuple[int, int]] = set()
+
+    def keep(move: dict[str, Any]) -> None:
+        pos = tuple(move["pos"])
+        if pos not in kept_positions and len(kept) < limit:
+            kept_positions.add(pos)
+            kept.append(move)
+
+    # Ferry anchors first, then the stable endpoints, then the strategic sample.
+    for move in moves:
+        if tuple(move["pos"]) in extras:
+            keep(move)
+    keep(moves[0])
+    keep(moves[-1])
+    rest = [move for move in priority if tuple(move["pos"]) not in kept_positions]
+    for move in _thin(rest, max(0, limit - len(kept))):
+        keep(move)
+    if len(kept) < limit:
+        fillers = [move for move in moves if tuple(move["pos"]) not in kept_positions]
+        for move in _thin(fillers, limit - len(kept)):
+            keep(move)
+    return kept
+
+
+def unit_options_summary(
+    state: GameState,
+    unit_id: str,
+    *,
+    site_positions: set[tuple[int, int]] | None = None,
+    enemy_positions: set[tuple[int, int]] | None = None,
+    extra_positions: set[tuple[int, int]] | None = None,
+) -> dict[str, Any]:
     """A trimmed version of :func:`tbs.engine.rules.unit_options` for prompts."""
     unit = state.unit(unit_id)
     if unit.acted:
@@ -342,7 +453,14 @@ def unit_options_summary(state: GameState, unit_id: str) -> dict[str, Any]:
     if unit.deployed_this_turn:
         return {"new_unit": True}
     summary: dict[str, Any] = {}
-    moves = legal_moves(state, unit_id)
+    moves = _bounded_moves(
+        state,
+        unit,
+        legal_moves(state, unit_id),
+        site_positions=site_positions,
+        enemy_positions=enemy_positions,
+        extra_positions=extra_positions,
+    )
     if moves:
         summary["move_to"] = [[move["pos"], move["move_cost"]] for move in moves]
     attacks = attack_options(state, unit_id)
@@ -375,6 +493,9 @@ def state_view(state: GameState, player_id: str | None = None) -> dict[str, Any]
     unit; for the acting player ``unit_actions`` lists what each unit may do.
     """
     asking = player_id or state.current_player
+    islands = landmass_index(state)
+    ferry = ferry_hints(state, state.current_player) if state.status == "ongoing" else None
+    stranded = set(ferry.get("stranded", ())) if ferry else set()
     sites = []
     for tile in sorted(state.map.tiles.values(), key=lambda t: (t.pos[1], t.pos[0])):
         terrain = state.terrain_of(tile.terrain)
@@ -416,6 +537,20 @@ def state_view(state: GameState, player_id: str | None = None) -> dict[str, Any]
             }
         )
 
+    if ferry is not None:
+        # Amphibious annotations are only worth their prompt space on a map
+        # where a sea transport exists (or a stranded unit needs one).
+        for site in sites:
+            component = islands.of(tuple(site["pos"]))
+            if component is not None:
+                site["island"] = component
+        for unit in units:
+            component = islands.of(tuple(unit["pos"])) if unit["pos"] is not None else None
+            if component is not None:
+                unit["island"] = component
+            if unit["id"] in stranded:
+                unit["stranded"] = True
+
     stacks = []
     for pos in sorted(state.map.tiles, key=lambda hex_: (hex_[1], hex_[0])):
         occupants = state.units_at(pos)
@@ -447,16 +582,41 @@ def state_view(state: GameState, player_id: str | None = None) -> dict[str, Any]
                 "income_per_turn": turn_income(state, player.id),
                 "eliminated": player.eliminated,
                 "unit_count": len(state.units_of(player.id)),
+                "unit_limit": int(
+                    state.config.get("max_units_per_player", DEFAULT_MAX_UNITS_PER_PLAYER)
+                ),
             }
             for player in state.players.values()
         ],
         "sites": sites,
         "units": units,
     }
+    if ferry is not None:
+        view["ferry"] = ferry
     if state.status == "ongoing":
         view["build_options"] = build_options(state, state.current_player)
+        site_positions = {tuple(site["pos"]) for site in sites}
+        enemy_positions = {
+            enemy.pos
+            for enemy in state.enemies_of(state.current_player)
+            if enemy.pos is not None
+        }
+        ferry_moves: dict[str, set[tuple[int, int]]] = {}
+        for operation in (ferry or {}).get("operations", ()):
+            transport = str(operation.get("transport") or "")
+            cargo = str(operation.get("cargo") or "")
+            if operation.get("transport_to") is not None:
+                ferry_moves.setdefault(transport, set()).add(tuple(operation["transport_to"]))
+            if operation.get("cargo_to") is not None:
+                ferry_moves.setdefault(cargo, set()).add(tuple(operation["cargo_to"]))
         view["unit_actions"] = {
-            unit["id"]: unit_options_summary(state, unit["id"])
+            unit["id"]: unit_options_summary(
+                state,
+                unit["id"],
+                site_positions=site_positions,
+                enemy_positions=enemy_positions,
+                extra_positions=ferry_moves.get(unit["id"]),
+            )
             for unit in view["units"]
             if unit["owner"] == state.current_player
         }

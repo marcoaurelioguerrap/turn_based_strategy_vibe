@@ -1,0 +1,578 @@
+{
+  "schema": 1,
+  "name": "border_skirmish_m",
+  "title": "Border Skirmish M",
+  "description": "Large (about 10x area) version of Border Skirmish. Two nations split by a broken ridge with a sea bay cut through it. The introductory map: mirrored armies, a ridge for infantry and a bay for ships.",
+  "difficulty": "intro",
+  "fair": true,
+  "tags": [
+    "land",
+    "air",
+    "naval"
+  ],
+  "comment": "Large (about 10x area) version of Border Skirmish. Terrain is scaled from the original and enriched with extra bases and a larger starting army. Unit cap: 50 per team; agent view move limit: 12.",
+  "seed": 20261019,
+  "first_player": "A",
+  "initial_income": 1000,
+  "max_turns": 120,
+  "fog_of_war": false,
+  "players": [
+    {
+      "id": "A",
+      "name": "Blue Republic",
+      "funds": 15000
+    },
+    {
+      "id": "B",
+      "name": "Red Federation",
+      "funds": 15000
+    }
+  ],
+  "regions": [
+    {
+      "owner": "A",
+      "offset_cols": [
+        0,
+        20
+      ]
+    },
+    {
+      "owner": "B",
+      "offset_cols": [
+        23,
+        43
+      ]
+    }
+  ],
+  "rows": [
+    ".......C...........######...........C.......",
+    "...................#####....................",
+    "...................######...................",
+    "...f...............#####...............f....",
+    "................############................",
+    "................###########.................",
+    "................############................",
+    "...H.............C.#####.C.............H....",
+    "..........C........######........C..........",
+    "...................#####....................",
+    ".......C........############........C.......",
+    "..........C.....###########.....C...........",
+    "................############................",
+    "............A......~~~~~......A.............",
+    "...A......C........~~~~~~........C......A...",
+    ".................p.~~~~~.p..................",
+    "............f...~~~~~~~~~~~~...f............",
+    "...............p~~~~~~~~~~~p................",
+    "................~~~~~~~~~~~~................",
+    "...................~~~~~....................",
+    "...................~~~~~~...................",
+    "...................~~~~~....................",
+    "............................................",
+    "............................................",
+    "............................................"
+  ],
+  "units": [
+    {
+      "id": "A1",
+      "type": "hq",
+      "owner": "A",
+      "offset": [
+        3,
+        7
+      ],
+      "label": "Blue Headquarters 1"
+    },
+    {
+      "id": "A2",
+      "type": "destroyer",
+      "owner": "A",
+      "offset": [
+        15,
+        17
+      ],
+      "label": "Blue Destroyer 2"
+    },
+    {
+      "id": "A3",
+      "type": "destroyer",
+      "owner": "A",
+      "offset": [
+        17,
+        15
+      ],
+      "label": "Blue Destroyer 3"
+    },
+    {
+      "id": "A4",
+      "type": "destroyer",
+      "owner": "A",
+      "offset": [
+        16,
+        18
+      ],
+      "label": "Blue Destroyer 4"
+    },
+    {
+      "id": "A5",
+      "type": "attack_plane",
+      "owner": "A",
+      "offset": [
+        3,
+        14
+      ],
+      "label": "Blue Attack Plane 5"
+    },
+    {
+      "id": "A6",
+      "type": "attack_plane",
+      "owner": "A",
+      "offset": [
+        12,
+        13
+      ],
+      "label": "Blue Attack Plane 6"
+    },
+    {
+      "id": "A7",
+      "type": "attack_plane",
+      "owner": "A",
+      "offset": [
+        2,
+        14
+      ],
+      "label": "Blue Attack Plane 7"
+    },
+    {
+      "id": "A8",
+      "type": "tank",
+      "owner": "A",
+      "offset": [
+        12,
+        13
+      ],
+      "label": "Blue Tank 8"
+    },
+    {
+      "id": "A9",
+      "type": "truck",
+      "owner": "A",
+      "offset": [
+        17,
+        7
+      ],
+      "label": "Blue Truck 9"
+    },
+    {
+      "id": "A10",
+      "type": "aa_missile",
+      "owner": "A",
+      "offset": [
+        7,
+        0
+      ],
+      "label": "Blue AA Missile 10"
+    },
+    {
+      "id": "A11",
+      "type": "infantry",
+      "owner": "A",
+      "offset": [
+        2,
+        7
+      ],
+      "label": "Blue Infantry 11"
+    },
+    {
+      "id": "A12",
+      "type": "infantry",
+      "owner": "A",
+      "offset": [
+        7,
+        10
+      ],
+      "label": "Blue Infantry 12"
+    },
+    {
+      "id": "A13",
+      "type": "truck",
+      "owner": "A",
+      "offset": [
+        3,
+        3
+      ],
+      "label": "Blue Truck 13"
+    },
+    {
+      "id": "A14",
+      "type": "aa_missile",
+      "owner": "A",
+      "offset": [
+        3,
+        14
+      ],
+      "label": "Blue AA Missile 14"
+    },
+    {
+      "id": "A15",
+      "type": "tank",
+      "owner": "A",
+      "offset": [
+        12,
+        16
+      ],
+      "label": "Blue Tank 15"
+    },
+    {
+      "id": "A16",
+      "type": "infantry",
+      "owner": "A",
+      "offset": [
+        10,
+        8
+      ],
+      "label": "Blue Infantry 16"
+    },
+    {
+      "id": "A17",
+      "type": "tank",
+      "owner": "A",
+      "offset": [
+        10,
+        11
+      ],
+      "label": "Blue Tank 17"
+    },
+    {
+      "id": "A18",
+      "type": "infantry",
+      "owner": "A",
+      "offset": [
+        10,
+        14
+      ],
+      "label": "Blue Infantry 18"
+    },
+    {
+      "id": "A19",
+      "type": "infantry",
+      "owner": "A",
+      "offset": [
+        11,
+        13
+      ],
+      "label": "Blue Infantry 19"
+    },
+    {
+      "id": "A20",
+      "type": "artillery",
+      "owner": "A",
+      "offset": [
+        16,
+        7
+      ],
+      "label": "Blue Artillery 20"
+    },
+    {
+      "id": "A21",
+      "type": "truck",
+      "owner": "A",
+      "offset": [
+        6,
+        0
+      ],
+      "label": "Blue Truck 21"
+    },
+    {
+      "id": "A22",
+      "type": "artillery",
+      "owner": "A",
+      "offset": [
+        3,
+        8
+      ],
+      "label": "Blue Artillery 22"
+    },
+    {
+      "id": "A23",
+      "type": "infantry",
+      "owner": "A",
+      "offset": [
+        6,
+        10
+      ],
+      "label": "Blue Infantry 23"
+    },
+    {
+      "id": "A24",
+      "type": "artillery",
+      "owner": "A",
+      "offset": [
+        2,
+        3
+      ],
+      "label": "Blue Artillery 24"
+    },
+    {
+      "id": "A25",
+      "type": "aa_missile",
+      "owner": "A",
+      "offset": [
+        2,
+        14
+      ],
+      "label": "Blue AA Missile 25"
+    },
+    {
+      "id": "B1",
+      "type": "hq",
+      "owner": "B",
+      "offset": [
+        39,
+        7
+      ],
+      "label": "Red Headquarters 1"
+    },
+    {
+      "id": "B2",
+      "type": "destroyer",
+      "owner": "B",
+      "offset": [
+        27,
+        17
+      ],
+      "label": "Red Destroyer 2"
+    },
+    {
+      "id": "B3",
+      "type": "destroyer",
+      "owner": "B",
+      "offset": [
+        25,
+        15
+      ],
+      "label": "Red Destroyer 3"
+    },
+    {
+      "id": "B4",
+      "type": "destroyer",
+      "owner": "B",
+      "offset": [
+        27,
+        18
+      ],
+      "label": "Red Destroyer 4"
+    },
+    {
+      "id": "B5",
+      "type": "attack_plane",
+      "owner": "B",
+      "offset": [
+        40,
+        14
+      ],
+      "label": "Red Attack Plane 5"
+    },
+    {
+      "id": "B6",
+      "type": "attack_plane",
+      "owner": "B",
+      "offset": [
+        30,
+        13
+      ],
+      "label": "Red Attack Plane 6"
+    },
+    {
+      "id": "B7",
+      "type": "attack_plane",
+      "owner": "B",
+      "offset": [
+        41,
+        14
+      ],
+      "label": "Red Attack Plane 7"
+    },
+    {
+      "id": "B8",
+      "type": "tank",
+      "owner": "B",
+      "offset": [
+        30,
+        13
+      ],
+      "label": "Red Tank 8"
+    },
+    {
+      "id": "B9",
+      "type": "truck",
+      "owner": "B",
+      "offset": [
+        25,
+        7
+      ],
+      "label": "Red Truck 9"
+    },
+    {
+      "id": "B10",
+      "type": "aa_missile",
+      "owner": "B",
+      "offset": [
+        36,
+        0
+      ],
+      "label": "Red AA Missile 10"
+    },
+    {
+      "id": "B11",
+      "type": "infantry",
+      "owner": "B",
+      "offset": [
+        40,
+        7
+      ],
+      "label": "Red Infantry 11"
+    },
+    {
+      "id": "B12",
+      "type": "infantry",
+      "owner": "B",
+      "offset": [
+        36,
+        10
+      ],
+      "label": "Red Infantry 12"
+    },
+    {
+      "id": "B13",
+      "type": "truck",
+      "owner": "B",
+      "offset": [
+        39,
+        3
+      ],
+      "label": "Red Truck 13"
+    },
+    {
+      "id": "B14",
+      "type": "aa_missile",
+      "owner": "B",
+      "offset": [
+        40,
+        14
+      ],
+      "label": "Red AA Missile 14"
+    },
+    {
+      "id": "B15",
+      "type": "tank",
+      "owner": "B",
+      "offset": [
+        31,
+        16
+      ],
+      "label": "Red Tank 15"
+    },
+    {
+      "id": "B16",
+      "type": "infantry",
+      "owner": "B",
+      "offset": [
+        33,
+        8
+      ],
+      "label": "Red Infantry 16"
+    },
+    {
+      "id": "B17",
+      "type": "tank",
+      "owner": "B",
+      "offset": [
+        32,
+        11
+      ],
+      "label": "Red Tank 17"
+    },
+    {
+      "id": "B18",
+      "type": "infantry",
+      "owner": "B",
+      "offset": [
+        33,
+        14
+      ],
+      "label": "Red Infantry 18"
+    },
+    {
+      "id": "B19",
+      "type": "infantry",
+      "owner": "B",
+      "offset": [
+        31,
+        13
+      ],
+      "label": "Red Infantry 19"
+    },
+    {
+      "id": "B20",
+      "type": "artillery",
+      "owner": "B",
+      "offset": [
+        26,
+        7
+      ],
+      "label": "Red Artillery 20"
+    },
+    {
+      "id": "B21",
+      "type": "truck",
+      "owner": "B",
+      "offset": [
+        37,
+        0
+      ],
+      "label": "Red Truck 21"
+    },
+    {
+      "id": "B22",
+      "type": "artillery",
+      "owner": "B",
+      "offset": [
+        40,
+        8
+      ],
+      "label": "Red Artillery 22"
+    },
+    {
+      "id": "B23",
+      "type": "infantry",
+      "owner": "B",
+      "offset": [
+        37,
+        10
+      ],
+      "label": "Red Infantry 23"
+    },
+    {
+      "id": "B24",
+      "type": "artillery",
+      "owner": "B",
+      "offset": [
+        40,
+        3
+      ],
+      "label": "Red Artillery 24"
+    },
+    {
+      "id": "B25",
+      "type": "aa_missile",
+      "owner": "B",
+      "offset": [
+        41,
+        14
+      ],
+      "label": "Red AA Missile 25"
+    }
+  ],
+  "max_units_per_player": 50,
+  "view_move_limit": 12
+}

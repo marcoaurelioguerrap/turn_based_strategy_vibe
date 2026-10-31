@@ -257,17 +257,27 @@ def apply_plan(state: GameState, plan: AgentPlan) -> ApplyResult:
     follow-up for that unit is validated against the position that really exists.
     That is more forgiving to a model than aborting the whole plan on the first
     hallucinated target, while the engine remains the authority on what happened.
+
+    A unit may appear twice only in the engine's legal shape: one move followed
+    by one non-move action.  This is what makes a whole-turn ``move`` then
+    ``load``/``unload`` or ``move`` then ``capture`` plan possible; a second move
+    is still a duplicate and is ignored.
     """
     result = ApplyResult()
-    resolved_units: set[str] = set()
+    first_action: dict[str, str] = {}
     for raw_order in plan.orders:
         if state.status != "ongoing":
             break
         action = raw_order.get("action") if isinstance(raw_order, dict) else None
         unit_key = raw_order.get("unit") if isinstance(raw_order, dict) and action not in ("build", "end_turn") else None
-        if unit_key is not None and unit_key in resolved_units:
-            result.ignored.append(f"duplicate order for {unit_key} ignored: it already acted this turn")
-            continue
+        if unit_key is not None:
+            unit_id = str(unit_key)
+            previous = first_action.get(unit_id)
+            if previous is not None and not (previous == "move" and action not in ("move", "build", "end_turn")):
+                result.ignored.append(
+                    f"duplicate order for {unit_id} ignored: it already acted this turn"
+                )
+                continue
         try:
             order = normalize_order(state, raw_order)
             if order.get("action") == "end_turn":
@@ -281,7 +291,10 @@ def apply_plan(state: GameState, plan: AgentPlan) -> ApplyResult:
             continue
         result.applied.append(AppliedOrder(order=order, events=events))
         if unit_key is not None:
-            resolved_units.add(str(unit_key))
+            unit_id = str(unit_key)
+            first_action.setdefault(unit_id, str(action))
+            if str(action) != "move":
+                first_action[unit_id] = str(action)
     return result
 
 

@@ -16,6 +16,11 @@ from .hexgrid import Hex, axial_to_offset, hex_cells, offset_to_axial
 
 SCHEMA_VERSION = 1
 
+#: The default cap on live units per player.  Scenarios may lower or raise it
+#: with ``max_units_per_player``; production and starting placements both obey
+#: the same limit.
+DEFAULT_MAX_UNITS_PER_PLAYER = 50
+
 #: The keys a scenario unit placement may use.  Anything else is an authoring
 #: mistake, so it is reported instead of quietly ignored.
 UNIT_PLACEMENT_KEYS = frozenset(
@@ -306,7 +311,7 @@ class GameState:
             status=data.get("status", "ongoing"),
             winner=data.get("winner"),
             initial_income=int(data.get("initial_income", 1000)),
-            config=dict(data.get("config", {})),
+            config=_config_with_defaults(data.get("config")),
             action_seq=int(data.get("action_seq", 0)),
             unit_counter=dict(data.get("unit_counter", {})),
             log=list(data.get("log", [])),
@@ -410,6 +415,15 @@ def new_game(scenario: dict[str, Any], specs: GameSpecs) -> GameState:
             # "damage_luck": false makes combat fully predictable (used by tests
             # and by deterministic agent runs).
             "damage_luck": bool(scenario.get("damage_luck", True)),
+            "max_units_per_player": _positive_int(
+                scenario.get("max_units_per_player", DEFAULT_MAX_UNITS_PER_PLAYER),
+                "max_units_per_player",
+            ),
+            # 0 keeps every legal destination in the agent view.  Large maps set
+            # a small strategic cap so a legal-order reranker stays tractable.
+            "view_move_limit": _nonnegative_int(
+                scenario.get("view_move_limit", 0), "view_move_limit"
+            ),
         },
         scenario_name=scenario.get("name", ""),
         specs=specs,
@@ -450,6 +464,33 @@ def _placement_position(raw: dict[str, Any]) -> Hex:
     raise ValueError(f"unit placement {raw.get('id') or raw.get('type')!r} needs 'offset' [col,row] or 'pos' [q,r]")
 
 
+def _config_with_defaults(raw: Any) -> dict[str, Any]:
+    """Fill in config keys added after a save file was written."""
+    config = dict(raw or {})
+    config.setdefault("max_units_per_player", DEFAULT_MAX_UNITS_PER_PLAYER)
+    config.setdefault("view_move_limit", 0)
+    return config
+
+
+def _positive_int(value: Any, name: str) -> int:
+    """An integer scenario/config knob that must be at least one."""
+    number = _nonnegative_int(value, name)
+    if number < 1:
+        raise ValueError(f"{name} must be a positive integer, not {number}")
+    return number
+
+
+def _nonnegative_int(value: Any, name: str) -> int:
+    """An integer scenario/config knob that must not be negative."""
+    try:
+        number = int(value)
+    except (TypeError, ValueError):
+        raise ValueError(f"{name} must be a non-negative integer, not {value!r}") from None
+    if number < 0:
+        raise ValueError(f"{name} must be a non-negative integer, not {number}")
+    return number
+
+
 def create_unit(
     state: GameState,
     type_id: str,
@@ -467,6 +508,13 @@ def create_unit(
     spec = state.spec_of(type_id)
     if owner not in state.players:
         raise ValueError(f"cannot create a unit for unknown player {owner!r}")
+    limit = int(state.config.get("max_units_per_player", DEFAULT_MAX_UNITS_PER_PLAYER))
+    have = sum(1 for unit in state.units.values() if unit.owner == owner)
+    if have >= limit:
+        raise ValueError(
+            f"cannot create {spec.name} for {owner}: it already has {have} units "
+            f"(max_units_per_player is {limit})"
+        )
     if unit_id is None:
         unit_id = _next_unit_id(state, owner)
     if unit_id in state.units:

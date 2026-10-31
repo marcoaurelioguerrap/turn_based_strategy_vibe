@@ -23,7 +23,7 @@ from __future__ import annotations
 import pytest
 
 from tbs.engine.errors import ActionError
-from tbs.engine.rules import turn_income
+from tbs.engine.rules import build_options, turn_income
 from .helpers import (
     anchor,
     at,
@@ -447,6 +447,28 @@ def test_a_player_with_a_factory_and_funds_is_never_out_of_the_war_on_units_alon
     events = do(state, build(1, 1, "infantry"))  # and does, next turn
     assert events[0]["type"] == "build"
     assert state.status == "ongoing"
+
+
+def test_the_team_unit_cap_stops_production_and_oversized_starting_armies():
+    state = make_state(
+        rows=FACTORY_ROWS,
+        regions=A_FACTORY,
+        units=[unit("infantry", "A", 4, 1, "A1"), anchor("B")],
+        max_units_per_player=1,
+    )
+    assert build_options(state, "A") == [], "a full team is offered no production"
+
+    with pytest.raises(ActionError) as info:
+        do(state, build(2, 1, "infantry"))
+    assert "caps each team at 1" in str(info.value)
+
+    with pytest.raises(ValueError) as info:
+        make_state(
+            rows=OPEN_GROUND_ROWS,
+            units=[unit("infantry", "A", 0, 0, "A1"), unit("infantry", "A", 1, 0, "A2"), anchor("B")],
+            max_units_per_player=1,
+        )
+    assert "max_units_per_player is 1" in str(info.value)
 
 
 def test_running_past_the_scenario_turn_limit_ends_the_game_as_a_draw():

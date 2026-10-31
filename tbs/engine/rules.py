@@ -42,7 +42,14 @@ from .actions import (
 from .data import SUPPLY_DOMAINS
 from .errors import ActionError
 from .hexgrid import Hex, hex_distance, hex_neighbors, reachable_hexes
-from .state import OUT_OF_FUEL_DAMAGE, GameState, Unit, can_share_hex, create_unit
+from .state import (
+    DEFAULT_MAX_UNITS_PER_PLAYER,
+    OUT_OF_FUEL_DAMAGE,
+    GameState,
+    Unit,
+    can_share_hex,
+    create_unit,
+)
 
 __all__ = [
     "apply_action",
@@ -524,6 +531,13 @@ def _apply_build(state: GameState, action: BuildAction) -> list[dict]:
         )
     if player.funds < spec.cost:
         raise ActionError(f"{spec.name} costs {spec.cost} but you only have {player.funds}")
+    limit = int(state.config.get("max_units_per_player", DEFAULT_MAX_UNITS_PER_PLAYER))
+    have = len(state.units_of(player.id))
+    if have >= limit:
+        raise ActionError(
+            f"{player.id} already has {have} units; this scenario caps each team at {limit} "
+            "(max_units_per_player)"
+        )
 
     unit = create_unit(state, spec.id, player.id, site.pos, deployed_this_turn=True)
     player.funds -= spec.cost
@@ -898,6 +912,9 @@ def unload_options(state: GameState, unit_id: str) -> list[dict]:
 def build_options(state: GameState, player_id: str) -> list[dict]:
     """What can be produced this turn, per owned empty build site."""
     player = state.players[player_id]
+    limit = int(state.config.get("max_units_per_player", DEFAULT_MAX_UNITS_PER_PLAYER))
+    if len(state.units_of(player_id)) >= limit:
+        return []
     options: list[dict] = []
     for site in state.build_sites(player_id):
         terrain = state.terrain_of(site)

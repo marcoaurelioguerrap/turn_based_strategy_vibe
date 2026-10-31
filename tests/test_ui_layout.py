@@ -84,11 +84,26 @@ def test_fit_keeps_every_bundled_map_on_screen():
     for path in available_scenarios():
         state = new_game(load_scenario(path), load_specs())
         camera = layout.Camera.fit(state, 800, 600)
-        assert layout.MIN_HEX_SIZE <= camera.size <= layout.MAX_HEX_SIZE
+        assert layout.OVERVIEW_MIN_HEX_SIZE <= camera.size <= layout.MAX_HEX_SIZE
         for pos in state.map.tiles:
             x, y = camera.to_screen(pos)
             assert -1 <= x <= 801, f"{path.stem}: hex {pos} is off-screen horizontally"
             assert -1 <= y <= 601, f"{path.stem}: hex {pos} is off-screen vertically"
+
+
+def test_large_maps_open_on_the_current_players_hq_at_a_playable_zoom():
+    from tbs.engine.data import available_scenarios
+
+    large = next(path for path in available_scenarios() if path.stem == "archipelago_m")
+    state = new_game(load_scenario(large), load_specs())
+    camera = layout.Camera.for_game(state, 800, 600)
+    assert camera.size == layout.DEFAULT_HEX_SIZE
+    hq = next(unit for unit in state.units_of(state.current_player) if unit.type_id == "hq")
+    x, y = camera.to_screen(hq.pos)
+    assert abs(x - 400) < 1e-6 and abs(y - 300) < 1e-6
+
+    overview = layout.Camera.fit(state, 800, 600)
+    assert overview.size < layout.MIN_HEX_SIZE, "the large map fits only as an overview"
 
 
 def test_zoom_keeps_the_hex_under_the_cursor():

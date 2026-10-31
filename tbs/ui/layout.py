@@ -17,8 +17,13 @@ from tbs.engine.state import GameState
 
 #: Default circumradius of a hex, in pixels.
 DEFAULT_HEX_SIZE = 34.0
+#: The normal interactive zoom floor.  Below this the map is legible only as
+#: an overview, and `Camera.fit` may use the smaller overview floor instead.
 MIN_HEX_SIZE = 14.0
+OVERVIEW_MIN_HEX_SIZE = 6.0
 MAX_HEX_SIZE = 90.0
+#: A board that fits no larger than this starts focused on the player's HQ.
+PLAYABLE_FIT_HEX_SIZE = 18.0
 
 
 def hex_corners(center: tuple[float, float], size: float) -> list[tuple[float, float]]:
@@ -85,9 +90,9 @@ class Camera:
         """A camera whose hex size makes the whole board fit the viewport.
 
         ``board_bounds`` scales linearly with the hex size, so one measurement
-        at size 1 gives the aspect ratio; the result is clamped to the zoom
+        at size 1 gives the aspect ratio; the result is clamped to the overview
         range so a tiny map is not blown up past ``MAX_HEX_SIZE`` and a huge
-        one stays legible.
+        map still fits as a legible overview.
         """
         min_x, min_y, max_x, max_y = board_bounds(state, 1.0)
         span_x = max(max_x - min_x, 1e-9)
@@ -95,8 +100,45 @@ class Camera:
         available_x = max(1.0, viewport_width - 2.0 * padding)
         available_y = max(1.0, viewport_height - 2.0 * padding)
         size = min(available_x / span_x, available_y / span_y)
-        size = max(MIN_HEX_SIZE, min(MAX_HEX_SIZE, size))
+        size = max(OVERVIEW_MIN_HEX_SIZE, min(MAX_HEX_SIZE, size))
         return cls.centered(state, viewport_width, viewport_height, size=size)
+
+    @classmethod
+    def for_game(
+        cls,
+        state: GameState,
+        viewport_width: float,
+        viewport_height: float,
+        *,
+        player_id: str | None = None,
+        size: float = DEFAULT_HEX_SIZE,
+    ) -> "Camera":
+        """The opening camera: whole-map fit when readable, HQ focus otherwise.
+
+        The 10x-area maps cannot fit the window at a playable hex size, so they
+        open centred on the current player's HQ at the normal zoom.  Pressing
+        Home still produces the full-map overview.
+        """
+        fitted = cls.fit(state, viewport_width, viewport_height)
+        if fitted.size >= PLAYABLE_FIT_HEX_SIZE:
+            return fitted
+        player = player_id or state.current_player
+        hq = next(
+            (
+                unit
+                for unit in state.units_of(player)
+                if unit.type_id == "hq" and unit.pos is not None
+            ),
+            None,
+        )
+        camera = cls(size=size)
+        if hq is not None:
+            camera.focus_on(hq.pos, viewport_width, viewport_height)
+        else:
+            min_x, min_y, max_x, max_y = board_bounds(state, size)
+            camera.pan_x = (min_x + max_x) / 2.0 - viewport_width / 2.0
+            camera.pan_y = (min_y + max_y) / 2.0 - viewport_height / 2.0
+        return camera
 
     def to_screen(self, pos: Hex) -> tuple[float, float]:
         x, y = axial_to_pixel(tuple(pos), self.size)

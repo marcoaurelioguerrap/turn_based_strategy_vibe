@@ -68,6 +68,7 @@ def test_the_client_posts_an_openai_chat_completion_request():
     assert seen["body"]["max_tokens"] == 777
     assert seen["body"]["stream"] is False
     assert seen["body"]["enable_thinking"] is False
+    assert seen["body"]["chat_template_kwargs"] == {"enable_thinking": False}
     assert seen["body"]["reasoning_effort"] == "low"
     assert seen["headers"]["Authorization"] == "Bearer secret"
     assert seen["timeout"] == 180.0
@@ -162,6 +163,101 @@ def test_the_prompt_carries_the_view_rules_and_previous_rejections():
     assert "corrected plan" in payload["instruction"]
 
 
+def test_the_prompt_explains_building_is_separate_and_expected():
+    view = {
+        "turn": 2,
+        "status": "ongoing",
+        "current_player": "A",
+        "players": {"A": {"funds": 5000}},
+        "build_options": [
+            {"site": [8, 15], "unit": "tank", "cost": 1200, "affordable": True}
+        ],
+        "unit_actions": {"A1": {"hold": True}},
+    }
+    system = build_messages(TurnRequest(player="A", view=view))[0]["content"]
+
+    assert "ECONOMY AND BUILDING" in system
+    assert "build_options" in system
+    assert "include at least one build" in system
+    assert "do not use a unit's action" in system
+    assert '"action":"build"' in system
+    assert "Unspent income is wasted" in system
+
+
+def test_the_prompt_carries_the_objective_summary_and_finish_rule():
+    view = {
+        "turn": 5,
+        "status": "ongoing",
+        "current_player": "A",
+        "players": [
+            {"id": "A", "unit_count": 2, "unit_limit": 50, "funds": 1200},
+            {"id": "B", "unit_count": 2, "unit_limit": 50, "funds": 900},
+        ],
+        "sites": [
+            {"pos": [3, 0], "terrain": "H", "owner": "B", "objective": True},
+            {"pos": [1, 0], "terrain": "C", "owner": None, "objective": True},
+        ],
+        "units": [
+            {"id": "A1", "owner": "A", "type": "infantry", "pos": [0, 0], "hp": 100},
+            {"id": "A2", "owner": "A", "type": "infantry", "pos": [1, 0], "hp": 100},
+            {"id": "B1", "owner": "B", "type": "hq", "pos": [3, 0], "hp": 100},
+            {"id": "B2", "owner": "B", "type": "infantry", "pos": [2, 0], "hp": 100},
+        ],
+        "unit_actions": {
+            "A1": {"attack": [["B1", "rifle", 3, 25]], "hold": True},
+            "A2": {"capture_remaining_hp": 100, "hold": True},
+        },
+    }
+    messages = build_messages(TurnRequest(player="A", view=view))
+    payload = json.loads(messages[1]["content"])
+
+    assert "FINISHING THE GAME" in messages[0]["content"]
+    assert payload["victory"]["enemy_hq"]["id"] == "B1"
+    assert payload["victory"]["best_hq_attacks"][0]["unit"] == "A1"
+    assert payload["victory"]["capturable_objectives"][0]["unit"] == "A2"
+    assert payload["victory"]["unit_cap"] == {"units": 2, "limit": 50}
+
+
+def test_auto_tactics_replaces_holds_and_fills_idle_units():
+    view = {
+        "turn": 5,
+        "status": "ongoing",
+        "current_player": "A",
+        "players": [],
+        "sites": [
+            {"pos": [3, 0], "objective": True},
+            {"pos": [1, 0], "objective": True},
+        ],
+        "units": [
+            {"id": "A1", "owner": "A", "type": "infantry", "pos": [0, 0], "hp": 100},
+            {"id": "A2", "owner": "A", "type": "infantry", "pos": [1, 0], "hp": 100},
+            {"id": "B1", "owner": "B", "type": "hq", "pos": [3, 0], "hp": 100},
+        ],
+        "unit_actions": {
+            "A1": {"attack": [["B1", "rifle", 3, 25]], "hold": True},
+            "A2": {"capture_remaining_hp": 100, "hold": True},
+        },
+    }
+    raw = '{"orders":[{"action":"hold","unit":"A1"}],"commentary":"hold"}'
+    transport = lambda *_args: completion(raw)
+
+    agent = SingleLlmAgent(
+        LlmClient(LlmConfig(model="m"), transport=transport), auto_tactics=True
+    )
+    plan = agent.plan(TurnRequest(player="A", view=view))
+    assert plan.orders == [
+        {"action": "attack", "unit": "A1", "target": "B1", "weapon": "rifle"},
+        {"action": "capture", "unit": "A2"},
+    ]
+
+    plain = SingleLlmAgent(
+        LlmClient(LlmConfig(model="m"), transport=transport), auto_tactics=False
+    )
+    assert plain.plan(TurnRequest(player="A", view=view)).orders == [
+        {"action": "hold", "unit": "A1"}
+    ]
+
+
 def test_the_prompt_compacts_duplicate_layers_and_empty_fields():
     view = {
         "turn": 1,
@@ -208,6 +304,34 @@ def test_the_prompt_compacts_duplicate_layers_and_empty_fields():
     ]
     assert "ENGINE RULES SUMMARY" in messages[0]["content"]
     assert "long duplicated rules" in messages[0]["content"]
+
+
+def test_the_llm_prompt_bounds_a_large_move_menu_without_losing_key_destinations():
+    moves = [[[col, 0], col + 1] for col in range(100)]
+    view = {
+        "turn": 1,
+        "status": "ongoing",
+        "current_player": "A",
+        "map_size": [100, 1],
+        "map_terrain_rows": ["." * 100],
+        "players": [],
+        "sites": [{"pos": [2, 0], "terrain": "C"}],
+        "units": [
+            {"id": "A1", "owner": "A", "type": "infantry", "pos": [0, 0]},
+            {"id": "B1", "owner": "B", "type": "infantry", "pos": [5, 0]},
+        ],
+        "unit_actions": {"A1": {"move_to": moves, "hold": True}},
+    }
+    messages = build_messages(TurnRequest(player="A", view=view), max_move_options=12)
+    actions = json.loads(messages[1]["content"])["view"]["unit_actions"]["A1"]
+    kept = [tuple(move[0]) for move in actions["move_to"]]
+
+    assert len(kept) <= 12
+    assert len(kept) < len(moves), "the large menu was actually trimmed"
+    assert (0, 0) in kept and (99, 0) in kept, "nearest and farthest remain anchors"
+    assert (2, 0) in kept, "the city destination survives the trim"
+    assert all(pos in {tuple(move[0]) for move in moves} for pos in kept)
+    assert actions["hold"] is True
 
 
 def test_single_agent_returns_a_parsed_plan_and_logs_both_sides(tmp_path):

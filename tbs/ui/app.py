@@ -66,7 +66,17 @@ from tbs.ui.menu import Menu, MenuItem
 
 DEFAULT_WIDTH = 1100
 DEFAULT_HEIGHT = 720
-DEFAULT_SAVE = Path("saves") / "quicksave.json"
+
+
+def _default_save_path() -> Path:
+    """Keep saves in the checkout, or in LocalAppData for the frozen build."""
+    if getattr(sys, "frozen", False):
+        base = Path(os.environ.get("LOCALAPPDATA") or Path.home())
+        return base / "tbs" / "saves" / "quicksave.json"
+    return Path("saves") / "quicksave.json"
+
+
+DEFAULT_SAVE = _default_save_path()
 _TARGET_MODES = (MODE_MOVE, MODE_ATTACK, MODE_LOAD, MODE_UNLOAD)
 _ARROW_STEPS = {
     pygame.K_LEFT: (-1, 0),
@@ -99,7 +109,7 @@ class App:
         self.state = state
         self.width = width
         self.height = height
-        self.camera = layout.Camera.fit(state, width, height)
+        self.camera = layout.Camera.for_game(state, width, height)
         self.controller = Controller()
         self.show_coords = False
         self.show_log = True
@@ -464,7 +474,7 @@ class App:
             self._open_unit_menu()
         elif button_id == "build":
             site = self.controller.open_build_menu(self.state)
-            self.message = f"build at {list(site)}" if site is not None else "no empty build site"
+            self.message = f"build at {list(site)}" if site is not None else "no build available"
         elif button_id == "save":
             self._save()
         elif button_id == "load":
@@ -559,7 +569,7 @@ class App:
             self._open_unit_menu()
         elif key == pygame.K_b:
             site = self.controller.open_build_menu(self.state)
-            self.message = f"build at {list(site)}" if site is not None else "no empty build site"
+            self.message = f"build at {list(site)}" if site is not None else "no build available"
         elif key == pygame.K_c:
             self.show_coords = not self.show_coords
         elif key == pygame.K_l:
@@ -709,7 +719,7 @@ class App:
     def _adopt(self, state) -> None:
         self._cancel_agent_run()
         self.state = state
-        self.camera = layout.Camera.fit(state, self.width, self.height)
+        self.camera = layout.Camera.for_game(state, self.width, self.height)
         self.controller.clear()
         self.log_lines = []
         self.pause_menu = None
@@ -1070,6 +1080,12 @@ def main(argv: list[str] | None = None) -> int:
         help="directory with tokenizer.pt/generator.pt; plays the NCM model (needs the NCM environment)",
     )
     parser.add_argument("--ncm-device", help="torch device for the NCM model (default: cuda when available)")
+    parser.add_argument(
+        "--ncm-decode",
+        choices=("sample", "legal"),
+        default="legal",
+        help="NCM inference: free sample + repair, or model-ranked legal orders (default: legal)",
+    )
     parser.add_argument("--ncm-max-steps", type=int, default=64, help="NCM order batches per turn")
     parser.add_argument(
         "--llm-base-url", default=os.environ.get("TBS_LLM_BASE_URL", DEFAULT_BASE_URL)
@@ -1133,7 +1149,8 @@ def main(argv: list[str] | None = None) -> int:
         except ImportError as exc:  # pragma: no cover - depends on the environment
             parser.error(f"--ncm-checkpoint needs the NCM environment ({exc})")
         external_agent = NcmAgent(
-            NcmSampler(args.ncm_checkpoint, device=args.ncm_device)
+            NcmSampler(args.ncm_checkpoint, device=args.ncm_device),
+            decode=args.ncm_decode,
         )
     if args.agent_side and llm_config is None and external_agent is None:
         parser.error("--agent-side needs --llm-model or --ncm-checkpoint")

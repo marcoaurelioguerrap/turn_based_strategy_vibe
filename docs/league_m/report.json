@@ -1,0 +1,1325 @@
+{
+  "maps": [
+    "border_skirmish_m",
+    "mountain_pass_m",
+    "archipelago_m",
+    "urban_delta_m",
+    "last_stand_m"
+  ],
+  "personas": [
+    "aggressive",
+    "defensive",
+    "infantry",
+    "armor",
+    "artillery"
+  ],
+  "games_per_map": 1,
+  "max_turns": 40,
+  "max_steps": 12,
+  "matches": 50,
+  "seconds": 732.2,
+  "aggregates": {
+    "aggressive": {
+      "persona": "aggressive",
+      "games": 20,
+      "wins": 0,
+      "losses": 0,
+      "unfinished": 20,
+      "win_rate": 0.0,
+      "avg_score_delta": 22.6385,
+      "avg_turns": 41.0
+    },
+    "defensive": {
+      "persona": "defensive",
+      "games": 20,
+      "wins": 0,
+      "losses": 0,
+      "unfinished": 20,
+      "win_rate": 0.0,
+      "avg_score_delta": 11.728,
+      "avg_turns": 41.0
+    },
+    "infantry": {
+      "persona": "infantry",
+      "games": 20,
+      "wins": 0,
+      "losses": 0,
+      "unfinished": 20,
+      "win_rate": 0.0,
+      "avg_score_delta": 22.140500000000003,
+      "avg_turns": 41.0
+    },
+    "armor": {
+      "persona": "armor",
+      "games": 20,
+      "wins": 0,
+      "losses": 0,
+      "unfinished": 20,
+      "win_rate": 0.0,
+      "avg_score_delta": -31.303000000000008,
+      "avg_turns": 41.0
+    },
+    "artillery": {
+      "persona": "artillery",
+      "games": 20,
+      "wins": 0,
+      "losses": 0,
+      "unfinished": 20,
+      "win_rate": 0.0,
+      "avg_score_delta": -25.204,
+      "avg_turns": 41.0
+    }
+  },
+  "games": [
+    {
+      "pair": [
+        "aggressive",
+        "defensive"
+      ],
+      "map": "border_skirmish_m",
+      "seed": 880000,
+      "sides": {
+        "aggressive": "A",
+        "defensive": "B"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 10.92,
+      "scores": {
+        "A": 105.56,
+        "B": 73.36
+      },
+      "score_delta": 32.2,
+      "units": {
+        "A": 40,
+        "B": 28
+      }
+    },
+    {
+      "pair": [
+        "aggressive",
+        "defensive"
+      ],
+      "map": "mountain_pass_m",
+      "seed": 880001,
+      "sides": {
+        "aggressive": "B",
+        "defensive": "A"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 16.81,
+      "scores": {
+        "A": 122.0,
+        "B": 122.0
+      },
+      "score_delta": 0.0,
+      "units": {
+        "A": 50,
+        "B": 50
+      }
+    },
+    {
+      "pair": [
+        "aggressive",
+        "defensive"
+      ],
+      "map": "archipelago_m",
+      "seed": 880002,
+      "sides": {
+        "aggressive": "A",
+        "defensive": "B"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 22.19,
+      "scores": {
+        "A": 128.0,
+        "B": 128.0
+      },
+      "score_delta": 0.0,
+      "units": {
+        "A": 50,
+        "B": 50
+      }
+    },
+    {
+      "pair": [
+        "aggressive",
+        "defensive"
+      ],
+      "map": "urban_delta_m",
+      "seed": 880003,
+      "sides": {
+        "aggressive": "B",
+        "defensive": "A"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 17.9,
+      "scores": {
+        "A": 132.0,
+        "B": 132.0
+      },
+      "score_delta": 0.0,
+      "units": {
+        "A": 50,
+        "B": 50
+      }
+    },
+    {
+      "pair": [
+        "aggressive",
+        "defensive"
+      ],
+      "map": "last_stand_m",
+      "seed": 880004,
+      "sides": {
+        "aggressive": "A",
+        "defensive": "B"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 15.63,
+      "scores": {
+        "A": 126.0,
+        "B": 118.0
+      },
+      "score_delta": 8.0,
+      "units": {
+        "A": 50,
+        "B": 50
+      }
+    },
+    {
+      "pair": [
+        "aggressive",
+        "infantry"
+      ],
+      "map": "border_skirmish_m",
+      "seed": 880005,
+      "sides": {
+        "aggressive": "B",
+        "infantry": "A"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 10.33,
+      "scores": {
+        "A": 78.28,
+        "B": 109.97999999999999
+      },
+      "score_delta": 31.7,
+      "units": {
+        "A": 27,
+        "B": 43
+      }
+    },
+    {
+      "pair": [
+        "aggressive",
+        "infantry"
+      ],
+      "map": "mountain_pass_m",
+      "seed": 880006,
+      "sides": {
+        "aggressive": "A",
+        "infantry": "B"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 16.89,
+      "scores": {
+        "A": 122.0,
+        "B": 122.0
+      },
+      "score_delta": 0.0,
+      "units": {
+        "A": 50,
+        "B": 50
+      }
+    },
+    {
+      "pair": [
+        "aggressive",
+        "infantry"
+      ],
+      "map": "archipelago_m",
+      "seed": 880007,
+      "sides": {
+        "aggressive": "B",
+        "infantry": "A"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 22.59,
+      "scores": {
+        "A": 128.0,
+        "B": 128.0
+      },
+      "score_delta": 0.0,
+      "units": {
+        "A": 50,
+        "B": 50
+      }
+    },
+    {
+      "pair": [
+        "aggressive",
+        "infantry"
+      ],
+      "map": "urban_delta_m",
+      "seed": 880008,
+      "sides": {
+        "aggressive": "A",
+        "infantry": "B"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 18.64,
+      "scores": {
+        "A": 132.0,
+        "B": 132.0
+      },
+      "score_delta": 0.0,
+      "units": {
+        "A": 50,
+        "B": 50
+      }
+    },
+    {
+      "pair": [
+        "aggressive",
+        "infantry"
+      ],
+      "map": "last_stand_m",
+      "seed": 880009,
+      "sides": {
+        "aggressive": "B",
+        "infantry": "A"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 15.51,
+      "scores": {
+        "A": 126.0,
+        "B": 118.0
+      },
+      "score_delta": -8.0,
+      "units": {
+        "A": 50,
+        "B": 50
+      }
+    },
+    {
+      "pair": [
+        "aggressive",
+        "armor"
+      ],
+      "map": "border_skirmish_m",
+      "seed": 880010,
+      "sides": {
+        "aggressive": "A",
+        "armor": "B"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 9.15,
+      "scores": {
+        "A": 89.93,
+        "B": 69.81
+      },
+      "score_delta": 20.12,
+      "units": {
+        "A": 33,
+        "B": 22
+      }
+    },
+    {
+      "pair": [
+        "aggressive",
+        "armor"
+      ],
+      "map": "mountain_pass_m",
+      "seed": 880011,
+      "sides": {
+        "aggressive": "B",
+        "armor": "A"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 13.69,
+      "scores": {
+        "A": 68.0,
+        "B": 122.0
+      },
+      "score_delta": 54.0,
+      "units": {
+        "A": 23,
+        "B": 50
+      }
+    },
+    {
+      "pair": [
+        "aggressive",
+        "armor"
+      ],
+      "map": "archipelago_m",
+      "seed": 880012,
+      "sides": {
+        "aggressive": "A",
+        "armor": "B"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 18.87,
+      "scores": {
+        "A": 128.0,
+        "B": 84.0
+      },
+      "score_delta": 44.0,
+      "units": {
+        "A": 50,
+        "B": 28
+      }
+    },
+    {
+      "pair": [
+        "aggressive",
+        "armor"
+      ],
+      "map": "urban_delta_m",
+      "seed": 880013,
+      "sides": {
+        "aggressive": "B",
+        "armor": "A"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 15.0,
+      "scores": {
+        "A": 84.0,
+        "B": 132.0
+      },
+      "score_delta": 48.0,
+      "units": {
+        "A": 26,
+        "B": 50
+      }
+    },
+    {
+      "pair": [
+        "aggressive",
+        "armor"
+      ],
+      "map": "last_stand_m",
+      "seed": 880014,
+      "sides": {
+        "aggressive": "A",
+        "armor": "B"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 13.43,
+      "scores": {
+        "A": 126.0,
+        "B": 76.0
+      },
+      "score_delta": 50.0,
+      "units": {
+        "A": 50,
+        "B": 29
+      }
+    },
+    {
+      "pair": [
+        "aggressive",
+        "artillery"
+      ],
+      "map": "border_skirmish_m",
+      "seed": 880015,
+      "sides": {
+        "aggressive": "B",
+        "artillery": "A"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 8.51,
+      "scores": {
+        "A": 64.11,
+        "B": 89.61
+      },
+      "score_delta": 25.5,
+      "units": {
+        "A": 20,
+        "B": 33
+      }
+    },
+    {
+      "pair": [
+        "aggressive",
+        "artillery"
+      ],
+      "map": "mountain_pass_m",
+      "seed": 880016,
+      "sides": {
+        "aggressive": "A",
+        "artillery": "B"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 13.57,
+      "scores": {
+        "A": 109.87,
+        "B": 67.97
+      },
+      "score_delta": 41.9,
+      "units": {
+        "A": 44,
+        "B": 23
+      }
+    },
+    {
+      "pair": [
+        "aggressive",
+        "artillery"
+      ],
+      "map": "archipelago_m",
+      "seed": 880017,
+      "sides": {
+        "aggressive": "B",
+        "artillery": "A"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 19.01,
+      "scores": {
+        "A": 89.87,
+        "B": 124.0
+      },
+      "score_delta": 34.13,
+      "units": {
+        "A": 32,
+        "B": 48
+      }
+    },
+    {
+      "pair": [
+        "aggressive",
+        "artillery"
+      ],
+      "map": "urban_delta_m",
+      "seed": 880018,
+      "sides": {
+        "aggressive": "A",
+        "artillery": "B"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 14.96,
+      "scores": {
+        "A": 108.0,
+        "B": 81.09
+      },
+      "score_delta": 26.91,
+      "units": {
+        "A": 38,
+        "B": 25
+      }
+    },
+    {
+      "pair": [
+        "aggressive",
+        "artillery"
+      ],
+      "map": "last_stand_m",
+      "seed": 880019,
+      "sides": {
+        "aggressive": "B",
+        "artillery": "A"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 11.1,
+      "scores": {
+        "A": 56.43,
+        "B": 100.74000000000001
+      },
+      "score_delta": 44.31,
+      "units": {
+        "A": 16,
+        "B": 42
+      }
+    },
+    {
+      "pair": [
+        "defensive",
+        "infantry"
+      ],
+      "map": "border_skirmish_m",
+      "seed": 880020,
+      "sides": {
+        "defensive": "A",
+        "infantry": "B"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 11.87,
+      "scores": {
+        "A": 76.87,
+        "B": 125.63
+      },
+      "score_delta": -48.76,
+      "units": {
+        "A": 29,
+        "B": 50
+      }
+    },
+    {
+      "pair": [
+        "defensive",
+        "infantry"
+      ],
+      "map": "mountain_pass_m",
+      "seed": 880021,
+      "sides": {
+        "defensive": "B",
+        "infantry": "A"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 16.84,
+      "scores": {
+        "A": 122.0,
+        "B": 122.0
+      },
+      "score_delta": 0.0,
+      "units": {
+        "A": 50,
+        "B": 50
+      }
+    },
+    {
+      "pair": [
+        "defensive",
+        "infantry"
+      ],
+      "map": "archipelago_m",
+      "seed": 880022,
+      "sides": {
+        "defensive": "A",
+        "infantry": "B"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 22.03,
+      "scores": {
+        "A": 128.0,
+        "B": 128.0
+      },
+      "score_delta": 0.0,
+      "units": {
+        "A": 50,
+        "B": 50
+      }
+    },
+    {
+      "pair": [
+        "defensive",
+        "infantry"
+      ],
+      "map": "urban_delta_m",
+      "seed": 880023,
+      "sides": {
+        "defensive": "B",
+        "infantry": "A"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 17.27,
+      "scores": {
+        "A": 132.0,
+        "B": 132.0
+      },
+      "score_delta": 0.0,
+      "units": {
+        "A": 50,
+        "B": 50
+      }
+    },
+    {
+      "pair": [
+        "defensive",
+        "infantry"
+      ],
+      "map": "last_stand_m",
+      "seed": 880024,
+      "sides": {
+        "defensive": "A",
+        "infantry": "B"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 15.37,
+      "scores": {
+        "A": 126.0,
+        "B": 118.0
+      },
+      "score_delta": 8.0,
+      "units": {
+        "A": 50,
+        "B": 50
+      }
+    },
+    {
+      "pair": [
+        "defensive",
+        "armor"
+      ],
+      "map": "border_skirmish_m",
+      "seed": 880025,
+      "sides": {
+        "defensive": "B",
+        "armor": "A"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 10.54,
+      "scores": {
+        "A": 87.52,
+        "B": 71.11
+      },
+      "score_delta": -16.41,
+      "units": {
+        "A": 31,
+        "B": 26
+      }
+    },
+    {
+      "pair": [
+        "defensive",
+        "armor"
+      ],
+      "map": "mountain_pass_m",
+      "seed": 880026,
+      "sides": {
+        "defensive": "A",
+        "armor": "B"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 13.56,
+      "scores": {
+        "A": 122.0,
+        "B": 68.0
+      },
+      "score_delta": 54.0,
+      "units": {
+        "A": 50,
+        "B": 23
+      }
+    },
+    {
+      "pair": [
+        "defensive",
+        "armor"
+      ],
+      "map": "archipelago_m",
+      "seed": 880027,
+      "sides": {
+        "defensive": "B",
+        "armor": "A"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 19.35,
+      "scores": {
+        "A": 85.89,
+        "B": 128.0
+      },
+      "score_delta": 42.11,
+      "units": {
+        "A": 29,
+        "B": 50
+      }
+    },
+    {
+      "pair": [
+        "defensive",
+        "armor"
+      ],
+      "map": "urban_delta_m",
+      "seed": 880028,
+      "sides": {
+        "defensive": "A",
+        "armor": "B"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 15.01,
+      "scores": {
+        "A": 132.0,
+        "B": 84.0
+      },
+      "score_delta": 48.0,
+      "units": {
+        "A": 50,
+        "B": 26
+      }
+    },
+    {
+      "pair": [
+        "defensive",
+        "armor"
+      ],
+      "map": "last_stand_m",
+      "seed": 880029,
+      "sides": {
+        "defensive": "B",
+        "armor": "A"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 11.31,
+      "scores": {
+        "A": 58.0,
+        "B": 104.0
+      },
+      "score_delta": 46.0,
+      "units": {
+        "A": 16,
+        "B": 43
+      }
+    },
+    {
+      "pair": [
+        "defensive",
+        "artillery"
+      ],
+      "map": "border_skirmish_m",
+      "seed": 880030,
+      "sides": {
+        "defensive": "A",
+        "artillery": "B"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 11.29,
+      "scores": {
+        "A": 113.43,
+        "B": 87.12
+      },
+      "score_delta": 26.31,
+      "units": {
+        "A": 44,
+        "B": 31
+      }
+    },
+    {
+      "pair": [
+        "defensive",
+        "artillery"
+      ],
+      "map": "mountain_pass_m",
+      "seed": 880031,
+      "sides": {
+        "defensive": "B",
+        "artillery": "A"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 14.64,
+      "scores": {
+        "A": 84.0,
+        "B": 100.64
+      },
+      "score_delta": 16.64,
+      "units": {
+        "A": 31,
+        "B": 42
+      }
+    },
+    {
+      "pair": [
+        "defensive",
+        "artillery"
+      ],
+      "map": "archipelago_m",
+      "seed": 880032,
+      "sides": {
+        "defensive": "A",
+        "artillery": "B"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 19.88,
+      "scores": {
+        "A": 128.0,
+        "B": 98.0
+      },
+      "score_delta": 30.0,
+      "units": {
+        "A": 50,
+        "B": 35
+      }
+    },
+    {
+      "pair": [
+        "defensive",
+        "artillery"
+      ],
+      "map": "urban_delta_m",
+      "seed": 880033,
+      "sides": {
+        "defensive": "B",
+        "artillery": "A"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 15.99,
+      "scores": {
+        "A": 95.62,
+        "B": 124.37
+      },
+      "score_delta": 28.75,
+      "units": {
+        "A": 30,
+        "B": 50
+      }
+    },
+    {
+      "pair": [
+        "defensive",
+        "artillery"
+      ],
+      "map": "last_stand_m",
+      "seed": 880034,
+      "sides": {
+        "defensive": "A",
+        "artillery": "B"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 13.16,
+      "scores": {
+        "A": 118.12,
+        "B": 78.0
+      },
+      "score_delta": 40.12,
+      "units": {
+        "A": 49,
+        "B": 29
+      }
+    },
+    {
+      "pair": [
+        "infantry",
+        "armor"
+      ],
+      "map": "border_skirmish_m",
+      "seed": 880035,
+      "sides": {
+        "infantry": "B",
+        "armor": "A"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 9.19,
+      "scores": {
+        "A": 72.58,
+        "B": 84.65
+      },
+      "score_delta": 12.07,
+      "units": {
+        "A": 24,
+        "B": 30
+      }
+    },
+    {
+      "pair": [
+        "infantry",
+        "armor"
+      ],
+      "map": "mountain_pass_m",
+      "seed": 880036,
+      "sides": {
+        "infantry": "A",
+        "armor": "B"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 13.6,
+      "scores": {
+        "A": 122.0,
+        "B": 68.0
+      },
+      "score_delta": 54.0,
+      "units": {
+        "A": 50,
+        "B": 23
+      }
+    },
+    {
+      "pair": [
+        "infantry",
+        "armor"
+      ],
+      "map": "archipelago_m",
+      "seed": 880037,
+      "sides": {
+        "infantry": "B",
+        "armor": "A"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 18.69,
+      "scores": {
+        "A": 83.68,
+        "B": 128.0
+      },
+      "score_delta": 44.32,
+      "units": {
+        "A": 28,
+        "B": 50
+      }
+    },
+    {
+      "pair": [
+        "infantry",
+        "armor"
+      ],
+      "map": "urban_delta_m",
+      "seed": 880038,
+      "sides": {
+        "infantry": "A",
+        "armor": "B"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 15.14,
+      "scores": {
+        "A": 132.0,
+        "B": 84.0
+      },
+      "score_delta": 48.0,
+      "units": {
+        "A": 50,
+        "B": 26
+      }
+    },
+    {
+      "pair": [
+        "infantry",
+        "armor"
+      ],
+      "map": "last_stand_m",
+      "seed": 880039,
+      "sides": {
+        "infantry": "B",
+        "armor": "A"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 11.63,
+      "scores": {
+        "A": 58.0,
+        "B": 118.0
+      },
+      "score_delta": 60.0,
+      "units": {
+        "A": 16,
+        "B": 50
+      }
+    },
+    {
+      "pair": [
+        "infantry",
+        "artillery"
+      ],
+      "map": "border_skirmish_m",
+      "seed": 880040,
+      "sides": {
+        "infantry": "A",
+        "artillery": "B"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 10.65,
+      "scores": {
+        "A": 125.89,
+        "B": 66.35
+      },
+      "score_delta": 59.54,
+      "units": {
+        "A": 50,
+        "B": 21
+      }
+    },
+    {
+      "pair": [
+        "infantry",
+        "artillery"
+      ],
+      "map": "mountain_pass_m",
+      "seed": 880041,
+      "sides": {
+        "infantry": "B",
+        "artillery": "A"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 14.94,
+      "scores": {
+        "A": 81.95,
+        "B": 111.32
+      },
+      "score_delta": 29.37,
+      "units": {
+        "A": 30,
+        "B": 49
+      }
+    },
+    {
+      "pair": [
+        "infantry",
+        "artillery"
+      ],
+      "map": "archipelago_m",
+      "seed": 880042,
+      "sides": {
+        "infantry": "A",
+        "artillery": "B"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 19.67,
+      "scores": {
+        "A": 127.57,
+        "B": 97.22
+      },
+      "score_delta": 30.35,
+      "units": {
+        "A": 50,
+        "B": 35
+      }
+    },
+    {
+      "pair": [
+        "infantry",
+        "artillery"
+      ],
+      "map": "urban_delta_m",
+      "seed": 880043,
+      "sides": {
+        "infantry": "B",
+        "artillery": "A"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 15.12,
+      "scores": {
+        "A": 85.94,
+        "B": 125.22999999999999
+      },
+      "score_delta": 39.29,
+      "units": {
+        "A": 28,
+        "B": 50
+      }
+    },
+    {
+      "pair": [
+        "infantry",
+        "artillery"
+      ],
+      "map": "last_stand_m",
+      "seed": 880044,
+      "sides": {
+        "infantry": "A",
+        "artillery": "B"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 12.68,
+      "scores": {
+        "A": 120.81,
+        "B": 72.0
+      },
+      "score_delta": 48.81,
+      "units": {
+        "A": 48,
+        "B": 27
+      }
+    },
+    {
+      "pair": [
+        "armor",
+        "artillery"
+      ],
+      "map": "border_skirmish_m",
+      "seed": 880045,
+      "sides": {
+        "armor": "B",
+        "artillery": "A"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 8.7,
+      "scores": {
+        "A": 67.93,
+        "B": 73.99
+      },
+      "score_delta": 6.06,
+      "units": {
+        "A": 22,
+        "B": 24
+      }
+    },
+    {
+      "pair": [
+        "armor",
+        "artillery"
+      ],
+      "map": "mountain_pass_m",
+      "seed": 880046,
+      "sides": {
+        "armor": "A",
+        "artillery": "B"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 11.91,
+      "scores": {
+        "A": 71.92,
+        "B": 69.44
+      },
+      "score_delta": 2.48,
+      "units": {
+        "A": 25,
+        "B": 24
+      }
+    },
+    {
+      "pair": [
+        "armor",
+        "artillery"
+      ],
+      "map": "archipelago_m",
+      "seed": 880047,
+      "sides": {
+        "armor": "B",
+        "artillery": "A"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 16.18,
+      "scores": {
+        "A": 86.67,
+        "B": 77.96000000000001
+      },
+      "score_delta": -8.71,
+      "units": {
+        "A": 30,
+        "B": 25
+      }
+    },
+    {
+      "pair": [
+        "armor",
+        "artillery"
+      ],
+      "map": "urban_delta_m",
+      "seed": 880048,
+      "sides": {
+        "armor": "A",
+        "artillery": "B"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 12.89,
+      "scores": {
+        "A": 68.0,
+        "B": 83.22
+      },
+      "score_delta": -15.22,
+      "units": {
+        "A": 18,
+        "B": 26
+      }
+    },
+    {
+      "pair": [
+        "armor",
+        "artillery"
+      ],
+      "map": "last_stand_m",
+      "seed": 880049,
+      "sides": {
+        "armor": "B",
+        "artillery": "A"
+      },
+      "winner": "",
+      "status": "ongoing",
+      "turns": 41,
+      "seconds": 8.26,
+      "scores": {
+        "A": 58.31,
+        "B": 55.85
+      },
+      "score_delta": -2.46,
+      "units": {
+        "A": 18,
+        "B": 19
+      }
+    }
+  ]
+}

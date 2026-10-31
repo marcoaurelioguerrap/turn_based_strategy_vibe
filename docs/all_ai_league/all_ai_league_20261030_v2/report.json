@@ -1,0 +1,2516 @@
+{
+  "batch": "all_ai_league_20261030_v2",
+  "agents": [
+    "llm",
+    "ncm-vanguard",
+    "ncm-siege",
+    "conventional"
+  ],
+  "labels": {
+    "llm": "Qwen LLM",
+    "ncm-vanguard": "NCM Vanguard",
+    "ncm-siege": "NCM Siege",
+    "conventional": "Conventional heuristic"
+  },
+  "maps": [
+    "archipelago",
+    "archipelago_m",
+    "border_skirmish",
+    "border_skirmish_m",
+    "last_stand",
+    "last_stand_m",
+    "mountain_pass",
+    "mountain_pass_m",
+    "urban_delta",
+    "urban_delta_m"
+  ],
+  "max_turns": 0,
+  "games": 60,
+  "standings": {
+    "llm": {
+      "agent": "llm",
+      "label": "Qwen LLM",
+      "games": 30,
+      "wins": 16,
+      "losses": 14,
+      "draws": 0,
+      "unfinished": 0,
+      "failed": 0,
+      "points": 16.0,
+      "board_total": 28796.62000000001,
+      "units_total": 851.0,
+      "average_score": 959.89,
+      "average_units": 28.37
+    },
+    "ncm-vanguard": {
+      "agent": "ncm-vanguard",
+      "label": "NCM Vanguard",
+      "games": 30,
+      "wins": 17,
+      "losses": 13,
+      "draws": 0,
+      "unfinished": 0,
+      "failed": 0,
+      "points": 17.0,
+      "board_total": 28406.659999999996,
+      "units_total": 608.0,
+      "average_score": 946.89,
+      "average_units": 20.27
+    },
+    "ncm-siege": {
+      "agent": "ncm-siege",
+      "label": "NCM Siege",
+      "games": 30,
+      "wins": 8,
+      "losses": 22,
+      "draws": 0,
+      "unfinished": 0,
+      "failed": 0,
+      "points": 8.0,
+      "board_total": 28206.13,
+      "units_total": 498.0,
+      "average_score": 940.2,
+      "average_units": 16.6
+    },
+    "conventional": {
+      "agent": "conventional",
+      "label": "Conventional heuristic",
+      "games": 30,
+      "wins": 19,
+      "losses": 11,
+      "draws": 0,
+      "unfinished": 0,
+      "failed": 0,
+      "points": 19.0,
+      "board_total": 29292.65000000001,
+      "units_total": 1173.0,
+      "average_score": 976.42,
+      "average_units": 39.1
+    }
+  },
+  "head_to_head": {
+    "llm": {
+      "ncm-vanguard": {
+        "wins": 5,
+        "losses": 5,
+        "draws": 0,
+        "failed": 0
+      },
+      "ncm-siege": {
+        "wins": 8,
+        "losses": 2,
+        "draws": 0,
+        "failed": 0
+      },
+      "conventional": {
+        "wins": 3,
+        "losses": 7,
+        "draws": 0,
+        "failed": 0
+      }
+    },
+    "ncm-vanguard": {
+      "llm": {
+        "wins": 5,
+        "losses": 5,
+        "draws": 0,
+        "failed": 0
+      },
+      "ncm-siege": {
+        "wins": 8,
+        "losses": 2,
+        "draws": 0,
+        "failed": 0
+      },
+      "conventional": {
+        "wins": 4,
+        "losses": 6,
+        "draws": 0,
+        "failed": 0
+      }
+    },
+    "ncm-siege": {
+      "llm": {
+        "wins": 2,
+        "losses": 8,
+        "draws": 0,
+        "failed": 0
+      },
+      "ncm-vanguard": {
+        "wins": 2,
+        "losses": 8,
+        "draws": 0,
+        "failed": 0
+      },
+      "conventional": {
+        "wins": 4,
+        "losses": 6,
+        "draws": 0,
+        "failed": 0
+      }
+    },
+    "conventional": {
+      "llm": {
+        "wins": 7,
+        "losses": 3,
+        "draws": 0,
+        "failed": 0
+      },
+      "ncm-vanguard": {
+        "wins": 6,
+        "losses": 4,
+        "draws": 0,
+        "failed": 0
+      },
+      "ncm-siege": {
+        "wins": 6,
+        "losses": 4,
+        "draws": 0,
+        "failed": 0
+      }
+    }
+  },
+  "results": [
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-archipelago-llm-vs-ncm-vanguard-seed880000",
+      "map": "archipelago",
+      "agents": {
+        "A": "llm",
+        "B": "ncm-vanguard"
+      },
+      "board": {
+        "A": {
+          "units": 24,
+          "hp": 2158,
+          "sites": 120,
+          "funds": 151500,
+          "hq_hp": 100,
+          "score": 285.58
+        },
+        "B": {
+          "units": 25,
+          "hp": 2383,
+          "sites": 120,
+          "funds": 134000,
+          "hq_hp": 100,
+          "score": 288.83
+        }
+      },
+      "status": "draw",
+      "winner_side": "B",
+      "winner": "ncm-vanguard",
+      "decided_by": "board",
+      "board_margin": 3.25,
+      "turn_cap": 60,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-archipelago-llm-vs-ncm-vanguard-seed880000.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-archipelago-llm-vs-ncm-vanguard-seed880000.meta.json",
+      "seconds": 884.18,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-archipelago-ncm-siege-vs-llm-seed880001",
+      "map": "archipelago",
+      "agents": {
+        "A": "ncm-siege",
+        "B": "llm"
+      },
+      "board": {
+        "A": {
+          "units": 15,
+          "hp": 1350,
+          "sites": 120,
+          "funds": 184500,
+          "hq_hp": 0,
+          "score": 268.5
+        },
+        "B": {
+          "units": 28,
+          "hp": 2749,
+          "sites": 120,
+          "funds": 159600,
+          "hq_hp": 100,
+          "score": 295.49
+        }
+      },
+      "status": "draw",
+      "winner_side": "B",
+      "winner": "llm",
+      "decided_by": "board",
+      "board_margin": 26.99,
+      "turn_cap": 60,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-archipelago-ncm-siege-vs-llm-seed880001.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-archipelago-ncm-siege-vs-llm-seed880001.meta.json",
+      "seconds": 774.62,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-archipelago-llm-vs-conventional-seed880002",
+      "map": "archipelago",
+      "agents": {
+        "A": "llm",
+        "B": "conventional"
+      },
+      "board": {
+        "A": {
+          "units": 19,
+          "hp": 1814,
+          "sites": 120,
+          "funds": 156000,
+          "hq_hp": 100,
+          "score": 277.14
+        },
+        "B": {
+          "units": 48,
+          "hp": 4438,
+          "sites": 120,
+          "funds": 133800,
+          "hq_hp": 23,
+          "score": 332.38
+        }
+      },
+      "status": "draw",
+      "winner_side": "B",
+      "winner": "conventional",
+      "decided_by": "board",
+      "board_margin": 55.24,
+      "turn_cap": 60,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-archipelago-llm-vs-conventional-seed880002.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-archipelago-llm-vs-conventional-seed880002.meta.json",
+      "seconds": 666.67,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-archipelago-ncm-siege-vs-ncm-vanguard-seed880003",
+      "map": "archipelago",
+      "agents": {
+        "A": "ncm-siege",
+        "B": "ncm-vanguard"
+      },
+      "board": {
+        "A": {
+          "units": 17,
+          "hp": 1663,
+          "sites": 120,
+          "funds": 188300,
+          "hq_hp": 100,
+          "score": 273.63
+        },
+        "B": {
+          "units": 50,
+          "hp": 4920,
+          "sites": 120,
+          "funds": 138800,
+          "hq_hp": 100,
+          "score": 339.2
+        }
+      },
+      "status": "draw",
+      "winner_side": "B",
+      "winner": "ncm-vanguard",
+      "decided_by": "board",
+      "board_margin": 65.57,
+      "turn_cap": 60,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-archipelago-ncm-siege-vs-ncm-vanguard-seed880003.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-archipelago-ncm-siege-vs-ncm-vanguard-seed880003.meta.json",
+      "seconds": 210.49,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-archipelago-ncm-vanguard-vs-conventional-seed880004",
+      "map": "archipelago",
+      "agents": {
+        "A": "ncm-vanguard",
+        "B": "conventional"
+      },
+      "board": {
+        "A": {
+          "units": 48,
+          "hp": 4727,
+          "sites": 120,
+          "funds": 147900,
+          "hq_hp": 100,
+          "score": 335.27
+        },
+        "B": {
+          "units": 50,
+          "hp": 4697,
+          "sites": 120,
+          "funds": 138100,
+          "hq_hp": 100,
+          "score": 336.97
+        }
+      },
+      "status": "draw",
+      "winner_side": "B",
+      "winner": "conventional",
+      "decided_by": "board",
+      "board_margin": 1.7,
+      "turn_cap": 60,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-archipelago-ncm-vanguard-vs-conventional-seed880004.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-archipelago-ncm-vanguard-vs-conventional-seed880004.meta.json",
+      "seconds": 114.02,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-archipelago-conventional-vs-ncm-siege-seed880005",
+      "map": "archipelago",
+      "agents": {
+        "A": "conventional",
+        "B": "ncm-siege"
+      },
+      "board": {
+        "A": {
+          "units": 49,
+          "hp": 4862,
+          "sites": 120,
+          "funds": 140200,
+          "hq_hp": 62,
+          "score": 337.62
+        },
+        "B": {
+          "units": 50,
+          "hp": 4958,
+          "sites": 120,
+          "funds": 151100,
+          "hq_hp": 100,
+          "score": 339.58
+        }
+      },
+      "status": "draw",
+      "winner_side": "B",
+      "winner": "ncm-siege",
+      "decided_by": "board",
+      "board_margin": 1.96,
+      "turn_cap": 60,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-archipelago-conventional-vs-ncm-siege-seed880005.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-archipelago-conventional-vs-ncm-siege-seed880005.meta.json",
+      "seconds": 110.96,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-archipelago_m-ncm-vanguard-vs-llm-seed880106",
+      "map": "archipelago_m",
+      "agents": {
+        "A": "ncm-vanguard",
+        "B": "llm"
+      },
+      "board": {
+        "A": {
+          "units": 50,
+          "hp": 5000,
+          "sites": 1178,
+          "funds": 750500,
+          "hq_hp": 100,
+          "score": 2456.0
+        },
+        "B": {
+          "units": 50,
+          "hp": 4813,
+          "sites": 1178,
+          "funds": 732700,
+          "hq_hp": 38,
+          "score": 2454.13
+        }
+      },
+      "status": "draw",
+      "winner_side": "A",
+      "winner": "ncm-vanguard",
+      "decided_by": "board",
+      "board_margin": -1.87,
+      "turn_cap": 140,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-archipelago_m-ncm-vanguard-vs-llm-seed880106.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-archipelago_m-ncm-vanguard-vs-llm-seed880106.meta.json",
+      "seconds": 4262.69,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-archipelago_m-llm-vs-ncm-siege-seed880107",
+      "map": "archipelago_m",
+      "agents": {
+        "A": "llm",
+        "B": "ncm-siege"
+      },
+      "board": {
+        "A": {
+          "units": 50,
+          "hp": 4708,
+          "sites": 1178,
+          "funds": 709600,
+          "hq_hp": 33,
+          "score": 2453.08
+        },
+        "B": {
+          "units": 28,
+          "hp": 2343,
+          "sites": 1178,
+          "funds": 737700,
+          "hq_hp": 4,
+          "score": 2407.43
+        }
+      },
+      "status": "draw",
+      "winner_side": "A",
+      "winner": "llm",
+      "decided_by": "board",
+      "board_margin": -45.65,
+      "turn_cap": 140,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-archipelago_m-llm-vs-ncm-siege-seed880107.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-archipelago_m-llm-vs-ncm-siege-seed880107.meta.json",
+      "seconds": 3033.72,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-archipelago_m-conventional-vs-llm-seed880108",
+      "map": "archipelago_m",
+      "agents": {
+        "A": "conventional",
+        "B": "llm"
+      },
+      "board": {
+        "A": {
+          "units": 50,
+          "hp": 4701,
+          "sites": 1178,
+          "funds": 761600,
+          "hq_hp": 100,
+          "score": 2453.01
+        },
+        "B": {
+          "units": 50,
+          "hp": 4934,
+          "sites": 1178,
+          "funds": 743900,
+          "hq_hp": 100,
+          "score": 2455.34
+        }
+      },
+      "status": "draw",
+      "winner_side": "B",
+      "winner": "llm",
+      "decided_by": "board",
+      "board_margin": 2.33,
+      "turn_cap": 140,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-archipelago_m-conventional-vs-llm-seed880108.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-archipelago_m-conventional-vs-llm-seed880108.meta.json",
+      "seconds": 3471.53,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-archipelago_m-ncm-vanguard-vs-ncm-siege-seed880109",
+      "map": "archipelago_m",
+      "agents": {
+        "A": "ncm-vanguard",
+        "B": "ncm-siege"
+      },
+      "board": {
+        "A": {
+          "units": 50,
+          "hp": 4710,
+          "sites": 1178,
+          "funds": 754300,
+          "hq_hp": 53,
+          "score": 2453.1
+        },
+        "B": {
+          "units": 37,
+          "hp": 3507,
+          "sites": 1178,
+          "funds": 753600,
+          "hq_hp": 65,
+          "score": 2428.07
+        }
+      },
+      "status": "draw",
+      "winner_side": "A",
+      "winner": "ncm-vanguard",
+      "decided_by": "board",
+      "board_margin": -25.03,
+      "turn_cap": 140,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-archipelago_m-ncm-vanguard-vs-ncm-siege-seed880109.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-archipelago_m-ncm-vanguard-vs-ncm-siege-seed880109.meta.json",
+      "seconds": 1297.77,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-archipelago_m-conventional-vs-ncm-vanguard-seed880110",
+      "map": "archipelago_m",
+      "agents": {
+        "A": "conventional",
+        "B": "ncm-vanguard"
+      },
+      "board": {
+        "A": {
+          "units": 50,
+          "hp": 4661,
+          "sites": 1178,
+          "funds": 754600,
+          "hq_hp": 100,
+          "score": 2452.61
+        },
+        "B": {
+          "units": 50,
+          "hp": 4944,
+          "sites": 1178,
+          "funds": 746400,
+          "hq_hp": 100,
+          "score": 2455.44
+        }
+      },
+      "status": "draw",
+      "winner_side": "B",
+      "winner": "ncm-vanguard",
+      "decided_by": "board",
+      "board_margin": 2.83,
+      "turn_cap": 140,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-archipelago_m-conventional-vs-ncm-vanguard-seed880110.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-archipelago_m-conventional-vs-ncm-vanguard-seed880110.meta.json",
+      "seconds": 766.84,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-archipelago_m-ncm-siege-vs-conventional-seed880111",
+      "map": "archipelago_m",
+      "agents": {
+        "A": "ncm-siege",
+        "B": "conventional"
+      },
+      "board": {
+        "A": {
+          "units": 50,
+          "hp": 4853,
+          "sites": 1178,
+          "funds": 769800,
+          "hq_hp": 100,
+          "score": 2454.53
+        },
+        "B": {
+          "units": 50,
+          "hp": 4452,
+          "sites": 1178,
+          "funds": 746600,
+          "hq_hp": 91,
+          "score": 2450.52
+        }
+      },
+      "status": "draw",
+      "winner_side": "A",
+      "winner": "ncm-siege",
+      "decided_by": "board",
+      "board_margin": -4.01,
+      "turn_cap": 140,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-archipelago_m-ncm-siege-vs-conventional-seed880111.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-archipelago_m-ncm-siege-vs-conventional-seed880111.meta.json",
+      "seconds": 788.69,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-border_skirmish-llm-vs-ncm-vanguard-seed880212",
+      "map": "border_skirmish",
+      "agents": {
+        "A": "llm",
+        "B": "ncm-vanguard"
+      },
+      "board": {
+        "A": {
+          "units": 8,
+          "hp": 664,
+          "sites": 47,
+          "funds": 128900,
+          "hq_hp": 0,
+          "score": 108.64
+        },
+        "B": {
+          "units": 18,
+          "hp": 1463,
+          "sites": 49,
+          "funds": 146300,
+          "hq_hp": 0,
+          "score": 130.63
+        }
+      },
+      "status": "draw",
+      "winner_side": "B",
+      "winner": "ncm-vanguard",
+      "decided_by": "board",
+      "board_margin": 21.99,
+      "turn_cap": 60,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-border_skirmish-llm-vs-ncm-vanguard-seed880212.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-border_skirmish-llm-vs-ncm-vanguard-seed880212.meta.json",
+      "seconds": 499.87,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-border_skirmish-ncm-siege-vs-llm-seed880213",
+      "map": "border_skirmish",
+      "agents": {
+        "A": "ncm-siege",
+        "B": "llm"
+      },
+      "board": {
+        "A": {
+          "units": 8,
+          "hp": 502,
+          "sites": 48,
+          "funds": 150200,
+          "hq_hp": 100,
+          "score": 109.02
+        },
+        "B": {
+          "units": 23,
+          "hp": 2069,
+          "sites": 48,
+          "funds": 136400,
+          "hq_hp": 0,
+          "score": 139.69
+        }
+      },
+      "status": "draw",
+      "winner_side": "B",
+      "winner": "llm",
+      "decided_by": "board",
+      "board_margin": 30.67,
+      "turn_cap": 60,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-border_skirmish-ncm-siege-vs-llm-seed880213.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-border_skirmish-ncm-siege-vs-llm-seed880213.meta.json",
+      "seconds": 723.93,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-border_skirmish-llm-vs-conventional-seed880214",
+      "map": "border_skirmish",
+      "agents": {
+        "A": "llm",
+        "B": "conventional"
+      },
+      "board": {
+        "A": {
+          "units": 0,
+          "hp": 0,
+          "sites": 48,
+          "funds": 130300,
+          "hq_hp": 0,
+          "score": 96.0
+        },
+        "B": {
+          "units": 43,
+          "hp": 3626,
+          "sites": 48,
+          "funds": 138300,
+          "hq_hp": 0,
+          "score": 175.26
+        }
+      },
+      "status": "draw",
+      "winner_side": "B",
+      "winner": "conventional",
+      "decided_by": "board",
+      "board_margin": 79.26,
+      "turn_cap": 60,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-border_skirmish-llm-vs-conventional-seed880214.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-border_skirmish-llm-vs-conventional-seed880214.meta.json",
+      "seconds": 372.09,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-border_skirmish-ncm-siege-vs-ncm-vanguard-seed880215",
+      "map": "border_skirmish",
+      "agents": {
+        "A": "ncm-siege",
+        "B": "ncm-vanguard"
+      },
+      "board": {
+        "A": {
+          "units": 9,
+          "hp": 789,
+          "sites": 48,
+          "funds": 139700,
+          "hq_hp": 0,
+          "score": 112.89
+        },
+        "B": {
+          "units": 11,
+          "hp": 727,
+          "sites": 48,
+          "funds": 114800,
+          "hq_hp": 0,
+          "score": 114.27
+        }
+      },
+      "status": "draw",
+      "winner_side": "B",
+      "winner": "ncm-vanguard",
+      "decided_by": "board",
+      "board_margin": 1.38,
+      "turn_cap": 60,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-border_skirmish-ncm-siege-vs-ncm-vanguard-seed880215.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-border_skirmish-ncm-siege-vs-ncm-vanguard-seed880215.meta.json",
+      "seconds": 208.03,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-border_skirmish-ncm-vanguard-vs-conventional-seed880216",
+      "map": "border_skirmish",
+      "agents": {
+        "A": "ncm-vanguard",
+        "B": "conventional"
+      },
+      "board": {
+        "A": {
+          "units": 32,
+          "hp": 3073,
+          "sites": 48,
+          "funds": 139500,
+          "hq_hp": 100,
+          "score": 158.73
+        },
+        "B": {
+          "units": 0,
+          "hp": 0,
+          "sites": 48,
+          "funds": 186200,
+          "hq_hp": 0,
+          "score": 96.0
+        }
+      },
+      "status": "draw",
+      "winner_side": "A",
+      "winner": "ncm-vanguard",
+      "decided_by": "board",
+      "board_margin": -62.73,
+      "turn_cap": 60,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-border_skirmish-ncm-vanguard-vs-conventional-seed880216.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-border_skirmish-ncm-vanguard-vs-conventional-seed880216.meta.json",
+      "seconds": 105.26,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-border_skirmish-conventional-vs-ncm-siege-seed880217",
+      "map": "border_skirmish",
+      "agents": {
+        "A": "conventional",
+        "B": "ncm-siege"
+      },
+      "board": {
+        "A": {
+          "units": 0,
+          "hp": 0,
+          "sites": 42,
+          "funds": 72900,
+          "hq_hp": 0,
+          "score": 84.0
+        },
+        "B": {
+          "units": 18,
+          "hp": 1735,
+          "sites": 54,
+          "funds": 81200,
+          "hq_hp": 100,
+          "score": 143.35
+        }
+      },
+      "status": "victory",
+      "winner_side": "B",
+      "winner": "ncm-siege",
+      "decided_by": "victory",
+      "board_margin": 59.35,
+      "turn_cap": 60,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-border_skirmish-conventional-vs-ncm-siege-seed880217.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-border_skirmish-conventional-vs-ncm-siege-seed880217.meta.json",
+      "seconds": 47.56,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-border_skirmish_m-ncm-vanguard-vs-llm-seed880318",
+      "map": "border_skirmish_m",
+      "agents": {
+        "A": "ncm-vanguard",
+        "B": "llm"
+      },
+      "board": {
+        "A": {
+          "units": 11,
+          "hp": 947,
+          "sites": 525,
+          "funds": 623100,
+          "hq_hp": 100,
+          "score": 1070.47
+        },
+        "B": {
+          "units": 46,
+          "hp": 4079,
+          "sites": 525,
+          "funds": 512100,
+          "hq_hp": 92,
+          "score": 1136.79
+        }
+      },
+      "status": "draw",
+      "winner_side": "B",
+      "winner": "llm",
+      "decided_by": "board",
+      "board_margin": 66.32,
+      "turn_cap": 120,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-border_skirmish_m-ncm-vanguard-vs-llm-seed880318.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-border_skirmish_m-ncm-vanguard-vs-llm-seed880318.meta.json",
+      "seconds": 3030.7,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-border_skirmish_m-llm-vs-ncm-siege-seed880319",
+      "map": "border_skirmish_m",
+      "agents": {
+        "A": "llm",
+        "B": "ncm-siege"
+      },
+      "board": {
+        "A": {
+          "units": 49,
+          "hp": 4633,
+          "sites": 525,
+          "funds": 568500,
+          "hq_hp": 0,
+          "score": 1145.33
+        },
+        "B": {
+          "units": 12,
+          "hp": 955,
+          "sites": 525,
+          "funds": 598600,
+          "hq_hp": 0,
+          "score": 1071.55
+        }
+      },
+      "status": "draw",
+      "winner_side": "A",
+      "winner": "llm",
+      "decided_by": "board",
+      "board_margin": -73.78,
+      "turn_cap": 120,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-border_skirmish_m-llm-vs-ncm-siege-seed880319.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-border_skirmish_m-llm-vs-ncm-siege-seed880319.meta.json",
+      "seconds": 2121.54,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-border_skirmish_m-conventional-vs-llm-seed880320",
+      "map": "border_skirmish_m",
+      "agents": {
+        "A": "conventional",
+        "B": "llm"
+      },
+      "board": {
+        "A": {
+          "units": 50,
+          "hp": 3120,
+          "sites": 525,
+          "funds": 528300,
+          "hq_hp": 100,
+          "score": 1131.2
+        },
+        "B": {
+          "units": 50,
+          "hp": 4680,
+          "sites": 525,
+          "funds": 557600,
+          "hq_hp": 100,
+          "score": 1146.8
+        }
+      },
+      "status": "draw",
+      "winner_side": "B",
+      "winner": "llm",
+      "decided_by": "board",
+      "board_margin": 15.6,
+      "turn_cap": 120,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-border_skirmish_m-conventional-vs-llm-seed880320.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-border_skirmish_m-conventional-vs-llm-seed880320.meta.json",
+      "seconds": 2161.58,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-border_skirmish_m-ncm-vanguard-vs-ncm-siege-seed880321",
+      "map": "border_skirmish_m",
+      "agents": {
+        "A": "ncm-vanguard",
+        "B": "ncm-siege"
+      },
+      "board": {
+        "A": {
+          "units": 9,
+          "hp": 677,
+          "sites": 526,
+          "funds": 631100,
+          "hq_hp": 39,
+          "score": 1067.77
+        },
+        "B": {
+          "units": 8,
+          "hp": 800,
+          "sites": 524,
+          "funds": 542700,
+          "hq_hp": 0,
+          "score": 1064.0
+        }
+      },
+      "status": "draw",
+      "winner_side": "A",
+      "winner": "ncm-vanguard",
+      "decided_by": "board",
+      "board_margin": -3.77,
+      "turn_cap": 120,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-border_skirmish_m-ncm-vanguard-vs-ncm-siege-seed880321.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-border_skirmish_m-ncm-vanguard-vs-ncm-siege-seed880321.meta.json",
+      "seconds": 1129.89,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-border_skirmish_m-conventional-vs-ncm-vanguard-seed880322",
+      "map": "border_skirmish_m",
+      "agents": {
+        "A": "conventional",
+        "B": "ncm-vanguard"
+      },
+      "board": {
+        "A": {
+          "units": 50,
+          "hp": 2870,
+          "sites": 526,
+          "funds": 555800,
+          "hq_hp": 90,
+          "score": 1130.7
+        },
+        "B": {
+          "units": 7,
+          "hp": 447,
+          "sites": 524,
+          "funds": 510900,
+          "hq_hp": 100,
+          "score": 1059.47
+        }
+      },
+      "status": "draw",
+      "winner_side": "A",
+      "winner": "conventional",
+      "decided_by": "board",
+      "board_margin": -71.23,
+      "turn_cap": 120,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-border_skirmish_m-conventional-vs-ncm-vanguard-seed880322.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-border_skirmish_m-conventional-vs-ncm-vanguard-seed880322.meta.json",
+      "seconds": 612.08,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-border_skirmish_m-ncm-siege-vs-conventional-seed880323",
+      "map": "border_skirmish_m",
+      "agents": {
+        "A": "ncm-siege",
+        "B": "conventional"
+      },
+      "board": {
+        "A": {
+          "units": 6,
+          "hp": 498,
+          "sites": 525,
+          "funds": 592900,
+          "hq_hp": 100,
+          "score": 1060.98
+        },
+        "B": {
+          "units": 50,
+          "hp": 3629,
+          "sites": 525,
+          "funds": 578200,
+          "hq_hp": 99,
+          "score": 1136.29
+        }
+      },
+      "status": "draw",
+      "winner_side": "B",
+      "winner": "conventional",
+      "decided_by": "board",
+      "board_margin": 75.31,
+      "turn_cap": 120,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-border_skirmish_m-ncm-siege-vs-conventional-seed880323.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-border_skirmish_m-ncm-siege-vs-conventional-seed880323.meta.json",
+      "seconds": 616.81,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-last_stand-llm-vs-ncm-vanguard-seed880424",
+      "map": "last_stand",
+      "agents": {
+        "A": "llm",
+        "B": "ncm-vanguard"
+      },
+      "board": {
+        "A": {
+          "units": 15,
+          "hp": 1500,
+          "sites": 80,
+          "funds": 142900,
+          "hq_hp": 0,
+          "score": 190.0
+        },
+        "B": {
+          "units": 16,
+          "hp": 1315,
+          "sites": 80,
+          "funds": 95400,
+          "hq_hp": 0,
+          "score": 189.15
+        }
+      },
+      "status": "draw",
+      "winner_side": "A",
+      "winner": "llm",
+      "decided_by": "board",
+      "board_margin": -0.85,
+      "turn_cap": 50,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-last_stand-llm-vs-ncm-vanguard-seed880424.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-last_stand-llm-vs-ncm-vanguard-seed880424.meta.json",
+      "seconds": 476.33,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-last_stand-ncm-siege-vs-llm-seed880425",
+      "map": "last_stand",
+      "agents": {
+        "A": "ncm-siege",
+        "B": "llm"
+      },
+      "board": {
+        "A": {
+          "units": 9,
+          "hp": 699,
+          "sites": 82,
+          "funds": 118800,
+          "hq_hp": 100,
+          "score": 179.99
+        },
+        "B": {
+          "units": 7,
+          "hp": 700,
+          "sites": 78,
+          "funds": 75000,
+          "hq_hp": 0,
+          "score": 170.0
+        }
+      },
+      "status": "victory",
+      "winner_side": "A",
+      "winner": "ncm-siege",
+      "decided_by": "victory",
+      "board_margin": -9.99,
+      "turn_cap": 50,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-last_stand-ncm-siege-vs-llm-seed880425.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-last_stand-ncm-siege-vs-llm-seed880425.meta.json",
+      "seconds": 405.13,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-last_stand-llm-vs-conventional-seed880426",
+      "map": "last_stand",
+      "agents": {
+        "A": "llm",
+        "B": "conventional"
+      },
+      "board": {
+        "A": {
+          "units": 0,
+          "hp": 0,
+          "sites": 80,
+          "funds": 119400,
+          "hq_hp": 0,
+          "score": 160.0
+        },
+        "B": {
+          "units": 45,
+          "hp": 3840,
+          "sites": 80,
+          "funds": 84400,
+          "hq_hp": 93,
+          "score": 243.4
+        }
+      },
+      "status": "draw",
+      "winner_side": "B",
+      "winner": "conventional",
+      "decided_by": "board",
+      "board_margin": 83.4,
+      "turn_cap": 50,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-last_stand-llm-vs-conventional-seed880426.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-last_stand-llm-vs-conventional-seed880426.meta.json",
+      "seconds": 311.78,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-last_stand-ncm-siege-vs-ncm-vanguard-seed880427",
+      "map": "last_stand",
+      "agents": {
+        "A": "ncm-siege",
+        "B": "ncm-vanguard"
+      },
+      "board": {
+        "A": {
+          "units": 0,
+          "hp": 0,
+          "sites": 83,
+          "funds": 204700,
+          "hq_hp": 0,
+          "score": 166.0
+        },
+        "B": {
+          "units": 28,
+          "hp": 2648,
+          "sites": 77,
+          "funds": 63400,
+          "hq_hp": 95,
+          "score": 208.48
+        }
+      },
+      "status": "draw",
+      "winner_side": "B",
+      "winner": "ncm-vanguard",
+      "decided_by": "board",
+      "board_margin": 42.48,
+      "turn_cap": 50,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-last_stand-ncm-siege-vs-ncm-vanguard-seed880427.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-last_stand-ncm-siege-vs-ncm-vanguard-seed880427.meta.json",
+      "seconds": 110.81,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-last_stand-ncm-vanguard-vs-conventional-seed880428",
+      "map": "last_stand",
+      "agents": {
+        "A": "ncm-vanguard",
+        "B": "conventional"
+      },
+      "board": {
+        "A": {
+          "units": 5,
+          "hp": 409,
+          "sites": 80,
+          "funds": 127800,
+          "hq_hp": 100,
+          "score": 169.09
+        },
+        "B": {
+          "units": 31,
+          "hp": 2261,
+          "sites": 80,
+          "funds": 85800,
+          "hq_hp": 97,
+          "score": 213.61
+        }
+      },
+      "status": "draw",
+      "winner_side": "B",
+      "winner": "conventional",
+      "decided_by": "board",
+      "board_margin": 44.52,
+      "turn_cap": 50,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-last_stand-ncm-vanguard-vs-conventional-seed880428.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-last_stand-ncm-vanguard-vs-conventional-seed880428.meta.json",
+      "seconds": 75.84,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-last_stand-conventional-vs-ncm-siege-seed880429",
+      "map": "last_stand",
+      "agents": {
+        "A": "conventional",
+        "B": "ncm-siege"
+      },
+      "board": {
+        "A": {
+          "units": 38,
+          "hp": 3237,
+          "sites": 79,
+          "funds": 124200,
+          "hq_hp": 86,
+          "score": 228.37
+        },
+        "B": {
+          "units": 7,
+          "hp": 403,
+          "sites": 81,
+          "funds": 121500,
+          "hq_hp": 100,
+          "score": 173.03
+        }
+      },
+      "status": "draw",
+      "winner_side": "A",
+      "winner": "conventional",
+      "decided_by": "board",
+      "board_margin": -55.34,
+      "turn_cap": 50,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-last_stand-conventional-vs-ncm-siege-seed880429.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-last_stand-conventional-vs-ncm-siege-seed880429.meta.json",
+      "seconds": 86.03,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-last_stand_m-ncm-vanguard-vs-llm-seed880530",
+      "map": "last_stand_m",
+      "agents": {
+        "A": "ncm-vanguard",
+        "B": "llm"
+      },
+      "board": {
+        "A": {
+          "units": 27,
+          "hp": 2479,
+          "sites": 800,
+          "funds": 468000,
+          "hq_hp": 100,
+          "score": 1651.79
+        },
+        "B": {
+          "units": 50,
+          "hp": 4645,
+          "sites": 768,
+          "funds": 352100,
+          "hq_hp": 95,
+          "score": 1632.45
+        }
+      },
+      "status": "draw",
+      "winner_side": "A",
+      "winner": "ncm-vanguard",
+      "decided_by": "board",
+      "board_margin": -19.34,
+      "turn_cap": 100,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-last_stand_m-ncm-vanguard-vs-llm-seed880530.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-last_stand_m-ncm-vanguard-vs-llm-seed880530.meta.json",
+      "seconds": 3047.16,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-last_stand_m-llm-vs-ncm-siege-seed880531",
+      "map": "last_stand_m",
+      "agents": {
+        "A": "llm",
+        "B": "ncm-siege"
+      },
+      "board": {
+        "A": {
+          "units": 38,
+          "hp": 3570,
+          "sites": 797,
+          "funds": 411500,
+          "hq_hp": 0,
+          "score": 1667.7
+        },
+        "B": {
+          "units": 21,
+          "hp": 1886,
+          "sites": 771,
+          "funds": 451700,
+          "hq_hp": 39,
+          "score": 1581.86
+        }
+      },
+      "status": "draw",
+      "winner_side": "A",
+      "winner": "llm",
+      "decided_by": "board",
+      "board_margin": -85.84,
+      "turn_cap": 100,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-last_stand_m-llm-vs-ncm-siege-seed880531.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-last_stand_m-llm-vs-ncm-siege-seed880531.meta.json",
+      "seconds": 1787.33,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-last_stand_m-conventional-vs-llm-seed880532",
+      "map": "last_stand_m",
+      "agents": {
+        "A": "conventional",
+        "B": "llm"
+      },
+      "board": {
+        "A": {
+          "units": 50,
+          "hp": 3152,
+          "sites": 800,
+          "funds": 455300,
+          "hq_hp": 100,
+          "score": 1681.52
+        },
+        "B": {
+          "units": 50,
+          "hp": 4572,
+          "sites": 768,
+          "funds": 326600,
+          "hq_hp": 100,
+          "score": 1631.72
+        }
+      },
+      "status": "draw",
+      "winner_side": "A",
+      "winner": "conventional",
+      "decided_by": "board",
+      "board_margin": -49.8,
+      "turn_cap": 100,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-last_stand_m-conventional-vs-llm-seed880532.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-last_stand_m-conventional-vs-llm-seed880532.meta.json",
+      "seconds": 2244.22,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-last_stand_m-ncm-vanguard-vs-ncm-siege-seed880533",
+      "map": "last_stand_m",
+      "agents": {
+        "A": "ncm-vanguard",
+        "B": "ncm-siege"
+      },
+      "board": {
+        "A": {
+          "units": 10,
+          "hp": 880,
+          "sites": 800,
+          "funds": 465600,
+          "hq_hp": 0,
+          "score": 1618.8
+        },
+        "B": {
+          "units": 18,
+          "hp": 1309,
+          "sites": 768,
+          "funds": 364000,
+          "hq_hp": 94,
+          "score": 1567.09
+        }
+      },
+      "status": "draw",
+      "winner_side": "A",
+      "winner": "ncm-vanguard",
+      "decided_by": "board",
+      "board_margin": -51.71,
+      "turn_cap": 100,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-last_stand_m-ncm-vanguard-vs-ncm-siege-seed880533.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-last_stand_m-ncm-vanguard-vs-ncm-siege-seed880533.meta.json",
+      "seconds": 940.47,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-last_stand_m-conventional-vs-ncm-vanguard-seed880534",
+      "map": "last_stand_m",
+      "agents": {
+        "A": "conventional",
+        "B": "ncm-vanguard"
+      },
+      "board": {
+        "A": {
+          "units": 49,
+          "hp": 2543,
+          "sites": 800,
+          "funds": 437000,
+          "hq_hp": 100,
+          "score": 1674.43
+        },
+        "B": {
+          "units": 15,
+          "hp": 1230,
+          "sites": 768,
+          "funds": 346000,
+          "hq_hp": 100,
+          "score": 1563.3
+        }
+      },
+      "status": "draw",
+      "winner_side": "A",
+      "winner": "conventional",
+      "decided_by": "board",
+      "board_margin": -111.13,
+      "turn_cap": 100,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-last_stand_m-conventional-vs-ncm-vanguard-seed880534.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-last_stand_m-conventional-vs-ncm-vanguard-seed880534.meta.json",
+      "seconds": 536.01,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-last_stand_m-ncm-siege-vs-conventional-seed880535",
+      "map": "last_stand_m",
+      "agents": {
+        "A": "ncm-siege",
+        "B": "conventional"
+      },
+      "board": {
+        "A": {
+          "units": 7,
+          "hp": 641,
+          "sites": 800,
+          "funds": 492500,
+          "hq_hp": 100,
+          "score": 1613.41
+        },
+        "B": {
+          "units": 50,
+          "hp": 3132,
+          "sites": 768,
+          "funds": 374900,
+          "hq_hp": 100,
+          "score": 1617.32
+        }
+      },
+      "status": "draw",
+      "winner_side": "B",
+      "winner": "conventional",
+      "decided_by": "board",
+      "board_margin": 3.91,
+      "turn_cap": 100,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-last_stand_m-ncm-siege-vs-conventional-seed880535.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-last_stand_m-ncm-siege-vs-conventional-seed880535.meta.json",
+      "seconds": 538.36,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-mountain_pass-llm-vs-ncm-vanguard-seed880636",
+      "map": "mountain_pass",
+      "agents": {
+        "A": "llm",
+        "B": "ncm-vanguard"
+      },
+      "board": {
+        "A": {
+          "units": 14,
+          "hp": 1356,
+          "sites": 90,
+          "funds": 140600,
+          "hq_hp": 0,
+          "score": 207.56
+        },
+        "B": {
+          "units": 11,
+          "hp": 942,
+          "sites": 90,
+          "funds": 118400,
+          "hq_hp": 0,
+          "score": 200.42
+        }
+      },
+      "status": "draw",
+      "winner_side": "A",
+      "winner": "llm",
+      "decided_by": "board",
+      "board_margin": -7.14,
+      "turn_cap": 60,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-mountain_pass-llm-vs-ncm-vanguard-seed880636.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-mountain_pass-llm-vs-ncm-vanguard-seed880636.meta.json",
+      "seconds": 681.74,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-mountain_pass-ncm-siege-vs-llm-seed880637",
+      "map": "mountain_pass",
+      "agents": {
+        "A": "ncm-siege",
+        "B": "llm"
+      },
+      "board": {
+        "A": {
+          "units": 9,
+          "hp": 862,
+          "sites": 94,
+          "funds": 124300,
+          "hq_hp": 100,
+          "score": 205.62
+        },
+        "B": {
+          "units": 2,
+          "hp": 111,
+          "sites": 86,
+          "funds": 79300,
+          "hq_hp": 0,
+          "score": 175.11
+        }
+      },
+      "status": "victory",
+      "winner_side": "A",
+      "winner": "ncm-siege",
+      "decided_by": "victory",
+      "board_margin": -30.51,
+      "turn_cap": 60,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-mountain_pass-ncm-siege-vs-llm-seed880637.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-mountain_pass-ncm-siege-vs-llm-seed880637.meta.json",
+      "seconds": 393.9,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-mountain_pass-llm-vs-conventional-seed880638",
+      "map": "mountain_pass",
+      "agents": {
+        "A": "llm",
+        "B": "conventional"
+      },
+      "board": {
+        "A": {
+          "units": 1,
+          "hp": 99,
+          "sites": 90,
+          "funds": 107200,
+          "hq_hp": 0,
+          "score": 181.99
+        },
+        "B": {
+          "units": 47,
+          "hp": 3975,
+          "sites": 90,
+          "funds": 118000,
+          "hq_hp": 98,
+          "score": 266.75
+        }
+      },
+      "status": "draw",
+      "winner_side": "B",
+      "winner": "conventional",
+      "decided_by": "board",
+      "board_margin": 84.76,
+      "turn_cap": 60,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-mountain_pass-llm-vs-conventional-seed880638.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-mountain_pass-llm-vs-conventional-seed880638.meta.json",
+      "seconds": 335.41,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-mountain_pass-ncm-siege-vs-ncm-vanguard-seed880639",
+      "map": "mountain_pass",
+      "agents": {
+        "A": "ncm-siege",
+        "B": "ncm-vanguard"
+      },
+      "board": {
+        "A": {
+          "units": 8,
+          "hp": 708,
+          "sites": 93,
+          "funds": 194600,
+          "hq_hp": 0,
+          "score": 201.08
+        },
+        "B": {
+          "units": 21,
+          "hp": 1700,
+          "sites": 87,
+          "funds": 105700,
+          "hq_hp": 68,
+          "score": 212.0
+        }
+      },
+      "status": "draw",
+      "winner_side": "B",
+      "winner": "ncm-vanguard",
+      "decided_by": "board",
+      "board_margin": 10.92,
+      "turn_cap": 60,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-mountain_pass-ncm-siege-vs-ncm-vanguard-seed880639.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-mountain_pass-ncm-siege-vs-ncm-vanguard-seed880639.meta.json",
+      "seconds": 202.6,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-mountain_pass-ncm-vanguard-vs-conventional-seed880640",
+      "map": "mountain_pass",
+      "agents": {
+        "A": "ncm-vanguard",
+        "B": "conventional"
+      },
+      "board": {
+        "A": {
+          "units": 26,
+          "hp": 2412,
+          "sites": 90,
+          "funds": 148800,
+          "hq_hp": 100,
+          "score": 230.12
+        },
+        "B": {
+          "units": 0,
+          "hp": 0,
+          "sites": 90,
+          "funds": 174300,
+          "hq_hp": 0,
+          "score": 180.0
+        }
+      },
+      "status": "draw",
+      "winner_side": "A",
+      "winner": "ncm-vanguard",
+      "decided_by": "board",
+      "board_margin": -50.12,
+      "turn_cap": 60,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-mountain_pass-ncm-vanguard-vs-conventional-seed880640.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-mountain_pass-ncm-vanguard-vs-conventional-seed880640.meta.json",
+      "seconds": 98.67,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-mountain_pass-conventional-vs-ncm-siege-seed880641",
+      "map": "mountain_pass",
+      "agents": {
+        "A": "conventional",
+        "B": "ncm-siege"
+      },
+      "board": {
+        "A": {
+          "units": 39,
+          "hp": 3374,
+          "sites": 89,
+          "funds": 107300,
+          "hq_hp": 98,
+          "score": 250.74
+        },
+        "B": {
+          "units": 9,
+          "hp": 663,
+          "sites": 91,
+          "funds": 162700,
+          "hq_hp": 100,
+          "score": 197.63
+        }
+      },
+      "status": "draw",
+      "winner_side": "A",
+      "winner": "conventional",
+      "decided_by": "board",
+      "board_margin": -53.11,
+      "turn_cap": 60,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-mountain_pass-conventional-vs-ncm-siege-seed880641.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-mountain_pass-conventional-vs-ncm-siege-seed880641.meta.json",
+      "seconds": 110.39,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-mountain_pass_m-ncm-vanguard-vs-llm-seed880742",
+      "map": "mountain_pass_m",
+      "agents": {
+        "A": "ncm-vanguard",
+        "B": "llm"
+      },
+      "board": {
+        "A": {
+          "units": 10,
+          "hp": 908,
+          "sites": 864,
+          "funds": 497200,
+          "hq_hp": 100,
+          "score": 1747.08
+        },
+        "B": {
+          "units": 39,
+          "hp": 3649,
+          "sites": 864,
+          "funds": 459900,
+          "hq_hp": 20,
+          "score": 1803.49
+        }
+      },
+      "status": "draw",
+      "winner_side": "B",
+      "winner": "llm",
+      "decided_by": "board",
+      "board_margin": 56.41,
+      "turn_cap": 120,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-mountain_pass_m-ncm-vanguard-vs-llm-seed880742.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-mountain_pass_m-ncm-vanguard-vs-llm-seed880742.meta.json",
+      "seconds": 2670.63,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-mountain_pass_m-llm-vs-ncm-siege-seed880743",
+      "map": "mountain_pass_m",
+      "agents": {
+        "A": "llm",
+        "B": "ncm-siege"
+      },
+      "board": {
+        "A": {
+          "units": 31,
+          "hp": 3013,
+          "sites": 864,
+          "funds": 495300,
+          "hq_hp": 0,
+          "score": 1789.13
+        },
+        "B": {
+          "units": 16,
+          "hp": 1377,
+          "sites": 864,
+          "funds": 544500,
+          "hq_hp": 100,
+          "score": 1757.77
+        }
+      },
+      "status": "draw",
+      "winner_side": "A",
+      "winner": "llm",
+      "decided_by": "board",
+      "board_margin": -31.36,
+      "turn_cap": 120,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-mountain_pass_m-llm-vs-ncm-siege-seed880743.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-mountain_pass_m-llm-vs-ncm-siege-seed880743.meta.json",
+      "seconds": 2185.69,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-mountain_pass_m-conventional-vs-llm-seed880744",
+      "map": "mountain_pass_m",
+      "agents": {
+        "A": "conventional",
+        "B": "llm"
+      },
+      "board": {
+        "A": {
+          "units": 48,
+          "hp": 2532,
+          "sites": 866,
+          "funds": 529700,
+          "hq_hp": 100,
+          "score": 1805.32
+        },
+        "B": {
+          "units": 30,
+          "hp": 2372,
+          "sites": 862,
+          "funds": 403400,
+          "hq_hp": 0,
+          "score": 1777.72
+        }
+      },
+      "status": "draw",
+      "winner_side": "A",
+      "winner": "conventional",
+      "decided_by": "board",
+      "board_margin": -27.6,
+      "turn_cap": 120,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-mountain_pass_m-conventional-vs-llm-seed880744.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-mountain_pass_m-conventional-vs-llm-seed880744.meta.json",
+      "seconds": 1771.04,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-mountain_pass_m-ncm-vanguard-vs-ncm-siege-seed880745",
+      "map": "mountain_pass_m",
+      "agents": {
+        "A": "ncm-vanguard",
+        "B": "ncm-siege"
+      },
+      "board": {
+        "A": {
+          "units": 0,
+          "hp": 0,
+          "sites": 865,
+          "funds": 558400,
+          "hq_hp": 0,
+          "score": 1730.0
+        },
+        "B": {
+          "units": 33,
+          "hp": 3132,
+          "sites": 863,
+          "funds": 501300,
+          "hq_hp": 82,
+          "score": 1790.32
+        }
+      },
+      "status": "draw",
+      "winner_side": "B",
+      "winner": "ncm-siege",
+      "decided_by": "board",
+      "board_margin": 60.32,
+      "turn_cap": 120,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-mountain_pass_m-ncm-vanguard-vs-ncm-siege-seed880745.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-mountain_pass_m-ncm-vanguard-vs-ncm-siege-seed880745.meta.json",
+      "seconds": 885.97,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-mountain_pass_m-conventional-vs-ncm-vanguard-seed880746",
+      "map": "mountain_pass_m",
+      "agents": {
+        "A": "conventional",
+        "B": "ncm-vanguard"
+      },
+      "board": {
+        "A": {
+          "units": 49,
+          "hp": 4077,
+          "sites": 864,
+          "funds": 456700,
+          "hq_hp": 100,
+          "score": 1817.77
+        },
+        "B": {
+          "units": 8,
+          "hp": 782,
+          "sites": 864,
+          "funds": 463800,
+          "hq_hp": 100,
+          "score": 1743.82
+        }
+      },
+      "status": "draw",
+      "winner_side": "A",
+      "winner": "conventional",
+      "decided_by": "board",
+      "board_margin": -73.95,
+      "turn_cap": 120,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-mountain_pass_m-conventional-vs-ncm-vanguard-seed880746.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-mountain_pass_m-conventional-vs-ncm-vanguard-seed880746.meta.json",
+      "seconds": 628.4,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-mountain_pass_m-ncm-siege-vs-conventional-seed880747",
+      "map": "mountain_pass_m",
+      "agents": {
+        "A": "ncm-siege",
+        "B": "conventional"
+      },
+      "board": {
+        "A": {
+          "units": 10,
+          "hp": 772,
+          "sites": 864,
+          "funds": 531400,
+          "hq_hp": 100,
+          "score": 1745.72
+        },
+        "B": {
+          "units": 50,
+          "hp": 4677,
+          "sites": 864,
+          "funds": 441400,
+          "hq_hp": 0,
+          "score": 1824.77
+        }
+      },
+      "status": "draw",
+      "winner_side": "B",
+      "winner": "conventional",
+      "decided_by": "board",
+      "board_margin": 79.05,
+      "turn_cap": 120,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-mountain_pass_m-ncm-siege-vs-conventional-seed880747.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-mountain_pass_m-ncm-siege-vs-conventional-seed880747.meta.json",
+      "seconds": 645.61,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-urban_delta-llm-vs-ncm-vanguard-seed880848",
+      "map": "urban_delta",
+      "agents": {
+        "A": "llm",
+        "B": "ncm-vanguard"
+      },
+      "board": {
+        "A": {
+          "units": 4,
+          "hp": 261,
+          "sites": 79,
+          "funds": 224200,
+          "hq_hp": 0,
+          "score": 164.61
+        },
+        "B": {
+          "units": 7,
+          "hp": 578,
+          "sites": 81,
+          "funds": 237200,
+          "hq_hp": 0,
+          "score": 174.78
+        }
+      },
+      "status": "draw",
+      "winner_side": "B",
+      "winner": "ncm-vanguard",
+      "decided_by": "board",
+      "board_margin": 10.17,
+      "turn_cap": 60,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-urban_delta-llm-vs-ncm-vanguard-seed880848.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-urban_delta-llm-vs-ncm-vanguard-seed880848.meta.json",
+      "seconds": 666.02,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-urban_delta-ncm-siege-vs-llm-seed880849",
+      "map": "urban_delta",
+      "agents": {
+        "A": "ncm-siege",
+        "B": "llm"
+      },
+      "board": {
+        "A": {
+          "units": 8,
+          "hp": 800,
+          "sites": 82,
+          "funds": 278500,
+          "hq_hp": 0,
+          "score": 180.0
+        },
+        "B": {
+          "units": 23,
+          "hp": 2219,
+          "sites": 78,
+          "funds": 205100,
+          "hq_hp": 0,
+          "score": 201.19
+        }
+      },
+      "status": "draw",
+      "winner_side": "B",
+      "winner": "llm",
+      "decided_by": "board",
+      "board_margin": 21.19,
+      "turn_cap": 60,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-urban_delta-ncm-siege-vs-llm-seed880849.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-urban_delta-ncm-siege-vs-llm-seed880849.meta.json",
+      "seconds": 840.56,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-urban_delta-llm-vs-conventional-seed880850",
+      "map": "urban_delta",
+      "agents": {
+        "A": "llm",
+        "B": "conventional"
+      },
+      "board": {
+        "A": {
+          "units": 11,
+          "hp": 878,
+          "sites": 80,
+          "funds": 202900,
+          "hq_hp": 0,
+          "score": 179.78
+        },
+        "B": {
+          "units": 39,
+          "hp": 2656,
+          "sites": 80,
+          "funds": 224100,
+          "hq_hp": 0,
+          "score": 225.56
+        }
+      },
+      "status": "draw",
+      "winner_side": "B",
+      "winner": "conventional",
+      "decided_by": "board",
+      "board_margin": 45.78,
+      "turn_cap": 60,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-urban_delta-llm-vs-conventional-seed880850.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-urban_delta-llm-vs-conventional-seed880850.meta.json",
+      "seconds": 586.52,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-urban_delta-ncm-siege-vs-ncm-vanguard-seed880851",
+      "map": "urban_delta",
+      "agents": {
+        "A": "ncm-siege",
+        "B": "ncm-vanguard"
+      },
+      "board": {
+        "A": {
+          "units": 2,
+          "hp": 30,
+          "sites": 82,
+          "funds": 301200,
+          "hq_hp": 0,
+          "score": 166.3
+        },
+        "B": {
+          "units": 9,
+          "hp": 616,
+          "sites": 78,
+          "funds": 200300,
+          "hq_hp": 84,
+          "score": 171.16
+        }
+      },
+      "status": "draw",
+      "winner_side": "B",
+      "winner": "ncm-vanguard",
+      "decided_by": "board",
+      "board_margin": 4.86,
+      "turn_cap": 60,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-urban_delta-ncm-siege-vs-ncm-vanguard-seed880851.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-urban_delta-ncm-siege-vs-ncm-vanguard-seed880851.meta.json",
+      "seconds": 173.76,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-urban_delta-ncm-vanguard-vs-conventional-seed880852",
+      "map": "urban_delta",
+      "agents": {
+        "A": "ncm-vanguard",
+        "B": "conventional"
+      },
+      "board": {
+        "A": {
+          "units": 18,
+          "hp": 1633,
+          "sites": 82,
+          "funds": 284600,
+          "hq_hp": 100,
+          "score": 198.33
+        },
+        "B": {
+          "units": 0,
+          "hp": 0,
+          "sites": 78,
+          "funds": 240800,
+          "hq_hp": 0,
+          "score": 156.0
+        }
+      },
+      "status": "draw",
+      "winner_side": "A",
+      "winner": "ncm-vanguard",
+      "decided_by": "board",
+      "board_margin": -42.33,
+      "turn_cap": 60,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-urban_delta-ncm-vanguard-vs-conventional-seed880852.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-urban_delta-ncm-vanguard-vs-conventional-seed880852.meta.json",
+      "seconds": 110.02,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-urban_delta-conventional-vs-ncm-siege-seed880853",
+      "map": "urban_delta",
+      "agents": {
+        "A": "conventional",
+        "B": "ncm-siege"
+      },
+      "board": {
+        "A": {
+          "units": 0,
+          "hp": 0,
+          "sites": 72,
+          "funds": 169300,
+          "hq_hp": 0,
+          "score": 144.0
+        },
+        "B": {
+          "units": 35,
+          "hp": 3266,
+          "sites": 88,
+          "funds": 335700,
+          "hq_hp": 100,
+          "score": 243.66
+        }
+      },
+      "status": "draw",
+      "winner_side": "B",
+      "winner": "ncm-siege",
+      "decided_by": "board",
+      "board_margin": 99.66,
+      "turn_cap": 60,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-urban_delta-conventional-vs-ncm-siege-seed880853.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-urban_delta-conventional-vs-ncm-siege-seed880853.meta.json",
+      "seconds": 112.99,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-urban_delta_m-ncm-vanguard-vs-llm-seed880954",
+      "map": "urban_delta_m",
+      "agents": {
+        "A": "ncm-vanguard",
+        "B": "llm"
+      },
+      "board": {
+        "A": {
+          "units": 29,
+          "hp": 2900,
+          "sites": 769,
+          "funds": 779500,
+          "hq_hp": 100,
+          "score": 1596.0
+        },
+        "B": {
+          "units": 49,
+          "hp": 4381,
+          "sites": 767,
+          "funds": 614200,
+          "hq_hp": 11,
+          "score": 1626.81
+        }
+      },
+      "status": "draw",
+      "winner_side": "B",
+      "winner": "llm",
+      "decided_by": "board",
+      "board_margin": 30.81,
+      "turn_cap": 120,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-urban_delta_m-ncm-vanguard-vs-llm-seed880954.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-urban_delta_m-ncm-vanguard-vs-llm-seed880954.meta.json",
+      "seconds": 2948.15,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-urban_delta_m-llm-vs-ncm-siege-seed880955",
+      "map": "urban_delta_m",
+      "agents": {
+        "A": "llm",
+        "B": "ncm-siege"
+      },
+      "board": {
+        "A": {
+          "units": 40,
+          "hp": 3868,
+          "sites": 768,
+          "funds": 689100,
+          "hq_hp": 0,
+          "score": 1614.68
+        },
+        "B": {
+          "units": 16,
+          "hp": 1111,
+          "sites": 768,
+          "funds": 756100,
+          "hq_hp": 0,
+          "score": 1563.11
+        }
+      },
+      "status": "draw",
+      "winner_side": "A",
+      "winner": "llm",
+      "decided_by": "board",
+      "board_margin": -51.57,
+      "turn_cap": 120,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-urban_delta_m-llm-vs-ncm-siege-seed880955.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-urban_delta_m-llm-vs-ncm-siege-seed880955.meta.json",
+      "seconds": 2227.61,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-urban_delta_m-conventional-vs-llm-seed880956",
+      "map": "urban_delta_m",
+      "agents": {
+        "A": "conventional",
+        "B": "llm"
+      },
+      "board": {
+        "A": {
+          "units": 50,
+          "hp": 2867,
+          "sites": 769,
+          "funds": 729200,
+          "hq_hp": 100,
+          "score": 1616.67
+        },
+        "B": {
+          "units": 50,
+          "hp": 4467,
+          "sites": 767,
+          "funds": 640500,
+          "hq_hp": 100,
+          "score": 1628.67
+        }
+      },
+      "status": "draw",
+      "winner_side": "B",
+      "winner": "llm",
+      "decided_by": "board",
+      "board_margin": 12.0,
+      "turn_cap": 120,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-urban_delta_m-conventional-vs-llm-seed880956.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-urban_delta_m-conventional-vs-llm-seed880956.meta.json",
+      "seconds": 2608.95,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-urban_delta_m-ncm-vanguard-vs-ncm-siege-seed880957",
+      "map": "urban_delta_m",
+      "agents": {
+        "A": "ncm-vanguard",
+        "B": "ncm-siege"
+      },
+      "board": {
+        "A": {
+          "units": 7,
+          "hp": 416,
+          "sites": 767,
+          "funds": 706400,
+          "hq_hp": 3,
+          "score": 1545.16
+        },
+        "B": {
+          "units": 8,
+          "hp": 648,
+          "sites": 769,
+          "funds": 738100,
+          "hq_hp": 0,
+          "score": 1552.48
+        }
+      },
+      "status": "draw",
+      "winner_side": "B",
+      "winner": "ncm-siege",
+      "decided_by": "board",
+      "board_margin": 7.32,
+      "turn_cap": 120,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-urban_delta_m-ncm-vanguard-vs-ncm-siege-seed880957.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-urban_delta_m-ncm-vanguard-vs-ncm-siege-seed880957.meta.json",
+      "seconds": 1178.63,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-urban_delta_m-conventional-vs-ncm-vanguard-seed880958",
+      "map": "urban_delta_m",
+      "agents": {
+        "A": "conventional",
+        "B": "ncm-vanguard"
+      },
+      "board": {
+        "A": {
+          "units": 50,
+          "hp": 4493,
+          "sites": 772,
+          "funds": 340100,
+          "hq_hp": 22,
+          "score": 1638.93
+        },
+        "B": {
+          "units": 0,
+          "hp": 0,
+          "sites": 764,
+          "funds": 359200,
+          "hq_hp": 0,
+          "score": 1528.0
+        }
+      },
+      "status": "victory",
+      "winner_side": "A",
+      "winner": "conventional",
+      "decided_by": "victory",
+      "board_margin": -110.93,
+      "turn_cap": 120,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-urban_delta_m-conventional-vs-ncm-vanguard-seed880958.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-urban_delta_m-conventional-vs-ncm-vanguard-seed880958.meta.json",
+      "seconds": 198.1,
+      "replay_matches": true
+    },
+    {
+      "id": "all_ai_league_20261030_v2-all-ai-urban_delta_m-ncm-siege-vs-conventional-seed880959",
+      "map": "urban_delta_m",
+      "agents": {
+        "A": "ncm-siege",
+        "B": "conventional"
+      },
+      "board": {
+        "A": {
+          "units": 24,
+          "hp": 2353,
+          "sites": 770,
+          "funds": 761100,
+          "hq_hp": 100,
+          "score": 1587.53
+        },
+        "B": {
+          "units": 48,
+          "hp": 1093,
+          "sites": 766,
+          "funds": 616800,
+          "hq_hp": 67,
+          "score": 1590.93
+        }
+      },
+      "status": "draw",
+      "winner_side": "B",
+      "winner": "conventional",
+      "decided_by": "board",
+      "board_margin": 3.4,
+      "turn_cap": 120,
+      "unfinished": false,
+      "leader": null,
+      "error": null,
+      "match_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-urban_delta_m-ncm-siege-vs-conventional-seed880959.json",
+      "meta_path": "C:\\AIs\\NCM\\artifacts\\tbs\\matches\\all_ai_league_20261030_v2-all-ai-urban_delta_m-ncm-siege-vs-conventional-seed880959.meta.json",
+      "seconds": 661.61,
+      "replay_matches": true
+    }
+  ],
+  "updated_at": "2026-10-31T14:31:21.374374+00:00"
+}

@@ -27,6 +27,8 @@ State format
     B3 infantry 6,3 4 - rifle:9
     builds
     1,1 infantry 700
+    ferry
+    A10 A3 p 3,5 - - 15,3
     ...
 
 The header names the acting player and turn (plus any non-``ongoing`` status).
@@ -37,7 +39,10 @@ records carry what matters.  A unit record is ``id type pos hp fuel ammo
 are ``!`` acted, ``>`` moved, ``+`` produced this turn, ``^`` loaded and
 ``c<ids>`` cargo.  A site record only adds ``progress/needed`` while a capture
 is in progress, and ``!`` marks an objective.  Build records are the engine's
-legal, affordable production options: ``site type cost``.
+legal, affordable production options: ``site type cost``.  A ferry record is
+``transport cargo action cargo_to transport_to at target`` with ``-`` for absent
+coordinates; actions are ``l`` load, ``u`` unload, ``p`` pickup, ``s`` sail and
+``r`` reposition (empty transport returning toward the next cargo).
 
 The codec is deliberately lossy about static spec data (unit names, max hp,
 movement ranges) and about the engine's ``unit_actions`` option lists.  Static
@@ -286,6 +291,53 @@ def _unit_flags(unit: dict[str, Any]) -> str:
     return flags
 
 
+_FERRY_ACTIONS = {"load": "l", "unload": "u", "pickup": "p", "sail": "s", "reposition": "r"}
+
+
+def _ferry_lines(view: dict[str, Any]) -> list[str]:
+    ferry = view.get("ferry")
+    if not isinstance(ferry, dict):
+        return []
+    lines: list[str] = []
+    for operation in sorted(
+        (item for item in ferry.get("operations", ()) if isinstance(item, dict)),
+        key=lambda item: (
+            str(item.get("transport") or ""),
+            str(item.get("cargo") or ""),
+            str(item.get("action") or ""),
+        ),
+    ):
+        action = _FERRY_ACTIONS.get(str(operation.get("action") or ""))
+        transport = str(operation.get("transport") or "")
+        cargo = str(operation.get("cargo") or "")
+        if not action or not transport or not cargo:
+            continue
+
+        def coord(key: str) -> str:
+            value = operation.get(key)
+            if not isinstance(value, (list, tuple)) or len(value) != 2:
+                return "-"
+            try:
+                return f"{int(value[0])},{int(value[1])}"
+            except (TypeError, ValueError):
+                return "-"
+
+        lines.append(
+            " ".join(
+                (
+                    transport,
+                    cargo,
+                    action,
+                    coord("cargo_to"),
+                    coord("transport_to"),
+                    coord("at"),
+                    coord("target"),
+                )
+            )
+        )
+    return lines
+
+
 def encode_state(view: dict[str, Any]) -> str:
     """Encode a :func:`tbs.engine.view.state_view` dictionary as compact text.
 
@@ -363,4 +415,8 @@ def encode_state(view: dict[str, Any]) -> str:
             f"{_coord_text(option.get('site'), 'build site')} "
             f"{_text(option.get('unit'), 'build type')} {option['cost']}"
         )
+    ferry = _ferry_lines(view)
+    if ferry:
+        lines.append("ferry")
+        lines.extend(ferry)
     return "\n".join(lines)
